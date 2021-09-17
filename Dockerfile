@@ -2,6 +2,6 @@
 FROM openjdk:11-jre
 
 #컨테이너 안에 jar 파일은 app.jar 될꺼임
-COPY build/libs/springboot-template.jar app.jar
+COPY build/libs/sloth.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
