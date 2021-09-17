@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Studio | Table Plugins</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	
+	<!-- ================== BEGIN core-css ================== -->
+	<link href="assets/css/vendor.min.css" rel="stylesheet" />
+	<link href="assets/css/app.min.css" rel="stylesheet" />
+	<!-- ================== END core-css ================== -->
+	
+	<!-- ================== BEGIN page-css ================== -->
+	<link href="assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+	<link href="assets/plugins/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+	<link href="assets/plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+	<link href="assets/plugins/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet" />
+	<!-- ================== END page-css ================== -->
+
+</head>
+<body data-bs-spy='scroll' data-bs-target='#sidebar-bootstrap' data-bs-offset='200'>
+	<!-- BEGIN #app -->
+	<div id="app" class="app">
+		<!-- BEGIN #header -->
+		<div id="header" class="app-header">
+			<!-- BEGIN mobile-toggler -->
+			<div class="mobile-toggler">
+				<button type="button" class="menu-toggler" data-toggle="sidebar-mobile">
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</button>
+			</div>
+			<!-- END mobile-toggler -->
+			
+			<!-- BEGIN brand -->
+			<div class="brand">
+				<div class="desktop-toggler">
+					<button type="button" class="menu-toggler" data-toggle="sidebar-minify">
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				
+				<a href="#" class="brand-logo">
+					<img src="assets/img/logo.png" alt="" height="20" />
+				</a>
+			</div>
+			<!-- END brand -->
+			
+			<!-- BEGIN menu -->
+			<div class="menu">
+				<form class="menu-search" method="POST" name="header_search_form">
+					<div class="menu-search-icon"><i class="fa fa-search"></i></div>
+					<div class="menu-search-input">
+						<input type="text" class="form-control" placeholder="Search menu..." />
+					</div>
+				</form>
+				<div class="menu-item dropdown">
+					<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+						<div class="menu-icon"><i class="fa fa-bell nav-icon"></i></div>
+						<div class="menu-label">3</div>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end dropdown-notification">
+						<h6 class="dropdown-header text-gray-900 mb-1">Notifications</h6>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<i class="fa fa-receipt fa-lg fa-fw text-success"></i>
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Your store has a new order for 2 items totaling $1,299.00</div>
+								<div class="time">just now</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<i class="far fa-user-circle fa-lg fa-fw text-muted"></i>
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">3 new customer account is created</div>
+								<div class="time">2 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<img src="assets/img/icon/android.svg" alt="" width="26" />
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Your android application has been approved</div>
+								<div class="time">5 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<img src="assets/img/icon/paypal.svg" alt="" width="26" />
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Paypal payment method has been enabled for your store</div>
+								<div class="time">10 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<div class="p-2 text-center mb-n1">
+							<a href="#" class="text-gray-800 text-decoration-none">See all</a>
+						</div>
+					</div>
+				</div>
+				<div class="menu-item dropdown">
+					<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+						<div class="menu-img online">
+							<img src="assets/img/user/user.jpg" alt="" class="mw-100 mh-100 rounded-circle" />
+						</div>
+						<div class="menu-text">seantheme@gmail.com</div>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end me-lg-3">
+						<a class="dropdown-item d-flex align-items-center" href="#">Edit Profile <i class="fa fa-user-circle fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Inbox <i class="fa fa-envelope fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Calendar <i class="fa fa-calendar-alt fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Setting <i class="fa fa-wrench fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item d-flex align-items-center" href="#">Log Out <i class="fa fa-toggle-off fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+					</div>
+				</div>
+			</div>
+			<!-- END menu -->
+		</div>
+		<!-- END #header -->
+		
+		<!-- BEGIN #sidebar -->
+		<div id="sidebar" class="app-sidebar">
+			<!-- BEGIN scrollbar -->
+			<div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+				<!-- BEGIN menu -->
+				<div class="menu">
+					<div class="menu-header">Navigation</div>
+					<div class="menu-item">
+						<a href="index.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-laptop"></i></span>
+							<span class="menu-text">Dashboard</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="analytics.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-chart-pie"></i></span>
+							<span class="menu-text">Analytics</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon">
+								<i class="fa fa-envelope"></i>
+								<span class="menu-icon-label">6</span>
+							</span>
+							<span class="menu-text">Email</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="email_inbox.html" class="menu-link">
+									<span class="menu-text">Inbox</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="email_compose.html" class="menu-link">
+									<span class="menu-text">Compose</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="email_detail.html" class="menu-link">
+									<span class="menu-text">Detail</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-divider"></div>
+					<div class="menu-header">Components</div>
+					<div class="menu-item">
+						<a href="widgets.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-qrcode"></i></span>
+							<span class="menu-text">Widgets</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-heart"></i></span>
+							<span class="menu-text">UI Kits</span> 
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="ui_bootstrap.html" class="menu-link">
+									<span class="menu-text">Bootstrap</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_buttons.html" class="menu-link">
+									<span class="menu-text">Buttons</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_card.html" class="menu-link">
+									<span class="menu-text">Card</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_icons.html" class="menu-link">
+									<span class="menu-text">Icons</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_modal_notification.html" class="menu-link">
+									<span class="menu-text">Modal & Notification</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_typography.html" class="menu-link">
+									<span class="menu-text">Typography</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_tabs_accordions.html" class="menu-link">
+									<span class="menu-text">Tabs & Accordions</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-file-alt"></i></span>
+							<span class="menu-text">Forms</span> 
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="form_elements.html" class="menu-link">
+									<span class="menu-text">Form Elements</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="form_plugins.html" class="menu-link">
+									<span class="menu-text">Form Plugins</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="form_wizards.html" class="menu-link">
+									<span class="menu-text">Wizards</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub active">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-table"></i></span>
+							<span class="menu-text">Tables</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="table_elements.html" class="menu-link">
+									<span class="menu-text">Table Elements</span>
+								</a>
+							</div>
+							<div class="menu-item active">
+								<a href="table_plugins.html" class="menu-link">
+									<span class="menu-text">Table Plugins</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-chart-bar"></i></span>
+							<span class="menu-text">Charts</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="chart_js.html" class="menu-link">
+									<span class="menu-text">Chart.js</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="chart_apex.html" class="menu-link">
+									<span class="menu-text">Apexcharts.js</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item">
+						<a href="map.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-map-marker-alt"></i></span>
+							<span class="menu-text">Map</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-code-branch"></i></span>
+							<span class="menu-text">Layout</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="layout_starter.html" class="menu-link">
+									<span class="menu-text">Starter Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_fixed_footer.html" class="menu-link">
+									<span class="menu-text">Fixed Footer</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_full_height.html" class="menu-link">
+									<span class="menu-text">Full Height</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_full_width.html" class="menu-link">
+									<span class="menu-text">Full Width</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_boxed_layout.html" class="menu-link">
+									<span class="menu-text">Boxed Layout</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_minified_sidebar.html" class="menu-link">
+									<span class="menu-text">Minified Sidebar</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-globe"></i></span>
+							<span class="menu-text">Pages</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="page_scrum_board.html" class="menu-link">
+									<span class="menu-text">Scrum Board</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_products.html" class="menu-link">
+									<span class="menu-text">Products</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_orders.html" class="menu-link">
+									<span class="menu-text">Orders</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_gallery.html" class="menu-link">
+									<span class="menu-text">Gallery</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_search_results.html" class="menu-link">
+									<span class="menu-text">Search Results</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_coming_soon.html" class="menu-link">
+									<span class="menu-text">Coming Soon Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_404_error.html" class="menu-link">
+									<span class="menu-text">404 Error Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_login.html" class="menu-link">
+									<span class="menu-text">Login</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_register.html" class="menu-link">
+									<span class="menu-text">Register</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-divider"></div>
+					<div class="menu-header">Users</div>
+					<div class="menu-item">
+						<a href="profile.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-user-circle"></i></span>
+							<span class="menu-text">Profile</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="calendar.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-calendar"></i></span>
+							<span class="menu-text">Calendar</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="settings.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-cog"></i></span>
+							<span class="menu-text">Settings</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="helper.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-question-circle"></i></span>
+							<span class="menu-text">Helper</span>
+						</a>
+					</div>
+					<div class="p-3 px-4 mt-auto hide-on-minified">
+						<a href="../../documentation/index.html" class="btn d-block btn-secondary fw-600 rounded-pill">
+							<i class="fa fa-code-branch me-1 ms-n1 opacity-5"></i> Documentation
+						</a>
+					</div>
+				</div>
+				<!-- END menu -->
+			</div>
+			<!-- END scrollbar -->
+			
+			<!-- BEGIN mobile-sidebar-backdrop -->
+			<button class="app-sidebar-mobile-backdrop" data-dismiss="sidebar-mobile"></button>
+			<!-- END mobile-sidebar-backdrop -->
+		</div>
+		<!-- END #sidebar -->
+		
+		<!-- BEGIN #content -->
+		<div id="content" class="app-content">
+			<!-- BEGIN container -->
+			<div class="container">
+				<!-- BEGIN row -->
+				<div class="row justify-content-center">
+					<!-- BEGIN col-10 -->
+					<div class="col-xl-10">
+						<!-- BEGIN row -->
+						<div class="row">
+							<!-- BEGIN col-9 -->
+							<div class="col-xl-9">
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">TABLES</a></li>
+									<li class="breadcrumb-item active">TABLE PLUGINS</li>
+								</ul>
+								
+								<h1 class="page-header">
+									Table Plugins <small>page header description goes here...</small>
+								</h1>
+								
+								<hr class="mb-4" />
+								
+								<!-- BEGIN #datatable -->
+								<div id="datatable" class="mb-5">
+									<h4>Datatable</h4>
+									<p>DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, built upon the foundations of progressive enhancement, that adds all of these advanced features to any HTML table. Please read the <a href="https://datatables.net/" target="_blank">official documentation</a> for the full list of options.</p>
+									<div class="card">
+										<div class="card-body">
+											<table id="datatableDefault" class="table text-nowrap w-100">
+												<thead>
+													<tr>
+														<th>#</th>
+														<th>Name</th>
+														<th>Position</th>
+														<th>Office</th>
+														<th>Age</th>
+														<th>Start Date</th>
+														<th>Salary</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>1.</td>
+														<td>Tiger Nixon</td>
+														<td>System Architect</td>
+														<td>Edinburgh</td>
+														<td>61</td>
+														<td>2011/04/25</td>
+														<td>$320,800</td>
+													</tr>
+													<tr>
+														<td>2.</td>
+														<td>Garrett Winters</td>
+														<td>Accountant</td>
+														<td>Tokyo</td>
+														<td>63</td>
+														<td>2011/07/25</td>
+														<td>$170,750</td>
+													</tr>
+													<tr>
+														<td>3.</td>
+														<td>Ashton Cox</td>
+														<td>Junior Technical Author</td>
+														<td>San Francisco</td>
+														<td>66</td>
+														<td>2009/01/12</td>
+														<td>$86,000</td>
+													</tr>
+													<tr>
+														<td>4.</td>
+														<td>Cedric Kelly</td>
+														<td>Senior Javascript Developer</td>
+														<td>Edinburgh</td>
+														<td>22</td>
+														<td>2012/03/29</td>
+														<td>$433,060</td>
+													</tr>
+													<tr>
+														<td>5.</td>
+														<td>Airi Satou</td>
+														<td>Accountant</td>
+														<td>Tokyo</td>
+														<td>33</td>
+														<td>2008/11/28</td>
+														<td>$162,700</td>
+													</tr>
+													<tr>
+														<td>6.</td>
+														<td>Brielle Williamson</td>
+														<td>Integration Specialist</td>
+														<td>New York</td>
+														<td>61</td>
+														<td>2012/12/02</td>
+														<td>$372,000</td>
+													</tr>
+													<tr>
+														<td>7.</td>
+														<td>Herrod Chandler</td>
+														<td>Sales Assistant</td>
+														<td>San Francisco</td>
+														<td>59</td>
+														<td>2012/08/06</td>
+														<td>$137,500</td>
+													</tr>
+													<tr>
+														<td>8.</td>
+														<td>Rhona Davidson</td>
+														<td>Integration Specialist</td>
+														<td>Tokyo</td>
+														<td>55</td>
+														<td>2010/10/14</td>
+														<td>$327,900</td>
+													</tr>
+													<tr>
+														<td>9.</td>
+														<td>Colleen Hurst</td>
+														<td>Javascript Developer</td>
+														<td>San Francisco</td>
+														<td>39</td>
+														<td>2009/09/15</td>
+														<td>$205,500</td>
+													</tr>
+													<tr>
+														<td>10.</td>
+														<td>Sonya Frost</td>
+														<td>Software Engineer</td>
+														<td>Edinburgh</td>
+														<td>23</td>
+														<td>2008/12/13</td>
+														<td>$103,600</td>
+													</tr>
+													<tr>
+														<td>11.</td>
+														<td>Jena Gaines</td>
+														<td>Office Manager</td>
+														<td>London</td>
+														<td>30</td>
+														<td>2008/12/19</td>
+														<td>$90,560</td>
+													</tr>
+													<tr>
+														<td>12.</td>
+														<td>Quinn Flynn</td>
+														<td>Support Lead</td>
+														<td>Edinburgh</td>
+														<td>22</td>
+														<td>2013/03/03</td>
+														<td>$342,000</td>
+													</tr>
+													<tr>
+														<td>13.</td>
+														<td>Charde Marshall</td>
+														<td>Regional Director</td>
+														<td>San Francisco</td>
+														<td>36</td>
+														<td>2008/10/16</td>
+														<td>$470,600</td>
+													</tr>
+													<tr>
+														<td>14.</td>
+														<td>Haley Kennedy</td>
+														<td>Senior Marketing Designer</td>
+														<td>London</td>
+														<td>43</td>
+														<td>2012/12/18</td>
+														<td>$313,500</td>
+													</tr>
+													<tr>
+														<td>15.</td>
+														<td>Tatyana Fitzpatrick</td>
+														<td>Regional Director</td>
+														<td>London</td>
+														<td>19</td>
+														<td>2010/03/17</td>
+														<td>$385,750</td>
+													</tr>
+													<tr>
+														<td>16.</td>
+														<td>Michael Silva</td>
+														<td>Marketing Designer</td>
+														<td>London</td>
+														<td>66</td>
+														<td>2012/11/27</td>
+														<td>$198,500</td>
+													</tr>
+													<tr>
+														<td>17.</td>
+														<td>Paul Byrd</td>
+														<td>Chief Financial Officer (CFO)</td>
+														<td>New York</td>
+														<td>64</td>
+														<td>2010/06/09</td>
+														<td>$725,000</td>
+													</tr>
+													<tr>
+														<td>18.</td>
+														<td>Gloria Little</td>
+														<td>Systems Administrator</td>
+														<td>New York</td>
+														<td>59</td>
+														<td>2009/04/10</td>
+														<td>$237,500</td>
+													</tr>
+													<tr>
+														<td>19.</td>
+														<td>Bradley Greer</td>
+														<td>Software Engineer</td>
+														<td>London</td>
+														<td>41</td>
+														<td>2012/10/13</td>
+														<td>$132,000</td>
+													</tr>
+													<tr>
+														<td>20.</td>
+														<td>Dai Rios</td>
+														<td>Personnel Lead</td>
+														<td>Edinburgh</td>
+														<td>35</td>
+														<td>2012/09/26</td>
+														<td>$217,500</td>
+													</tr>
+													<tr>
+														<td>21.</td>
+														<td>Jenette Caldwell</td>
+														<td>Development Lead</td>
+														<td>New York</td>
+														<td>30</td>
+														<td>2011/09/03</td>
+														<td>$345,000</td>
+													</tr>
+													<tr>
+														<td>22.</td>
+														<td>Yuri Berry</td>
+														<td>Chief Marketing Officer (CMO)</td>
+														<td>New York</td>
+														<td>40</td>
+														<td>2009/06/25</td>
+														<td>$675,000</td>
+													</tr>
+													<tr>
+														<td>23.</td>
+														<td>Caesar Vance</td>
+														<td>Pre-Sales Support</td>
+														<td>New York</td>
+														<td>21</td>
+														<td>2011/12/12</td>
+														<td>$106,450</td>
+													</tr>
+													<tr>
+														<td>24.</td>
+														<td>Doris Wilder</td>
+														<td>Sales Assistant</td>
+														<td>Sidney</td>
+														<td>23</td>
+														<td>2010/09/20</td>
+														<td>$85,600</td>
+													</tr>
+													<tr>
+														<td>25.</td>
+														<td>Angelica Ramos</td>
+														<td>Chief Executive Officer (CEO)</td>
+														<td>London</td>
+														<td>47</td>
+														<td>2009/10/09</td>
+														<td>$1,200,000</td>
+													</tr>
+													<tr>
+														<td>26.</td>
+														<td>Gavin Joyce</td>
+														<td>Developer</td>
+														<td>Edinburgh</td>
+														<td>42</td>
+														<td>2010/12/22</td>
+														<td>$92,575</td>
+													</tr>
+													<tr>
+														<td>27.</td>
+														<td>Jennifer Chang</td>
+														<td>Regional Director</td>
+														<td>Singapore</td>
+														<td>28</td>
+														<td>2010/11/14</td>
+														<td>$357,650</td>
+													</tr>
+													<tr>
+														<td>28.</td>
+														<td>Brenden Wagner</td>
+														<td>Software Engineer</td>
+														<td>San Francisco</td>
+														<td>28</td>
+														<td>2011/06/07</td>
+														<td>$206,850</td>
+													</tr>
+													<tr>
+														<td>29.</td>
+														<td>Fiona Green</td>
+														<td>Chief Operating Officer (COO)</td>
+														<td>San Francisco</td>
+														<td>48</td>
+														<td>2010/03/11</td>
+														<td>$850,000</td>
+													</tr>
+													<tr>
+														<td>30.</td>
+														<td>Shou Itou</td>
+														<td>Regional Marketing</td>
+														<td>Tokyo</td>
+														<td>20</td>
+														<td>2011/08/14</td>
+														<td>$163,000</td>
+													</tr>
+													<tr>
+														<td>31.</td>
+														<td>Michelle House</td>
+														<td>Integration Specialist</td>
+														<td>Sidney</td>
+														<td>37</td>
+														<td>2011/06/02</td>
+														<td>$95,400</td>
+													</tr>
+													<tr>
+														<td>32.</td>
+														<td>Suki Burks</td>
+														<td>Developer</td>
+														<td>London</td>
+														<td>53</td>
+														<td>2009/10/22</td>
+														<td>$114,500</td>
+													</tr>
+													<tr>
+														<td>33.</td>
+														<td>Prescott Bartlett</td>
+														<td>Technical Author</td>
+														<td>London</td>
+														<td>27</td>
+														<td>2011/05/07</td>
+														<td>$145,000</td>
+													</tr>
+													<tr>
+														<td>34.</td>
+														<td>Gavin Cortez</td>
+														<td>Team Leader</td>
+														<td>San Francisco</td>
+														<td>22</td>
+														<td>2008/10/26</td>
+														<td>$235,500</td>
+													</tr>
+													<tr>
+														<td>35.</td>
+														<td>Martena Mccray</td>
+														<td>Post-Sales support</td>
+														<td>Edinburgh</td>
+														<td>46</td>
+														<td>2011/03/09</td>
+														<td>$324,050</td>
+													</tr>
+													<tr>
+														<td>36.</td>
+														<td>Unity Butler</td>
+														<td>Marketing Designer</td>
+														<td>San Francisco</td>
+														<td>47</td>
+														<td>2009/12/09</td>
+														<td>$85,675</td>
+													</tr>
+													<tr>
+														<td>37.</td>
+														<td>Howard Hatfield</td>
+														<td>Office Manager</td>
+														<td>San Francisco</td>
+														<td>51</td>
+														<td>2008/12/16</td>
+														<td>$164,500</td>
+													</tr>
+													<tr>
+														<td>38.</td>
+														<td>Hope Fuentes</td>
+														<td>Secretary</td>
+														<td>San Francisco</td>
+														<td>41</td>
+														<td>2010/02/12</td>
+														<td>$109,850</td>
+													</tr>
+													<tr>
+														<td>39.</td>
+														<td>Vivian Harrell</td>
+														<td>Financial Controller</td>
+														<td>San Francisco</td>
+														<td>62</td>
+														<td>2009/02/14</td>
+														<td>$452,500</td>
+													</tr>
+													<tr>
+														<td>40.</td>
+														<td>Timothy Mooney</td>
+														<td>Office Manager</td>
+														<td>London</td>
+														<td>37</td>
+														<td>2008/12/11</td>
+														<td>$136,200</td>
+													</tr>
+													<tr>
+														<td>41.</td>
+														<td>Jackson Bradshaw</td>
+														<td>Director</td>
+														<td>New York</td>
+														<td>65</td>
+														<td>2008/09/26</td>
+														<td>$645,750</td>
+													</tr>
+													<tr>
+														<td>42.</td>
+														<td>Olivia Liang</td>
+														<td>Support Engineer</td>
+														<td>Singapore</td>
+														<td>64</td>
+														<td>2011/02/03</td>
+														<td>$234,500</td>
+													</tr>
+													<tr>
+														<td>43.</td>
+														<td>Bruno Nash</td>
+														<td>Software Engineer</td>
+														<td>London</td>
+														<td>38</td>
+														<td>2011/05/03</td>
+														<td>$163,500</td>
+													</tr>
+													<tr>
+														<td>44.</td>
+														<td>Sakura Yamamoto</td>
+														<td>Support Engineer</td>
+														<td>Tokyo</td>
+														<td>37</td>
+														<td>2009/08/19</td>
+														<td>$139,575</td>
+													</tr>
+													<tr>
+														<td>45.</td>
+														<td>Thor Walton</td>
+														<td>Developer</td>
+														<td>New York</td>
+														<td>61</td>
+														<td>2013/08/11</td>
+														<td>$98,540</td>
+													</tr>
+													<tr>
+														<td>46.</td>
+														<td>Finn Camacho</td>
+														<td>Support Engineer</td>
+														<td>San Francisco</td>
+														<td>47</td>
+														<td>2009/07/07</td>
+														<td>$87,500</td>
+													</tr>
+													<tr>
+														<td>47.</td>
+														<td>Serge Baldwin</td>
+														<td>Data Coordinator</td>
+														<td>Singapore</td>
+														<td>64</td>
+														<td>2012/04/09</td>
+														<td>$138,575</td>
+													</tr>
+													<tr>
+														<td>48.</td>
+														<td>Zenaida Frank</td>
+														<td>Software Engineer</td>
+														<td>New York</td>
+														<td>63</td>
+														<td>2010/01/04</td>
+														<td>$125,250</td>
+													</tr>
+													<tr>
+														<td>49.</td>
+														<td>Zorita Serrano</td>
+														<td>Software Engineer</td>
+														<td>San Francisco</td>
+														<td>56</td>
+														<td>2012/06/01</td>
+														<td>$115,000</td>
+													</tr>
+													<tr>
+														<td>50.</td>
+														<td>Jennifer Acosta</td>
+														<td>Junior Javascript Developer</td>
+														<td>Edinburgh</td>
+														<td>43</td>
+														<td>2013/02/01</td>
+														<td>$75,650</td>
+													</tr>
+													<tr>
+														<td>51.</td>
+														<td>Cara Stevens</td>
+														<td>Sales Assistant</td>
+														<td>New York</td>
+														<td>46</td>
+														<td>2011/12/06</td>
+														<td>$145,600</td>
+													</tr>
+													<tr>
+														<td>52.</td>
+														<td>Hermione Butler</td>
+														<td>Regional Director</td>
+														<td>London</td>
+														<td>47</td>
+														<td>2011/03/21</td>
+														<td>$356,250</td>
+													</tr>
+													<tr>
+														<td>53.</td>
+														<td>Lael Greer</td>
+														<td>Systems Administrator</td>
+														<td>London</td>
+														<td>21</td>
+														<td>2009/02/27</td>
+														<td>$103,500</td>
+													</tr>
+													<tr>
+														<td>54.</td>
+														<td>Jonas Alexander</td>
+														<td>Developer</td>
+														<td>San Francisco</td>
+														<td>30</td>
+														<td>2010/07/14</td>
+														<td>$86,500</td>
+													</tr>
+													<tr>
+														<td>55.</td>
+														<td>Shad Decker</td>
+														<td>Regional Director</td>
+														<td>Edinburgh</td>
+														<td>51</td>
+														<td>2008/11/13</td>
+														<td>$183,000</td>
+													</tr>
+													<tr>
+														<td>56.</td>
+														<td>Michael Bruce</td>
+														<td>Javascript Developer</td>
+														<td>Singapore</td>
+														<td>29</td>
+														<td>2011/06/27</td>
+														<td>$183,000</td>
+													</tr>
+													<tr>
+														<td>57.</td>
+														<td>Donna Snider</td>
+														<td>Customer Support</td>
+														<td>New York</td>
+														<td>27</td>
+														<td>2011/01/25</td>
+														<td>$112,000</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code>&lt;!-- required css --&gt;
+&lt;link href="assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" /&gt;
+&lt;link href="assets/plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" /&gt;
+&lt;link href="assets/plugins/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" /&gt;
+
+&lt;!-- required js --&gt;
+&lt;script src="assets/plugins/datatables.net/js/jquery.dataTables.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/plugins/datatables.net-buttons/js/buttons.flash.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/plugins/datatables.net-buttons/js/buttons.html5.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/plugins/datatables.net-buttons/js/buttons.print.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/plugins/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- html --&gt;
+&lt;table id="datatableDefault" class="table text-nowrap w-100"&gt;
+  ...
+&lt;/table&gt;
+
+&lt;!-- script --&gt;
+&lt;script&gt;
+  $('#datatableDefault').DataTable({
+    dom: "&lt;'row mb-3'&lt;'col-sm-4'l&gt;&lt;'col-sm-8 text-end'&lt;'d-flex justify-content-end'fB&gt;&gt;&gt;t&lt;'d-flex align-items-center'&lt;'me-auto'i&gt;&lt;'mb-0'p&gt;&gt;",
+    lengthMenu: [ 10, 20, 30, 40, 50 ],
+    responsive: true,
+    buttons: [ 
+      { extend: 'print', className: 'btn btn-default' },
+      { extend: 'csv', className: 'btn btn-default' }
+    ]
+  });
+&lt;/script&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #datatable -->
+								
+								<!-- BEGIN #bootstrapTable -->
+								<div id="bootstrapTable" class="mb-5">
+									<h4>Basic Table</h4>
+									<p>Bootstrap table is an extended table to the integration with some of the most widely used CSS frameworks. (Supports Bootstrap, Semantic UI, Bulma, Material Design, Foundation). Please read the <a href="https://bootstrap-table.com/" target="_blank">official documentation</a> for the full list of options.</p>
+									<div class="card">
+										<div class="card-body">
+											<table class="table" data-toggle="table"
+												data-sort-class="table-active"
+												data-sortable="true"
+												data-search="true"
+												data-pagination="true"
+												data-show-refresh="true"
+												data-show-columns="true"
+												data-show-fullscreen="true"
+												data-height="460">
+												<thead>
+													<tr>
+														<th data-sortable="true">Item ID</th>
+														<th data-sortable="true">Item Name</th>
+														<th data-sortable="true">Item Price</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr><td>1</td><td>Item 1</td><td>$1</td></tr>
+													<tr><td>2</td><td>Item 2</td><td>$2</td></tr>
+													<tr><td>3</td><td>Item 3</td><td>$3</td></tr>
+													<tr><td>4</td><td>Item 4</td><td>$4</td></tr>
+													<tr><td>5</td><td>Item 5</td><td>$5</td></tr>
+													<tr><td>6</td><td>Item 6</td><td>$6</td></tr>
+													<tr><td>7</td><td>Item 7</td><td>$7</td></tr>
+													<tr><td>8</td><td>Item 8</td><td>$8</td></tr>
+													<tr><td>9</td><td>Item 9</td><td>$9</td></tr>
+													<tr><td>10</td><td>Item 10</td><td>$10</td></tr>
+													<tr><td>11</td><td>Item 11</td><td>$11</td></tr>
+													<tr><td>12</td><td>Item 12</td><td>$12</td></tr>
+													<tr><td>13</td><td>Item 13</td><td>$13</td></tr>
+													<tr><td>14</td><td>Item 14</td><td>$14</td></tr>
+													<tr><td>15</td><td>Item 15</td><td>$15</td></tr>
+													<tr><td>16</td><td>Item 16</td><td>$16</td></tr>
+													<tr><td>17</td><td>Item 17</td><td>$17</td></tr>
+													<tr><td>18</td><td>Item 18</td><td>$18</td></tr>
+													<tr><td>19</td><td>Item 19</td><td>$19</td></tr>
+													<tr><td>20</td><td>Item 20</td><td>$20</td></tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code>&lt;!-- required css / js --&gt;
+&lt;link href="assets/plugins/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet" /&gt;
+&lt;script src="assets/plugins/bootstrap-table/dist/bootstrap-table.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- html --&gt;
+&lt;table class="table" data-toggle="table"
+  data-sort-class="table-active"
+  data-sortable="true"
+  data-search="true"
+  data-pagination="true"
+  data-show-refresh="true"
+  data-show-columns="true"
+  data-show-fullscreen="true"
+  data-height="460"&gt;
+...
+&lt;/table&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #bootstrapTable -->
+							</div>
+							<!-- END col-9-->
+							<!-- BEGIN col-3 -->
+							<div class="col-xl-3">
+								<!-- BEGIN #sidebar-bootstrap -->
+								<nav id="sidebar-bootstrap" class="navbar navbar-sticky d-none d-xl-block">
+									<nav class="nav">
+										<a class="nav-link" href="#datatable" data-toggle="scroll-to">Datatable</a>
+										<a class="nav-link" href="#bootstrapTable" data-toggle="scroll-to">Bootstrap table</a>
+									</nav>
+								</nav>
+								<!-- END #sidebar-bootstrap -->
+							</div>
+							<!-- END col-3 -->
+						</div>
+						<!-- END row -->
+					</div>
+					<!-- END col-10 -->
+				</div>
+				<!-- END row -->
+			</div>
+			<!-- END container -->
+		</div>
+		<!-- END #content -->
+		
+		<!-- BEGIN btn-scroll-top -->
+		<a href="#" data-click="scroll-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+		<!-- END btn-scroll-top -->
+	</div>
+	<!-- END #app -->
+	
+	<!-- ================== BEGIN core-js ================== -->
+	<script src="assets/js/vendor.min.js"></script>
+	<script src="assets/js/app.min.js"></script>
+	<!-- ================== END core-js ================== -->
+	
+	<!-- ================== BEGIN page-js ================== -->
+	<script src="assets/plugins/highlight.js/highlight.min.js"></script>
+	<script src="assets/js/demo/highlightjs.demo.js"></script>
+	<script src="assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="assets/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+	<script src="assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+	<script src="assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+	<script src="assets/plugins/datatables.net-buttons/js/buttons.flash.min.js"></script>
+	<script src="assets/plugins/datatables.net-buttons/js/buttons.html5.min.js"></script>
+	<script src="assets/plugins/datatables.net-buttons/js/buttons.print.min.js"></script>
+	<script src="assets/plugins/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+	<script src="assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+	<script src="assets/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+	<script src="assets/plugins/bootstrap-table/dist/bootstrap-table.min.js"></script>
+	<script src="assets/js/demo/table-plugins.demo.js"></script>
+	<!-- ================== END page-js ================== -->
+</body>
+</html>

@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Studio | Form Elements</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	
+	<!-- ================== BEGIN core-css ================== -->
+	<link href="assets/css/vendor.min.css" rel="stylesheet" />
+	<link href="assets/css/app.min.css" rel="stylesheet" />
+	<!-- ================== END core-css ================== -->
+	
+</head>
+<body data-bs-spy='scroll' data-bs-target='#sidebar-bootstrap' data-bs-offset='200'>
+	<!-- BEGIN #app -->
+	<div id="app" class="app">
+		<!-- BEGIN #header -->
+		<div id="header" class="app-header">
+			<!-- BEGIN mobile-toggler -->
+			<div class="mobile-toggler">
+				<button type="button" class="menu-toggler" data-toggle="sidebar-mobile">
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</button>
+			</div>
+			<!-- END mobile-toggler -->
+			
+			<!-- BEGIN brand -->
+			<div class="brand">
+				<div class="desktop-toggler">
+					<button type="button" class="menu-toggler" data-toggle="sidebar-minify">
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				
+				<a href="#" class="brand-logo">
+					<img src="assets/img/logo.png" alt="" height="20" />
+				</a>
+			</div>
+			<!-- END brand -->
+			
+			<!-- BEGIN menu -->
+			<div class="menu">
+				<form class="menu-search" method="POST" name="header_search_form">
+					<div class="menu-search-icon"><i class="fa fa-search"></i></div>
+					<div class="menu-search-input">
+						<input type="text" class="form-control" placeholder="Search menu..." />
+					</div>
+				</form>
+				<div class="menu-item dropdown">
+					<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+						<div class="menu-icon"><i class="fa fa-bell nav-icon"></i></div>
+						<div class="menu-label">3</div>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end dropdown-notification">
+						<h6 class="dropdown-header text-gray-900 mb-1">Notifications</h6>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<i class="fa fa-receipt fa-lg fa-fw text-success"></i>
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Your store has a new order for 2 items totaling $1,299.00</div>
+								<div class="time">just now</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<i class="far fa-user-circle fa-lg fa-fw text-muted"></i>
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">3 new customer account is created</div>
+								<div class="time">2 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<img src="assets/img/icon/android.svg" alt="" width="26" />
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Your android application has been approved</div>
+								<div class="time">5 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<img src="assets/img/icon/paypal.svg" alt="" width="26" />
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Paypal payment method has been enabled for your store</div>
+								<div class="time">10 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<div class="p-2 text-center mb-n1">
+							<a href="#" class="text-gray-800 text-decoration-none">See all</a>
+						</div>
+					</div>
+				</div>
+				<div class="menu-item dropdown">
+					<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+						<div class="menu-img online">
+							<img src="assets/img/user/user.jpg" alt="" class="mw-100 mh-100 rounded-circle" />
+						</div>
+						<div class="menu-text">seantheme@gmail.com</div>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end me-lg-3">
+						<a class="dropdown-item d-flex align-items-center" href="#">Edit Profile <i class="fa fa-user-circle fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Inbox <i class="fa fa-envelope fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Calendar <i class="fa fa-calendar-alt fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Setting <i class="fa fa-wrench fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item d-flex align-items-center" href="#">Log Out <i class="fa fa-toggle-off fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+					</div>
+				</div>
+			</div>
+			<!-- END menu -->
+		</div>
+		<!-- END #header -->
+		
+		<!-- BEGIN #sidebar -->
+		<div id="sidebar" class="app-sidebar">
+			<!-- BEGIN scrollbar -->
+			<div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+				<!-- BEGIN menu -->
+				<div class="menu">
+					<div class="menu-header">Navigation</div>
+					<div class="menu-item">
+						<a href="index.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-laptop"></i></span>
+							<span class="menu-text">Dashboard</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="analytics.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-chart-pie"></i></span>
+							<span class="menu-text">Analytics</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon">
+								<i class="fa fa-envelope"></i>
+								<span class="menu-icon-label">6</span>
+							</span>
+							<span class="menu-text">Email</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="email_inbox.html" class="menu-link">
+									<span class="menu-text">Inbox</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="email_compose.html" class="menu-link">
+									<span class="menu-text">Compose</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="email_detail.html" class="menu-link">
+									<span class="menu-text">Detail</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-divider"></div>
+					<div class="menu-header">Components</div>
+					<div class="menu-item">
+						<a href="widgets.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-qrcode"></i></span>
+							<span class="menu-text">Widgets</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-heart"></i></span>
+							<span class="menu-text">UI Kits</span> 
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="ui_bootstrap.html" class="menu-link">
+									<span class="menu-text">Bootstrap</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_buttons.html" class="menu-link">
+									<span class="menu-text">Buttons</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_card.html" class="menu-link">
+									<span class="menu-text">Card</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_icons.html" class="menu-link">
+									<span class="menu-text">Icons</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_modal_notification.html" class="menu-link">
+									<span class="menu-text">Modal & Notification</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_typography.html" class="menu-link">
+									<span class="menu-text">Typography</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_tabs_accordions.html" class="menu-link">
+									<span class="menu-text">Tabs & Accordions</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub active">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-file-alt"></i></span>
+							<span class="menu-text">Forms</span> 
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item active">
+								<a href="form_elements.html" class="menu-link">
+									<span class="menu-text">Form Elements</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="form_plugins.html" class="menu-link">
+									<span class="menu-text">Form Plugins</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="form_wizards.html" class="menu-link">
+									<span class="menu-text">Wizards</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-table"></i></span>
+							<span class="menu-text">Tables</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="table_elements.html" class="menu-link">
+									<span class="menu-text">Table Elements</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="table_plugins.html" class="menu-link">
+									<span class="menu-text">Table Plugins</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-chart-bar"></i></span>
+							<span class="menu-text">Charts</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="chart_js.html" class="menu-link">
+									<span class="menu-text">Chart.js</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="chart_apex.html" class="menu-link">
+									<span class="menu-text">Apexcharts.js</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item">
+						<a href="map.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-map-marker-alt"></i></span>
+							<span class="menu-text">Map</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-code-branch"></i></span>
+							<span class="menu-text">Layout</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="layout_starter.html" class="menu-link">
+									<span class="menu-text">Starter Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_fixed_footer.html" class="menu-link">
+									<span class="menu-text">Fixed Footer</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_full_height.html" class="menu-link">
+									<span class="menu-text">Full Height</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_full_width.html" class="menu-link">
+									<span class="menu-text">Full Width</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_boxed_layout.html" class="menu-link">
+									<span class="menu-text">Boxed Layout</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_minified_sidebar.html" class="menu-link">
+									<span class="menu-text">Minified Sidebar</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-globe"></i></span>
+							<span class="menu-text">Pages</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="page_scrum_board.html" class="menu-link">
+									<span class="menu-text">Scrum Board</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_products.html" class="menu-link">
+									<span class="menu-text">Products</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_orders.html" class="menu-link">
+									<span class="menu-text">Orders</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_gallery.html" class="menu-link">
+									<span class="menu-text">Gallery</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_search_results.html" class="menu-link">
+									<span class="menu-text">Search Results</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_coming_soon.html" class="menu-link">
+									<span class="menu-text">Coming Soon Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_404_error.html" class="menu-link">
+									<span class="menu-text">404 Error Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_login.html" class="menu-link">
+									<span class="menu-text">Login</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_register.html" class="menu-link">
+									<span class="menu-text">Register</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-divider"></div>
+					<div class="menu-header">Users</div>
+					<div class="menu-item">
+						<a href="profile.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-user-circle"></i></span>
+							<span class="menu-text">Profile</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="calendar.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-calendar"></i></span>
+							<span class="menu-text">Calendar</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="settings.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-cog"></i></span>
+							<span class="menu-text">Settings</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="helper.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-question-circle"></i></span>
+							<span class="menu-text">Helper</span>
+						</a>
+					</div>
+					<div class="p-3 px-4 mt-auto hide-on-minified">
+						<a href="../../documentation/index.html" class="btn d-block btn-secondary fw-600 rounded-pill">
+							<i class="fa fa-code-branch me-1 ms-n1 opacity-5"></i> Documentation
+						</a>
+					</div>
+				</div>
+				<!-- END menu -->
+			</div>
+			<!-- END scrollbar -->
+			
+			<!-- BEGIN mobile-sidebar-backdrop -->
+			<button class="app-sidebar-mobile-backdrop" data-dismiss="sidebar-mobile"></button>
+			<!-- END mobile-sidebar-backdrop -->
+		</div>
+		<!-- END #sidebar -->
+		
+		<!-- BEGIN #content -->
+		<div id="content" class="app-content">
+			<!-- BEGIN container -->
+			<div class="container">
+				<!-- BEGIN row -->
+				<div class="row justify-content-center">
+					<!-- BEGIN col-10 -->
+					<div class="col-xl-10">
+						<!-- BEGIN row -->
+						<div class="row">
+							<!-- BEGIN col-9 -->
+							<div class="col-xl-9">
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">FORMS</a></li>
+									<li class="breadcrumb-item active">FORM ELEMENTS</li>
+								</ul>
+								
+								<h1 class="page-header">
+									Form Elements <small>page header description goes here...</small>
+								</h1>
+								
+								<hr class="mb-4" />
+								
+								<!-- BEGIN #formControls -->
+								<div id="formControls" class="mb-5">
+									<h4>Form controls</h4>
+									<p>Textual form controls—like <code>&lt;input&gt;</code>s, <code>&lt;select&gt;</code>s, and <code>&lt;textarea&gt;</code>s—are styled with the .form-control class. Included are styles for general appearance, focus state, sizing, and more. Please read the <a href="https://getbootstrap.com/docs/5.0/components/forms/" target="_blank">official Bootstrap documentation</a> for the full list of options.</p>
+									<div class="card">
+										<div class="card-body pb-2">
+											<form>
+												<div class="row">
+													<div class="col-xl-6">
+														<div class="form-group mb-3">
+															<label class="form-label" for="exampleFormControlInput1">Text input</label>
+															<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+														</div>
+														<div class="form-group mb-3">
+															<label class="form-label" for="exampleFormControlTextarea1">Textarea</label>
+															<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+														</div>
+														<div class="form-group mb-3">
+															<label class="form-label" for="exampleFormControlFile1">File input</label>
+															<input type="file" class="form-control" id="exampleFormControlFile1" />
+														</div>
+													</div>
+													<div class="col-xl-6">
+														<div class="form-group mb-3">
+															<label class="form-label" for="exampleFormControlSelect1">Select dropdown</label>
+															<select class="form-select" id="exampleFormControlSelect1">
+																<option>1</option>
+																<option>2</option>
+																<option>3</option>
+																<option>4</option>
+																<option>5</option>
+															</select>
+														</div>
+														<div class="form-group mb-3">
+															<label class="form-label" for="exampleFormControlSelect2">Multiple select</label>
+															<select multiple class="form-select" id="exampleFormControlSelect2">
+																<option>1</option>
+																<option>2</option>
+																<option>3</option>
+																<option>4</option>
+																<option>5</option>
+															</select>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code class="xml">&lt;!-- text input --&gt;
+&lt;div class="form-group mb-3"&gt;
+  &lt;label class="form-label" for="exampleFormControlInput1"&gt;Email address&lt;/label&gt;
+  &lt;input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"&gt;
+&lt;/div&gt;
+
+&lt;!-- select --&gt;
+&lt;select class="form-control"&gt;
+  ...
+&lt;/select&gt;
+
+&lt;!-- multiple select --&gt;
+&lt;select multiple class="form-control"&gt;
+  ...
+&lt;/select&gt;
+
+&lt;!-- textarea --&gt;
+&lt;textarea class="form-control" rows="3"&gt;&lt;/textarea&gt;
+
+&lt;!-- file input --&gt;
+&lt;input type="file" class="form-control" id="exampleFormControlFile1" /&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #formControls -->
+								
+								<!-- BEGIN #sizing -->
+								<div id="sizing" class="mb-5">
+									<h4>Sizing</h4>
+									<p>Set heights using classes like <code>.form-control-lg</code> and <code>.form-control-sm</code>.</p>
+									<div class="card">
+										<div class="card-body">
+											<div class="row mb-n3">
+												<div class="col-xl-6">
+													<input class="form-control form-control-lg mb-3" type="text" placeholder=".form-control-lg" />
+													<input class="form-control mb-3" type="text" placeholder="Default input" />
+													<input class="form-control form-control-sm mb-3" type="text" placeholder=".form-control-sm" />
+												</div>
+												<div class="col-xl-6">
+													<select class="form-control form-control-lg mb-3">
+														<option>Large select</option>
+													</select>
+													<select class="form-control mb-3">
+														<option>Default select</option>
+													</select>
+													<select class="form-control form-control-sm mb-3">
+														<option>Small select</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code class="xml">&lt;!-- input text --&gt;
+&lt;input class="form-control form-control-lg" type="text" placeholder=".form-control-lg"&gt;
+&lt;input class="form-control" type="text" placeholder="Default input"&gt;
+&lt;input class="form-control form-control-sm" type="text" placeholder=".form-control-sm"&gt;
+
+&lt;!-- select --&gt;
+&lt;select class="form-control form-control-lg"&gt;
+  &lt;option&gt;Large select&lt;/option&gt;
+&lt;/select&gt;
+&lt;select class="form-control"&gt;
+  &lt;option&gt;Default select&lt;/option&gt;
+&lt;/select&gt;
+&lt;select class="form-control form-control-sm"&gt;
+  &lt;option&gt;Small select&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #sizing -->
+								
+								<!-- BEGIN #readonly -->
+								<div id="readonly" class="mb-5">
+									<h4>Readonly</h4>
+									<p>Add the readonly boolean attribute on an input to prevent modification of the input’s value. Read-only inputs appear lighter (just like disabled inputs), but retain the standard cursor.</p>
+									<div class="card">
+										<div class="card-body">
+											<input class="form-control" type="text" placeholder="Readonly input here..." readonly />
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code class="xml">&lt;input class="form-control" type="text" placeholder="Readonly input here..." readonly /&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #readonly -->
+								
+								<!-- BEGIN #readonlyPlainText -->
+								<div id="readonlyPlainText" class="mb-5">
+									<h4>Readonly plain text</h4>
+									<p>If you want to have <code>&lt;input readonly&gt;</code> elements in your form styled as plain text, use the .form-control-plaintext class to remove the default form field styling and preserve the correct margin and padding.</p>
+									<div class="card">
+										<div class="card-body">
+											<form>
+												<div class="form-group row mb-3">
+													<label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+													<div class="col-sm-10">
+														<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+													</div>
+												</div>
+												<div class="form-group row mb-2">
+													<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+													<div class="col-sm-10">
+														<input type="password" class="form-control" id="inputPassword">
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code class="xml">&lt;div class="form-group row mb-3"&gt;
+  &lt;label for="staticEmail" class="col-sm-2 col-form-label"&gt;Email&lt;/label&gt;
+  &lt;div class="col-sm-10"&gt;
+    &lt;input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #readonlyPlainText -->
+								
+								<!-- BEGIN #rangeInputs -->
+								<div id="rangeInputs" class="mb-5">
+									<h4>Range inputs</h4>
+									<p>Set horizontally scrollable range inputs using <code>.form-range</code>.</p>
+									<div class="card">
+										<div class="card-body">
+											<div class="row mb-n3">
+											  <div class="col-xl-6">
+													<div class="form-group mb-3">
+														<label for="formControlRange" class="form-label">Example range input</label>
+														<input type="range" class="form-range" id="formControlRange" />
+													</div>
+											  </div>
+											  <div class="col-xl-6">
+													<div class="form-group mb-3">
+														<label for="disabledRange" class="form-label">Disabled range</label>
+														<input type="range" class="form-range" id="disabledRange" disabled />
+													</div>
+											  </div>
+											</div>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code class="xml">&lt;!-- default range --&gt;
+&lt;input type="range" class="form-range" id="formControlRange" /&gt;
+
+&lt;!-- disabled range --&gt;
+&lt;input type="range" class="form-range" id="disabledRange" disabled /&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #rangeInputs -->
+								
+								<!-- BEGIN #checkboxes -->
+								<div id="checkboxes" class="mb-5">
+									<h4>Checkboxes</h4>
+									<p>Default checkboxes are improved upon with the help of <code>.form-check</code>, a single class for both input types that improves the layout and behavior of their HTML elements.</p>
+									<div class="card">
+										<div class="card-body">
+											<div class="row mb-n3">
+												<div class="col-xl-6">
+													<div class="fs-12px text-muted mb-1"><b>DEFAULT CHECKBOX</b></div>
+													<div class="form-group mb-4">
+														<div class="form-check">
+															<input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+															<label class="form-check-label" for="defaultCheck1">Default checkbox</label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" type="checkbox" value="" id="defaultCheck2" checked />
+															<label class="form-check-label" for="defaultCheck2">Checked checkbox</label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" type="checkbox" value="" id="defaultCheck3" disabled />
+															<label class="form-check-label" for="defaultCheck3">Disabled checkbox</label>
+														</div>
+													</div>
+												</div>
+												<div class="col-xl-6">
+													<div class="fs-12px text-muted mb-1"><b>INLINE CHECKBOX</b></div>
+													<div class="form-group mb-3">
+														<div class="form-check form-check-inline">
+															<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
+															<label class="form-check-label" for="inlineCheckbox1">1</label>
+														</div>
+														<div class="form-check form-check-inline">
+															<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" checked />
+															<label class="form-check-label" for="inlineCheckbox2">2</label>
+														</div>
+														<div class="form-check form-check-inline">
+															<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" disabled />
+															<label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code class="xml">&lt;!-- checkbox --&gt;
+&lt;div class="form-check"&gt;
+  &lt;input class="form-check-input" type="checkbox" value="" id="defaultCheck1" disabled /&gt;
+  &lt;label class="form-check-label" for="defaultCheck1"&gt;Default checkbox&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;!-- inline checkbox --&gt;
+&lt;div class="form-check form-check-inline"&gt;
+  ...
+&lt;/div&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #checkboxes -->
+								
+								<!-- BEGIN #radios -->
+								<div id="radios" class="mb-5">
+									<h4>Radios</h4>
+									<p>Default radios are improved upon with the help of <code>.form-check</code>, a single class for both input types that improves the layout and behavior of their HTML elements. You can use Bootstrap custom radio for styled radio button.</p>
+									<div class="card">
+										<div class="card-body">
+											<div class="row mb-n3">
+												<div class="col-xl-6">
+													<div class="fs-12px text-muted mb-1"><b>DEFAULT RADIO</b></div>
+													<div class="form-group mb-4">
+														<div class="form-check">
+															<input class="form-check-input" type="radio" value="" name="radio_1" id="defaultRadio1" />
+															<label class="form-check-label" for="defaultRadio1">Default radio button</label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" type="radio" value="" name="radio_1" id="defaultRadio2" checked />
+															<label class="form-check-label" for="defaultRadio2">Checked radio button</label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" type="radio" value="" name="radio_1" id="defaultRadio3" disabled />
+															<label class="form-check-label" for="defaultRadio3">Disabled radio button</label>
+														</div>
+													</div>
+												</div>
+												<div class="col-xl-6">
+													<div class="fs-12px text-muted mb-1"><b>INLINE RADIO</b></div>
+													<div class="form-group mb-3">
+														<div class="form-check form-check-inline">
+															<input class="form-check-input" name="default_radio" type="radio" id="inlineRadio1" value="option1" />
+															<label class="form-check-label" for="inlineRadio1">1</label>
+														</div>
+														<div class="form-check form-check-inline">
+															<input class="form-check-input" name="default_radio" type="radio" id="inlineRadio2" value="option2" checked />
+															<label class="form-check-label" for="inlineRadio2">2</label>
+														</div>
+														<div class="form-check form-check-inline">
+															<input class="form-check-input" name="default_radio" type="radio" id="inlineRadio3" value="option3" disabled />
+															<label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code class="xml">&lt;!-- radio --&gt;
+&lt;div class="form-check"&gt;
+  &lt;input class="form-check-input" type="radio" value="" id="defaultRadio1" disabled /&gt;
+  &lt;label class="form-check-label" for="defaultRadio1"&gt;Default checkbox&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;!-- inline radio --&gt;
+&lt;div class="form-check form-check-inline"&gt;
+  ...
+&lt;/div&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #radios -->
+								
+								<!-- BEGIN #switches -->
+								<div id="switches" class="mb-5">
+									<h4>Switches</h4>
+									<p>A switch has the markup of a custom checkbox but uses the <code>.form-switch</code> class to render a toggle switch. Switches also support the disabled attribute.</p>
+									<div class="card">
+										<div class="card-body">
+											<div class="form-check form-switch">
+												<input type="checkbox" class="form-check-input" id="customSwitch1">
+												<label class="form-check-label" for="customSwitch1">Toggle this switch element</label>
+											</div>
+											<div class="form-check form-switch">
+												<input type="checkbox" class="form-check-input" checked id="customSwitch2">
+												<label class="form-check-label" for="customSwitch2">Checked switch element</label>
+											</div>
+											<div class="form-check form-switch">
+												<input type="checkbox" class="form-check-input" disabled id="customSwitch3">
+												<label class="form-check-label" for="customSwitch3">Disabled switch element</label>
+											</div>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code class="xml">&lt;div class="form-check form-switch"&gt;
+  &lt;input type="checkbox" class="form-check-input" id="customSwitch1"&gt;
+  &lt;label class="form-check-label" for="customSwitch1"&gt;Toggle this switch element&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #switches -->
+								
+								<!-- BEGIN #selectMenu -->
+								<div id="selectMenu" class="mb-5">
+									<h4>Select menu</h4>
+									<p>Custom &lt;select&gt; menus need only a custom class, .form-select to trigger the custom styles. Custom styles are limited to the &lt;select&gt;’s initial appearance and cannot modify the &lt;option&gt;s due to browser limitations.</p>
+									<div class="card">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-xl-6">
+													<div class="fs-12px text-muted mb-2"><b>DEFAULT</b></div>
+													<select class="form-select">
+														<option selected>Open this select menu</option>
+														<option value="1">One</option>
+														<option value="2">Two</option>
+														<option value="3">Three</option>
+													</select>
+												</div>
+												<div class="col-xl-6">
+													<div class="fs-12px text-muted mb-2"><b>SIZING</b></div>
+													<select class="form-select form-select-lg mb-3">
+														<option selected>Open this select menu</option>
+														<option value="1">One</option>
+														<option value="2">Two</option>
+														<option value="3">Three</option>
+													</select>
+
+													<select class="form-select form-select-sm">
+														<option selected>Open this select menu</option>
+														<option value="1">One</option>
+														<option value="2">Two</option>
+														<option value="3">Three</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code class="xml">&lt;!-- form select --&gt;
+&lt;select class="form-select"&gt;
+  &lt;option selected&gt;Open this select menu&lt;/option&gt;
+  &lt;option value="1"&gt;One&lt;/option&gt;
+  &lt;option value="2"&gt;Two&lt;/option&gt;
+  &lt;option value="3"&gt;Three&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;!-- form-select-lg --&gt;
+&lt;select class="form-select form-select-lg"&gt;...&lt;/select&gt;
+
+&lt;!-- form-select-sm --&gt;
+&lt;select class="form-select form-select-sm"&gt;...&lt;/select&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #selectMenu -->
+								
+								<!-- BEGIN #fileBrowser -->
+								<div id="fileBrowser" class="mb-5">
+									<h4>File browser</h4>
+									<p>The file input is the most gnarly of the bunch and requires additional JavaScript if you’d like to hook them up with functional Choose file… and selected file name text.</p>
+									<div class="card">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-xl-6">
+													<div class="mb-3">
+														<label class="form-label" for="defaultFile">Default file input example</label>
+														<input type="file" class="form-control" id="defaultFile" />
+													</div>
+													<div class="mb-3">
+														<label class="form-label" for="multipleFile">Multiple files input example</label>
+														<input type="file" class="form-control" id="multipleFile" multiple />
+													</div>
+													<div class="mb-3">
+														<label class="form-label" for="disabledFile">Disabled files input example</label>
+														<input type="file" class="form-control" id="disabledFile" disabled />
+													</div>
+												</div>
+												<div class="col-xl-6">
+													<div class="mb-3">
+														<label class="form-label" for="smFile">Small file input example</label>
+														<input type="file" class="form-control form-control-sm" id="smFile" />
+													</div>
+													<div class="mb-3">
+														<label class="form-label" for="lgFile">Large file input example</label>
+														<input type="file" class="form-control form-control-lg" id="lgFile" />
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code class="xml">&lt;div class="mb-3"&gt;
+  &lt;label class="form-label" for="defaultFile"&gt;Choose file&lt;/label&gt;
+  &lt;input type="file" class="form-control" id="defaultFile" /&gt;
+&lt;/div&gt;
+
+&lt;!-- small input file --&gt;
+&lt;input type="file" class="form-control form-control-sm" id="smFile" /&gt;
+
+&lt;!-- large input file --&gt;
+&lt;input type="file" class="form-control form-control-lg" id="lgFile" /&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #fileBrowser -->
+								
+								<!-- BEGIN #formGrid -->
+								<div id="formGrid" class="mb-5">
+									<h4>Form grid</h4>
+									<p>More complex forms can be built using bootstrap grid classes. Use these for form layouts that require multiple columns, varied widths, and additional alignment options.</p>
+									<div class="card">
+										<div class="card-body">
+											<form>
+												<div class="mb-3 row">
+													<label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+													<div class="col-sm-10">
+														<input type="email" class="form-control" id="inputEmail3">
+													</div>
+												</div>
+												<div class="mb-3 row">
+													<label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+													<div class="col-sm-10">
+														<input type="password" class="form-control" id="inputPassword3">
+													</div>
+												</div>
+												<fieldset class="mb-2">
+													<div class="row">
+														<label class="col-form-label col-sm-2 pt-0">Radios</label>
+														<div class="col-sm-10">
+															<div class="form-check">
+																<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+																<label class="form-check-label" for="gridRadios1">
+																	First radio
+																</label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+																<label class="form-check-label" for="gridRadios2">
+																	Second radio
+																</label>
+															</div>
+															<div class="form-check disabled">
+																<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+																<label class="form-check-label" for="gridRadios3">
+																	Third disabled radio
+																</label>
+															</div>
+														</div>
+													</div>
+												</fieldset>
+												<div class="row mb-2">
+													<label class="col-sm-2 col-form-label pt-0">Checkbox</label>
+													<div class="col-sm-10">
+														<div class="form-check">
+															<input class="form-check-input" type="checkbox" id="gridCheck1">
+															<label class="form-check-label" for="gridCheck1">
+																Example checkbox
+															</label>
+														</div>
+													</div>
+												</div>
+												<div class="form-group row">
+													<div class="col-sm-10 offset-sm-2">
+														<button type="submit" class="btn btn-primary">Sign in</button>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code class="xml">&lt;form&gt;
+  &lt;div class="mb-3 row"&gt;
+    &lt;label for="inputEmail3" class="col-sm-2 col-form-label"&gt;Email&lt;/label&gt;
+    &lt;div class="col-sm-10"&gt;
+      &lt;input type="email" class="form-control" id="inputEmail3"&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="mb-3 row"&gt;
+    &lt;div class="col-sm-10 offset-sm-2"&gt;
+      &lt;button type="submit" class="btn btn-primary"&gt;Sign in&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #formGrid -->
+								
+								<!-- BEGIN #helpText -->
+								<div id="helpText" class="mb-5">
+									<h4>Help text</h4>
+									<p>Block-level help text in forms can be created using <code>.form-text</code>. Inline help text can be flexibly implemented using any inline HTML element and utility classes like <code>.text-muted</code>.</p>
+									<div class="card">
+										<div class="card-body">
+											<label for="inputPassword5" class="form-label">Password</label>
+											<input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+											<small id="passwordHelpBlock" class="form-text text-muted">
+												Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+											</small>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code class="xml">&lt;label for="inputPassword5"&gt;Password&lt;/label&gt;
+&lt;input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock"&gt;
+&lt;small id="passwordHelpBlock" class="form-text text-muted"&gt;
+  Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+&lt;/small&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #helpText -->
+								
+								<!-- BEGIN #inputGroup -->
+								<div id="inputGroup" class="mb-5">
+									<h4>Input group</h4>
+									<p>Place one add-on or button on either side of an input. You may also place one on both sides of an input. Remember to place <code>&lt;label&gt;</code> outside the input group.</p>
+									<div class="card">
+										<div class="card-body">
+											<div class="input-group flex-nowrap">
+												<span class="input-group-text" id="addon-wrapping">@</span>
+												<input type="text" class="form-control" placeholder="Username" />
+												<span class="input-group-text">.com</span>
+											</div>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code class="xml">&lt;div class="input-group flex-nowrap"&gt;
+  &lt;span class="input-group-text" id="addon-wrapping"&gt;@&lt;/span&gt;
+  &lt;input type="text" class="form-control" placeholder="Username" /&gt;
+  &lt;span class="input-group-text"&gt;.com&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #inputGroup -->
+								
+								<!-- BEGIN #validation -->
+								<div id="validation" class="mb-5">
+									<h4>Validation</h4>
+									<p>Provide valuable, actionable feedback to your users with HTML5 form validation. Choose from the browser default validation feedback, or implement custom messages with our built-in classes and starter JavaScript.</p>
+									<div class="card">
+										<div class="card-body">
+											<form class="was-validated">
+												<div class="row mb-n3">
+													<div class="col-md-6 mb-3">
+														<label for="validationValidInput" class="form-label">Valid input</label>
+														<input type="text" class="form-control is-valid" id="validationValidInput" value="Mark" required />
+														<div class="valid-feedback">
+															Looks good!
+														</div>
+													</div>
+													<div class="col-md-6 mb-3">
+														<label for="validationInvalidInput" class="form-label">Invalid input</label>
+														<input type="text" class="form-control is-invalid" id="validationInvalidInput" value="" required />
+														<div class="invalid-feedback" id="validationInvalidInputFeedback">
+															Please provide a name
+														</div>
+													</div>
+													<div class="col-md-6 mb-3">
+														<label for="validationInvalidInputGroup" class="form-label">Input group</label>
+														<div class="input-group has-validation">
+															<span class="input-group-text">@</span>
+															<input type="text" class="form-control is-invalid" id="validationInvalidInputGroup" required />
+															<div class="invalid-feedback">
+																Please choose a username.
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6 mb-3">
+														<label for="validationSelectInvalid" class="form-label">Select dropdown</label>
+														<select class="form-select is-invalid" id="validationSelectInvalid" required>
+															<option selected disabled value="">Choose...</option>
+															<option>...</option>
+														</select>
+														<div class="invalid-feedback">
+															Please select a valid state.
+														</div>
+													</div>
+													<div class="col-md-6 mb-3">
+														<label for="validationTextarea" class="form-label">Textarea</label>
+														<textarea class="form-control is-invalid" id="validationTextarea" placeholder="Required example textarea" required></textarea>
+														<div class="invalid-feedback">
+															Please enter a message in the textarea.
+														</div>
+													</div>
+													<div class="col-md-6 mb-3">
+														<div class="form-check pt-md-3 mt-md-2">
+															<input class="form-check-input is-invalid" type="checkbox" value="" id="validationInvalidCheckbox" required />
+															<label class="form-check-label" for="validationInvalidCheckbox">
+																Agree to terms and conditions
+															</label>
+															<div class="invalid-feedback">
+																You must agree before submitting.
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+											<hr />
+											<form class="was-validated" novalidate>
+												<div class="row mb-n3">
+													<div class="col-md-6 mb-5 position-relative">
+														<label for="validationTooltip01">Tooltip valid</label>
+														<input type="text" class="form-control" id="validationTooltip01" value="Mark" required />
+														<div class="valid-tooltip">
+															Looks good!
+														</div>
+													</div>
+													<div class="col-md-6 mb-5 position-relative">
+														<label for="validationTooltip02">Tooltip invalid</label>
+														<div class="input-group">
+															<div class="input-group-text">@</div>
+															<input type="text" class="form-control" id="validationTooltip02" required>
+															<div class="invalid-tooltip">
+																Field is required
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6 mb-5 position-relative">
+														<label for="validationTooltip03">Tooltip dropdown</label>
+														<select class="form-select" id="validationTooltip03" required>
+															<option selected disabled value="">Choose...</option>
+															<option>...</option>
+														</select>
+														<div class="invalid-tooltip">
+															Please select a valid state.
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code class="xml">&lt;form class="was-validated"&gt;
+  &lt;!-- valid input --&gt;
+  &lt;input type="text" class="form-control is-valid" value="" required /&gt;
+  &lt;div class="valid-feedback"&gt;Looks good!&lt;/div&gt;
+
+  &lt;!-- invalid input --&gt;
+  &lt;input type="text" class="form-control is-invalid" value="" required /&gt;
+  &lt;div class="invalid-feedback"&gt;Field is required&lt;/div&gt;
+
+  &lt;!-- valid tooltip --&gt;
+  &lt;div class="position-relative"&gt;
+    &lt;div class="valid-tooltip"&gt;Looks good!&lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;!-- invalid tooltip --&gt;
+  &lt;div class="position-relative"&gt;
+    &lt;div class="invalid-tooltip"&gt;Field is required&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #validation -->
+							</div>
+							<!-- END col-9-->
+							<!-- BEGIN col-3 -->
+							<div class="col-xl-3">
+								<!-- BEGIN #sidebar-bootstrap -->
+								<nav id="sidebar-bootstrap" class="navbar navbar-sticky d-none d-xl-block">
+									<nav class="nav">
+										<a class="nav-link" href="#formControls" data-toggle="scroll-to">Form controls</a>
+										<a class="nav-link" href="#sizing" data-toggle="scroll-to">Sizing</a>
+										<a class="nav-link" href="#readonly" data-toggle="scroll-to">Readonly</a>
+										<a class="nav-link" href="#readonlyPlainText" data-toggle="scroll-to">Readonly plain text</a>
+										<a class="nav-link" href="#rangeInputs" data-toggle="scroll-to">Range inputs</a>
+										<a class="nav-link" href="#checkboxes" data-toggle="scroll-to">Checkboxes</a>
+										<a class="nav-link" href="#radios" data-toggle="scroll-to">Radios</a>
+										<a class="nav-link" href="#switches" data-toggle="scroll-to">Switches</a>
+										<a class="nav-link" href="#selectMenu" data-toggle="scroll-to">Select menu</a>
+										<a class="nav-link" href="#fileBrowser" data-toggle="scroll-to">File browser</a>
+										<a class="nav-link" href="#formGrid" data-toggle="scroll-to">Form grid</a>
+										<a class="nav-link" href="#helpText" data-toggle="scroll-to">Help text</a>
+										<a class="nav-link" href="#inputGroup" data-toggle="scroll-to">Input group</a>
+										<a class="nav-link" href="#validation" data-toggle="scroll-to">Validation</a>
+									</nav>
+								</nav>
+								<!-- END #sidebar-bootstrap -->
+							</div>
+							<!-- END col-3 -->
+						</div>
+						<!-- END row -->
+					</div>
+					<!-- END col-10 -->
+				</div>
+				<!-- END row -->
+			</div>
+			<!-- END container -->
+		</div>
+		<!-- END #content -->
+		
+		<!-- BEGIN btn-scroll-top -->
+		<a href="#" data-click="scroll-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+		<!-- END btn-scroll-top -->
+	</div>
+	<!-- END #app -->
+	
+	<!-- ================== BEGIN core-js ================== -->
+	<script src="assets/js/vendor.min.js"></script>
+	<script src="assets/js/app.min.js"></script>
+	<!-- ================== END core-js ================== -->
+	
+	<!-- ================== BEGIN page-js ================== -->
+	<script src="assets/plugins/highlight.js/highlight.min.js"></script>
+	<script src="assets/js/demo/highlightjs.demo.js"></script>
+	<!-- ================== END page-js ================== -->
+</body>
+</html>

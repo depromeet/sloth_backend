@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- /*
+
+변수 목록
+
+1. page : 현재 페이지 번호 (1부터 시작)
+2. maxPage : 페이지에서 보일 최대 개수 (ex: 1~5 노출)
+3. totalPages : 전체 페이지 수
+
+*/ -->
+
+<div th:fragment="pagination(page, maxPage, totalPages)">
+    <div th:with="start=${(page/maxPage)*maxPage + 1}, end=(${(totalPages == 0) ? 1 : (start + (maxPage - 1) < totalPages ? start + (maxPage - 1) : totalPages)})" >
+        <ul class="pagination justify-content-center">
+
+            <li class="page-item" th:classappend="${page eq 1}?'disabled':''">
+                <a th:href="@{__${#httpServletRequest.requestURI}__(page=${page -1})}" aria-label='Previous' class="page-link">
+                    <span aria-hidden='true'>Previous</span>
+                </a>
+            </li>
+
+            <li class="page-item" th:each="curPage: ${#numbers.sequence(start, end)}" th:classappend="${page eq curPage}?'active':''">
+                <a th:href="@{__${#httpServletRequest.requestURI}__(page=${curPage})}" th:inline="text" class="page-link">[[${curPage}]]</a>
+            </li>
+
+            <li class="page-item" th:classappend="${page ge totalPages}?'disabled':''">
+                <a th:href="@{__${#httpServletRequest.requestURI}__(page=${page +1})}" aria-label='Next' class="page-link">
+                    <span aria-hidden='true'>Next</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+</html>

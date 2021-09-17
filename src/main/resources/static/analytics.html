@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Studio | Analytics</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	
+	<!-- ================== BEGIN core-css ================== -->
+	<link href="assets/css/vendor.min.css" rel="stylesheet" />
+	<link href="assets/css/app.min.css" rel="stylesheet" />
+	<!-- ================== END core-css ================== -->
+	
+	<!-- ================== BEGIN page-css ================== -->
+	<link href="assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+	<!-- ================== END page-css ================== -->
+
+</head>
+<body>
+	<!-- BEGIN #app -->
+	<div id="app" class="app">
+		<!-- BEGIN #header -->
+		<div id="header" class="app-header">
+			<!-- BEGIN mobile-toggler -->
+			<div class="mobile-toggler">
+				<button type="button" class="menu-toggler" data-toggle="sidebar-mobile">
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</button>
+			</div>
+			<!-- END mobile-toggler -->
+			
+			<!-- BEGIN brand -->
+			<div class="brand">
+				<div class="desktop-toggler">
+					<button type="button" class="menu-toggler" data-toggle="sidebar-minify">
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				
+				<a href="#" class="brand-logo">
+					<img src="assets/img/logo.png" alt="" height="20" />
+				</a>
+			</div>
+			<!-- END brand -->
+			
+			<!-- BEGIN menu -->
+			<div class="menu">
+				<form class="menu-search" method="POST" name="header_search_form">
+					<div class="menu-search-icon"><i class="fa fa-search"></i></div>
+					<div class="menu-search-input">
+						<input type="text" class="form-control" placeholder="Search menu..." />
+					</div>
+				</form>
+				<div class="menu-item dropdown">
+					<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+						<div class="menu-icon"><i class="fa fa-bell nav-icon"></i></div>
+						<div class="menu-label">3</div>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end dropdown-notification">
+						<h6 class="dropdown-header text-gray-900 mb-1">Notifications</h6>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<i class="fa fa-receipt fa-lg fa-fw text-success"></i>
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Your store has a new order for 2 items totaling $1,299.00</div>
+								<div class="time">just now</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<i class="far fa-user-circle fa-lg fa-fw text-muted"></i>
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">3 new customer account is created</div>
+								<div class="time">2 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<img src="assets/img/icon/android.svg" alt="" width="26" />
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Your android application has been approved</div>
+								<div class="time">5 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<img src="assets/img/icon/paypal.svg" alt="" width="26" />
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Paypal payment method has been enabled for your store</div>
+								<div class="time">10 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<div class="p-2 text-center mb-n1">
+							<a href="#" class="text-gray-800 text-decoration-none">See all</a>
+						</div>
+					</div>
+				</div>
+				<div class="menu-item dropdown">
+					<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+						<div class="menu-img online">
+							<img src="assets/img/user/user.jpg" alt="" class="mw-100 mh-100 rounded-circle" />
+						</div>
+						<div class="menu-text">seantheme@gmail.com</div>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end me-lg-3">
+						<a class="dropdown-item d-flex align-items-center" href="#">Edit Profile <i class="fa fa-user-circle fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Inbox <i class="fa fa-envelope fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Calendar <i class="fa fa-calendar-alt fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Setting <i class="fa fa-wrench fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item d-flex align-items-center" href="#">Log Out <i class="fa fa-toggle-off fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+					</div>
+				</div>
+			</div>
+			<!-- END menu -->
+		</div>
+		<!-- END #header -->
+		
+		<!-- BEGIN #sidebar -->
+		<div id="sidebar" class="app-sidebar">
+			<!-- BEGIN scrollbar -->
+			<div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+				<!-- BEGIN menu -->
+				<div class="menu">
+					<div class="menu-header">Navigation</div>
+					<div class="menu-item">
+						<a href="index.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-laptop"></i></span>
+							<span class="menu-text">Dashboard</span>
+						</a>
+					</div>
+					<div class="menu-item active">
+						<a href="analytics.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-chart-pie"></i></span>
+							<span class="menu-text">Analytics</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon">
+								<i class="fa fa-envelope"></i>
+								<span class="menu-icon-label">6</span>
+							</span>
+							<span class="menu-text">Email</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="email_inbox.html" class="menu-link">
+									<span class="menu-text">Inbox</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="email_compose.html" class="menu-link">
+									<span class="menu-text">Compose</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="email_detail.html" class="menu-link">
+									<span class="menu-text">Detail</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-divider"></div>
+					<div class="menu-header">Components</div>
+					<div class="menu-item">
+						<a href="widgets.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-qrcode"></i></span>
+							<span class="menu-text">Widgets</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-heart"></i></span>
+							<span class="menu-text">UI Kits</span> 
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="ui_bootstrap.html" class="menu-link">
+									<span class="menu-text">Bootstrap</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_buttons.html" class="menu-link">
+									<span class="menu-text">Buttons</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_card.html" class="menu-link">
+									<span class="menu-text">Card</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_icons.html" class="menu-link">
+									<span class="menu-text">Icons</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_modal_notification.html" class="menu-link">
+									<span class="menu-text">Modal & Notification</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_typography.html" class="menu-link">
+									<span class="menu-text">Typography</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_tabs_accordions.html" class="menu-link">
+									<span class="menu-text">Tabs & Accordions</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-file-alt"></i></span>
+							<span class="menu-text">Forms</span> 
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="form_elements.html" class="menu-link">
+									<span class="menu-text">Form Elements</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="form_plugins.html" class="menu-link">
+									<span class="menu-text">Form Plugins</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="form_wizards.html" class="menu-link">
+									<span class="menu-text">Wizards</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-table"></i></span>
+							<span class="menu-text">Tables</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="table_elements.html" class="menu-link">
+									<span class="menu-text">Table Elements</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="table_plugins.html" class="menu-link">
+									<span class="menu-text">Table Plugins</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-chart-bar"></i></span>
+							<span class="menu-text">Charts</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="chart_js.html" class="menu-link">
+									<span class="menu-text">Chart.js</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="chart_apex.html" class="menu-link">
+									<span class="menu-text">Apexcharts.js</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item">
+						<a href="map.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-map-marker-alt"></i></span>
+							<span class="menu-text">Map</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-code-branch"></i></span>
+							<span class="menu-text">Layout</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="layout_starter.html" class="menu-link">
+									<span class="menu-text">Starter Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_fixed_footer.html" class="menu-link">
+									<span class="menu-text">Fixed Footer</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_full_height.html" class="menu-link">
+									<span class="menu-text">Full Height</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_full_width.html" class="menu-link">
+									<span class="menu-text">Full Width</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_boxed_layout.html" class="menu-link">
+									<span class="menu-text">Boxed Layout</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_minified_sidebar.html" class="menu-link">
+									<span class="menu-text">Minified Sidebar</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-globe"></i></span>
+							<span class="menu-text">Pages</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="page_scrum_board.html" class="menu-link">
+									<span class="menu-text">Scrum Board</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_products.html" class="menu-link">
+									<span class="menu-text">Products</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_orders.html" class="menu-link">
+									<span class="menu-text">Orders</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_gallery.html" class="menu-link">
+									<span class="menu-text">Gallery</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_search_results.html" class="menu-link">
+									<span class="menu-text">Search Results</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_coming_soon.html" class="menu-link">
+									<span class="menu-text">Coming Soon Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_404_error.html" class="menu-link">
+									<span class="menu-text">404 Error Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_login.html" class="menu-link">
+									<span class="menu-text">Login</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_register.html" class="menu-link">
+									<span class="menu-text">Register</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-divider"></div>
+					<div class="menu-header">Users</div>
+					<div class="menu-item">
+						<a href="profile.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-user-circle"></i></span>
+							<span class="menu-text">Profile</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="calendar.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-calendar"></i></span>
+							<span class="menu-text">Calendar</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="settings.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-cog"></i></span>
+							<span class="menu-text">Settings</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="helper.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-question-circle"></i></span>
+							<span class="menu-text">Helper</span>
+						</a>
+					</div>
+					<div class="p-3 px-4 mt-auto hide-on-minified">
+						<a href="../../documentation/index.html" class="btn d-block btn-secondary fw-600 rounded-pill">
+							<i class="fa fa-code-branch me-1 ms-n1 opacity-5"></i> Documentation
+						</a>
+					</div>
+				</div>
+				<!-- END menu -->
+			</div>
+			<!-- END scrollbar -->
+			
+			<!-- BEGIN mobile-sidebar-backdrop -->
+			<button class="app-sidebar-mobile-backdrop" data-dismiss="sidebar-mobile"></button>
+			<!-- END mobile-sidebar-backdrop -->
+		</div>
+		<!-- END #sidebar -->
+		
+		<!-- BEGIN #content -->
+		<div id="content" class="app-content">
+			<!-- page header -->
+			<h1 class="page-header">
+				Analytics <small>stats, overview & performance</small>
+			</h1>
+			
+			<!-- daterangepicker -->
+			<div class="d-flex align-items-center mb-3">
+				<a href="#" class="btn btn-default" id="daterangepicker"><i class="fa fa-fw fa-calendar ms-n1"></i> <span data-id="daterangepicker-date">Today</span> <b class="caret text-muted ms-1"></b></a>
+				<span class="ms-2">compared to <span data-id="prev-date" id="daterangepicker-compare-date"></span></span>
+			</div>
+		
+			<!-- BEGIN rows -->
+			<div class="row" data-masonry='{"percentPosition": true }'>
+				<div class="col-sm-6 col-xl-4 mb-4">
+					<!-- BEGIN card -->
+					<div class="card">
+						<div class="card-body">
+							<!-- title -->
+							<div class="d-flex align-items-center mb-2">
+								<div class="flex-fill fw-600 fs-16px">Total sales</div>
+								<a href="#" class="text-decoration-none">View report</a>
+							</div>
+					
+							<!-- stats -->
+							<div class="d-flex align-items-center mb-4 h3">
+								<div>$821.50</div>
+								<small class="fw-400 ms-auto text-success">+5%</small>
+							</div>
+					
+							<!-- chart -->
+							<div>
+								<div class="fs-13px fw-600 mb-3">SALES OVER TIME</div>
+								<div class="chart mb-2" style="height: 190px">
+									<canvas id="chart1" class="w-100" height="190"></canvas>
+								</div>
+								<div class="d-flex align-items-center">
+									<i class="fa fa-square text-gray-300 me-2 ms-auto"></i> 
+									<span class="fs-12px me-4" data-id="prev-date">&nbsp;</span>
+									<i class="fa fa-square text-primary me-2"></i> 
+									<span class="fs-12px" data-id="today-date">&nbsp;</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END card -->
+				</div>
+				
+				<div class="col-sm-6 col-xl-4 mb-4">
+					<!-- BEGIN card -->
+					<div class="card">
+						<div class="card-body">
+							<!-- title -->
+							<div class="d-flex align-items-center mb-2">
+								<div class="flex-fill fw-600 fs-16px">Online store sessions</div>
+								<a href="#" class="text-decoration-none">View report</a>
+							</div>
+					
+							<!-- stats -->
+							<div class="d-flex align-items-center mb-4 h3">
+								<div>39</div>
+								<small class="fw-400 ms-auto text-danger">-2.5%</small>
+							</div>
+					
+							<!-- stats small -->
+							<div class="row mb-4">
+								<div class="col-6">Visitors</div>
+								<div class="col-3 text-center">2</div>
+								<div class="col-3 text-end">
+									<span class="text-danger">-</span> 50%
+								</div>
+							</div>
+					
+							<!-- chart -->
+							<div>
+								<div class="fs-13px fw-600 mb-3">SESSIONS OVER TIME</div>
+								<div class="chart mb-2" style="height: 190px">
+									<canvas id="chart2" class="w-100" height="190"></canvas>
+								</div>
+								<div class="d-flex align-items-center">
+									<i class="fa fa-square text-gray-300 me-2 ms-auto"></i> 
+									<span class="fs-12px me-4" data-id="prev-date">&nbsp;</span>
+									<i class="fa fa-square text-blue me-2"></i> 
+									<span class="fs-12px" data-id="today-date">&nbsp;</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END card -->
+				</div>
+				
+				<div class="col-sm-6 col-xl-4 mb-4">
+					<!-- BEGIN card -->
+					<div class="card">
+						<div class="card-body">
+							<!-- title -->
+							<div class="d-flex align-items-center mb-3">
+								<div class="flex-fill fw-600 fs-16px">Top product by units sold</div>
+							</div>
+					
+							<!-- list -->
+							<div>
+								<div class="row mb-2">
+									<div class="col-6">iPhone 11 Pro Max</div>
+									<div class="col-3 text-center">329</div>
+									<div class="col-3 text-center"><span class="text-success">+</span> 25%</div>
+								</div>
+								<div class="row mb-2">
+									<div class="col-6">iPad Pro</div>
+									<div class="col-3 text-center">219</div>
+									<div class="col-3 text-center"><span class="text-danger">-</span> 5.2%</div>
+								</div>
+								<div class="row mb-2">
+									<div class="col-6">Macbook Pro</div>
+									<div class="col-3 text-center">125</div>
+									<div class="col-3 text-center"><span class="text-success">+</span> 2.3%</div>
+								</div>
+								<div class="row mb-2">
+									<div class="col-6">iPhone SE 2</div>
+									<div class="col-3 text-center">92</div>
+									<div class="col-3 text-center"><span class="text-success">+</span> 4.9%</div>
+								</div>
+								<div class="row mb-2">
+									<div class="col-6">Apple pencil</div>
+									<div class="col-3 text-center">52</div>
+									<div class="col-3 text-center"><span class="text-success">+</span> 25%</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END card -->
+				</div>
+				
+				<div class="col-sm-6 col-xl-4 mb-4">
+					<!-- BEGIN card -->
+					<div class="card">
+						<div class="card-body">
+							<!-- title -->
+							<div class="d-flex align-items-center mb-2">
+								<div class="flex-fill fw-600 fs-16px">Returning customer rate</div>
+							</div>
+					
+							<!-- stats -->
+							<div class="d-flex align-items-center mb-4 h3">
+								<div>52.85%</div>
+								<small class="fw-400 ms-auto text-danger">-7%</small>
+							</div>
+					
+							<!-- chart -->
+							<div>
+								<div class="fs-13px fw-600 mb-3">CUSTOMERS</div>
+								<div class="chart mb-2" style="height: 190px">
+									<canvas id="chart3" class="w-100" height="190"></canvas>
+								</div>
+								<div class="d-flex align-items-center">
+									<i class="fa fa-square text-indigo me-2 ms-auto"></i> 
+									<span class="fs-12px me-4">First-time</span>
+									<i class="fa fa-square text-teal me-2"></i> 
+									<span class="fs-12px">Returning</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END card -->
+				</div>
+				
+				<div class="col-sm-6 col-xl-4 mb-4">
+					<!-- BEGIN card -->
+					<div class="card">
+						<div class="card-body">
+							<!-- title -->
+							<div class="d-flex align-items-center mb-2">
+								<div class="flex-fill fw-600 fs-16px">Conversion rate</div>
+								<a href="#" class="text-decoration-none">View report</a>
+							</div>
+					
+							<!-- stats -->
+							<div class="d-flex align-items-center mb-4 h3">
+								<div>5.29%</div>
+								<small class="fw-400 ms-auto text-success">+83%</small>
+							</div>
+					
+							<!-- list -->
+							<div>
+								<div class="fs-13px fw-600 mb-3">CONVERSION FUNNEL</div>
+								<div class="row mb-2">
+									<div class="col-6">
+										<div>Added to cart</div>
+										<div class="text-gray-700 fs-13px">55 session</div>
+									</div>
+									<div class="col-3 text-center">25.28%</div>
+									<div class="col-3 text-center"><span class="text-danger">-</span> 5%</div>
+								</div>
+								<div class="row mb-2">
+									<div class="col-6">
+										<div>Reached checkout</div>
+										<div class="text-gray-700 fs-13px">25 session</div>
+									</div>
+									<div class="col-3 text-center">15.28%</div>
+									<div class="col-3 text-center"><span class="text-success">+</span> 82%</div>
+								</div>
+								<div class="row">
+									<div class="col-6">
+										<div>Sessions converted</div>
+										<div class="text-gray-700 fs-13px">5 session</div>
+									</div>
+									<div class="col-3 text-center">5.28%</div>
+									<div class="col-3 text-center"><span class="text-success">+</span> 82%</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END card -->
+				</div>
+				
+				<div class="col-sm-6 col-xl-4 mb-4">
+					<!-- BEGIN card -->
+					<div class="card">
+						<div class="card-body">
+							<!-- title -->
+							<div class="d-flex align-items-center mb-2">
+								<div class="flex-fill fw-600 fs-16px">Average order value</div>
+							</div>
+					
+							<!-- stats -->
+							<div class="d-flex align-items-center mb-4 h3">
+								<div>$35.12</div>
+								<small class="fw-400 ms-auto text-danger">-3.2%</small>
+							</div>
+					
+							<!-- chart -->
+							<div>
+								<div class="chart mb-2" style="height: 190px">
+									<canvas id="chart4" class="w-100" height="190"></canvas>
+								</div>
+								<div class="d-flex align-items-center">
+									<i class="fa fa-square text-gray-300 me-2 ms-auto"></i> 
+									<span class="fs-12px me-4" data-id="prev-date">&nbsp;</span>
+									<i class="fa fa-square text-blue me-2"></i> 
+									<span class="fs-12px" data-id="today-date">&nbsp;</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END card -->
+				</div>
+				
+				<div class="col-sm-6 col-xl-4 mb-4">
+					<!-- BEGIN card -->
+					<div class="card">
+						<div class="card-body">
+							<!-- title -->
+							<div class="d-flex align-items-center mb-2">
+								<div class="flex-fill fw-600 fs-16px">Total orders</div>
+							</div>
+					
+							<!-- stats -->
+							<div class="d-flex align-items-center mb-4 h3">
+								<div>12</div>
+								<small class="fw-400 ms-auto text-success">+57%</small>
+							</div>
+					
+							<!-- chart -->
+							<div>
+								<div class="fs-13px fw-600 mb-3">ORDERS OVER TIME</div>
+								<div class="chart mb-2">
+									<canvas id="chart5" class="w-100" height="190"></canvas>
+								</div>
+								<div class="d-flex align-items-center">
+									<i class="fa fa-square text-gray-300 me-2 ms-auto"></i> 
+									<span class="fs-12px me-4" data-id="prev-date">&nbsp;</span>
+									<i class="fa fa-square text-blue me-2"></i> 
+									<span class="fs-12px" data-id="today-date">&nbsp;</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END card -->
+				</div>
+				
+				<div class="col-sm-6 col-xl-4 mb-4">
+					<!-- BEGIN card -->
+					<div class="card">
+						<div class="card-body">
+							<!-- title -->
+							<div class="d-flex align-items-center mb-3">
+								<div class="flex-fill fw-600 fs-16px">Top pages by sessions</div>
+							</div>
+					
+							<!-- list -->
+							<div class="row mb-2">
+								<div class="col-6"><div><a href="#" class="text-decoration-none">/phone/apple-11-pro-max</a></div></div>
+								<div class="col-3 text-center">15</div>
+								<div class="col-3 text-center"><span class="text-success">+</span> 15%</div>
+							</div>
+							<div class="row mb-2">
+								<div class="col-6"><div><a href="#" class="text-decoration-none">/tablet/apple-ipad-pro-128gb</a></div></div>
+								<div class="col-3 text-center">12</div>
+								<div class="col-3 text-center"><span class="text-success">+</span> 8%</div>
+							</div>
+							<div class="row">
+								<div class="col-6"><div><a href="#" class="text-decoration-none">/desktop/apple-mac-pro</a></div></div>
+								<div class="col-3 text-center">4</div>
+								<div class="col-3 text-center"><span class="text-danger">-</span> 3%</div>
+							</div>
+						</div>
+					</div>
+					<!-- END card -->
+				</div>
+				
+				<div class="col-sm-6 col-xl-4 mb-4">
+					<!-- BEGIN card -->
+					<div class="card">
+						<div class="card-body">
+							<!-- title -->
+							<div class="d-flex align-items-center mb-3">
+								<div class="flex-fill fw-600 fs-16px">Sessions by device type</div>
+								<a href="#" class="text-decoration-none">View report</a>
+							</div>
+					
+							<!-- list -->
+							<div class="row mb-2">
+								<div class="col-6">
+									<div>Desktop</div>
+								</div>
+								<div class="col-3 text-center">247</div>
+								<div class="col-3 text-center"><span class="text-success">+</span> 4.2%</div>
+							</div>
+							<div class="row mb-2">
+								<div class="col-6">
+									<div>Mobile</div>
+								</div>
+								<div class="col-3 text-center">198</div>
+								<div class="col-3 text-center"><span class="text-danger">-</span> 2.2%</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<div>Tablet</div>
+								</div>
+								<div class="col-3 text-center">35</div>
+								<div class="col-3 text-center"><span class="text-success">+</span> 8.9%</div>
+							</div>
+						</div>
+					</div>
+					<!-- END card -->
+				</div>
+				
+				<div class="col-sm-6 col-xl-4 mb-4">
+					<!-- BEGIN card -->
+					<div class="card">
+						<div class="card-body">
+							<!-- title -->
+							<div class="d-flex align-items-center mb-3">
+								<div class="flex-fill fw-600 fs-16px">Visits from social sources</div>
+								<a href="#" class="text-decoration-none">View report</a>
+							</div>
+					
+							<!-- list -->
+							<div class="row mb-2">
+								<div class="col-6">
+									<div>Facebook</div>
+								</div>
+								<div class="col-3 text-center">247</div>
+								<div class="col-3 text-center"><span class="text-success">+</span> 4.2%</div>
+							</div>
+							<div class="row mb-2">
+								<div class="col-6">
+									<div>Twitter</div>
+								</div>
+								<div class="col-3 text-center">153</div>
+								<div class="col-3 text-center"><span class="text-success">+</span> 8.2%</div>
+							</div>
+							<div class="row mb-2">
+								<div class="col-6">
+									<div>Instagram</div>
+								</div>
+								<div class="col-3 text-center">98</div>
+								<div class="col-3 text-center"><span class="text-danger">-</span> 3.4%</div>
+							</div>
+							<div class="row mb-2">
+								<div class="col-6">
+									<div>Pinterest</div>
+								</div>
+								<div class="col-3 text-center">75</div>
+								<div class="col-3 text-center"><span class="text-success">+</span> 1.9%</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<div>Dribbble</div>
+								</div>
+								<div class="col-3 text-center">22</div>
+								<div class="col-3 text-center"><span class="text-success">+</span> 2.1%</div>
+							</div>
+						</div>
+					</div>
+					<!-- END card -->
+				</div>
+			</div>
+			<!-- END row -->
+		</div>
+		<!-- END #content -->
+		
+		<!-- BEGIN btn-scroll-top -->
+		<a href="#" data-click="scroll-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+		<!-- END btn-scroll-top -->
+	</div>
+	<!-- END #app -->
+	
+	<!-- ================== BEGIN core-js ================== -->
+	<script src="assets/js/vendor.min.js"></script>
+	<script src="assets/js/app.min.js"></script>
+	<!-- ================== END core-js ================== -->
+	
+	<!-- ================== BEGIN page-js ================== -->
+	<script src="assets/plugins/masonry-layout/dist/masonry.pkgd.min.js"></script>
+	<script src="assets/plugins/chart.js/dist/Chart.min.js"></script>
+	<script src="assets/plugins/moment/min/moment.min.js"></script>
+	<script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+	<script src="assets/js/demo/analytics.demo.js"></script>
+	<!-- ================== END page-js ================== -->
+</body>
+</html>

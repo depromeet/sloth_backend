@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout2}">
+<head>
+  <meta charset="utf-8" />
+  <title>Studio | Orders</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+</head>
+<body>
+
+<th:block layout:fragment="content">
+
+  <input type="hidden" id="entityName" th:value="${entityName}">
+
+  <!-- BEGIN #content -->
+  <div id="content" class="app-content">
+    <div class="d-flex align-items-center mb-3">
+      <div>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">PAGES</a></li>
+          <li class="breadcrumb-item active">Entity</li>
+        </ul>
+        <h1 class="page-header mb-0" th:text="${entityName}">Entity Name</h1>
+      </div>
+
+      <div class="ms-auto">
+        <a href="#" class="btn btn-success" th:text="#{button.update}" onclick="update()"></a>
+        <a href="#" class="btn btn-danger" th:text="#{button.delete}" onclick="deleteEntity()"></a>
+      </div>
+    </div>
+
+    <div class="mb-md-4 mb-3 d-md-flex">
+      <div class="mt-md-0 mt-2"><a href="#" class="text-dark text-decoration-none"><i class="fa fa-download fa-fw me-1 text-muted"></i> Export</a></div>
+      <div class="ms-md-4 mt-md-0 mt-2 dropdown-toggle">
+        <a href="#" data-bs-toggle="dropdown" class="text-dark text-decoration-none">More Actions</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+          <div role="separator" class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="tab-content p-4">
+        <div class="tab-pane fade show active" id="allTab">
+
+          <!-- BEGIN table -->
+          <div class="table-responsive">
+            <table class="table table-hover text-nowrap">
+              <thead>
+              <tr>
+                <th class="border-top-0 pt-0 pb-2">
+                  <div class=\"form-check\">
+                    <input type="checkbox" class="form-check-input" id="checkall" onclick="checkAll()">
+                    <label class="form-check-label"></label>
+                  </div>
+                </th>
+                <th class="border-top-0 pt-0 pb-2" th:each="field : ${fieldList}" th:text="${field}"></th>
+              </tr>
+              </thead>
+              <tbody id="entityTb">
+              <tr th:each="entity : ${entityPageResult.content}">
+                <td class="w-10px align-middle">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" name="id" th:value="${entity.get('id')}">
+<!--                    <label class="form-check-label" th:for="${#ids.prev('entity')}"></label>-->
+                  </div>
+                </td>
+                <td class="align-middle" th:each="entityKey, status : ${entity.keySet()}">
+                  <th:block th:if="${entityKey == 'id'}">
+                    [[${entity.get(entityKey)}]]
+                  </th:block>
+                  <input type="text" th:unless="${entityKey == 'id'}" th:name="${entityKey}" th:value="${entity.get(entityKey)}">
+                </td>
+
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- END table -->
+
+          <div th:replace="fragments/pagination::pagination(${page}, ${maxPage}, ${totalPages})"></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END #content -->
+
+  <!-- BEGIN btn-scroll-top -->
+  <a href="#" data-click="scroll-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+  <!-- END btn-scroll-top -->
+
+</th:block>
+
+<th:block layout:fragment="script">
+
+  <script th:inline="javascript">
+
+    window.onload = function (){
+
+    }
+
+    function checkAll() {
+
+      if($("#checkall").prop("checked")) {
+        $("input[name=id]").prop("checked",true);
+      } else {
+        $("input[name=id]").prop("checked",false);
+      }
+
+    }
+
+    function update() {
+
+      let url = "/entity-manager/" + $("#entityName").val();
+
+      var entityTbs = $('#entityTb input[name="id"]:checked');
+
+      if(entityTbs.length < 1){
+        alert("업데이트할 데이터를 선택해주세요");
+        return;
+      }
+
+      var paramData = new Object();
+      var dataList = new Array();
+
+      for(var i=0;i<entityTbs.length;i++){
+
+        var data = new Object();
+
+        data['id'] = $('#entityTb input[name="id"]:checked')[i].value;
+
+        var inputs = $($($('#entityTb input[name="id"]:checked')[i]).parents('tr')[0]).children('td').children('input');
+        for(var j=0;j<inputs.length;j++){
+
+          var name = inputs[j].name;
+          var value = inputs[j].value;
+          data[name] = value;
+        }
+
+        dataList.push(data);
+      }
+
+      paramData['requestMaps'] = dataList;
+
+      AjaxUtil.sendPatchAjax(url, paramData, updateSuccessCallback, updateFailCallback);
+    }
+
+    function updateSuccessCallback() {
+      alert("데이터 저장에 성공하였습니다.");
+    }
+
+    function updateFailCallback() {
+      alert("데이터 저장에 실패하였습니다.");
+    }
+
+    function deleteEntity() {
+      var entityTbs = $('#entityTb input[name="id"]:checked');
+
+      if(entityTbs.length < 1){
+        alert("삭제할 데이터를 선택해주세요");
+        return;
+      }
+
+      let ids = "";
+
+      for(var i=0;i<entityTbs.length;i++){
+        ids += $('#entityTb input[name="id"]:checked')[i].value + ",";
+      }
+
+      let url = "/entity-manager/" + $("#entityName").val() + "/" + ids;
+
+      AjaxUtil.sendDeleteAjax(url, null, deleteSuccessCallback, deleteFailCallback);
+    }
+
+    function deleteSuccessCallback() {
+      alert("데이터 삭제에 성공하였습니다.");
+      location.reload();
+    }
+
+    function deleteFailCallback() {
+      alert("데이터 삭제에 실패하였습니다.");
+    }
+
+  </script>
+
+</th:block>
+
+
+</body>
+</html>

@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Studio | Orders</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	
+	<!-- ================== BEGIN core-css ================== -->
+	<link href="assets/css/vendor.min.css" rel="stylesheet" />
+	<link href="assets/css/app.min.css" rel="stylesheet" />
+	<!-- ================== END core-css ================== -->
+	
+</head>
+<body>
+	<!-- BEGIN #app -->
+	<div id="app" class="app">
+		<!-- BEGIN #header -->
+		<div id="header" class="app-header">
+			<!-- BEGIN mobile-toggler -->
+			<div class="mobile-toggler">
+				<button type="button" class="menu-toggler" data-toggle="sidebar-mobile">
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</button>
+			</div>
+			<!-- END mobile-toggler -->
+			
+			<!-- BEGIN brand -->
+			<div class="brand">
+				<div class="desktop-toggler">
+					<button type="button" class="menu-toggler" data-toggle="sidebar-minify">
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				
+				<a href="#" class="brand-logo">
+					<img src="assets/img/logo.png" alt="" height="20" />
+				</a>
+			</div>
+			<!-- END brand -->
+			
+			<!-- BEGIN menu -->
+			<div class="menu">
+				<form class="menu-search" method="POST" name="header_search_form">
+					<div class="menu-search-icon"><i class="fa fa-search"></i></div>
+					<div class="menu-search-input">
+						<input type="text" class="form-control" placeholder="Search menu..." />
+					</div>
+				</form>
+				<div class="menu-item dropdown">
+					<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+						<div class="menu-icon"><i class="fa fa-bell nav-icon"></i></div>
+						<div class="menu-label">3</div>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end dropdown-notification">
+						<h6 class="dropdown-header text-gray-900 mb-1">Notifications</h6>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<i class="fa fa-receipt fa-lg fa-fw text-success"></i>
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Your store has a new order for 2 items totaling $1,299.00</div>
+								<div class="time">just now</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<i class="far fa-user-circle fa-lg fa-fw text-muted"></i>
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">3 new customer account is created</div>
+								<div class="time">2 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<img src="assets/img/icon/android.svg" alt="" width="26" />
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Your android application has been approved</div>
+								<div class="time">5 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<img src="assets/img/icon/paypal.svg" alt="" width="26" />
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Paypal payment method has been enabled for your store</div>
+								<div class="time">10 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<div class="p-2 text-center mb-n1">
+							<a href="#" class="text-gray-800 text-decoration-none">See all</a>
+						</div>
+					</div>
+				</div>
+				<div class="menu-item dropdown">
+					<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+						<div class="menu-img online">
+							<img src="assets/img/user/user.jpg" alt="" class="mw-100 mh-100 rounded-circle" />
+						</div>
+						<div class="menu-text">seantheme@gmail.com</div>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end me-lg-3">
+						<a class="dropdown-item d-flex align-items-center" href="#">Edit Profile <i class="fa fa-user-circle fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Inbox <i class="fa fa-envelope fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Calendar <i class="fa fa-calendar-alt fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Setting <i class="fa fa-wrench fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item d-flex align-items-center" href="#">Log Out <i class="fa fa-toggle-off fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+					</div>
+				</div>
+			</div>
+			<!-- END menu -->
+		</div>
+		<!-- END #header -->
+		
+		<!-- BEGIN #sidebar -->
+		<div id="sidebar" class="app-sidebar">
+			<!-- BEGIN scrollbar -->
+			<div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+				<!-- BEGIN menu -->
+				<div class="menu">
+					<div class="menu-header">Navigation</div>
+					<div class="menu-item">
+						<a href="index.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-laptop"></i></span>
+							<span class="menu-text">Dashboard</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="analytics.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-chart-pie"></i></span>
+							<span class="menu-text">Analytics</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon">
+								<i class="fa fa-envelope"></i>
+								<span class="menu-icon-label">6</span>
+							</span>
+							<span class="menu-text">Email</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="email_inbox.html" class="menu-link">
+									<span class="menu-text">Inbox</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="email_compose.html" class="menu-link">
+									<span class="menu-text">Compose</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="email_detail.html" class="menu-link">
+									<span class="menu-text">Detail</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-divider"></div>
+					<div class="menu-header">Components</div>
+					<div class="menu-item">
+						<a href="widgets.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-qrcode"></i></span>
+							<span class="menu-text">Widgets</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-heart"></i></span>
+							<span class="menu-text">UI Kits</span> 
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="ui_bootstrap.html" class="menu-link">
+									<span class="menu-text">Bootstrap</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_buttons.html" class="menu-link">
+									<span class="menu-text">Buttons</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_card.html" class="menu-link">
+									<span class="menu-text">Card</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_icons.html" class="menu-link">
+									<span class="menu-text">Icons</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_modal_notification.html" class="menu-link">
+									<span class="menu-text">Modal & Notification</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_typography.html" class="menu-link">
+									<span class="menu-text">Typography</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_tabs_accordions.html" class="menu-link">
+									<span class="menu-text">Tabs & Accordions</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-file-alt"></i></span>
+							<span class="menu-text">Forms</span> 
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="form_elements.html" class="menu-link">
+									<span class="menu-text">Form Elements</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="form_plugins.html" class="menu-link">
+									<span class="menu-text">Form Plugins</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="form_wizards.html" class="menu-link">
+									<span class="menu-text">Wizards</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-table"></i></span>
+							<span class="menu-text">Tables</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="table_elements.html" class="menu-link">
+									<span class="menu-text">Table Elements</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="table_plugins.html" class="menu-link">
+									<span class="menu-text">Table Plugins</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-chart-bar"></i></span>
+							<span class="menu-text">Charts</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="chart_js.html" class="menu-link">
+									<span class="menu-text">Chart.js</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="chart_apex.html" class="menu-link">
+									<span class="menu-text">Apexcharts.js</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item">
+						<a href="map.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-map-marker-alt"></i></span>
+							<span class="menu-text">Map</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-code-branch"></i></span>
+							<span class="menu-text">Layout</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="layout_starter.html" class="menu-link">
+									<span class="menu-text">Starter Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_fixed_footer.html" class="menu-link">
+									<span class="menu-text">Fixed Footer</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_full_height.html" class="menu-link">
+									<span class="menu-text">Full Height</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_full_width.html" class="menu-link">
+									<span class="menu-text">Full Width</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_boxed_layout.html" class="menu-link">
+									<span class="menu-text">Boxed Layout</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_minified_sidebar.html" class="menu-link">
+									<span class="menu-text">Minified Sidebar</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub active">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-globe"></i></span>
+							<span class="menu-text">Pages</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="page_scrum_board.html" class="menu-link">
+									<span class="menu-text">Scrum Board</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_products.html" class="menu-link">
+									<span class="menu-text">Products</span>
+								</a>
+							</div>
+							<div class="menu-item active">
+								<a href="page_orders.html" class="menu-link">
+									<span class="menu-text">Orders</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_gallery.html" class="menu-link">
+									<span class="menu-text">Gallery</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_search_results.html" class="menu-link">
+									<span class="menu-text">Search Results</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_coming_soon.html" class="menu-link">
+									<span class="menu-text">Coming Soon Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_404_error.html" class="menu-link">
+									<span class="menu-text">404 Error Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_login.html" class="menu-link">
+									<span class="menu-text">Login</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_register.html" class="menu-link">
+									<span class="menu-text">Register</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-divider"></div>
+					<div class="menu-header">Users</div>
+					<div class="menu-item">
+						<a href="profile.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-user-circle"></i></span>
+							<span class="menu-text">Profile</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="calendar.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-calendar"></i></span>
+							<span class="menu-text">Calendar</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="settings.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-cog"></i></span>
+							<span class="menu-text">Settings</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="helper.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-question-circle"></i></span>
+							<span class="menu-text">Helper</span>
+						</a>
+					</div>
+					<div class="p-3 px-4 mt-auto hide-on-minified">
+						<a href="../../documentation/index.html" class="btn d-block btn-secondary fw-600 rounded-pill">
+							<i class="fa fa-code-branch me-1 ms-n1 opacity-5"></i> Documentation
+						</a>
+					</div>
+				</div>
+				<!-- END menu -->
+			</div>
+			<!-- END scrollbar -->
+			
+			<!-- BEGIN mobile-sidebar-backdrop -->
+			<button class="app-sidebar-mobile-backdrop" data-dismiss="sidebar-mobile"></button>
+			<!-- END mobile-sidebar-backdrop -->
+		</div>
+		<!-- END #sidebar -->
+		
+		<!-- BEGIN #content -->
+		<div id="content" class="app-content">
+			<div class="d-flex align-items-center mb-3">
+				<div>
+					<ul class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#">PAGES</a></li>
+						<li class="breadcrumb-item active">ORDERS</li>
+					</ul>
+					<h1 class="page-header mb-0">Orders</h1>
+				</div>
+				
+				<div class="ms-auto">
+					<a href="#" class="btn btn-primary"><i class="fa fa-plus-circle fa-fw me-1"></i> Create Orders</a>
+				</div>
+			</div>
+			
+			<div class="mb-md-4 mb-3 d-md-flex">
+				<div class="mt-md-0 mt-2"><a href="#" class="text-dark text-decoration-none"><i class="fa fa-download fa-fw me-1 text-muted"></i> Export</a></div>
+				<div class="ms-md-4 mt-md-0 mt-2 dropdown-toggle">
+					<a href="#" data-bs-toggle="dropdown" class="text-dark text-decoration-none">More Actions</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#">Action</a>
+						<a class="dropdown-item" href="#">Another action</a>
+						<a class="dropdown-item" href="#">Something else here</a>
+						<div role="separator" class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Separated link</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="card">
+				<ul class="nav nav-tabs nav-tabs-v2 px-4">
+					<li class="nav-item me-3"><a href="#allTab" class="nav-link active px-2" data-bs-toggle="tab">All</a></li>
+					<li class="nav-item me-3"><a href="#publishedTab" class="nav-link px-2" data-bs-toggle="tab">Unfulfilled</a></li>
+					<li class="nav-item me-3"><a href="#expiredTab" class="nav-link px-2" data-bs-toggle="tab">Unpaid</a></li>
+					<li class="nav-item me-3"><a href="#deletedTab" class="nav-link px-2" data-bs-toggle="tab">Open</a></li>
+					<li class="nav-item me-3"><a href="#deletedTab" class="nav-link px-2" data-bs-toggle="tab">Closed</a></li>
+					<li class="nav-item me-3"><a href="#deletedTab" class="nav-link px-2" data-bs-toggle="tab">Local delivery</a></li>
+				</ul>
+				<div class="tab-content p-4">
+					<div class="tab-pane fade show active" id="allTab">
+						<!-- BEGIN input-group -->
+						<div class="input-group mb-4">
+							<div class="flex-fill position-relative">
+								<div class="input-group">
+									<input type="text" class="form-control ps-35px" placeholder="Filter orders" />
+									<div class="input-group-text position-absolute top-0 bottom-0 bg-none border-0 pe-0" style="z-index: 1020;">
+										<i class="fa fa-search opacity-5"></i>
+									</div>
+								</div>
+							</div>
+							<button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown"><span class="d-none d-md-inline">Payment Status</span><span class="d-inline d-md-none"><i class="fa fa-credit-card"></i></span> &nbsp;</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="#">Another action</a>
+								<a class="dropdown-item" href="#">Something else here</a>
+								<div role="separator" class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Separated link</a>
+							</div>
+							<button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown"><span class="d-none d-md-inline">Fulfillment status</span><span class="d-inline d-md-none"><i class="fa fa-check"></i></span></button>
+							<div class="dropdown-menu dropdown-menu-end">
+								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="#">Another action</a>
+								<a class="dropdown-item" href="#">Something else here</a>
+								<div role="separator" class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Separated link</a>
+							</div>
+						</div>
+						<!-- END input-group -->
+						
+						<!-- BEGIN table -->
+						<div class="table-responsive">
+							<table class="table table-hover text-nowrap">
+								<thead>
+									<tr>
+										<th class="border-top-0 pt-0 pb-2"></th>
+										<th class="border-top-0 pt-0 pb-2">Order</th>
+										<th class="border-top-0 pt-0 pb-2">Date</th>
+										<th class="border-top-0 pt-0 pb-2">Customer</th>
+										<th class="border-top-0 pt-0 pb-2">Total</th>
+										<th class="border-top-0 pt-0 pb-2">Payment status</th>
+										<th class="border-top-0 pt-0 pb-2">Fulfillment status</th>
+										<th class="border-top-0 pt-0 pb-2">Items</th>
+										<th class="border-top-0 pt-0 pb-2">Delivery method</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="w-10px align-middle">
+											<div class="form-check">
+												<input type="checkbox" class="form-check-input" id="product1">
+												<label class="form-check-label" for="product1"></label>
+											</div>
+										</td>
+										<td class="align-middle"><a href="#">#1950</a></td>
+										<td class="align-middle">Thu 26 Nov, 12:23pm</td>
+										<td class="align-middle">Amanda Lee</td>
+										<td>$398.00</td>
+										<td class="py-1 align-middle"><span class="badge bg-gray-100 text-black-transparent-5 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-gray-500 fs-9px fa-fw me-5px"></i> Paid</span></td>
+										<td class="align-middle"><span class="badge bg-gray-100 text-black-transparent-5 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-gray-500 fs-9px fa-fw me-5px"></i> Fulfilled</span></td>
+										<td class="align-middle">3 items</td>
+										<td class="align-middle">Free shipping</td>
+									</tr>
+									<tr>
+										<td class="w-10px align-middle">
+											<div class="form-check">
+												<input type="checkbox" class="form-check-input" id="product2">
+												<label class="form-check-label" for="product2"></label>
+											</div>
+										</td>
+										<td class="align-middle"><a href="#">#1949</a></td>
+										<td class="align-middle">Thu 26 Nov, 11:54am</td>
+										<td class="align-middle">Leonard Oii</td>
+										<td>$496.00</td>
+										<td class="py-1 align-middle"><span class="badge bg-gray-100 text-black-transparent-5 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-gray-500 fs-9px fa-fw me-5px"></i> Paid</span></td>
+										<td class="align-middle"><span class="badge bg-gray-100 text-black-transparent-5 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-gray-500 fs-9px fa-fw me-5px"></i> Fulfilled</span></td>
+										<td class="align-middle">1 item</td>
+										<td class="align-middle">Local pickup</td>
+									</tr>
+									<tr>
+										<td class="w-10px align-middle">
+											<div class="form-check">
+												<input type="checkbox" class="form-check-input" id="product3">
+												<label class="form-check-label" for="product3"></label>
+											</div>
+										</td>
+										<td class="align-middle"><a href="#">#1948</a></td>
+										<td class="align-middle">Thu 25 Nov, 11:54pm</td>
+										<td class="align-middle">John Doe</td>
+										<td>$195.00</td>
+										<td class="py-1 align-middle"><span class="badge bg-orange-transparent-2 text-orange px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Pending</span></td>
+										<td class="align-middle"><span class="badge bg-yellow-transparent-5 text-black-transparent-5 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Unfulfilled</span></td>
+										<td class="align-middle">2 items</td>
+										<td class="align-middle">Express</td>
+									</tr>
+									<tr>
+										<td class="w-10px align-middle">
+											<div class="form-check">
+												<input type="checkbox" class="form-check-input" id="product4">
+												<label class="form-check-label" for="product4"></label>
+											</div>
+										</td>
+										<td class="align-middle"><a href="#">#1947</a></td>
+										<td class="align-middle">Thu 25 Nov, 11:53pm</td>
+										<td class="align-middle">Terry Ng</td>
+										<td>$195.00</td>
+										<td class="py-1 align-middle"><span class="badge bg-orange-transparent-2 text-orange px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Pending</span></td>
+										<td class="align-middle"><span class="badge bg-yellow-transparent-5 text-black-transparent-5 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Unfulfilled</span></td>
+										<td class="align-middle">2 items</td>
+										<td class="align-middle">Express</td>
+									</tr>
+									<tr>
+										<td class="w-10px align-middle">
+											<div class="form-check">
+												<input type="checkbox" class="form-check-input" id="product5">
+												<label class="form-check-label" for="product5"></label>
+											</div>
+										</td>
+										<td class="align-middle"><a href="#">#1946</a></td>
+										<td class="align-middle">Thu 25 Nov, 11:52pm</td>
+										<td class="align-middle">Terry Ng</td>
+										<td>$195.00</td>
+										<td class="py-1 align-middle"><span class="badge bg-orange-transparent-2 text-orange px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Pending</span></td>
+										<td class="align-middle"><span class="badge bg-yellow-transparent-5 text-black-transparent-5 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle fs-9px fa-fw me-5px"></i> Unfulfilled</span></td>
+										<td class="align-middle">2 items</td>
+										<td class="align-middle">Express</td>
+									</tr>
+									<tr>
+										<td class="w-10px align-middle">
+											<div class="form-check">
+												<input type="checkbox" class="form-check-input" id="product6">
+												<label class="form-check-label" for="product6"></label>
+											</div>
+										</td>
+										<td class="align-middle"><a href="#">#1945</a></td>
+										<td class="align-middle">Thu 24 Nov, 2:43pm</td>
+										<td class="align-middle">Lelouch Wong</td>
+										<td>$900.00</td>
+										<td class="py-1 align-middle"><span class="badge bg-gray-100 text-black-transparent-5 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-gray-500 fs-9px fa-fw me-5px"></i> Paid</span></td>
+										<td class="align-middle"><span class="badge bg-primary-transparent-2 text-primary px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-primary-transparent-8 fs-9px fa-fw me-5px"></i> Ready for pickup</span></td>
+										<td class="align-middle">2 items</td>
+										<td class="align-middle">Local pickup</td>
+									</tr>
+									<tr>
+										<td class="w-10px align-middle">
+											<div class="form-check">
+												<input type="checkbox" class="form-check-input" id="product7">
+												<label class="form-check-label" for="product7"></label>
+											</div>
+										</td>
+										<td class="align-middle"><a href="#">#1944</a></td>
+										<td class="align-middle">Thu 23 Nov, 2:43pm</td>
+										<td class="align-middle">Cynthia Ting</td>
+										<td>$625.00</td>
+										<td class="py-1 align-middle"><span class="badge bg-gray-100 text-black-transparent-5 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-gray-500 fs-9px fa-fw me-5px"></i> Paid</span></td>
+										<td class="align-middle"><span class="badge bg-primary-transparent-2 text-primary px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-primary-transparent-8 fs-9px fa-fw me-5px"></i> Ready for delivery</span></td>
+										<td class="align-middle">1 item</td>
+										<td class="align-middle">Local pickup</td>
+									</tr>
+									<tr>
+										<td class="w-10px align-middle">
+											<div class="form-check">
+												<input type="checkbox" class="form-check-input" id="product8">
+												<label class="form-check-label" for="product8"></label>
+											</div>
+										</td>
+										<td class="align-middle"><a href="#">#1943</a></td>
+										<td class="align-middle">Thu 23 Nov, 11:59am</td>
+										<td class="align-middle">Richard Leong</td>
+										<td>$195.00</td>
+										<td class="py-1 align-middle"><span class="badge bg-gray-100 text-black-transparent-5 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-gray-500 fs-9px fa-fw me-5px"></i> Partially refunded</span></td>
+										<td class="align-middle"><span class="badge bg-danger-transparent-3 text-black-transparent-5 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle fs-9px fa-fw me-5px text-danger-transparent-8"></i> Partially fulfilled</span></td>
+										<td class="align-middle">2 items</td>
+										<td class="align-middle">Express</td>
+									</tr>
+									<tr>
+										<td class="w-10px align-middle">
+											<div class="form-check">
+												<input type="checkbox" class="form-check-input" id="product9">
+												<label class="form-check-label" for="product9"></label>
+											</div>
+										</td>
+										<td class="align-middle"><a href="#">#1942</a></td>
+										<td class="align-middle">Thu 22 Nov, 8:12am</td>
+										<td class="align-middle">Clement Tang</td>
+										<td>$195.00</td>
+										<td class="py-1 align-middle"><span class="badge bg-gray-100 text-black-transparent-5 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-gray-500 fs-9px fa-fw me-5px"></i> Paid</span></td>
+										<td class="align-middle"><span class="badge bg-gray-100 text-black-transparent-5 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-gray-500 fs-9px fa-fw me-5px"></i> Fulfilled</span></td>
+										<td class="align-middle">1 item</td>
+										<td class="align-middle">Express</td>
+									</tr>
+									<tr>
+										<td class="w-10px align-middle">
+											<div class="form-check">
+												<input type="checkbox" class="form-check-input" id="product10">
+												<label class="form-check-label" for="product10"></label>
+											</div>
+										</td>
+										<td class="align-middle"><a href="#">#1941</a></td>
+										<td class="align-middle">Thu 22 Nov, 7:42am</td>
+										<td class="align-middle">Richard Leong</td>
+										<td>$195.00</td>
+										<td class="py-1 align-middle"><span class="badge bg-gray-100 text-black-transparent-5 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-gray-500 fs-9px fa-fw me-5px"></i> Paid</span></td>
+										<td class="align-middle"><span class="badge bg-gray-100 text-black-transparent-5 px-2 pt-5px pb-5px rounded fs-12px d-inline-flex align-items-center"><i class="fa fa-circle text-gray-500 fs-9px fa-fw me-5px"></i> Fulfilled</span></td>
+										<td class="align-middle">1 item</td>
+										<td class="align-middle">Express</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- END table -->
+						
+						<div class="d-md-flex align-items-center">
+							<div class="me-md-auto text-md-left text-center mb-2 mb-md-0">
+								Showing 1 to 10 of 57 entries
+							</div>
+							<ul class="pagination mb-0 justify-content-center">
+								<li class="page-item disabled"><a class="page-link">Previous</a></li>
+								<li class="page-item"><a class="page-link" href="#">1</a></li>
+								<li class="page-item active"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item"><a class="page-link" href="#">4</a></li>
+								<li class="page-item"><a class="page-link" href="#">5</a></li>
+								<li class="page-item"><a class="page-link" href="#">6</a></li>
+								<li class="page-item"><a class="page-link" href="#">Next</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END #content -->
+		
+		<!-- BEGIN btn-scroll-top -->
+		<a href="#" data-click="scroll-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+		<!-- END btn-scroll-top -->
+	</div>
+	<!-- END #app -->
+	
+	<!-- ================== BEGIN core-js ================== -->
+	<script src="assets/js/vendor.min.js"></script>
+	<script src="assets/js/app.min.js"></script>
+	<!-- ================== END core-js ================== -->
+	
+</body>
+</html>

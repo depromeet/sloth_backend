@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Studio | Icons</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	
+	<!-- ================== BEGIN core-css ================== -->
+	<link href="assets/css/vendor.min.css" rel="stylesheet" />
+	<link href="assets/css/app.min.css" rel="stylesheet" />
+	<!-- ================== END core-css ================== -->
+	
+</head>
+<body>
+	<!-- BEGIN #app -->
+	<div id="app" class="app">
+		<!-- BEGIN #header -->
+		<div id="header" class="app-header">
+			<!-- BEGIN mobile-toggler -->
+			<div class="mobile-toggler">
+				<button type="button" class="menu-toggler" data-toggle="sidebar-mobile">
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</button>
+			</div>
+			<!-- END mobile-toggler -->
+			
+			<!-- BEGIN brand -->
+			<div class="brand">
+				<div class="desktop-toggler">
+					<button type="button" class="menu-toggler" data-toggle="sidebar-minify">
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				
+				<a href="#" class="brand-logo">
+					<img src="assets/img/logo.png" alt="" height="20" />
+				</a>
+			</div>
+			<!-- END brand -->
+			
+			<!-- BEGIN menu -->
+			<div class="menu">
+				<form class="menu-search" method="POST" name="header_search_form">
+					<div class="menu-search-icon"><i class="fa fa-search"></i></div>
+					<div class="menu-search-input">
+						<input type="text" class="form-control" placeholder="Search menu..." />
+					</div>
+				</form>
+				<div class="menu-item dropdown">
+					<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+						<div class="menu-icon"><i class="fa fa-bell nav-icon"></i></div>
+						<div class="menu-label">3</div>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end dropdown-notification">
+						<h6 class="dropdown-header text-gray-900 mb-1">Notifications</h6>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<i class="fa fa-receipt fa-lg fa-fw text-success"></i>
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Your store has a new order for 2 items totaling $1,299.00</div>
+								<div class="time">just now</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<i class="far fa-user-circle fa-lg fa-fw text-muted"></i>
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">3 new customer account is created</div>
+								<div class="time">2 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<img src="assets/img/icon/android.svg" alt="" width="26" />
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Your android application has been approved</div>
+								<div class="time">5 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<img src="assets/img/icon/paypal.svg" alt="" width="26" />
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Paypal payment method has been enabled for your store</div>
+								<div class="time">10 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<div class="p-2 text-center mb-n1">
+							<a href="#" class="text-gray-800 text-decoration-none">See all</a>
+						</div>
+					</div>
+				</div>
+				<div class="menu-item dropdown">
+					<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+						<div class="menu-img online">
+							<img src="assets/img/user/user.jpg" alt="" class="mw-100 mh-100 rounded-circle" />
+						</div>
+						<div class="menu-text">seantheme@gmail.com</div>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end me-lg-3">
+						<a class="dropdown-item d-flex align-items-center" href="#">Edit Profile <i class="fa fa-user-circle fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Inbox <i class="fa fa-envelope fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Calendar <i class="fa fa-calendar-alt fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Setting <i class="fa fa-wrench fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item d-flex align-items-center" href="#">Log Out <i class="fa fa-toggle-off fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+					</div>
+				</div>
+			</div>
+			<!-- END menu -->
+		</div>
+		<!-- END #header -->
+		
+		<!-- BEGIN #sidebar -->
+		<div id="sidebar" class="app-sidebar">
+			<!-- BEGIN scrollbar -->
+			<div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+				<!-- BEGIN menu -->
+				<div class="menu">
+					<div class="menu-header">Navigation</div>
+					<div class="menu-item">
+						<a href="index.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-laptop"></i></span>
+							<span class="menu-text">Dashboard</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="analytics.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-chart-pie"></i></span>
+							<span class="menu-text">Analytics</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon">
+								<i class="fa fa-envelope"></i>
+								<span class="menu-icon-label">6</span>
+							</span>
+							<span class="menu-text">Email</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="email_inbox.html" class="menu-link">
+									<span class="menu-text">Inbox</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="email_compose.html" class="menu-link">
+									<span class="menu-text">Compose</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="email_detail.html" class="menu-link">
+									<span class="menu-text">Detail</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-divider"></div>
+					<div class="menu-header">Components</div>
+					<div class="menu-item">
+						<a href="widgets.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-qrcode"></i></span>
+							<span class="menu-text">Widgets</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub active">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-heart"></i></span>
+							<span class="menu-text">UI Kits</span> 
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="ui_bootstrap.html" class="menu-link">
+									<span class="menu-text">Bootstrap</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_buttons.html" class="menu-link">
+									<span class="menu-text">Buttons</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_card.html" class="menu-link">
+									<span class="menu-text">Card</span>
+								</a>
+							</div>
+							<div class="menu-item active">
+								<a href="ui_icons.html" class="menu-link">
+									<span class="menu-text">Icons</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_modal_notification.html" class="menu-link">
+									<span class="menu-text">Modal & Notification</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_typography.html" class="menu-link">
+									<span class="menu-text">Typography</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_tabs_accordions.html" class="menu-link">
+									<span class="menu-text">Tabs & Accordions</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-file-alt"></i></span>
+							<span class="menu-text">Forms</span> 
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="form_elements.html" class="menu-link">
+									<span class="menu-text">Form Elements</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="form_plugins.html" class="menu-link">
+									<span class="menu-text">Form Plugins</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="form_wizards.html" class="menu-link">
+									<span class="menu-text">Wizards</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-table"></i></span>
+							<span class="menu-text">Tables</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="table_elements.html" class="menu-link">
+									<span class="menu-text">Table Elements</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="table_plugins.html" class="menu-link">
+									<span class="menu-text">Table Plugins</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-chart-bar"></i></span>
+							<span class="menu-text">Charts</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="chart_js.html" class="menu-link">
+									<span class="menu-text">Chart.js</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="chart_apex.html" class="menu-link">
+									<span class="menu-text">Apexcharts.js</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item">
+						<a href="map.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-map-marker-alt"></i></span>
+							<span class="menu-text">Map</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-code-branch"></i></span>
+							<span class="menu-text">Layout</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="layout_starter.html" class="menu-link">
+									<span class="menu-text">Starter Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_fixed_footer.html" class="menu-link">
+									<span class="menu-text">Fixed Footer</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_full_height.html" class="menu-link">
+									<span class="menu-text">Full Height</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_full_width.html" class="menu-link">
+									<span class="menu-text">Full Width</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_boxed_layout.html" class="menu-link">
+									<span class="menu-text">Boxed Layout</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_minified_sidebar.html" class="menu-link">
+									<span class="menu-text">Minified Sidebar</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-globe"></i></span>
+							<span class="menu-text">Pages</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="page_scrum_board.html" class="menu-link">
+									<span class="menu-text">Scrum Board</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_products.html" class="menu-link">
+									<span class="menu-text">Products</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_orders.html" class="menu-link">
+									<span class="menu-text">Orders</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_gallery.html" class="menu-link">
+									<span class="menu-text">Gallery</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_search_results.html" class="menu-link">
+									<span class="menu-text">Search Results</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_coming_soon.html" class="menu-link">
+									<span class="menu-text">Coming Soon Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_404_error.html" class="menu-link">
+									<span class="menu-text">404 Error Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_login.html" class="menu-link">
+									<span class="menu-text">Login</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_register.html" class="menu-link">
+									<span class="menu-text">Register</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-divider"></div>
+					<div class="menu-header">Users</div>
+					<div class="menu-item">
+						<a href="profile.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-user-circle"></i></span>
+							<span class="menu-text">Profile</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="calendar.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-calendar"></i></span>
+							<span class="menu-text">Calendar</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="settings.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-cog"></i></span>
+							<span class="menu-text">Settings</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="helper.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-question-circle"></i></span>
+							<span class="menu-text">Helper</span>
+						</a>
+					</div>
+					<div class="p-3 px-4 mt-auto hide-on-minified">
+						<a href="../../documentation/index.html" class="btn d-block btn-secondary fw-600 rounded-pill">
+							<i class="fa fa-code-branch me-1 ms-n1 opacity-5"></i> Documentation
+						</a>
+					</div>
+				</div>
+				<!-- END menu -->
+			</div>
+			<!-- END scrollbar -->
+			
+			<!-- BEGIN mobile-sidebar-backdrop -->
+			<button class="app-sidebar-mobile-backdrop" data-dismiss="sidebar-mobile"></button>
+			<!-- END mobile-sidebar-backdrop -->
+		</div>
+		<!-- END #sidebar -->
+		
+		<!-- BEGIN #content -->
+		<div id="content" class="app-content">
+			<!-- BEGIN container -->
+			<div class="container">
+				<!-- BEGIN row -->
+				<div class="row justify-content-center">
+					<!-- BEGIN col-10 -->
+					<div class="col-xl-10">
+						<ul class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#">UI KITS</a></li>
+							<li class="breadcrumb-item active">ICONS</li>
+						</ul>
+						
+						<h1 class="page-header">
+							Icons <small>FontAwesome v5.15.2 with 1,609 Free Icons</small>
+						</h1>
+						
+						<hr class="mb-4" />
+			
+						<div class="row">
+							<!-- BEGIN col-6 -->
+							<div class="col-lg-6">
+								<h3 class="mb-2"><b>Solid</b></h3>
+								<p class="mb-3">
+									Solid type Font Awesome Icon prefix 
+									<code>fas fa-*</code>
+								</p>
+								
+								<!-- BEGIN row -->
+								<div class="row mb-5">
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-address-book"></i> <span class="text-inverse">address-book</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-address-card"></i> <span class="text-inverse">address-card</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-adjust"></i> <span class="text-inverse">adjust</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-align-center"></i> <span class="text-inverse">align-center</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-align-justify"></i> <span class="text-inverse">align-justify</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-align-left"></i> <span class="text-inverse">align-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-align-right"></i> <span class="text-inverse">align-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-ambulance"></i> <span class="text-inverse">ambulance</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-american-sign-language-interpreting"></i> <span class="text-inverse">american-sign-language-interpreting</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-anchor"></i> <span class="text-inverse">anchor</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-angle-double-down"></i> <span class="text-inverse">angle-double-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-angle-double-left"></i> <span class="text-inverse">angle-double-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-angle-double-right"></i> <span class="text-inverse">angle-double-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-angle-double-up"></i> <span class="text-inverse">angle-double-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-angle-down"></i> <span class="text-inverse">angle-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-angle-left"></i> <span class="text-inverse">angle-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-angle-right"></i> <span class="text-inverse">angle-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-angle-up"></i> <span class="text-inverse">angle-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-archive"></i> <span class="text-inverse">archive</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-arrow-alt-circle-down"></i> <span class="text-inverse">arrow-alt-circle-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-arrow-alt-circle-left"></i> <span class="text-inverse">arrow-alt-circle-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-arrow-alt-circle-right"></i> <span class="text-inverse">arrow-alt-circle-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-arrow-alt-circle-up"></i> <span class="text-inverse">arrow-alt-circle-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-arrow-circle-down"></i> <span class="text-inverse">arrow-circle-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-arrow-circle-left"></i> <span class="text-inverse">arrow-circle-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-arrow-circle-right"></i> <span class="text-inverse">arrow-circle-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-arrow-circle-up"></i> <span class="text-inverse">arrow-circle-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-arrow-down"></i> <span class="text-inverse">arrow-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-arrow-left"></i> <span class="text-inverse">arrow-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-arrow-right"></i> <span class="text-inverse">arrow-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-arrow-up"></i> <span class="text-inverse">arrow-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-arrows-alt"></i> <span class="text-inverse">arrows-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-arrows-alt-h"></i> <span class="text-inverse">arrows-alt-h</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-arrows-alt-v"></i> <span class="text-inverse">arrows-alt-v</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-assistive-listening-systems"></i> <span class="text-inverse">assistive-listening-systems</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-asterisk"></i> <span class="text-inverse">asterisk</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-at"></i> <span class="text-inverse">at</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-audio-description"></i> <span class="text-inverse">audio-description</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-backward"></i> <span class="text-inverse">backward</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-balance-scale"></i> <span class="text-inverse">balance-scale</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-ban"></i> <span class="text-inverse">ban</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-barcode"></i> <span class="text-inverse">barcode</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-bars"></i> <span class="text-inverse">bars</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-bath"></i> <span class="text-inverse">bath</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-battery-empty"></i> <span class="text-inverse">battery-empty</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-battery-full"></i> <span class="text-inverse">battery-full</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-battery-half"></i> <span class="text-inverse">battery-half</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-battery-quarter"></i> <span class="text-inverse">battery-quarter</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-battery-three-quarters"></i> <span class="text-inverse">battery-three-quarters</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-bed"></i> <span class="text-inverse">bed</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-beer"></i> <span class="text-inverse">beer</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-bell"></i> <span class="text-inverse">bell</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-bell-slash"></i> <span class="text-inverse">bell-slash</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-bicycle"></i> <span class="text-inverse">bicycle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-binoculars"></i> <span class="text-inverse">binoculars</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-birthday-cake"></i> <span class="text-inverse">birthday-cake</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-blind"></i> <span class="text-inverse">blind</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-bold"></i> <span class="text-inverse">bold</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-bolt"></i> <span class="text-inverse">bolt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-bomb"></i> <span class="text-inverse">bomb</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-book"></i> <span class="text-inverse">book</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-bookmark"></i> <span class="text-inverse">bookmark</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-braille"></i> <span class="text-inverse">braille</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-briefcase"></i> <span class="text-inverse">briefcase</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-bug"></i> <span class="text-inverse">bug</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-building"></i> <span class="text-inverse">building</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-bullhorn"></i> <span class="text-inverse">bullhorn</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-bullseye"></i> <span class="text-inverse">bullseye</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-bus"></i> <span class="text-inverse">bus</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-calculator"></i> <span class="text-inverse">calculator</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-calendar"></i> <span class="text-inverse">calendar</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-calendar-alt"></i> <span class="text-inverse">calendar-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-calendar-check"></i> <span class="text-inverse">calendar-check</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-calendar-minus"></i> <span class="text-inverse">calendar-minus</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-calendar-plus"></i> <span class="text-inverse">calendar-plus</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-calendar-times"></i> <span class="text-inverse">calendar-times</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-camera"></i> <span class="text-inverse">camera</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-camera-retro"></i> <span class="text-inverse">camera-retro</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-car"></i> <span class="text-inverse">car</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-caret-down"></i> <span class="text-inverse">caret-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-caret-left"></i> <span class="text-inverse">caret-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-caret-right"></i> <span class="text-inverse">caret-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-caret-square-down"></i> <span class="text-inverse">caret-square-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-caret-square-left"></i> <span class="text-inverse">caret-square-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-caret-square-right"></i> <span class="text-inverse">caret-square-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-caret-square-up"></i> <span class="text-inverse">caret-square-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-caret-up"></i> <span class="text-inverse">caret-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-cart-arrow-down"></i> <span class="text-inverse">cart-arrow-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-cart-plus"></i> <span class="text-inverse">cart-plus</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-certificate"></i> <span class="text-inverse">certificate</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-chart-area"></i> <span class="text-inverse">chart-area</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-chart-bar"></i> <span class="text-inverse">chart-bar</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-chart-line"></i> <span class="text-inverse">chart-line</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-chart-pie"></i> <span class="text-inverse">chart-pie</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-check"></i> <span class="text-inverse">check</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-check-circle"></i> <span class="text-inverse">check-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-check-square"></i> <span class="text-inverse">check-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-chevron-circle-down"></i> <span class="text-inverse">chevron-circle-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-chevron-circle-left"></i> <span class="text-inverse">chevron-circle-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-chevron-circle-right"></i> <span class="text-inverse">chevron-circle-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-chevron-circle-up"></i> <span class="text-inverse">chevron-circle-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-chevron-down"></i> <span class="text-inverse">chevron-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-chevron-left"></i> <span class="text-inverse">chevron-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-chevron-right"></i> <span class="text-inverse">chevron-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-chevron-up"></i> <span class="text-inverse">chevron-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-child"></i> <span class="text-inverse">child</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-circle"></i> <span class="text-inverse">circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-circle-notch"></i> <span class="text-inverse">circle-notch</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-clipboard"></i> <span class="text-inverse">clipboard</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-clock"></i> <span class="text-inverse">clock</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-clone"></i> <span class="text-inverse">clone</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-closed-captioning"></i> <span class="text-inverse">closed-captioning</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-cloud"></i> <span class="text-inverse">cloud</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-cloud-download-alt"></i> <span class="text-inverse">cloud-download-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-cloud-upload-alt"></i> <span class="text-inverse">cloud-upload-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-code"></i> <span class="text-inverse">code</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-code-branch"></i> <span class="text-inverse">code-branch</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-coffee"></i> <span class="text-inverse">coffee</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-cog"></i> <span class="text-inverse">cog</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-cogs"></i> <span class="text-inverse">cogs</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-columns"></i> <span class="text-inverse">columns</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-comment"></i> <span class="text-inverse">comment</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-comment-alt"></i> <span class="text-inverse">comment-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-comments"></i> <span class="text-inverse">comments</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-compass"></i> <span class="text-inverse">compass</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-compress"></i> <span class="text-inverse">compress</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-copy"></i> <span class="text-inverse">copy</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-copyright"></i> <span class="text-inverse">copyright</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-credit-card"></i> <span class="text-inverse">credit-card</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-crop"></i> <span class="text-inverse">crop</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-crosshairs"></i> <span class="text-inverse">crosshairs</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-cube"></i> <span class="text-inverse">cube</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-cubes"></i> <span class="text-inverse">cubes</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-cut"></i> <span class="text-inverse">cut</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-database"></i> <span class="text-inverse">database</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-deaf"></i> <span class="text-inverse">deaf</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-desktop"></i> <span class="text-inverse">desktop</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-dollar-sign"></i> <span class="text-inverse">dollar-sign</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-dot-circle"></i> <span class="text-inverse">dot-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-download"></i> <span class="text-inverse">download</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-edit"></i> <span class="text-inverse">edit</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-eject"></i> <span class="text-inverse">eject</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-ellipsis-h"></i> <span class="text-inverse">ellipsis-h</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-ellipsis-v"></i> <span class="text-inverse">ellipsis-v</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-envelope"></i> <span class="text-inverse">envelope</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-envelope-open"></i> <span class="text-inverse">envelope-open</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-envelope-square"></i> <span class="text-inverse">envelope-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-eraser"></i> <span class="text-inverse">eraser</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-euro-sign"></i> <span class="text-inverse">euro-sign</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-exchange-alt"></i> <span class="text-inverse">exchange-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-exclamation"></i> <span class="text-inverse">exclamation</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-exclamation-circle"></i> <span class="text-inverse">exclamation-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-exclamation-triangle"></i> <span class="text-inverse">exclamation-triangle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-expand"></i> <span class="text-inverse">expand</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-expand-arrows-alt"></i> <span class="text-inverse">expand-arrows-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-external-link-alt"></i> <span class="text-inverse">external-link-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-external-link-square-alt"></i> <span class="text-inverse">external-link-square-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-eye"></i> <span class="text-inverse">eye</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-eye-dropper"></i> <span class="text-inverse">eye-dropper</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-eye-slash"></i> <span class="text-inverse">eye-slash</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-fast-backward"></i> <span class="text-inverse">fast-backward</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-fast-forward"></i> <span class="text-inverse">fast-forward</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-fax"></i> <span class="text-inverse">fax</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-female"></i> <span class="text-inverse">female</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-fighter-jet"></i> <span class="text-inverse">fighter-jet</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-file"></i> <span class="text-inverse">file</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-file-alt"></i> <span class="text-inverse">file-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-file-archive"></i> <span class="text-inverse">file-archive</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-file-audio"></i> <span class="text-inverse">file-audio</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-file-code"></i> <span class="text-inverse">file-code</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-file-excel"></i> <span class="text-inverse">file-excel</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-file-image"></i> <span class="text-inverse">file-image</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-file-pdf"></i> <span class="text-inverse">file-pdf</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-file-powerpoint"></i> <span class="text-inverse">file-powerpoint</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-file-video"></i> <span class="text-inverse">file-video</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-file-word"></i> <span class="text-inverse">file-word</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-film"></i> <span class="text-inverse">film</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-filter"></i> <span class="text-inverse">filter</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-fire"></i> <span class="text-inverse">fire</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-fire-extinguisher"></i> <span class="text-inverse">fire-extinguisher</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-flag"></i> <span class="text-inverse">flag</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-flag-checkered"></i> <span class="text-inverse">flag-checkered</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-flask"></i> <span class="text-inverse">flask</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-folder"></i> <span class="text-inverse">folder</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-folder-open"></i> <span class="text-inverse">folder-open</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-font"></i> <span class="text-inverse">font</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-forward"></i> <span class="text-inverse">forward</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-frown"></i> <span class="text-inverse">frown</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-futbol"></i> <span class="text-inverse">futbol</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-gamepad"></i> <span class="text-inverse">gamepad</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-gavel"></i> <span class="text-inverse">gavel</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-gem"></i> <span class="text-inverse">gem</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-genderless"></i> <span class="text-inverse">genderless</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-gift"></i> <span class="text-inverse">gift</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-glass-martini"></i> <span class="text-inverse">glass-martini</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-globe"></i> <span class="text-inverse">globe</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-graduation-cap"></i> <span class="text-inverse">graduation-cap</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-h-square"></i> <span class="text-inverse">h-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hand-lizard"></i> <span class="text-inverse">hand-lizard</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hand-paper"></i> <span class="text-inverse">hand-paper</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hand-peace"></i> <span class="text-inverse">hand-peace</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hand-point-down"></i> <span class="text-inverse">hand-point-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hand-point-left"></i> <span class="text-inverse">hand-point-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hand-point-right"></i> <span class="text-inverse">hand-point-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hand-point-up"></i> <span class="text-inverse">hand-point-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hand-pointer"></i> <span class="text-inverse">hand-pointer</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hand-rock"></i> <span class="text-inverse">hand-rock</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hand-scissors"></i> <span class="text-inverse">hand-scissors</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hand-spock"></i> <span class="text-inverse">hand-spock</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-handshake"></i> <span class="text-inverse">handshake</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hashtag"></i> <span class="text-inverse">hashtag</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hdd"></i> <span class="text-inverse">hdd</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-heading"></i> <span class="text-inverse">heading</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-headphones"></i> <span class="text-inverse">headphones</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-heart"></i> <span class="text-inverse">heart</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-heartbeat"></i> <span class="text-inverse">heartbeat</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-history"></i> <span class="text-inverse">history</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-home"></i> <span class="text-inverse">home</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hospital"></i> <span class="text-inverse">hospital</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hourglass"></i> <span class="text-inverse">hourglass</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hourglass-end"></i> <span class="text-inverse">hourglass-end</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hourglass-half"></i> <span class="text-inverse">hourglass-half</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-hourglass-start"></i> <span class="text-inverse">hourglass-start</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-i-cursor"></i> <span class="text-inverse">i-cursor</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-id-badge"></i> <span class="text-inverse">id-badge</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-id-card"></i> <span class="text-inverse">id-card</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-image"></i> <span class="text-inverse">image</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-images"></i> <span class="text-inverse">images</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-inbox"></i> <span class="text-inverse">inbox</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-indent"></i> <span class="text-inverse">indent</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-industry"></i> <span class="text-inverse">industry</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-info"></i> <span class="text-inverse">info</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-info-circle"></i> <span class="text-inverse">info-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-italic"></i> <span class="text-inverse">italic</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-key"></i> <span class="text-inverse">key</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-keyboard"></i> <span class="text-inverse">keyboard</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-language"></i> <span class="text-inverse">language</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-laptop"></i> <span class="text-inverse">laptop</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-leaf"></i> <span class="text-inverse">leaf</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-lemon"></i> <span class="text-inverse">lemon</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-level-down-alt"></i> <span class="text-inverse">level-down-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-level-up-alt"></i> <span class="text-inverse">level-up-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-life-ring"></i> <span class="text-inverse">life-ring</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-lightbulb"></i> <span class="text-inverse">lightbulb</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-link"></i> <span class="text-inverse">link</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-lira-sign"></i> <span class="text-inverse">lira-sign</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-list"></i> <span class="text-inverse">list</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-list-alt"></i> <span class="text-inverse">list-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-list-ol"></i> <span class="text-inverse">list-ol</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-list-ul"></i> <span class="text-inverse">list-ul</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-location-arrow"></i> <span class="text-inverse">location-arrow</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-lock"></i> <span class="text-inverse">lock</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-lock-open"></i> <span class="text-inverse">lock-open</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-long-arrow-alt-down"></i> <span class="text-inverse">long-arrow-alt-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-long-arrow-alt-left"></i> <span class="text-inverse">long-arrow-alt-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-long-arrow-alt-right"></i> <span class="text-inverse">long-arrow-alt-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-long-arrow-alt-up"></i> <span class="text-inverse">long-arrow-alt-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-low-vision"></i> <span class="text-inverse">low-vision</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-magic"></i> <span class="text-inverse">magic</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-magnet"></i> <span class="text-inverse">magnet</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-male"></i> <span class="text-inverse">male</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-map"></i> <span class="text-inverse">map</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-map-marker"></i> <span class="text-inverse">map-marker</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-map-marker-alt"></i> <span class="text-inverse">map-marker-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-map-pin"></i> <span class="text-inverse">map-pin</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-map-signs"></i> <span class="text-inverse">map-signs</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-mars"></i> <span class="text-inverse">mars</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-mars-double"></i> <span class="text-inverse">mars-double</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-mars-stroke"></i> <span class="text-inverse">mars-stroke</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-mars-stroke-h"></i> <span class="text-inverse">mars-stroke-h</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-mars-stroke-v"></i> <span class="text-inverse">mars-stroke-v</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-medkit"></i> <span class="text-inverse">medkit</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-meh"></i> <span class="text-inverse">meh</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-mercury"></i> <span class="text-inverse">mercury</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-microchip"></i> <span class="text-inverse">microchip</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-microphone"></i> <span class="text-inverse">microphone</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-microphone-slash"></i> <span class="text-inverse">microphone-slash</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-minus"></i> <span class="text-inverse">minus</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-minus-circle"></i> <span class="text-inverse">minus-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-minus-square"></i> <span class="text-inverse">minus-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-mobile"></i> <span class="text-inverse">mobile</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-mobile-alt"></i> <span class="text-inverse">mobile-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-money-bill-alt"></i> <span class="text-inverse">money-bill-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-moon"></i> <span class="text-inverse">moon</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-motorcycle"></i> <span class="text-inverse">motorcycle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-mouse-pointer"></i> <span class="text-inverse">mouse-pointer</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-music"></i> <span class="text-inverse">music</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-neuter"></i> <span class="text-inverse">neuter</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-newspaper"></i> <span class="text-inverse">newspaper</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-object-group"></i> <span class="text-inverse">object-group</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-object-ungroup"></i> <span class="text-inverse">object-ungroup</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-outdent"></i> <span class="text-inverse">outdent</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-paint-brush"></i> <span class="text-inverse">paint-brush</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-paper-plane"></i> <span class="text-inverse">paper-plane</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-paperclip"></i> <span class="text-inverse">paperclip</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-paragraph"></i> <span class="text-inverse">paragraph</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-paste"></i> <span class="text-inverse">paste</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-pause"></i> <span class="text-inverse">pause</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-pause-circle"></i> <span class="text-inverse">pause-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-paw"></i> <span class="text-inverse">paw</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-pen-square"></i> <span class="text-inverse">pen-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-pencil-alt"></i> <span class="text-inverse">pencil-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-percent"></i> <span class="text-inverse">percent</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-phone"></i> <span class="text-inverse">phone</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-phone-square"></i> <span class="text-inverse">phone-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-phone-volume"></i> <span class="text-inverse">phone-volume</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-plane"></i> <span class="text-inverse">plane</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-play"></i> <span class="text-inverse">play</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-play-circle"></i> <span class="text-inverse">play-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-plug"></i> <span class="text-inverse">plug</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-plus"></i> <span class="text-inverse">plus</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-plus-circle"></i> <span class="text-inverse">plus-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-plus-square"></i> <span class="text-inverse">plus-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-podcast"></i> <span class="text-inverse">podcast</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-pound-sign"></i> <span class="text-inverse">pound-sign</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-power-off"></i> <span class="text-inverse">power-off</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-print"></i> <span class="text-inverse">print</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-puzzle-piece"></i> <span class="text-inverse">puzzle-piece</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-qrcode"></i> <span class="text-inverse">qrcode</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-question"></i> <span class="text-inverse">question</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-question-circle"></i> <span class="text-inverse">question-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-quote-left"></i> <span class="text-inverse">quote-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-quote-right"></i> <span class="text-inverse">quote-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-random"></i> <span class="text-inverse">random</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-recycle"></i> <span class="text-inverse">recycle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-redo"></i> <span class="text-inverse">redo</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-redo-alt"></i> <span class="text-inverse">redo-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-registered"></i> <span class="text-inverse">registered</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-reply"></i> <span class="text-inverse">reply</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-reply-all"></i> <span class="text-inverse">reply-all</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-retweet"></i> <span class="text-inverse">retweet</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-road"></i> <span class="text-inverse">road</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-rocket"></i> <span class="text-inverse">rocket</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-rss"></i> <span class="text-inverse">rss</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-rss-square"></i> <span class="text-inverse">rss-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-ruble-sign"></i> <span class="text-inverse">ruble-sign</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-rupee-sign"></i> <span class="text-inverse">rupee-sign</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-save"></i> <span class="text-inverse">save</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-search"></i> <span class="text-inverse">search</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-search-minus"></i> <span class="text-inverse">search-minus</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-search-plus"></i> <span class="text-inverse">search-plus</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-server"></i> <span class="text-inverse">server</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-share"></i> <span class="text-inverse">share</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-share-alt"></i> <span class="text-inverse">share-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-share-alt-square"></i> <span class="text-inverse">share-alt-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-share-square"></i> <span class="text-inverse">share-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-shekel-sign"></i> <span class="text-inverse">shekel-sign</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-shield-alt"></i> <span class="text-inverse">shield-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-ship"></i> <span class="text-inverse">ship</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-shopping-bag"></i> <span class="text-inverse">shopping-bag</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-shopping-basket"></i> <span class="text-inverse">shopping-basket</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-shopping-cart"></i> <span class="text-inverse">shopping-cart</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-shower"></i> <span class="text-inverse">shower</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sign-in-alt"></i> <span class="text-inverse">sign-in-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sign-language"></i> <span class="text-inverse">sign-language</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i> <span class="text-inverse">sign-out-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-signal"></i> <span class="text-inverse">signal</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sitemap"></i> <span class="text-inverse">sitemap</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sliders-h"></i> <span class="text-inverse">sliders-h</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-smile"></i> <span class="text-inverse">smile</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-snowflake"></i> <span class="text-inverse">snowflake</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sort"></i> <span class="text-inverse">sort</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sort-alpha-down"></i> <span class="text-inverse">sort-alpha-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sort-alpha-up"></i> <span class="text-inverse">sort-alpha-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sort-amount-down"></i> <span class="text-inverse">sort-amount-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sort-amount-up"></i> <span class="text-inverse">sort-amount-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sort-down"></i> <span class="text-inverse">sort-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sort-numeric-down"></i> <span class="text-inverse">sort-numeric-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sort-numeric-up"></i> <span class="text-inverse">sort-numeric-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sort-up"></i> <span class="text-inverse">sort-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-space-shuttle"></i> <span class="text-inverse">space-shuttle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-spinner"></i> <span class="text-inverse">spinner</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-square"></i> <span class="text-inverse">square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-star"></i> <span class="text-inverse">star</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-star-half"></i> <span class="text-inverse">star-half</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-step-backward"></i> <span class="text-inverse">step-backward</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-step-forward"></i> <span class="text-inverse">step-forward</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-stethoscope"></i> <span class="text-inverse">stethoscope</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sticky-note"></i> <span class="text-inverse">sticky-note</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-stop"></i> <span class="text-inverse">stop</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-stop-circle"></i> <span class="text-inverse">stop-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-stopwatch"></i> <span class="text-inverse">stopwatch</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-street-view"></i> <span class="text-inverse">street-view</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-strikethrough"></i> <span class="text-inverse">strikethrough</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-subscript"></i> <span class="text-inverse">subscript</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-subway"></i> <span class="text-inverse">subway</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-suitcase"></i> <span class="text-inverse">suitcase</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sun"></i> <span class="text-inverse">sun</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-superscript"></i> <span class="text-inverse">superscript</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sync"></i> <span class="text-inverse">sync</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-sync-alt"></i> <span class="text-inverse">sync-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-table"></i> <span class="text-inverse">table</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-tablet"></i> <span class="text-inverse">tablet</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-tablet-alt"></i> <span class="text-inverse">tablet-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-tachometer-alt"></i> <span class="text-inverse">tachometer-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-tag"></i> <span class="text-inverse">tag</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-tags"></i> <span class="text-inverse">tags</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-tasks"></i> <span class="text-inverse">tasks</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-taxi"></i> <span class="text-inverse">taxi</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-terminal"></i> <span class="text-inverse">terminal</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-text-height"></i> <span class="text-inverse">text-height</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-text-width"></i> <span class="text-inverse">text-width</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-th"></i> <span class="text-inverse">th</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-th-large"></i> <span class="text-inverse">th-large</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-th-list"></i> <span class="text-inverse">th-list</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-thermometer-empty"></i> <span class="text-inverse">thermometer-empty</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-thermometer-full"></i> <span class="text-inverse">thermometer-full</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-thermometer-half"></i> <span class="text-inverse">thermometer-half</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-thermometer-quarter"></i> <span class="text-inverse">thermometer-quarter</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-thermometer-three-quarters"></i> <span class="text-inverse">thermometer-three-quarters</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-thumbs-down"></i> <span class="text-inverse">thumbs-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-thumbs-up"></i> <span class="text-inverse">thumbs-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-thumbtack"></i> <span class="text-inverse">thumbtack</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-ticket-alt"></i> <span class="text-inverse">ticket-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-times"></i> <span class="text-inverse">times</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-times-circle"></i> <span class="text-inverse">times-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-tint"></i> <span class="text-inverse">tint</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-toggle-off"></i> <span class="text-inverse">toggle-off</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-toggle-on"></i> <span class="text-inverse">toggle-on</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-trademark"></i> <span class="text-inverse">trademark</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-train"></i> <span class="text-inverse">train</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-transgender"></i> <span class="text-inverse">transgender</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-transgender-alt"></i> <span class="text-inverse">transgender-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-trash"></i> <span class="text-inverse">trash</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-trash-alt"></i> <span class="text-inverse">trash-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-tree"></i> <span class="text-inverse">tree</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-trophy"></i> <span class="text-inverse">trophy</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-truck"></i> <span class="text-inverse">truck</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-tty"></i> <span class="text-inverse">tty</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-tv"></i> <span class="text-inverse">tv</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-umbrella"></i> <span class="text-inverse">umbrella</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-underline"></i> <span class="text-inverse">underline</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-undo"></i> <span class="text-inverse">undo</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-undo-alt"></i> <span class="text-inverse">undo-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-universal-access"></i> <span class="text-inverse">universal-access</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-university"></i> <span class="text-inverse">university</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-unlink"></i> <span class="text-inverse">unlink</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-unlock"></i> <span class="text-inverse">unlock</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-unlock-alt"></i> <span class="text-inverse">unlock-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-upload"></i> <span class="text-inverse">upload</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-user"></i> <span class="text-inverse">user</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-user-circle"></i> <span class="text-inverse">user-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-user-md"></i> <span class="text-inverse">user-md</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-user-plus"></i> <span class="text-inverse">user-plus</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-user-secret"></i> <span class="text-inverse">user-secret</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-user-times"></i> <span class="text-inverse">user-times</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-users"></i> <span class="text-inverse">users</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-utensil-spoon"></i> <span class="text-inverse">utensil-spoon</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-utensils"></i> <span class="text-inverse">utensils</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-venus"></i> <span class="text-inverse">venus</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-venus-double"></i> <span class="text-inverse">venus-double</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-venus-mars"></i> <span class="text-inverse">venus-mars</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-video"></i> <span class="text-inverse">video</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-volume-down"></i> <span class="text-inverse">volume-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-volume-off"></i> <span class="text-inverse">volume-off</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-volume-up"></i> <span class="text-inverse">volume-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-wheelchair"></i> <span class="text-inverse">wheelchair</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-wifi"></i> <span class="text-inverse">wifi</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-window-close"></i> <span class="text-inverse">window-close</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-window-maximize"></i> <span class="text-inverse">window-maximize</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-window-minimize"></i> <span class="text-inverse">window-minimize</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-window-restore"></i> <span class="text-inverse">window-restore</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-won-sign"></i> <span class="text-inverse">won-sign</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-wrench"></i> <span class="text-inverse">wrench</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fas fa-lg fa-fw me-2 fa-yen-sign"></i> <span class="text-inverse">yen-sign</span></div>
+								</div>
+								<!-- END row -->
+							</div>
+							<!-- END col-6 -->
+							<!-- BEGIN col-6 -->
+							<div class="col-lg-6">
+								<h3 class="mb-2"><b>Regular</b></h3>
+								<p class="mb-3">
+									Regular type Font Awesome Icon prefix 
+									<code>far fa-*</code>
+								</p>
+								
+								<!-- BEGIN row -->
+								<div class="row mb-5">
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-address-book"></i> <span class="text-inverse">address-book</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-address-card"></i> <span class="text-inverse">address-card</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-arrow-alt-circle-down"></i> <span class="text-inverse">arrow-alt-circle-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-arrow-alt-circle-left"></i> <span class="text-inverse">arrow-alt-circle-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-arrow-alt-circle-right"></i> <span class="text-inverse">arrow-alt-circle-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-arrow-alt-circle-up"></i> <span class="text-inverse">arrow-alt-circle-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-bell"></i> <span class="text-inverse">bell</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-bell-slash"></i> <span class="text-inverse">bell-slash</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-bookmark"></i> <span class="text-inverse">bookmark</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-building"></i> <span class="text-inverse">building</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-calendar"></i> <span class="text-inverse">calendar</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-calendar-alt"></i> <span class="text-inverse">calendar-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-calendar-check"></i> <span class="text-inverse">calendar-check</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-calendar-minus"></i> <span class="text-inverse">calendar-minus</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-calendar-plus"></i> <span class="text-inverse">calendar-plus</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-calendar-times"></i> <span class="text-inverse">calendar-times</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-caret-square-down"></i> <span class="text-inverse">caret-square-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-caret-square-left"></i> <span class="text-inverse">caret-square-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-caret-square-right"></i> <span class="text-inverse">caret-square-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-caret-square-up"></i> <span class="text-inverse">caret-square-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-chart-bar"></i> <span class="text-inverse">chart-bar</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-check-circle"></i> <span class="text-inverse">check-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-check-square"></i> <span class="text-inverse">check-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-circle"></i> <span class="text-inverse">circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-clipboard"></i> <span class="text-inverse">clipboard</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-clock"></i> <span class="text-inverse">clock</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-clone"></i> <span class="text-inverse">clone</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-closed-captioning"></i> <span class="text-inverse">closed-captioning</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-comment"></i> <span class="text-inverse">comment</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-comment-alt"></i> <span class="text-inverse">comment-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-comments"></i> <span class="text-inverse">comments</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-compass"></i> <span class="text-inverse">compass</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-copy"></i> <span class="text-inverse">copy</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-copyright"></i> <span class="text-inverse">copyright</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-credit-card"></i> <span class="text-inverse">credit-card</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-dot-circle"></i> <span class="text-inverse">dot-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-edit"></i> <span class="text-inverse">edit</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-envelope"></i> <span class="text-inverse">envelope</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-envelope-open"></i> <span class="text-inverse">envelope-open</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-eye-slash"></i> <span class="text-inverse">eye-slash</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-file"></i> <span class="text-inverse">file</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-file-alt"></i> <span class="text-inverse">file-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-file-archive"></i> <span class="text-inverse">file-archive</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-file-audio"></i> <span class="text-inverse">file-audio</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-file-code"></i> <span class="text-inverse">file-code</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-file-excel"></i> <span class="text-inverse">file-excel</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-file-image"></i> <span class="text-inverse">file-image</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-file-pdf"></i> <span class="text-inverse">file-pdf</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-file-powerpoint"></i> <span class="text-inverse">file-powerpoint</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-file-video"></i> <span class="text-inverse">file-video</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-file-word"></i> <span class="text-inverse">file-word</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-flag"></i> <span class="text-inverse">flag</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-folder"></i> <span class="text-inverse">folder</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-folder-open"></i> <span class="text-inverse">folder-open</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-frown"></i> <span class="text-inverse">frown</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-futbol"></i> <span class="text-inverse">futbol</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-gem"></i> <span class="text-inverse">gem</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-hand-lizard"></i> <span class="text-inverse">hand-lizard</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-hand-paper"></i> <span class="text-inverse">hand-paper</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-hand-peace"></i> <span class="text-inverse">hand-peace</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-hand-point-down"></i> <span class="text-inverse">hand-point-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-hand-point-left"></i> <span class="text-inverse">hand-point-left</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-hand-point-right"></i> <span class="text-inverse">hand-point-right</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-hand-point-up"></i> <span class="text-inverse">hand-point-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-hand-pointer"></i> <span class="text-inverse">hand-pointer</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-hand-rock"></i> <span class="text-inverse">hand-rock</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-hand-scissors"></i> <span class="text-inverse">hand-scissors</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-hand-spock"></i> <span class="text-inverse">hand-spock</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-handshake"></i> <span class="text-inverse">handshake</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-hdd"></i> <span class="text-inverse">hdd</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-heart"></i> <span class="text-inverse">heart</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-hospital"></i> <span class="text-inverse">hospital</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-hourglass"></i> <span class="text-inverse">hourglass</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-id-badge"></i> <span class="text-inverse">id-badge</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-id-card"></i> <span class="text-inverse">id-card</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-image"></i> <span class="text-inverse">image</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-images"></i> <span class="text-inverse">images</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-keyboard"></i> <span class="text-inverse">keyboard</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-lemon"></i> <span class="text-inverse">lemon</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-life-ring"></i> <span class="text-inverse">life-ring</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-lightbulb"></i> <span class="text-inverse">lightbulb</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-list-alt"></i> <span class="text-inverse">list-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-map"></i> <span class="text-inverse">map</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-meh"></i> <span class="text-inverse">meh</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-minus-square"></i> <span class="text-inverse">minus-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-money-bill-alt"></i> <span class="text-inverse">money-bill-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-moon"></i> <span class="text-inverse">moon</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-newspaper"></i> <span class="text-inverse">newspaper</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-object-group"></i> <span class="text-inverse">object-group</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-object-ungroup"></i> <span class="text-inverse">object-ungroup</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-paper-plane"></i> <span class="text-inverse">paper-plane</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-pause-circle"></i> <span class="text-inverse">pause-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-play-circle"></i> <span class="text-inverse">play-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-plus-square"></i> <span class="text-inverse">plus-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-question-circle"></i> <span class="text-inverse">question-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-registered"></i> <span class="text-inverse">registered</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-save"></i> <span class="text-inverse">save</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-share-square"></i> <span class="text-inverse">share-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-smile"></i> <span class="text-inverse">smile</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-snowflake"></i> <span class="text-inverse">snowflake</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-square"></i> <span class="text-inverse">square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-star"></i> <span class="text-inverse">star</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-star-half"></i> <span class="text-inverse">star-half</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-sticky-note"></i> <span class="text-inverse">sticky-note</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-stop-circle"></i> <span class="text-inverse">stop-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-sun"></i> <span class="text-inverse">sun</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-thumbs-down"></i> <span class="text-inverse">thumbs-down</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-thumbs-up"></i> <span class="text-inverse">thumbs-up</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-times-circle"></i> <span class="text-inverse">times-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-trash-alt"></i> <span class="text-inverse">trash-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-user"></i> <span class="text-inverse">user</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-user-circle"></i> <span class="text-inverse">user-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-window-close"></i> <span class="text-inverse">window-close</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-window-maximize"></i> <span class="text-inverse">window-maximize</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-window-minimize"></i> <span class="text-inverse">window-minimize</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="far fa-lg fa-fw me-2 fa-window-restore"></i> <span class="text-inverse">window-restore</span></div>
+								</div>
+								<!-- END row -->
+					
+								<h3 class="mb-2"><b>Brands</b></h3>
+								<p class="mb-3">
+									Brand type Font Awesome Icon prefix 
+									<code>fab fa-*</code>
+								</p>
+								
+								<!-- BEGIN row -->
+								<div class="row">
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-500px"></i> <span class="text-inverse">500px</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-accessible-icon"></i> <span class="text-inverse">accessible-icon</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-accusoft"></i> <span class="text-inverse">accusoft</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-adn"></i> <span class="text-inverse">adn</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-adversal"></i> <span class="text-inverse">adversal</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-affiliatetheme"></i> <span class="text-inverse">affiliatetheme</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-algolia"></i> <span class="text-inverse">algolia</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-amazon"></i> <span class="text-inverse">amazon</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-amazon-pay"></i> <span class="text-inverse">amazon-pay</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-amilia"></i> <span class="text-inverse">amilia</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-android"></i> <span class="text-inverse">android</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-angellist"></i> <span class="text-inverse">angellist</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-angrycreative"></i> <span class="text-inverse">angrycreative</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-angular"></i> <span class="text-inverse">angular</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-app-store"></i> <span class="text-inverse">app-store</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-app-store-ios"></i> <span class="text-inverse">app-store-ios</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-apper"></i> <span class="text-inverse">apper</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-apple"></i> <span class="text-inverse">apple</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-apple-pay"></i> <span class="text-inverse">apple-pay</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-asymmetrik"></i> <span class="text-inverse">asymmetrik</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-audible"></i> <span class="text-inverse">audible</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-autoprefixer"></i> <span class="text-inverse">autoprefixer</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-avianex"></i> <span class="text-inverse">avianex</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-aviato"></i> <span class="text-inverse">aviato</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-aws"></i> <span class="text-inverse">aws</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-bandcamp"></i> <span class="text-inverse">bandcamp</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-behance"></i> <span class="text-inverse">behance</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-behance-square"></i> <span class="text-inverse">behance-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-bimobject"></i> <span class="text-inverse">bimobject</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-bitbucket"></i> <span class="text-inverse">bitbucket</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-bitcoin"></i> <span class="text-inverse">bitcoin</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-bity"></i> <span class="text-inverse">bity</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-black-tie"></i> <span class="text-inverse">black-tie</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-blackberry"></i> <span class="text-inverse">blackberry</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-blogger"></i> <span class="text-inverse">blogger</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-blogger-b"></i> <span class="text-inverse">blogger-b</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-bluetooth"></i> <span class="text-inverse">bluetooth</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-bluetooth-b"></i> <span class="text-inverse">bluetooth-b</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-btc"></i> <span class="text-inverse">btc</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-buromobelexperte"></i> <span class="text-inverse">buromobelexperte</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-buysellads"></i> <span class="text-inverse">buysellads</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-cc-amazon-pay"></i> <span class="text-inverse">cc-amazon-pay</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-cc-amex"></i> <span class="text-inverse">cc-amex</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-cc-apple-pay"></i> <span class="text-inverse">cc-apple-pay</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-cc-diners-club"></i> <span class="text-inverse">cc-diners-club</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-cc-discover"></i> <span class="text-inverse">cc-discover</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-cc-jcb"></i> <span class="text-inverse">cc-jcb</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-cc-mastercard"></i> <span class="text-inverse">cc-mastercard</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-cc-paypal"></i> <span class="text-inverse">cc-paypal</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-cc-stripe"></i> <span class="text-inverse">cc-stripe</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-cc-visa"></i> <span class="text-inverse">cc-visa</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-centercode"></i> <span class="text-inverse">centercode</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-chrome"></i> <span class="text-inverse">chrome</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-cloudscale"></i> <span class="text-inverse">cloudscale</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-cloudsmith"></i> <span class="text-inverse">cloudsmith</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-cloudversify"></i> <span class="text-inverse">cloudversify</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-codepen"></i> <span class="text-inverse">codepen</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-codiepie"></i> <span class="text-inverse">codiepie</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-connectdevelop"></i> <span class="text-inverse">connectdevelop</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-contao"></i> <span class="text-inverse">contao</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-cpanel"></i> <span class="text-inverse">cpanel</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-creative-commons"></i> <span class="text-inverse">creative-commons</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-css3"></i> <span class="text-inverse">css3</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-css3-alt"></i> <span class="text-inverse">css3-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-cuttlefish"></i> <span class="text-inverse">cuttlefish</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-d-and-d"></i> <span class="text-inverse">d-and-d</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-dashcube"></i> <span class="text-inverse">dashcube</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-delicious"></i> <span class="text-inverse">delicious</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-deploydog"></i> <span class="text-inverse">deploydog</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-deskpro"></i> <span class="text-inverse">deskpro</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-deviantart"></i> <span class="text-inverse">deviantart</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-digg"></i> <span class="text-inverse">digg</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-digital-ocean"></i> <span class="text-inverse">digital-ocean</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-discord"></i> <span class="text-inverse">discord</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-discourse"></i> <span class="text-inverse">discourse</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-dochub"></i> <span class="text-inverse">dochub</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-docker"></i> <span class="text-inverse">docker</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-draft2digital"></i> <span class="text-inverse">draft2digital</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-dribbble"></i> <span class="text-inverse">dribbble</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-dribbble-square"></i> <span class="text-inverse">dribbble-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-dropbox"></i> <span class="text-inverse">dropbox</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-drupal"></i> <span class="text-inverse">drupal</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-dyalog"></i> <span class="text-inverse">dyalog</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-earlybirds"></i> <span class="text-inverse">earlybirds</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-edge"></i> <span class="text-inverse">edge</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-elementor"></i> <span class="text-inverse">elementor</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-ember"></i> <span class="text-inverse">ember</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-empire"></i> <span class="text-inverse">empire</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-envira"></i> <span class="text-inverse">envira</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-erlang"></i> <span class="text-inverse">erlang</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-ethereum"></i> <span class="text-inverse">ethereum</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-etsy"></i> <span class="text-inverse">etsy</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-expeditedssl"></i> <span class="text-inverse">expeditedssl</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-facebook"></i> <span class="text-inverse">facebook</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-facebook-f"></i> <span class="text-inverse">facebook-f</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-facebook-messenger"></i> <span class="text-inverse">facebook-messenger</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-facebook-square"></i> <span class="text-inverse">facebook-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-firefox"></i> <span class="text-inverse">firefox</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-first-order"></i> <span class="text-inverse">first-order</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-firstdraft"></i> <span class="text-inverse">firstdraft</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-flickr"></i> <span class="text-inverse">flickr</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-fly"></i> <span class="text-inverse">fly</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-font-awesome"></i> <span class="text-inverse">font-awesome</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-font-awesome-alt"></i> <span class="text-inverse">font-awesome-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-font-awesome-flag"></i> <span class="text-inverse">font-awesome-flag</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-fonticons"></i> <span class="text-inverse">fonticons</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-fonticons-fi"></i> <span class="text-inverse">fonticons-fi</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-fort-awesome"></i> <span class="text-inverse">fort-awesome</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-fort-awesome-alt"></i> <span class="text-inverse">fort-awesome-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-forumbee"></i> <span class="text-inverse">forumbee</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-foursquare"></i> <span class="text-inverse">foursquare</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-free-code-camp"></i> <span class="text-inverse">free-code-camp</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-freebsd"></i> <span class="text-inverse">freebsd</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-get-pocket"></i> <span class="text-inverse">get-pocket</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-gg"></i> <span class="text-inverse">gg</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-gg-circle"></i> <span class="text-inverse">gg-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-git"></i> <span class="text-inverse">git</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-git-square"></i> <span class="text-inverse">git-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-github"></i> <span class="text-inverse">github</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-github-alt"></i> <span class="text-inverse">github-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-github-square"></i> <span class="text-inverse">github-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-gitkraken"></i> <span class="text-inverse">gitkraken</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-gitlab"></i> <span class="text-inverse">gitlab</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-gitter"></i> <span class="text-inverse">gitter</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-glide"></i> <span class="text-inverse">glide</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-glide-g"></i> <span class="text-inverse">glide-g</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-gofore"></i> <span class="text-inverse">gofore</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-goodreads"></i> <span class="text-inverse">goodreads</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-goodreads-g"></i> <span class="text-inverse">goodreads-g</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-google"></i> <span class="text-inverse">google</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-google-drive"></i> <span class="text-inverse">google-drive</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-google-play"></i> <span class="text-inverse">google-play</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-google-plus"></i> <span class="text-inverse">google-plus</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-google-plus-g"></i> <span class="text-inverse">google-plus-g</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-google-plus-square"></i> <span class="text-inverse">google-plus-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-google-wallet"></i> <span class="text-inverse">google-wallet</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-gratipay"></i> <span class="text-inverse">gratipay</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-grav"></i> <span class="text-inverse">grav</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-gripfire"></i> <span class="text-inverse">gripfire</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-grunt"></i> <span class="text-inverse">grunt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-gulp"></i> <span class="text-inverse">gulp</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-hacker-news"></i> <span class="text-inverse">hacker-news</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-hacker-news-square"></i> <span class="text-inverse">hacker-news-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-hire-a-helper"></i> <span class="text-inverse">hire-a-helper</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-hooli"></i> <span class="text-inverse">hooli</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-hotjar"></i> <span class="text-inverse">hotjar</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-houzz"></i> <span class="text-inverse">houzz</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-html5"></i> <span class="text-inverse">html5</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-hubspot"></i> <span class="text-inverse">hubspot</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-imdb"></i> <span class="text-inverse">imdb</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-instagram"></i> <span class="text-inverse">instagram</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-internet-explorer"></i> <span class="text-inverse">internet-explorer</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-ioxhost"></i> <span class="text-inverse">ioxhost</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-itunes"></i> <span class="text-inverse">itunes</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-itunes-note"></i> <span class="text-inverse">itunes-note</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-jenkins"></i> <span class="text-inverse">jenkins</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-joget"></i> <span class="text-inverse">joget</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-joomla"></i> <span class="text-inverse">joomla</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-js"></i> <span class="text-inverse">js</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-js-square"></i> <span class="text-inverse">js-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-jsfiddle"></i> <span class="text-inverse">jsfiddle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-keycdn"></i> <span class="text-inverse">keycdn</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-kickstarter"></i> <span class="text-inverse">kickstarter</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-kickstarter-k"></i> <span class="text-inverse">kickstarter-k</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-korvue"></i> <span class="text-inverse">korvue</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-laravel"></i> <span class="text-inverse">laravel</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-lastfm"></i> <span class="text-inverse">lastfm</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-lastfm-square"></i> <span class="text-inverse">lastfm-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-leanpub"></i> <span class="text-inverse">leanpub</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-less"></i> <span class="text-inverse">less</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-line"></i> <span class="text-inverse">line</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-linkedin"></i> <span class="text-inverse">linkedin</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-linkedin-in"></i> <span class="text-inverse">linkedin-in</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-linode"></i> <span class="text-inverse">linode</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-linux"></i> <span class="text-inverse">linux</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-lyft"></i> <span class="text-inverse">lyft</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-magento"></i> <span class="text-inverse">magento</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-maxcdn"></i> <span class="text-inverse">maxcdn</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-medapps"></i> <span class="text-inverse">medapps</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-medium"></i> <span class="text-inverse">medium</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-medium-m"></i> <span class="text-inverse">medium-m</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-medrt"></i> <span class="text-inverse">medrt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-meetup"></i> <span class="text-inverse">meetup</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-microsoft"></i> <span class="text-inverse">microsoft</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-mix"></i> <span class="text-inverse">mix</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-mixcloud"></i> <span class="text-inverse">mixcloud</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-mizuni"></i> <span class="text-inverse">mizuni</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-modx"></i> <span class="text-inverse">modx</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-monero"></i> <span class="text-inverse">monero</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-napster"></i> <span class="text-inverse">napster</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-nintendo-switch"></i> <span class="text-inverse">nintendo-switch</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-node"></i> <span class="text-inverse">node</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-node-js"></i> <span class="text-inverse">node-js</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-npm"></i> <span class="text-inverse">npm</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-ns8"></i> <span class="text-inverse">ns8</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-nutritionix"></i> <span class="text-inverse">nutritionix</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-odnoklassniki"></i> <span class="text-inverse">odnoklassniki</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-odnoklassniki-square"></i> <span class="text-inverse">odnoklassniki-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-opencart"></i> <span class="text-inverse">opencart</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-openid"></i> <span class="text-inverse">openid</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-opera"></i> <span class="text-inverse">opera</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-optin-monster"></i> <span class="text-inverse">optin-monster</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-osi"></i> <span class="text-inverse">osi</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-page4"></i> <span class="text-inverse">page4</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-pagelines"></i> <span class="text-inverse">pagelines</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-palfed"></i> <span class="text-inverse">palfed</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-patreon"></i> <span class="text-inverse">patreon</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-paypal"></i> <span class="text-inverse">paypal</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-periscope"></i> <span class="text-inverse">periscope</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-phabricator"></i> <span class="text-inverse">phabricator</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-phoenix-framework"></i> <span class="text-inverse">phoenix-framework</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-pied-piper"></i> <span class="text-inverse">pied-piper</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-pied-piper-alt"></i> <span class="text-inverse">pied-piper-alt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-pied-piper-pp"></i> <span class="text-inverse">pied-piper-pp</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-pinterest"></i> <span class="text-inverse">pinterest</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-pinterest-p"></i> <span class="text-inverse">pinterest-p</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-pinterest-square"></i> <span class="text-inverse">pinterest-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-playstation"></i> <span class="text-inverse">playstation</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-product-hunt"></i> <span class="text-inverse">product-hunt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-pushed"></i> <span class="text-inverse">pushed</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-python"></i> <span class="text-inverse">python</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-qq"></i> <span class="text-inverse">qq</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-quora"></i> <span class="text-inverse">quora</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-ravelry"></i> <span class="text-inverse">ravelry</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-react"></i> <span class="text-inverse">react</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-rebel"></i> <span class="text-inverse">rebel</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-red-river"></i> <span class="text-inverse">red-river</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-reddit"></i> <span class="text-inverse">reddit</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-reddit-alien"></i> <span class="text-inverse">reddit-alien</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-reddit-square"></i> <span class="text-inverse">reddit-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-renren"></i> <span class="text-inverse">renren</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-replyd"></i> <span class="text-inverse">replyd</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-resolving"></i> <span class="text-inverse">resolving</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-rocketchat"></i> <span class="text-inverse">rocketchat</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-rockrms"></i> <span class="text-inverse">rockrms</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-safari"></i> <span class="text-inverse">safari</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-sass"></i> <span class="text-inverse">sass</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-schlix"></i> <span class="text-inverse">schlix</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-scribd"></i> <span class="text-inverse">scribd</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-searchengin"></i> <span class="text-inverse">searchengin</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-sellcast"></i> <span class="text-inverse">sellcast</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-sellsy"></i> <span class="text-inverse">sellsy</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-servicestack"></i> <span class="text-inverse">servicestack</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-shirtsinbulk"></i> <span class="text-inverse">shirtsinbulk</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-simplybuilt"></i> <span class="text-inverse">simplybuilt</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-sistrix"></i> <span class="text-inverse">sistrix</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-skyatlas"></i> <span class="text-inverse">skyatlas</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-skype"></i> <span class="text-inverse">skype</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-slack"></i> <span class="text-inverse">slack</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-slack-hash"></i> <span class="text-inverse">slack-hash</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-slideshare"></i> <span class="text-inverse">slideshare</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-snapchat"></i> <span class="text-inverse">snapchat</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-snapchat-ghost"></i> <span class="text-inverse">snapchat-ghost</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-snapchat-square"></i> <span class="text-inverse">snapchat-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-soundcloud"></i> <span class="text-inverse">soundcloud</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-speakap"></i> <span class="text-inverse">speakap</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-spotify"></i> <span class="text-inverse">spotify</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-stack-exchange"></i> <span class="text-inverse">stack-exchange</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-stack-overflow"></i> <span class="text-inverse">stack-overflow</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-staylinked"></i> <span class="text-inverse">staylinked</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-steam"></i> <span class="text-inverse">steam</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-steam-square"></i> <span class="text-inverse">steam-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-steam-symbol"></i> <span class="text-inverse">steam-symbol</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-sticker-mule"></i> <span class="text-inverse">sticker-mule</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-strava"></i> <span class="text-inverse">strava</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-stripe"></i> <span class="text-inverse">stripe</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-stripe-s"></i> <span class="text-inverse">stripe-s</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-studiovinari"></i> <span class="text-inverse">studiovinari</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-stumbleupon"></i> <span class="text-inverse">stumbleupon</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-stumbleupon-circle"></i> <span class="text-inverse">stumbleupon-circle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-superpowers"></i> <span class="text-inverse">superpowers</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-supple"></i> <span class="text-inverse">supple</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-telegram"></i> <span class="text-inverse">telegram</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-telegram-plane"></i> <span class="text-inverse">telegram-plane</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-tencent-weibo"></i> <span class="text-inverse">tencent-weibo</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-themeisle"></i> <span class="text-inverse">themeisle</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-trello"></i> <span class="text-inverse">trello</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-tripadvisor"></i> <span class="text-inverse">tripadvisor</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-tumblr"></i> <span class="text-inverse">tumblr</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-tumblr-square"></i> <span class="text-inverse">tumblr-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-twitch"></i> <span class="text-inverse">twitch</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-twitter"></i> <span class="text-inverse">twitter</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-twitter-square"></i> <span class="text-inverse">twitter-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-typo3"></i> <span class="text-inverse">typo3</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-uber"></i> <span class="text-inverse">uber</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-uikit"></i> <span class="text-inverse">uikit</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-uniregistry"></i> <span class="text-inverse">uniregistry</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-untappd"></i> <span class="text-inverse">untappd</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-usb"></i> <span class="text-inverse">usb</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-ussunnah"></i> <span class="text-inverse">ussunnah</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-vaadin"></i> <span class="text-inverse">vaadin</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-viacoin"></i> <span class="text-inverse">viacoin</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-viadeo"></i> <span class="text-inverse">viadeo</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-viadeo-square"></i> <span class="text-inverse">viadeo-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-viber"></i> <span class="text-inverse">viber</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-vimeo"></i> <span class="text-inverse">vimeo</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-vimeo-square"></i> <span class="text-inverse">vimeo-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-vimeo-v"></i> <span class="text-inverse">vimeo-v</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-vine"></i> <span class="text-inverse">vine</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-vk"></i> <span class="text-inverse">vk</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-vnv"></i> <span class="text-inverse">vnv</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-vuejs"></i> <span class="text-inverse">vuejs</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-weibo"></i> <span class="text-inverse">weibo</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-weixin"></i> <span class="text-inverse">weixin</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-whatsapp"></i> <span class="text-inverse">whatsapp</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-whatsapp-square"></i> <span class="text-inverse">whatsapp-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-whmcs"></i> <span class="text-inverse">whmcs</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-wikipedia-w"></i> <span class="text-inverse">wikipedia-w</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-windows"></i> <span class="text-inverse">windows</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-wordpress"></i> <span class="text-inverse">wordpress</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-wordpress-simple"></i> <span class="text-inverse">wordpress-simple</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-wpbeginner"></i> <span class="text-inverse">wpbeginner</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-wpexplorer"></i> <span class="text-inverse">wpexplorer</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-wpforms"></i> <span class="text-inverse">wpforms</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-xbox"></i> <span class="text-inverse">xbox</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-xing"></i> <span class="text-inverse">xing</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-xing-square"></i> <span class="text-inverse">xing-square</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-y-combinator"></i> <span class="text-inverse">y-combinator</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-yahoo"></i> <span class="text-inverse">yahoo</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-yandex"></i> <span class="text-inverse">yandex</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-yandex-international"></i> <span class="text-inverse">yandex-international</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-yelp"></i> <span class="text-inverse">yelp</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-yoast"></i> <span class="text-inverse">yoast</span></div>
+									<div class="col-md-6 col-sm-6 col-xs-6 mb-1 text-truncate"><i class="fab fa-lg fa-fw me-2 fa-youtube"></i> <span class="text-inverse">youtube</span></div>
+								</div>
+								<!-- END row -->
+							</div>
+							<!-- END col-6 -->
+						</div>
+					</div>
+					<!-- END col-10 -->
+				</div>
+				<!-- END row -->
+			</div>
+			<!-- END container -->
+		</div>
+		<!-- END #content -->
+		
+		<!-- BEGIN btn-scroll-top -->
+		<a href="#" data-click="scroll-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+		<!-- END btn-scroll-top -->
+	</div>
+	<!-- END #app -->
+	
+	<!-- ================== BEGIN core-js ================== -->
+	<script src="assets/js/vendor.min.js"></script>
+	<script src="assets/js/app.min.js"></script>
+	<!-- ================== END core-js ================== -->
+	
+</body>
+</html>

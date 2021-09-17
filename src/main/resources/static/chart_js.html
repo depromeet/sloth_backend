@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Studio | Chart.js</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	
+	<!-- ================== BEGIN core-css ================== -->
+	<link href="assets/css/vendor.min.css" rel="stylesheet" />
+	<link href="assets/css/app.min.css" rel="stylesheet" />
+	<!-- ================== END core-css ================== -->
+	
+</head>
+<body data-bs-spy='scroll' data-bs-target='#sidebar-bootstrap' data-bs-offset='200'>
+	<!-- BEGIN #app -->
+	<div id="app" class="app">
+		<!-- BEGIN #header -->
+		<div id="header" class="app-header">
+			<!-- BEGIN mobile-toggler -->
+			<div class="mobile-toggler">
+				<button type="button" class="menu-toggler" data-toggle="sidebar-mobile">
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</button>
+			</div>
+			<!-- END mobile-toggler -->
+			
+			<!-- BEGIN brand -->
+			<div class="brand">
+				<div class="desktop-toggler">
+					<button type="button" class="menu-toggler" data-toggle="sidebar-minify">
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				
+				<a href="#" class="brand-logo">
+					<img src="assets/img/logo.png" alt="" height="20" />
+				</a>
+			</div>
+			<!-- END brand -->
+			
+			<!-- BEGIN menu -->
+			<div class="menu">
+				<form class="menu-search" method="POST" name="header_search_form">
+					<div class="menu-search-icon"><i class="fa fa-search"></i></div>
+					<div class="menu-search-input">
+						<input type="text" class="form-control" placeholder="Search menu..." />
+					</div>
+				</form>
+				<div class="menu-item dropdown">
+					<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+						<div class="menu-icon"><i class="fa fa-bell nav-icon"></i></div>
+						<div class="menu-label">3</div>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end dropdown-notification">
+						<h6 class="dropdown-header text-gray-900 mb-1">Notifications</h6>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<i class="fa fa-receipt fa-lg fa-fw text-success"></i>
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Your store has a new order for 2 items totaling $1,299.00</div>
+								<div class="time">just now</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<i class="far fa-user-circle fa-lg fa-fw text-muted"></i>
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">3 new customer account is created</div>
+								<div class="time">2 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<img src="assets/img/icon/android.svg" alt="" width="26" />
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Your android application has been approved</div>
+								<div class="time">5 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<a href="#" class="dropdown-notification-item">
+							<div class="dropdown-notification-icon">
+								<img src="assets/img/icon/paypal.svg" alt="" width="26" />
+							</div>
+							<div class="dropdown-notification-info">
+								<div class="title">Paypal payment method has been enabled for your store</div>
+								<div class="time">10 minutes ago</div>
+							</div>
+							<div class="dropdown-notification-arrow">
+								<i class="fa fa-chevron-right"></i>
+							</div>
+						</a>
+						<div class="p-2 text-center mb-n1">
+							<a href="#" class="text-gray-800 text-decoration-none">See all</a>
+						</div>
+					</div>
+				</div>
+				<div class="menu-item dropdown">
+					<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+						<div class="menu-img online">
+							<img src="assets/img/user/user.jpg" alt="" class="mw-100 mh-100 rounded-circle" />
+						</div>
+						<div class="menu-text">seantheme@gmail.com</div>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end me-lg-3">
+						<a class="dropdown-item d-flex align-items-center" href="#">Edit Profile <i class="fa fa-user-circle fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Inbox <i class="fa fa-envelope fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Calendar <i class="fa fa-calendar-alt fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<a class="dropdown-item d-flex align-items-center" href="#">Setting <i class="fa fa-wrench fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item d-flex align-items-center" href="#">Log Out <i class="fa fa-toggle-off fa-fw ms-auto text-gray-400 fs-16px"></i></a>
+					</div>
+				</div>
+			</div>
+			<!-- END menu -->
+		</div>
+		<!-- END #header -->
+		
+		<!-- BEGIN #sidebar -->
+		<div id="sidebar" class="app-sidebar">
+			<!-- BEGIN scrollbar -->
+			<div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+				<!-- BEGIN menu -->
+				<div class="menu">
+					<div class="menu-header">Navigation</div>
+					<div class="menu-item">
+						<a href="index.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-laptop"></i></span>
+							<span class="menu-text">Dashboard</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="analytics.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-chart-pie"></i></span>
+							<span class="menu-text">Analytics</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon">
+								<i class="fa fa-envelope"></i>
+								<span class="menu-icon-label">6</span>
+							</span>
+							<span class="menu-text">Email</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="email_inbox.html" class="menu-link">
+									<span class="menu-text">Inbox</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="email_compose.html" class="menu-link">
+									<span class="menu-text">Compose</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="email_detail.html" class="menu-link">
+									<span class="menu-text">Detail</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-divider"></div>
+					<div class="menu-header">Components</div>
+					<div class="menu-item">
+						<a href="widgets.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-qrcode"></i></span>
+							<span class="menu-text">Widgets</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-heart"></i></span>
+							<span class="menu-text">UI Kits</span> 
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="ui_bootstrap.html" class="menu-link">
+									<span class="menu-text">Bootstrap</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_buttons.html" class="menu-link">
+									<span class="menu-text">Buttons</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_card.html" class="menu-link">
+									<span class="menu-text">Card</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_icons.html" class="menu-link">
+									<span class="menu-text">Icons</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_modal_notification.html" class="menu-link">
+									<span class="menu-text">Modal & Notification</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_typography.html" class="menu-link">
+									<span class="menu-text">Typography</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="ui_tabs_accordions.html" class="menu-link">
+									<span class="menu-text">Tabs & Accordions</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-file-alt"></i></span>
+							<span class="menu-text">Forms</span> 
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="form_elements.html" class="menu-link">
+									<span class="menu-text">Form Elements</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="form_plugins.html" class="menu-link">
+									<span class="menu-text">Form Plugins</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="form_wizards.html" class="menu-link">
+									<span class="menu-text">Wizards</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-table"></i></span>
+							<span class="menu-text">Tables</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="table_elements.html" class="menu-link">
+									<span class="menu-text">Table Elements</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="table_plugins.html" class="menu-link">
+									<span class="menu-text">Table Plugins</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub active">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-chart-bar"></i></span>
+							<span class="menu-text">Charts</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item active">
+								<a href="chart_js.html" class="menu-link">
+									<span class="menu-text">Chart.js</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="chart_apex.html" class="menu-link">
+									<span class="menu-text">Apexcharts.js</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item">
+						<a href="map.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-map-marker-alt"></i></span>
+							<span class="menu-text">Map</span>
+						</a>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-code-branch"></i></span>
+							<span class="menu-text">Layout</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="layout_starter.html" class="menu-link">
+									<span class="menu-text">Starter Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_fixed_footer.html" class="menu-link">
+									<span class="menu-text">Fixed Footer</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_full_height.html" class="menu-link">
+									<span class="menu-text">Full Height</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_full_width.html" class="menu-link">
+									<span class="menu-text">Full Width</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_boxed_layout.html" class="menu-link">
+									<span class="menu-text">Boxed Layout</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="layout_minified_sidebar.html" class="menu-link">
+									<span class="menu-text">Minified Sidebar</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-globe"></i></span>
+							<span class="menu-text">Pages</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="page_scrum_board.html" class="menu-link">
+									<span class="menu-text">Scrum Board</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_products.html" class="menu-link">
+									<span class="menu-text">Products</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_orders.html" class="menu-link">
+									<span class="menu-text">Orders</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_gallery.html" class="menu-link">
+									<span class="menu-text">Gallery</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_search_results.html" class="menu-link">
+									<span class="menu-text">Search Results</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_coming_soon.html" class="menu-link">
+									<span class="menu-text">Coming Soon Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_404_error.html" class="menu-link">
+									<span class="menu-text">404 Error Page</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_login.html" class="menu-link">
+									<span class="menu-text">Login</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="page_register.html" class="menu-link">
+									<span class="menu-text">Register</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-divider"></div>
+					<div class="menu-header">Users</div>
+					<div class="menu-item">
+						<a href="profile.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-user-circle"></i></span>
+							<span class="menu-text">Profile</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="calendar.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-calendar"></i></span>
+							<span class="menu-text">Calendar</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="settings.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-cog"></i></span>
+							<span class="menu-text">Settings</span>
+						</a>
+					</div>
+					<div class="menu-item">
+						<a href="helper.html" class="menu-link">
+							<span class="menu-icon"><i class="fa fa-question-circle"></i></span>
+							<span class="menu-text">Helper</span>
+						</a>
+					</div>
+					<div class="p-3 px-4 mt-auto hide-on-minified">
+						<a href="../../documentation/index.html" class="btn d-block btn-secondary fw-600 rounded-pill">
+							<i class="fa fa-code-branch me-1 ms-n1 opacity-5"></i> Documentation
+						</a>
+					</div>
+				</div>
+				<!-- END menu -->
+			</div>
+			<!-- END scrollbar -->
+			
+			<!-- BEGIN mobile-sidebar-backdrop -->
+			<button class="app-sidebar-mobile-backdrop" data-dismiss="sidebar-mobile"></button>
+			<!-- END mobile-sidebar-backdrop -->
+		</div>
+		<!-- END #sidebar -->
+		
+		<!-- BEGIN #content -->
+		<div id="content" class="app-content">
+			<!-- BEGIN container -->
+			<div class="container">
+				<!-- BEGIN row -->
+				<div class="row justify-content-center">
+					<!-- BEGIN col-10 -->
+					<div class="col-xl-10">
+						<!-- BEGIN row -->
+						<div class="row">
+							<!-- BEGIN col-9 -->
+							<div class="col-xl-9">
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">CHARTS</a></li>
+									<li class="breadcrumb-item active">CHART.JS</li>
+								</ul>
+								
+								<h1 class="page-header">
+									Chart.js <small>page header description goes here...</small>
+								</h1>
+								
+								<hr class="mb-4" />
+								
+								<!-- BEGIN #chartJs -->
+								<div id="chartJs">
+									<h4>Basic Example</h4>
+									<p>Chart.js is a simple yet flexible JavaScript charting for designers & developers. Please read the <a href="https://www.chartjs.org/" target="_blank">official documentation</a> for the full list of options.</p>
+								</div>
+								<!-- END #chartJs -->
+								
+								<!-- BEGIN #chartJsLineChart -->
+								<div id="chartJsLineChart" class="mb-5">
+									<div class="card">
+										<div class="card-body">
+											<h6>LINE CHART</h6>
+											<canvas id="lineChart"></canvas>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code>&lt;!-- required js --&gt;
+&lt;script src="assets/plugins/chart.js/dist/chart.min.js"/&gt;&lt;/script&gt;
+
+&lt;!-- html --&gt;
+&lt;canvas id="lineChart"&gt;&lt;/canvas&gt;
+
+&lt;!-- script --&gt;
+&lt;script&gt;
+  var ctx = document.getElementById('lineChart');
+  var lineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [{
+        color: COLOR_BLUE,
+        backgroundColor: hexToRgba(COLOR_BLUE, .2),
+        borderColor: COLOR_BLUE,
+        borderWidth: 1.5,
+        pointBackgroundColor: COLOR_WHITE,
+        pointBorderWidth: 1.5,
+        pointRadius: 4,
+        pointHoverBackgroundColor: COLOR_BLUE,
+        pointHoverBorderColor: COLOR_WHITE,
+        pointHoverRadius: 7,
+        label: 'Total Sales',
+        data: [12, 19, 4, 5, 2, 3]
+      }]
+    }
+  });
+&lt;/script&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #chartJsLineChart -->
+								
+								<!-- BEGIN #chartJsBarChart -->
+								<div id="chartJsBarChart" class="mb-5">
+									<div class="card">
+										<div class="card-body">
+											<h6>BAR CHART</h6>
+											<canvas id="barChart"></canvas>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code>&lt;!-- required js --&gt;
+&lt;script src="assets/plugins/chart.js/dist/chart.min.js"/&gt;&lt;/script&gt;
+
+&lt;!-- html --&gt;
+&lt;canvas id="barChart"&gt;&lt;/canvas&gt;
+
+&lt;!-- script --&gt;
+&lt;script&gt;
+  var ctx2 = document.getElementById('barChart');
+  var barChart = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+      datasets: [{
+        label: 'Total Visitors',
+        data: [37,31,36,34,43,31],
+        backgroundColor: hexToRgba(COLOR_BLUE, .2),
+        borderColor: COLOR_BLUE,
+        borderWidth: 1.5
+      },{
+        label: 'New Visitors',
+        data: [12,16,20,14,23,21],
+        backgroundColor: hexToRgba(COLOR_GRAY_500, .2),
+        borderColor: COLOR_GRAY_500,
+        borderWidth: 1.5
+      }]
+    }
+  });
+&lt;/script&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #chartJsBarChart -->
+								
+								<!-- BEGIN #chartJsRadarChart -->
+								<div id="chartJsRadarChart" class="mb-5">
+									<div class="card">
+										<div class="card-body">
+											<h6>RADAR CHART</h6>
+											<canvas id="radarChart"></canvas>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code>&lt;!-- required js --&gt;
+&lt;script src="assets/plugins/chart.js/dist/chart.min.js"/&gt;&lt;/script&gt;
+
+&lt;!-- html --&gt;
+&lt;canvas id="radarChart"&gt;&lt;/canvas&gt;
+
+&lt;!-- script --&gt;
+&lt;script&gt;
+  var ctx3 = document.getElementById('radarChart');
+  var radarChart = new Chart(ctx3, {
+    type: 'radar',
+    data: {
+      labels: ['United States', 'Canada', 'Australia', 'Netherlands', 'Germany', 'New Zealand', 'Singapore'],
+      datasets: [
+        {
+          label: 'Mobile',
+          backgroundColor: hexToRgba(COLOR_BLUE, .2),
+          borderColor: COLOR_BLUE,
+          pointBackgroundColor: COLOR_WHITE,
+          pointBorderColor: COLOR_BLUE,
+          pointHoverBackgroundColor: COLOR_BLUE,
+          pointHoverBorderColor: COLOR_WHITE,
+          data: [65, 59, 90, 81, 56, 55, 40],
+          borderWidth: 1.5
+        },
+        {
+          label: 'Desktop',
+          backgroundColor: hexToRgba(COLOR_GRAY_500, .2),
+          borderColor: COLOR_GRAY_500,
+          pointBackgroundColor: COLOR_WHITE,
+          pointBorderColor: COLOR_GRAY_500,
+          pointHoverBackgroundColor: COLOR_GRAY_500,
+          pointHoverBorderColor: COLOR_WHITE,
+          data: [28, 48, 40, 19, 96, 27, 100],
+          borderWidth: 1.5
+        }
+      ]
+    }
+  });
+&lt;/script&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #chartJsRadarChart -->
+								
+								<!-- BEGIN #chartJsPolarAreaChart -->
+								<div id="chartJsPolarAreaChart" class="mb-5">
+									<div class="card">
+										<div class="card-body">
+											<h6>POLAR AREA CHART</h6>
+											<div class="h-300px w-300px mx-auto">
+												<canvas id="polarAreaChart"></canvas>
+											</div>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code>&lt;!-- required js --&gt;
+&lt;script src="assets/plugins/chart.js/dist/chart.min.js"/&gt;&lt;/script&gt;
+
+&lt;!-- html --&gt;
+&lt;canvas id="polarAreaChart"&gt;&lt;/canvas&gt;
+
+&lt;!-- script --&gt;
+&lt;script&gt;
+  var ctx4 = document.getElementById('polarAreaChart');
+  var polarAreaChart = new Chart(ctx4, {
+    type: 'polarArea',
+    data: {
+      datasets: [{
+        data: [11, 16, 7, 3, 14],
+        backgroundColor: [hexToRgba(COLOR_BLUE, .85), hexToRgba(COLOR_INDIGO, .85), hexToRgba(COLOR_AQUA, .85), hexToRgba(COLOR_GRAY_500, .85), hexToRgba(COLOR_GRAY_800, .85)],
+        borderWidth: 1.5
+      }],
+      labels: ['IE', 'Safari', 'Chrome', 'Firefox', 'Opera']
+    }
+  });
+&lt;/script&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #chartJsPolarAreaChart -->
+								
+								<!-- BEGIN #chartJsPieChart -->
+								<div id="chartJsPieChart" class="mb-5">
+									<div class="card">
+										<div class="card-body">
+											<h6>PIE CHART</h6>
+											<div class="h-300px w-300px mx-auto">
+												<canvas id="pieChart"></canvas>
+											</div>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code>&lt;!-- required js --&gt;
+&lt;script src="assets/plugins/chart.js/dist/chart.min.js"/&gt;&lt;/script&gt;
+
+&lt;!-- html --&gt;
+&lt;canvas id="pieChart"&gt;&lt;/canvas&gt;
+
+&lt;!-- script --&gt;
+&lt;script&gt;
+  var ctx5 = document.getElementById('pieChart');
+  var pieChart = new Chart(ctx5, {
+    type: 'pie',
+    data: {
+      labels: ['Total Visitor', 'New Visitor', 'Returning Visitor'],
+      datasets: [{
+        data: [300, 50, 100],
+        backgroundColor: [COLOR_BLUE, COLOR_INDIGO, COLOR_GRAY_900],
+        hoverBackgroundColor: [COLOR_BLUE, COLOR_INDIGO, COLOR_GRAY_900],
+        borderWidth: 0
+      }]
+    }
+  });
+&lt;/script&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #chartJsPieChart -->
+								
+								<!-- BEGIN #chartJsDoughnutChart -->
+								<div id="chartJsDoughnutChart" class="mb-5">
+									<div class="card">
+										<div class="card-body">
+											<h6>DOUGHNUT CHART</h6>
+											<div class="h-300px w-300px mx-auto">
+												<canvas id="doughnutChart"></canvas>
+											</div>
+										</div>
+										<div class="hljs-container rounded-bottom"><pre><code>&lt;!-- required js --&gt;
+&lt;script src="assets/plugins/chart.js/dist/chart.min.js"/&gt;&lt;/script&gt;
+
+&lt;!-- html --&gt;
+&lt;canvas id="doughnutChart"&gt;&lt;/canvas&gt;
+
+&lt;!-- script --&gt;
+&lt;script&gt;
+  var ctx6 = document.getElementById('doughnutChart');
+  var doughnutChart = new Chart(ctx6, {
+    type: 'doughnut',
+    data: {
+      labels: ['Total Visitor', 'New Visitor', 'Returning Visitor'],
+      datasets: [{
+        data: [300, 50, 100],
+        backgroundColor: [COLOR_BLUE, COLOR_INDIGO, COLOR_GRAY_900],
+        hoverBackgroundColor: [COLOR_BLUE, COLOR_INDIGO, COLOR_GRAY_900],
+        borderWidth: 0
+      }]
+    }
+  });
+&lt;/script&gt;</code></pre>
+										</div>
+									</div>
+								</div>
+								<!-- END #chartJsDoughnutChart -->
+							</div>
+							<!-- END col-9-->
+							<!-- BEGIN col-3 -->
+							<div class="col-xl-3">
+								<!-- BEGIN #sidebar-bootstrap -->
+								<nav id="sidebar-bootstrap" class="navbar navbar-sticky d-none d-xl-block">
+									<nav class="nav">
+										<a class="nav-link" href="#chartJs" data-toggle="scroll-to">Chart.js</a>
+										<a class="nav-link" href="#chartJsLineChart" data-toggle="scroll-to"> - line chart</a>
+										<a class="nav-link" href="#chartJsBarChart" data-toggle="scroll-to"> - bar chart</a>
+										<a class="nav-link" href="#chartJsRadarChart" data-toggle="scroll-to"> - radar chart</a>
+										<a class="nav-link" href="#chartJsPolarAreaChart" data-toggle="scroll-to"> - polar area chart</a>
+										<a class="nav-link" href="#chartJsPieChart" data-toggle="scroll-to"> - pie chart</a>
+										<a class="nav-link" href="#chartJsDoughnutChart" data-toggle="scroll-to"> - doughnut chart</a>
+									</nav>
+								</nav>
+								<!-- END #sidebar-bootstrap -->
+							</div>
+							<!-- END col-3 -->
+						</div>
+						<!-- END row -->
+					</div>
+					<!-- END col-10 -->
+				</div>
+				<!-- END row -->
+			</div>
+			<!-- END container -->
+		</div>
+		<!-- END #content -->
+		
+		<!-- BEGIN btn-scroll-top -->
+		<a href="#" data-click="scroll-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+		<!-- END btn-scroll-top -->
+	</div>
+	<!-- END #app -->
+	
+	<!-- ================== BEGIN core-js ================== -->
+	<script src="assets/js/vendor.min.js"></script>
+	<script src="assets/js/app.min.js"></script>
+	<!-- ================== END core-js ================== -->
+	
+	<!-- ================== BEGIN page-js ================== -->
+	<script src="assets/plugins/highlight.js/highlight.min.js"></script>
+	<script src="assets/js/demo/highlightjs.demo.js"></script>
+	<script src="assets/plugins/chart.js/dist/chart.min.js"></script>
+	<script src="assets/js/demo/chart-js.demo.js"></script>
+	<!-- ================== END page-js ================== -->
+</body>
+</html>

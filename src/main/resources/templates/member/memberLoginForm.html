@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+
+</th:block>
+
+<div layout:fragment="content">
+
+    <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+    <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
+
+</div>
+
+</html>

@@ -1,0 +1,89 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+# Repo Action 페이지에 나타날 이름 
+name: Spring Boot & Gradle CI/CD & Docker Hub
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  NAME: goohoon # 계정 명
+  REPO: springboot-template # 레포 이름
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Get Current Time
+      uses: 1466587594/get-current-time@v2
+      id: current-time
+      with:
+        format: YYYY-MM-DDTHH:mm:ss
+        utcOffset: "+09:00" # 기준이 UTC이기 때문에 한국시간인 KST를 맞추기 위해 +9시간 추가
+
+    - name: Print Current Time
+      run: echo "Current Time=${{steps.current-time.outputs.formattedTime}}" # current-time 에서 지정한 포맷대로 현재 시간 출력
+      shell: bash          
+    
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        
+
+    - name: Cache Gradle packages
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Build with Gradle
+      run: ./gradlew clean build
+      
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{secrets.DOCKERHUB_USERNAME}}
+        password: ${{secrets.DOCKERHUB_TOKEN}}      
+      
+    - name: build and release to DockerHub
+      run: |
+        docker build -t ${{env.REPO}} .
+        docker tag $REPO:latest ${{env.NAME}}/${{env.REPO}}:latest
+        docker push ${{env.NAME}}/${{env.REPO}}:latest      
+        
+    - name: send custom message with args
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO_ID }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        args: ${{ github.actor }} 님의 소스 코드가 반영 됐습니다. ${{ github.event.head_commit.message }}              
+                
+        
+  deploy:
+    needs: build
+    name: Deploy
+    runs-on: [ self-hosted, label-development ]
+    steps:
+      - name: deploy run
+        run: |
+              sh /home/ec2-user/sh/stop.sh
+              sh /home/ec2-user/sh/start.sh
+              sh /home/ec2-user/sh/health.sh
+

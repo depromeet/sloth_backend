@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout2}">
+
+	<!-- BEGIN login -->
+	<div class="login" layout:fragment="content">
+		<!-- BEGIN login-content -->
+		<div class="login-content">
+
+			<h1 class="text-center">Sign In</h1>
+			<div class="text-muted text-center mb-4">
+				For your protection, please verify your identity.
+			</div>
+
+			<a href="/oauth2/authorization/google" class="btn btn-success active w-100 fw-500 mb-3" role="button">Google Login</a>
+			<a href="/oauth2/authorization/naver" class="btn btn-secondary active w-100 fw-500 mb-3" role="button">Naver Login</a>
+
+		</div>
+	</div>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+    <meta charset="utf-8" />
+    <title>Studio | Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <!-- ================== BEGIN core-css ================== -->
+    <link th:href="@{/assets/css/vendor.min.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/app.min.css}" rel="stylesheet" />
+    <!-- ================== END core-css ================== -->
+
+</head>
+<body>
+
+    <div id="app" class="app">
+
+        <th:block th:replace="fragments/header::header"></th:block>
+
+        <th:block th:replace="fragments/sidebar::sidebar"></th:block>
+
+        <th:block layout:fragment="content"> </th:block>
+
+    </div>
+
+    <!-- ================== BEGIN jquerry ================== -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- ================== END jquerry ================== -->
+
+    <!-- ================== BEGIN core-js ================== -->
+    <script src="/assets/js/vendor.min.js"></script>
+    <script src="/assets/js/app.min.js"></script>
+    <!-- ================== END core-js ================== -->
+
+    <!-- ================== BEGIN page-js ================== -->
+    <script src="/assets/plugins/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="/assets/js/demo/dashboard.demo.js"></script>
+    <!-- ================== END page-js ================== -->
+
+    <!-- ================== Util ================== -->
+    <script src="/js/AjaxUtil.js"></script>
+    <!-- ================== END Util ================== -->
+
+    <th:block layout:fragment="script"></th:block>
+
+</body>
+</html>
