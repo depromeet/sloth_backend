@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -19,10 +20,15 @@ public class HealthController {
     private final Environment env;
 
     @Operation(summary = "profile", description = "profile api")
-    @GetMapping("/profile")
+    @GetMapping(value = "/profile")
     public ResponseEntity<String> profile() {
+
         List<String> profiles = Arrays.asList(env.getActiveProfiles());
         List<String> realProfiles = Arrays.asList("real1", "real2");
+
+        profiles = profiles.stream().filter(profile -> "real1".equals(profile) || "real2".equals(profile))
+                .collect(Collectors.toList());
+
         String defaultProfile = profiles.isEmpty()? "default" : profiles.get(0);
 
         String activeProfile = profiles.stream()
