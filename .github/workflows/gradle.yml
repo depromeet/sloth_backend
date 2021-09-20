@@ -12,7 +12,7 @@ on:
 
 env:
   NAME: dbfgml741 # 계정 명
-  REPO: springboot-template # 레포 이름
+  REPO: sloth # 레포 이름
 
 jobs:
   build:
@@ -83,5 +83,6 @@ jobs:
     steps:
       - name: deploy run
         run: |
-              echo "hello"
-
+              sh /home/ec2-user/sh/stop.sh
+              sh /home/ec2-user/sh/start.sh
+              sh /home/ec2-user/sh/health.sh
