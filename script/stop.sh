@@ -29,7 +29,7 @@ else
   sudo docker pull dbfgml741/sloth
 
   #미사용 도커 이미지 삭제
-  sudo docker image prune -a
+  sudo docker image prune -f
 
   sleep 5
 
