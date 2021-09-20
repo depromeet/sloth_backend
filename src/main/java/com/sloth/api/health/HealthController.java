@@ -20,7 +20,7 @@ public class HealthController {
 
     private final Environment env;
 
-    @Operation(summary = "profile check api", description = "현재 실행중인 Profile 체크 api")
+    @Operation(summary = "profile check api", description = "현재 실행중인 profile 체크 api")
     @GetMapping(value = "/profile", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> profile() {
 

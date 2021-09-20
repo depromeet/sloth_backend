@@ -25,7 +25,11 @@ else
         $(sudo docker stop "spring-template-real2")
   fi
 
+  # 도커 이미지 pull
   sudo docker pull dbfgml741/sloth
+
+  #미사용 도커 이미지 삭제
+  sudo docker image prune -a
 
   sleep 5
 
