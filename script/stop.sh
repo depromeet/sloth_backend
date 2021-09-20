@@ -25,6 +25,8 @@ else
         $(sudo docker stop "spring-template-real2")
   fi
 
+  sudo docker pull dbfgml741/sloth
+
   sleep 5
 
 fi
