@@ -11,7 +11,7 @@ on:
     branches: [ master ]
 
 env:
-  NAME: goohoon # 계정 명
+  NAME: dbfgml741 # 계정 명
   REPO: springboot-template # 레포 이름
 
 jobs:
@@ -68,12 +68,12 @@ jobs:
         docker tag $REPO:latest ${{env.NAME}}/${{env.REPO}}:latest
         docker push ${{env.NAME}}/${{env.REPO}}:latest      
         
-    - name: send custom message with args
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.TELEGRAM_TO_ID }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        args: ${{ github.actor }} 님의 소스 코드가 반영 됐습니다. ${{ github.event.head_commit.message }}              
+#    - name: send custom message with args
+#      uses: appleboy/telegram-action@master
+#      with:
+#        to: ${{ secrets.TELEGRAM_TO_ID }}
+#        token: ${{ secrets.TELEGRAM_TOKEN }}
+#        args: ${{ github.actor }} 님의 소스 코드가 반영 됐습니다. ${{ github.event.head_commit.message }}
                 
         
   deploy:
