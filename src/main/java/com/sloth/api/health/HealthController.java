@@ -43,7 +43,7 @@ public class HealthController {
     @Operation(summary = "health check api", description = "서버 health check용 API")
     @GetMapping(value = "/health", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> healthCheck() {
-        return ResponseEntity.ok("Heal Check OK");
+        return ResponseEntity.ok("Health Check OK");
     }
 
 }
