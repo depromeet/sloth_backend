@@ -3,6 +3,7 @@ package com.sloth.api.health;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +20,8 @@ public class HealthController {
 
     private final Environment env;
 
-    @Operation(summary = "profile", description = "profile api")
-    @GetMapping(value = "/profile")
+    @Operation(summary = "profile check api", description = "현재 실행중인 Profile 체크 api")
+    @GetMapping(value = "/profile", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> profile() {
 
         List<String> profiles = Arrays.asList(env.getActiveProfiles());
@@ -39,8 +40,8 @@ public class HealthController {
         return ResponseEntity.ok(activeProfile);
     }
 
-    @Operation(summary = "health check", description = "health check api")
-    @GetMapping("/health")
+    @Operation(summary = "health check api", description = "서버 health check용 API")
+    @GetMapping(value = "/health", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> healthCheck() {
         return ResponseEntity.ok("Heal Check OK");
     }
