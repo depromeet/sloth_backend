@@ -1,5 +1,6 @@
-package com.sloth.api.health;
+package com.sloth.api.health.controller;
 
+import com.sloth.api.health.dto.ResponseHealthCheckDto;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
@@ -41,9 +42,14 @@ public class HealthController {
     }
 
     @Operation(summary = "health check api", description = "서버 health check용 API")
-    @GetMapping(value = "/health", produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> healthCheck() {
-        return ResponseEntity.ok("Health Check OK");
+    @GetMapping(value = "/health", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseHealthCheckDto> healthCheck() {
+        ResponseHealthCheckDto responseHealthCheckDto = ResponseHealthCheckDto.builder()
+                .status(true)
+                .health("ok")
+                .build();
+
+        return ResponseEntity.ok(responseHealthCheckDto);
     }
 
 }
