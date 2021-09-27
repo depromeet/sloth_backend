@@ -5,8 +5,8 @@ spring:
       client:
         registration:
           google:
-            client-id: 720374646118-52asquaedqhca16hherg5777tffvsh65.apps.googleusercontent.com
-            client-secret: ENC(IX+MyItnyHWAoFbyKNoRs59FCQebGKF3+QzFDEjdNZ6IUtPR0+I6M8rVvvmSOwJt)
+            client-id: 151935241850-4jk4v4dj9bihjm5fpj3dva28oke08l6n.apps.googleusercontent.com
+            client-secret: aroKVgxziypO3MlN7kxvUWLJ
             # scope에 openid는 빼고 등록. 그래야 OpenId Provider 서비스(구글)와 그렇지 않은 서비스(네이버/카카오 등)로 나눠서 Oauth2Service를 안만들어도됨
             scope: profile,email
           naver:
