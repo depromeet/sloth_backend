@@ -73,8 +73,7 @@ jobs:
 #      with:
 #        to: ${{ secrets.TELEGRAM_TO_ID }}
 #        token: ${{ secrets.TELEGRAM_TOKEN }}
-#        args: ${{ github.actor }} 님의 소스 코드가 반영 됐습니다. ${{ github.event.head_commit.message }}
-                
+#        args: ${{ github.actor }} 님의 소스 코드가 반영 됐습니다. ${{ github.event.head_commit.message }}  
         
   deploy:
     needs: build
