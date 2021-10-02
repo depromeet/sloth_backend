@@ -22,8 +22,8 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      - name: action-slack
       - uses: 8398a7/action-slack@v3
+      - name: action-slack
         with:
           status: ${{ job.status }}
           author_name: Sloth Backend - dev
