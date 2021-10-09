@@ -2,7 +2,6 @@ package com.sloth.config.auth.interceptor;
 
 import com.sloth.config.auth.TokenProvider;
 import com.sloth.config.auth.constant.TokenType;
-import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;
 import com.sloth.exception.MemberTokenNotFoundException;
@@ -10,24 +9,23 @@ import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Slf4j
 @RequiredArgsConstructor
+@Transactional
 public class AuthInterceptor implements HandlerInterceptor {
 
     private final TokenProvider tokenProvider;
     private final MemberTokenRepository memberTokenRepository;
-    private final MemberRepository memberRepository;
-    private final MessageSource messageSource;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

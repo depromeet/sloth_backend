@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -111,7 +112,7 @@ public class AuthTestControllerTest extends BaseApiController {
         MemberToken memberToken = MemberToken.createMemberToken(member, refreshToken, LocalDateTime.now().plusWeeks(2));
 
         given(memberTokenRepository.findByRefreshToken(refreshToken))
-                .willReturn(java.util.Optional.ofNullable(memberToken));
+                .willReturn(Optional.ofNullable(memberToken));
 
         //when
         ResultActions result = mockMvc.perform(get("/api/test")
