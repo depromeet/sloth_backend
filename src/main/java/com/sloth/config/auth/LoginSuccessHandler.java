@@ -7,6 +7,8 @@ import com.sloth.domain.member.constant.Role;
 import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;
+import com.sloth.util.DateTimeUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
@@ -19,7 +21,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Date;
 
+@Slf4j
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     private MemberRepository memberRepository;
@@ -41,11 +45,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         String email = (String) principal.getAttributes().get("email");
 
         TokenDto tokenDto = tokenProvider.createTokenDto(email);
+        saveRefreshToken(email, tokenDto);
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonToken = objectMapper.writeValueAsString(tokenDto);
 
         String role = getMemberRole(authentication);
-        saveRefreshToken(email, tokenDto.getRefreshToken());
 
         if(Role.USER.getKey().equals(role)) {
             response.setCharacterEncoding("utf-8");
@@ -62,13 +66,16 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     /**
      * refresh token 저장
      * @param email
-     * @param refreshToken
+     * @param tokenDto
      */
-    private void saveRefreshToken(String email, String refreshToken) {
+    private void saveRefreshToken(String email, TokenDto tokenDto) {
         Member member = memberRepository.findByEmail(email)
                 .orElseThrow(EntityNotFoundException::new);
-        LocalDateTime tokenExpiredTime = LocalDateTime.now().plusDays(14);  // 여기 토큰만들 때 값으로 들어가게 수정
-        MemberToken memberToken = MemberToken.createMemberToken(member, refreshToken, tokenExpiredTime);
+        Date refreshTokenExpireTime = tokenDto.getRefreshTokenExpireTime();
+
+        LocalDateTime tokenExpiredTime = DateTimeUtils.convertToLocalDateTime(refreshTokenExpireTime);
+
+        MemberToken memberToken = MemberToken.createMemberToken(member, tokenDto.getRefreshToken(), tokenExpiredTime);
         memberTokenRepository.save(memberToken);
     }
 

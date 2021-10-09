@@ -161,10 +161,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(em);
     }
 
-    @ExceptionHandler(MemberNotFoundException.class)
+    @ExceptionHandler(MemberTokenNotFoundException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
-    public ResponseEntity<ErrorMessage> memberNotFoundExceptionHandle(MemberNotFoundException e, HttpServletRequest request) {
+    public ResponseEntity<ErrorMessage> memberNotFoundExceptionHandle(MemberTokenNotFoundException e, HttpServletRequest request) {
         ErrorMessage em = ErrorMessage.builder()
                 .errorMessage(e.getMessage())
                 .code(HttpStatus.FORBIDDEN.value())

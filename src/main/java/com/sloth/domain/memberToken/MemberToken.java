@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Table(name="member_token")
@@ -25,7 +26,7 @@ public class MemberToken extends BaseEntity {
 
     private LocalDateTime tokenExpirationTime;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "member_id")
     private Member member;
 
@@ -37,8 +38,23 @@ public class MemberToken extends BaseEntity {
                 .build();
     }
 
+    /**
+     * 토큰 만료 시간 갱신
+     * @param tokenExpirationTime
+     */
     public void updateTokenExpirationTime(LocalDateTime tokenExpirationTime) {
         this.tokenExpirationTime = tokenExpirationTime;
+    }
+
+    /**
+     * 리프레시 토큰이 만료 갱신 기준 시간 이하일 경우 만료 시간 갱신
+     * @param token
+     */
+    public void updateRefreshTokenExpireTime(String token) {
+        long hours = ChronoUnit.HOURS.between(LocalDateTime.now(), tokenExpirationTime);
+        if(hours <= 72) {   //토큰 만료 시간이 72시간 이하일 경우 토큰 만료 시간 갱신
+            updateTokenExpirationTime(LocalDateTime.now().plusWeeks(2));
+        }
     }
 
 }
