@@ -96,7 +96,7 @@ public class TokenProvider {
     }
 
     /**
-     * access token이 만료됐는지 검사
+     * token이 만료됐는지 검사
      * @param tokenExpiredTime
      * @return
      */
@@ -111,6 +111,11 @@ public class TokenProvider {
         return false;
     }
 
+    /**
+     * token이 만료됐는지 검사
+     * @param tokenExpiredTime
+     * @return
+     */
     public boolean isTokenExpired(LocalDateTime tokenExpiredTime) {
 
         if(LocalDateTime.now().isAfter(tokenExpiredTime)) { //토큰 만료된 경우
