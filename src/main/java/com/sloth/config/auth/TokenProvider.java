@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Slf4j
@@ -95,7 +96,7 @@ public class TokenProvider {
     }
 
     /**
-     * 토큰이 만료됐는지 검사
+     * access token이 만료됐는지 검사
      * @param tokenExpiredTime
      * @return
      */
@@ -104,6 +105,15 @@ public class TokenProvider {
         Date now = new Date();
 
         if(now.after(tokenExpiredTime)) { //토큰 만료된 경우
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean isTokenExpired(LocalDateTime tokenExpiredTime) {
+
+        if(LocalDateTime.now().isAfter(tokenExpiredTime)) { //토큰 만료된 경우
             return true;
         }
 
