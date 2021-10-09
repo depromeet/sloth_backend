@@ -35,7 +35,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Bean
     public AuthInterceptor authInterceptor() {
-        return new AuthInterceptor(tokenProvider, memberTokenRepository, memberRepository, messageSource);
+        return new AuthInterceptor(tokenProvider, memberTokenRepository);
     }
 
     @Override

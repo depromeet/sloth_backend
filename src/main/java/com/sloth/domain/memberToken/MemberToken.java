@@ -3,7 +3,6 @@ package com.sloth.domain.memberToken;
 import com.sloth.domain.BaseEntity;
 import com.sloth.domain.member.Member;
 import lombok.*;
-import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,7 +15,6 @@ import java.time.temporal.ChronoUnit;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Slf4j
 public class MemberToken extends BaseEntity {
 
     @Id
@@ -55,7 +53,6 @@ public class MemberToken extends BaseEntity {
     public void updateRefreshTokenExpireTime(String token) {
         long hours = ChronoUnit.HOURS.between(LocalDateTime.now(), tokenExpirationTime);
         if(hours <= 72) {   //토큰 만료 시간이 72시간 이하일 경우 토큰 만료 시간 갱신
-            log.info("토큰 만료 시간 갱신 : {}", hours);
             updateTokenExpirationTime(LocalDateTime.now().plusWeeks(2));
         }
     }
