@@ -1,6 +1,7 @@
 package com.sloth.config.auth;
 
-import com.nimbusds.jose.shaded.json.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sloth.config.auth.dto.TokenDto;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.constant.Role;
 import com.sloth.domain.member.repository.MemberRepository;
@@ -12,7 +13,6 @@ import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.persistence.EntityNotFoundException;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -24,33 +24,34 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     private MemberRepository memberRepository;
     private MemberTokenRepository memberTokenRepository;
-    private JwtTokenService jwtTokenService;
+    private TokenProvider tokenProvider;
 
     public LoginSuccessHandler(MemberRepository memberRepository, MemberTokenRepository memberTokenRepository,
-                               JwtTokenService jwtTokenService) {
+                               TokenProvider tokenProvider) {
         this.memberRepository = memberRepository;
         this.memberTokenRepository = memberTokenRepository;
-        this.jwtTokenService = jwtTokenService;
+        this.tokenProvider = tokenProvider;
     }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException
-            , ServletException, EntityNotFoundException {
+            , EntityNotFoundException {
 
         DefaultOAuth2User principal = (DefaultOAuth2User) authentication.getPrincipal();
         String email = (String) principal.getAttributes().get("email");
-        JSONObject jsonTokenObject = makeJsonTokenObject(email);
+
+        TokenDto tokenDto = tokenProvider.createTokenDto(email);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonToken = objectMapper.writeValueAsString(tokenDto);
 
         String role = getMemberRole(authentication);
-
-        String refreshToken = (String) jsonTokenObject.get("refreshToken");
-        saveRefreshToken(email, refreshToken);
+        saveRefreshToken(email, tokenDto.getRefreshToken());
 
         if(Role.USER.getKey().equals(role)) {
             response.setCharacterEncoding("utf-8");
             response.setContentType("application/json");
             PrintWriter out = response.getWriter();
-            out.write(jsonTokenObject.toJSONString());
+            out.write(jsonToken);
             out.flush();
             out.close();
         } else if(Role.ADMIN.getKey().equals(role)) {
@@ -72,20 +73,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     }
 
     /**
-     * JsonToken 객체 생성
-     * @param email
-     * @return 토큰 정보를 담고있는 JSONObject 반환
-     */
-    private JSONObject makeJsonTokenObject(String email) {
-        JSONObject jsonTokenObject = new JSONObject();
-        String accessToken = jwtTokenService.makeAccessToken(email);
-        String refreshToken = jwtTokenService.makeAccessToken(email);
-        jsonTokenObject.put("accessToken", accessToken);
-        jsonTokenObject.put("refreshToken", refreshToken);
-        return jsonTokenObject;
-    }
-
-    /**
      * 로그인 성공한 사용자 ROLE 조회
      * @param authentication
      * @return 로그인 성공한 회원의 ROLE 반환
@@ -98,6 +85,5 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         }
         return role;
     }
-
 
 }

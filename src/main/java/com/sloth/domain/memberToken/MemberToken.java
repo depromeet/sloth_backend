@@ -37,4 +37,8 @@ public class MemberToken extends BaseEntity {
                 .build();
     }
 
+    public void updateTokenExpirationTime(LocalDateTime tokenExpirationTime) {
+        this.tokenExpirationTime = tokenExpirationTime;
+    }
+
 }

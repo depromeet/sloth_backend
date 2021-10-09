@@ -18,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final MemberRepository memberRepository;
     private final MemberTokenRepository memberTokenRepository;
-    private final JwtTokenService jwtTokenService;
+    private final TokenProvider tokenProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().logoutSuccessUrl("/")
             .and()
                 .oauth2Login()  //oauth2 로그인 기능에 대한 여러 설정의 진입점
-                    .successHandler(new LoginSuccessHandler(memberRepository, memberTokenRepository, jwtTokenService))
+                    .successHandler(new LoginSuccessHandler(memberRepository, memberTokenRepository, tokenProvider))
                     .userInfoEndpoint() //Oauth2 로그인 성공 후 사용자 정보를 가져올 때의 설정 담당
                     .userService(customOAuth2UserService)   //소셜 로그인 성공 후 후속 조치를 조치할 UserService 인터페이스 구현체 등록
                                                             //리소스 서버에서 사용자 정보를 가져온 상태에서 추가로 진행하고자하는 기능 명시 가능
