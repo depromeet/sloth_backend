@@ -61,3 +61,8 @@ restemplate:
 jasypt:
   encryptor:
     bean: encryptorBean
+
+token:
+  secret: sloth-backend
+  access-token-expiration-time: 1800
+  refresh-token-expiration-time: 20160

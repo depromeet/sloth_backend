@@ -25,7 +25,7 @@ import java.util.List;
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE member SET is_delete = true WHERE member_id=?")
 @Where(clause = "is_delete=false")
-public class Member extends BaseEntity implements EntityCommonMethod {
+public class Member extends BaseEntity {
 
     @Id
     @Column(name="member_id")
@@ -71,22 +71,6 @@ public class Member extends BaseEntity implements EntityCommonMethod {
     @JsonIgnore
     public String getRoleKey() {
         return this.role.getKey();
-    }
-
-    public List<Object> getAllValue() throws Exception {
-        Field[] fields = this.getClass().getDeclaredFields();
-        List<Object> objects = new ArrayList<>();
-
-        for (Field field : fields) {
-            if(field.getAnnotation(JsonIgnore.class) != null){
-                continue;
-            }
-            field.setAccessible(true);
-            Object obj = field.get(this);
-            objects.add(obj);
-        }
-
-        return objects;
     }
 
 }
