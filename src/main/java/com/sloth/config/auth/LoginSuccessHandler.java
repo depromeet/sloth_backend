@@ -45,6 +45,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         String email = (String) principal.getAttributes().get("email");
 
         TokenDto tokenDto = tokenProvider.createTokenDto(email);
+        saveRefreshToken(email, tokenDto);
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonToken = objectMapper.writeValueAsString(tokenDto);
 

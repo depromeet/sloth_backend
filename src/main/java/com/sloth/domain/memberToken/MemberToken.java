@@ -26,7 +26,7 @@ public class MemberToken extends BaseEntity {
 
     private LocalDateTime tokenExpirationTime;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "member_id")
     private Member member;
 
