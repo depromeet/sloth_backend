@@ -33,9 +33,10 @@ public class JpaConfig {
         Map<String , String> entityMap = new HashMap<>();
 
         for (EntityType<?> entity : entities) {
-            String entityName = entity.getName();
             String packageName = entity.getJavaType().getPackageName();
-            entityMap.put(entityName.toLowerCase(), packageName + "." + entityName);
+            String entityName = entity.getName();
+            String firstLowerEntityName = entityName.substring(0,1).toLowerCase() + entityName.substring(1);
+            entityMap.put(firstLowerEntityName, packageName + "." + entityName);
         }
 
         return entityMap;

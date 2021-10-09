@@ -1,10 +1,20 @@
 spring:
   #아래 내용이 없어도 스프링부트에서 테스트돌릴 때 기본적으로 메모리 모드로 돌림
+  #  datasource:
+  #    url: jdbc:h2:mem:test
+  #    username: sa
+  #    password:
+  #    driver-class-name: org.h2.Driver
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/slothdb
-    username:
-    password:
+    url: ENC(+xEBcLJcIQUu1KPlkOV3ZkZsbTbSRcswo8v2kEeebq5hxsm5sI93FdOJyEPTfynBO4y3N91npxzf/4/e/84aoQ==)
+    username: ENC(8W2nDkR47C1Qfzs+n59C7viOkTkagn3I2sWbspISdAc=)
+    password: ENC(6BDTOWvcxLRihjaMWcC3nqQcCQkPD/4ulENnyjlpG4Q=)
     driver-class-name: org.postgresql.Driver
+
+  session:
+    jdbc:
+      initialize-schema: always
 
   jpa:
     hibernate:
@@ -13,7 +23,7 @@ spring:
       hibernate:
         format_sql : true
         default_batch_fetch_size: 100
-#    open-in-view: false
+  #    open-in-view: false
   devtools:
     livereload:
       enabled: true
@@ -32,8 +42,8 @@ spring:
   profiles:
     include: oauth
 
-  session:
-    store-type: jdbc
+    #session:
+    # store-type: jdbc
 
   h2:
     console:
@@ -61,3 +71,8 @@ restemplate:
 jasypt:
   encryptor:
     bean: encryptorBean
+
+token:
+  secret: sloth-backend
+  access-token-expiration-time: 900000  # 15분
+  refresh-token-expiration-time: 1210500000 # 2주
