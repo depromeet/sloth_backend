@@ -6,15 +6,17 @@ import com.sloth.exception.BusinessException;
 import com.sloth.exception.EntityNotFoundException;
 import com.sloth.exception.EntityValidException;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.mapping.ToOne;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -37,7 +39,8 @@ public class EntityManageService {
     @SuppressWarnings("all")
     public Page<Map<String, Object>> findAll(String entityName, int page, int size, String type, String keyword) {
         JpaRepository repository = this.getJpaRepository(entityName);
-        Pageable pageable = PageRequest.of(page - 1, size);
+        Sort idBySort = Sort.by(Sort.Direction.DESC, "id");
+        Pageable pageable = PageRequest.of(page - 1, size, idBySort);
 
         Page result;
         if (type.isEmpty()) {
@@ -77,47 +80,33 @@ public class EntityManageService {
     }
 
     @SuppressWarnings("all")
-    @Transactional
-    public void updateEntity(String entityName, Long id, Map<String, Object> requestMap) {
-        try {
-            validateField(entityName, requestMap);
-            JpaRepository repository = this.getJpaRepository(entityName);
+    @Transactional(rollbackFor = Exception.class)
+    public void updateEntity(String entityName, Long id, Map<String, Object> requestMap) throws Throwable {
+        validateField(entityName, requestMap);
+        JpaRepository repository = this.getJpaRepository(entityName);
 
-            Object entityInstance = repository.findById(id)
-                    .orElseThrow(() -> new BusinessException("entity not found"));
+        Object entityInstance = repository.findById(id)
+                .orElseThrow(() -> new BusinessException("entity not found"));
 
-            Set<String> keySet = requestMap.keySet();
-            for (String key : keySet) {
+        Set<String> keySet = requestMap.keySet();
+        for (String key : keySet) {
 
-                if(key == "id") {
-                    continue;
-                }
-
-                Object value = requestMap.get(key);
-                System.out.println(Arrays.toString(entityInstance.getClass().getMethods()));
-                System.out.println("set" + key.substring(0, 1).toUpperCase() + key.substring(1));
-
-                Field field = entityInstance.getClass().getDeclaredField(key);
-                Method setter = entityInstance.getClass().getMethod("set" + key.substring(0, 1).toUpperCase() + key.substring(1), field.getType());
-
-                if (field.getType().isEnum()) {
-                    setter.invoke(entityInstance, Enum.valueOf((Class<Enum>) field.getType(), requestMap.get(key).toString()));
-                } else {
-                    setter.invoke(entityInstance, requestMap.get(key));
-                }
+            if(key == "id") {
+                continue;
             }
 
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            throw new BusinessException("field not found");
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch(SQLIntegrityConstraintViolationException e){
-            //todo sql 충돌 같은거 처리 해야할듯??
+            Object value = requestMap.get(key);
+            System.out.println(Arrays.toString(entityInstance.getClass().getMethods()));
+            System.out.println("set" + key.substring(0, 1).toUpperCase() + key.substring(1));
 
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
+            Field field = entityInstance.getClass().getDeclaredField(key);
+            Method setter = entityInstance.getClass().getMethod("set" + key.substring(0, 1).toUpperCase() + key.substring(1), field.getType());
+
+            if (field.getType().isEnum()) {
+                setter.invoke(entityInstance, Enum.valueOf((Class<Enum>) field.getType(), requestMap.get(key).toString()));
+            } else {
+                setter.invoke(entityInstance, requestMap.get(key));
+            }
         }
     }
 
@@ -189,7 +178,16 @@ public class EntityManageService {
             List<String> fieldNames = new ArrayList<>();
             Field[] fields = clazz.getDeclaredFields();
             for (Field field : fields) {
-                if (field.isAnnotationPresent(JsonIgnore.class)) continue;
+
+                if ( field.isAnnotationPresent(JsonIgnore.class) ||
+                     field.isAnnotationPresent(OneToOne.class)   ||
+                     field.isAnnotationPresent(OneToMany.class)  ||
+                     field.isAnnotationPresent(ManyToOne.class)  ||
+                     field.isAnnotationPresent(ManyToMany.class)
+                ) {
+                    continue;
+                }
+
                 fieldNames.add(field.getName());
             }
             return fieldNames;
@@ -216,7 +214,12 @@ public class EntityManageService {
             Class<?> clazz = Class.forName(entityFullName);
 
             List<Field> fields = Stream.of(clazz.getDeclaredFields())
-                    .filter((field) -> field.getDeclaredAnnotation(JsonIgnore.class) == null && field.getDeclaredAnnotation(Id.class) == null)
+                    .filter((field) -> field.getDeclaredAnnotation(JsonIgnore.class) == null)
+                    .filter((field) -> field.getDeclaredAnnotation(Id.class) == null)
+                    .filter((field) -> field.getDeclaredAnnotation(OneToOne.class) == null)
+                    .filter((field) -> field.getDeclaredAnnotation(ManyToOne.class) == null)
+                    .filter((field) -> field.getDeclaredAnnotation(OneToMany.class) == null)
+                    .filter((field) -> field.getDeclaredAnnotation(ManyToMany.class) == null)
                     .collect(Collectors.toList());
 
             Set<String> keySet = requestMap.keySet();
