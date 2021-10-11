@@ -24,6 +24,15 @@ bootJar{
     archiveVersion = "0.0.1"
 }
 
+ext{
+    springCloudVersion = '2020.0.3'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
 
 repositories {
     mavenCentral()
@@ -47,6 +56,7 @@ dependencies {
     implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.68'
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
 
+    compile('org.springframework.cloud:spring-cloud-starter-openfeign')
     compile group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '2.4.1'
     compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
