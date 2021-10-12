@@ -22,7 +22,7 @@ public class MemberDbInit {
     public void initMember() {
         for (int i = 0; i < 25; i++) {
             MemberFormDto memberFormDto = new MemberFormDto();
-            memberFormDto.setEmail("test@google.com" + i);
+            memberFormDto.setEmail("testtest"+ + i + "@google.com");
             memberFormDto.setName("test name" + i);
             memberFormDto.setPassword("test");
             memberFormDto.setSocialType(SocialType.GOOGLE);
