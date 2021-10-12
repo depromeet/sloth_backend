@@ -2,24 +2,21 @@ package com.sloth.domain.member;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sloth.domain.BaseEntity;
-import com.sloth.domain.EntityCommonMethod;
 import com.sloth.domain.member.constant.Role;
+import com.sloth.domain.member.dto.MemberFormDto;
+import com.sloth.domain.memberToken.MemberToken;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import com.sloth.domain.member.dto.MemberFormDto;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name="member")
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "memberToken")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -51,6 +48,9 @@ public class Member extends BaseEntity {
 
     @JsonIgnore
     private boolean isDelete = false;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private MemberToken memberToken;
 
     public static Member createAdmin(MemberFormDto memberFormDto) {
         return Member.builder()

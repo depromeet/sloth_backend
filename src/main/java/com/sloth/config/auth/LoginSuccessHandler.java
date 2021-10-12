@@ -6,7 +6,6 @@ import com.sloth.domain.member.Member;
 import com.sloth.domain.member.constant.Role;
 import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.memberToken.MemberToken;
-import com.sloth.domain.memberToken.repository.MemberTokenRepository;
 import com.sloth.util.DateTimeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -17,6 +16,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
@@ -24,16 +24,14 @@ import java.util.Collection;
 import java.util.Date;
 
 @Slf4j
+@Transactional
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     private MemberRepository memberRepository;
-    private MemberTokenRepository memberTokenRepository;
     private TokenProvider tokenProvider;
 
-    public LoginSuccessHandler(MemberRepository memberRepository, MemberTokenRepository memberTokenRepository,
-                               TokenProvider tokenProvider) {
+    public LoginSuccessHandler(MemberRepository memberRepository, TokenProvider tokenProvider) {
         this.memberRepository = memberRepository;
-        this.memberTokenRepository = memberTokenRepository;
         this.tokenProvider = tokenProvider;
     }
 
@@ -76,7 +74,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         LocalDateTime tokenExpiredTime = DateTimeUtils.convertToLocalDateTime(refreshTokenExpireTime);
 
         MemberToken memberToken = MemberToken.createMemberToken(member, tokenDto.getRefreshToken(), tokenExpiredTime);
-        memberTokenRepository.save(memberToken);
+        member.setMemberToken(memberToken);
+        memberRepository.save(member);
     }
 
     /**

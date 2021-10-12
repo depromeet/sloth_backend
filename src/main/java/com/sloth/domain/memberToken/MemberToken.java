@@ -11,7 +11,7 @@ import java.time.temporal.ChronoUnit;
 @Entity
 @Table(name="member_token")
 @Getter
-@ToString
+@ToString(exclude = "member")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,7 +26,7 @@ public class MemberToken extends BaseEntity {
 
     private LocalDateTime tokenExpirationTime;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 

@@ -53,14 +53,14 @@ public class EntityManageController {
 
     @PatchMapping("/{entityName}/{id}")
     @ResponseBody
-    public ResponseEntity<?> updateEntity(@PathVariable String entityName, @PathVariable Long id, @RequestBody Map<String, Object> requestMap) {
+    public ResponseEntity<?> updateEntity(@PathVariable String entityName, @PathVariable Long id, @RequestBody Map<String, Object> requestMap) throws Throwable {
         emService.updateEntity(entityName, id, requestMap);
         return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/{entityName}")
     @ResponseBody
-    public ResponseEntity<?> updateEntities(@PathVariable String entityName, @RequestBody Map<String, List<Map<String, Object>>> body) {
+    public ResponseEntity<?> updateEntities(@PathVariable String entityName, @RequestBody Map<String, List<Map<String, Object>>> body) throws Throwable {
 
         List<Map<String, Object>> requestMaps = body.get("requestMaps");
 
