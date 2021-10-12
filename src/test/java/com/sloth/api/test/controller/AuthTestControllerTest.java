@@ -36,7 +36,7 @@ public class AuthTestControllerTest extends BaseApiController {
     @DisplayName("Access Token 없을 경우 401 에러 테스트")
     public void noAccessTokenTest() throws Exception {
         //when
-        ResultActions result = mockMvc.perform(get("/api/test")
+        ResultActions result = mockMvc.perform(get("/api2/test")
                 .accept(MediaType.TEXT_PLAIN_VALUE));
 
         //then
@@ -55,7 +55,7 @@ public class AuthTestControllerTest extends BaseApiController {
         String accessToken = tokenProvider.createAccessToken(email, accessTokenExpireTime);
 
         //when
-        ResultActions result = mockMvc.perform(get("/api/test")
+        ResultActions result = mockMvc.perform(get("/api2/test")
                 .header(HttpHeaders.AUTHORIZATION, accessToken)
                 .accept(MediaType.TEXT_PLAIN_VALUE));
 
@@ -72,7 +72,7 @@ public class AuthTestControllerTest extends BaseApiController {
         String accessToken = "errortoken";
 
         //when
-        ResultActions result = mockMvc.perform(get("/api/test")
+        ResultActions result = mockMvc.perform(get("/api2/test")
                 .header(HttpHeaders.AUTHORIZATION, accessToken)
                 .accept(MediaType.TEXT_PLAIN_VALUE));
 
@@ -90,7 +90,7 @@ public class AuthTestControllerTest extends BaseApiController {
         String accessToken = tokenProvider.createAccessToken(email, accessTokenExpireTime);
 
         //when
-        ResultActions result = mockMvc.perform(get("/api/test")
+        ResultActions result = mockMvc.perform(get("/api2/test")
                 .header(HttpHeaders.AUTHORIZATION, accessToken)
                 .accept(MediaType.TEXT_PLAIN_VALUE));
 
@@ -115,7 +115,7 @@ public class AuthTestControllerTest extends BaseApiController {
                 .willReturn(Optional.ofNullable(memberToken));
 
         //when
-        ResultActions result = mockMvc.perform(get("/api/test")
+        ResultActions result = mockMvc.perform(get("/api2/test")
                 .header(HttpHeaders.AUTHORIZATION, refreshToken)
                 .accept(MediaType.TEXT_PLAIN_VALUE));
 

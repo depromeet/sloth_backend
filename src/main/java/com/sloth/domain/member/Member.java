@@ -1,6 +1,8 @@
 package com.sloth.domain.member;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sloth.api.oauth.dto.SocialType;
+import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.domain.BaseEntity;
 import com.sloth.domain.member.constant.Role;
 import com.sloth.domain.member.dto.MemberFormDto;
@@ -10,6 +12,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 
 @Entity
@@ -29,21 +32,26 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
-    @Column(unique = true)
     @Email
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    SocialType socialType;
 
     @Column
     private String picture;
 
     @JsonIgnore
+    @Column(nullable = false)
     private String password;
 
-    private String address;
-
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Role role;
 
     @JsonIgnore
@@ -56,16 +64,20 @@ public class Member extends BaseEntity {
         return Member.builder()
                 .name(memberFormDto.getName())
                 .email(memberFormDto.getEmail())
-                .address(memberFormDto.getAddress())
+                .socialType(memberFormDto.getSocialType())
                 .password(memberFormDto.getPassword())
-                .role(Role.USER)
+                .role(Role.ADMIN)
                 .build();
     }
 
-    public Member update(String name, String picture) {
-        this.name = name;
-        this.picture = picture;
-        return this;
+    public static Member createOauthMember(OAuthAttributes oAuthAttributes) {
+        return Member.builder()
+                .name(oAuthAttributes.getName())
+                .email(oAuthAttributes.getEmail())
+                .socialType(oAuthAttributes.getSocialType())
+                .password(oAuthAttributes.getPassword())
+                .role(Role.USER)
+                .build();
     }
 
     @JsonIgnore

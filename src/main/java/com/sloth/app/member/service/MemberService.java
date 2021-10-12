@@ -1,5 +1,11 @@
 package com.sloth.app.member.service;
 
+import com.sloth.api.oauth.dto.SocialType;
+import com.sloth.config.auth.dto.OAuthAttributes;
+import com.sloth.config.auth.dto.TokenDto;
+import com.sloth.domain.member.dto.MemberFormDto;
+import com.sloth.domain.memberToken.MemberToken;
+import com.sloth.util.DateTimeUtils;
 import lombok.RequiredArgsConstructor;
 import com.sloth.domain.member.model.SecurityMember;
 import com.sloth.domain.member.Member;
@@ -11,31 +17,45 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MemberService implements UserDetailsService{
+public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public Member saveMember(Member member){
-        validateDuplicateMember(member);
-        return memberRepository.save(member);
-    }
+    public Member saveMember(OAuthAttributes oAuthAttributes, TokenDto tokenDto) {
+        Optional<Member> optionalMember = memberRepository.findByEmail(oAuthAttributes.getEmail());
+        Member member = null;
 
-    private void validateDuplicateMember(Member member){
-        boolean isExistMember = memberRepository.existsByEmail(member.getEmail());
+        if(optionalMember.isEmpty()) {
+            member = Member.createOauthMember(oAuthAttributes);
+            Member savedMember = memberRepository.save(member);
 
-        if(isExistMember){
-            throw new IllegalStateException("이미 가입된 회원입니다.");
+            //리프레시 토큰 저장
+            saveRefreshToken(savedMember, tokenDto);
         }
+
+        return member;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return memberRepository.findByEmail(email)
-                .map(SecurityMember::new)
-                .orElseThrow(() -> new BusinessException("존재하지 않는 계정입니다."));
+    /**
+     * refresh token 저장
+     * @param tokenDto
+     */
+    private void saveRefreshToken(Member member, TokenDto tokenDto) {
+        Date refreshTokenExpireTime = tokenDto.getRefreshTokenExpireTime();
+
+        LocalDateTime tokenExpiredTime = DateTimeUtils.convertToLocalDateTime(refreshTokenExpireTime);
+
+        MemberToken memberToken = MemberToken.createMemberToken(member, tokenDto.getRefreshToken(), tokenExpiredTime);
+        member.setMemberToken(memberToken);
+        memberRepository.save(member);
     }
 
 }
