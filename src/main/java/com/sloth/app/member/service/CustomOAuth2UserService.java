@@ -55,7 +55,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         Member member = null;
         if(optionalMember.isPresent()) {
             member = optionalMember.get();
-            member.update(attributes.getName(), attributes.getPicture());
         } else {
             member = attributes.toEntity();
             memberRepository.save(member);

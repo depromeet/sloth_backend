@@ -1,5 +1,6 @@
 package com.sloth.config;
 
+import com.sloth.api.oauth.dto.SocialType;
 import com.sloth.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import com.sloth.domain.member.Member;
@@ -21,10 +22,10 @@ public class MemberDbInit {
     public void initMember() {
         for (int i = 0; i < 25; i++) {
             MemberFormDto memberFormDto = new MemberFormDto();
-            memberFormDto.setAddress("test address" + i);
-            memberFormDto.setEmail("test@naver.com" + i);
+            memberFormDto.setEmail("test@google.com" + i);
             memberFormDto.setName("test name" + i);
             memberFormDto.setPassword("test");
+            memberFormDto.setSocialType(SocialType.GOOGLE);
             Member member = Member.createAdmin(memberFormDto);
             memberRepository.save(member);
         }
