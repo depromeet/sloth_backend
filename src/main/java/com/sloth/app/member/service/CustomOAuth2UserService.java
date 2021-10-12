@@ -15,7 +15,9 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.text.html.Option;
 import java.util.Collections;
+import java.util.Optional;
 
 /**
  * 구글 로그인 후 가져온 정보를 기반으로 가입 및 정보수정, 세션 저장 등의 기능 지원
@@ -39,7 +41,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         // OAuth2UserService를 통해 가져 온 OAuth2User의 attribute를 담을 클래스이다.
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
-        Member member = saveOrUpdate(attributes);
+        Member member = save(attributes);
         httpSession.setAttribute("user", new SessionUser(member));    //세션에 user 등록
 
         return new DefaultOAuth2User(
@@ -48,11 +50,17 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 attributes.getNameAttributeKey());
     }
 
-    private Member saveOrUpdate(OAuthAttributes attributes) {
-        Member member = memberRepository.findByEmail(attributes.getEmail())
-                .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
-                .orElse(attributes.toEntity());
-        return memberRepository.save(member);
+    private Member save(OAuthAttributes attributes) {
+        Optional<Member> optionalMember = memberRepository.findByEmail(attributes.getEmail());
+        Member member = null;
+        if(optionalMember.isPresent()) {
+            member = optionalMember.get();
+        } else {
+            member = attributes.toEntity();
+            memberRepository.save(member);
+        }
+
+        return member;
     }
 
 }

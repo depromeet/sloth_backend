@@ -1,10 +1,7 @@
 package com.sloth.handler;
 
+import com.sloth.exception.*;
 import lombok.extern.slf4j.Slf4j;
-import com.sloth.exception.BusinessException;
-import com.sloth.exception.EntityNotFoundException;
-import com.sloth.exception.EntityValidException;
-import com.sloth.exception.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -37,7 +34,6 @@ public class GlobalExceptionHandler {
         log.error("handleMethodArgumentNotValidException", e);
         ErrorMessage em = ErrorMessage.builder()
                 .errorMessage(e.getMessage())
-                .status(false)
                 .code(HttpStatus.BAD_REQUEST.value())
                 .referedUrl(request.getRequestURL().toString())
                 .build()
@@ -63,7 +59,6 @@ public class GlobalExceptionHandler {
 
         ErrorMessage em = ErrorMessage.builder()
                 .errorMessage(sb.toString())
-                .status(false)
                 .code(HttpStatus.BAD_REQUEST.value())
                 .referedUrl(request.getRequestURL().toString())
                 .build()
@@ -80,7 +75,6 @@ public class GlobalExceptionHandler {
         log.error("handleMethodArgumentTypeMismatchException", e);
         ErrorMessage em = ErrorMessage.builder()
                 .errorMessage(e.getMessage())
-                .status(false)
                 .code(HttpStatus.BAD_REQUEST.value())
                 .referedUrl(request.getRequestURL().toString())
                 .build()
@@ -96,7 +90,6 @@ public class GlobalExceptionHandler {
         log.error("handleHttpRequestMethodNotSupportedException", e);
         ErrorMessage em = ErrorMessage.builder()
                 .errorMessage(e.getMessage())
-                .status(false)
                 .code(HttpStatus.METHOD_NOT_ALLOWED.value())
                 .referedUrl(request.getRequestURL().toString())
                 .build()
@@ -112,7 +105,6 @@ public class GlobalExceptionHandler {
         log.error("handleAccessDeniedException", e);
         ErrorMessage em = ErrorMessage.builder()
                 .errorMessage(e.getMessage())
-                .status(false)
                 .code(HttpStatus.FORBIDDEN.value())
                 .referedUrl(request.getRequestURL().toString())
                 .build()
@@ -128,7 +120,6 @@ public class GlobalExceptionHandler {
         System.out.println(e.getMessage());
         ErrorMessage em = ErrorMessage.builder()
                 .errorMessage(e.getMessage())
-                .status(false)
                 .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .referedUrl(request.getRequestURL().toString())
                 .build()
@@ -140,15 +131,20 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     @ResponseBody
     protected ResponseEntity<?> handleEntityValidException(EntityValidException e, HttpServletRequest request) {
-        List<String> messages = e.getEntities().stream()
+        List<String> messageList = e.getEntities().stream()
                 .map((entityName) -> entityName + " is required")
                 .collect(Collectors.toList());
 
+        StringBuilder sb = new StringBuilder();
+        for (String message : messageList) {
+            sb.append(message);
+        }
+        String messages = sb.toString();
+
         ErrorMessage em = ErrorMessage.builder()
-                .status(false)
                 .code(HttpStatus.UNPROCESSABLE_ENTITY.value())
                 .referedUrl(request.getRequestURL().toString())
-                .result(messages)
+                .errorMessage(messages)
                 .build();
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(em);
     }
@@ -158,12 +154,23 @@ public class GlobalExceptionHandler {
     @ResponseBody
     protected ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException e, HttpServletRequest request) {
         ErrorMessage em = ErrorMessage.builder()
-                .status(false)
                 .code(HttpStatus.NOT_FOUND.value())
                 .referedUrl(request.getRequestURL().toString())
-                .result(e.getMessage())
+                .errorMessage(e.getMessage())
                 .build();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(em);
+    }
+
+    @ExceptionHandler(MemberTokenNotFoundException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseBody
+    public ResponseEntity<ErrorMessage> memberNotFoundExceptionHandle(MemberTokenNotFoundException e, HttpServletRequest request) {
+        ErrorMessage em = ErrorMessage.builder()
+                .errorMessage(e.getMessage())
+                .code(HttpStatus.FORBIDDEN.value())
+                .referedUrl(request.getRequestURI())
+                .build();
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(em);
     }
 
 }
