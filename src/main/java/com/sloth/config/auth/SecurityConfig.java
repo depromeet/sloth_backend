@@ -23,14 +23,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .csrf().disable().headers().frameOptions().disable() //h2-console 화면을 사용하기 위해서 해당 옵션 disable
-            .and()
+                .csrf().disable().headers().frameOptions().disable() //h2-console 화면을 사용하기 위해서 해당 옵션 disable
+                .and()
                 .authorizeRequests()    //url별 권한 관리를 설정하는 옵션의 시작점
                 .antMatchers("/", "/css/**", "**.html", "/images/**", "/js/**"
-                        , "/assets/**","/h2-console/**", "/profile", "/swagger-ui.html").permitAll()
-                .antMatchers("/members/login").permitAll()
+                        , "/assets/**", "/h2-console/**", "/profile", "/swagger-ui.html").permitAll()
+                .antMatchers("/members/login").permitAll();
                 //.anyRequest().authenticated()
-            .and()
+            /*.and()
                 .oauth2Login().loginPage("/members/login")
             .and()
                 .logout().logoutSuccessUrl("/")
@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .userService(customOAuth2UserService)   //소셜 로그인 성공 후 후속 조치를 조치할 UserService 인터페이스 구현체 등록
                                                             //리소스 서버에서 사용자 정보를 가져온 상태에서 추가로 진행하고자하는 기능 명시 가능
 
-        ;
+        ;*/
     }
 
     @Bean
