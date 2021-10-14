@@ -5,6 +5,7 @@ import com.sloth.domain.member.Member;
 import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.config.auth.dto.SessionUser;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -29,6 +30,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     private final MemberRepository memberRepository;
     private final HttpSession httpSession;
 
+    @Value("${my-pass}")
+    private String pass;
+
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2UserService delegate = new DefaultOAuth2UserService();
@@ -39,7 +43,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 .getUserInfoEndpoint().getUserNameAttributeName();  //로그인 진행 시 키가 되는 필드값. 구글의 기본 코드는 sub임.
 
         // OAuth2UserService를 통해 가져 온 OAuth2User의 attribute를 담을 클래스이다.
-        OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
+        OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes(), pass);
 
         Member member = save(attributes);
         httpSession.setAttribute("user", new SessionUser(member));    //세션에 user 등록
@@ -53,7 +57,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     private Member save(OAuthAttributes attributes) {
         Optional<Member> optionalMember = memberRepository.findByEmail(attributes.getEmail());
         Member member = null;
-        if(optionalMember.isPresent()) {
+        if(!optionalMember.isPresent()) {
             member = optionalMember.get();
         } else {
             member = attributes.toEntity();

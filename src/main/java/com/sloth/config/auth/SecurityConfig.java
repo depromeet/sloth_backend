@@ -28,20 +28,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()    //url별 권한 관리를 설정하는 옵션의 시작점
                 .antMatchers("/", "/css/**", "**.html", "/images/**", "/js/**"
                         , "/assets/**", "/h2-console/**", "/profile", "/swagger-ui.html").permitAll()
-                .antMatchers("/members/login").permitAll();
+                .antMatchers("/members/login").permitAll()
                 //.anyRequest().authenticated()
-            /*.and()
-                .oauth2Login().loginPage("/members/login")
-            .and()
-                .logout().logoutSuccessUrl("/")
-            .and()
-                .oauth2Login()  //oauth2 로그인 기능에 대한 여러 설정의 진입점
-                    .successHandler(new LoginSuccessHandler(memberRepository, tokenProvider))
-                    .userInfoEndpoint() //Oauth2 로그인 성공 후 사용자 정보를 가져올 때의 설정 담당
-                    .userService(customOAuth2UserService)   //소셜 로그인 성공 후 후속 조치를 조치할 UserService 인터페이스 구현체 등록
-                                                            //리소스 서버에서 사용자 정보를 가져온 상태에서 추가로 진행하고자하는 기능 명시 가능
-
-        ;*/
+                .and()
+                    .oauth2Login().loginPage("/members/login")
+                .and()
+                    .logout().logoutSuccessUrl("/")
+                .and()
+                    .oauth2Login()
+                        .userInfoEndpoint() //Oauth2 로그인 성공 후 사용자 정보를 가져올 때의 설정 담당
+                        .userService(customOAuth2UserService)
+                 ;
     }
 
     @Bean
