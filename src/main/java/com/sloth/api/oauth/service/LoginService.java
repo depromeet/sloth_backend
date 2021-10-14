@@ -2,6 +2,7 @@ package com.sloth.api.oauth.service;
 
 import com.nimbusds.openid.connect.sdk.claims.UserInfo;
 import com.sloth.api.oauth.GoogleFeignClient;
+import com.sloth.api.oauth.KakaoFeignClient;
 import com.sloth.api.oauth.dto.*;
 import com.sloth.app.member.service.MemberService;
 import com.sloth.config.auth.TokenProvider;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 
 @Slf4j
 @Service
@@ -24,6 +26,7 @@ public class LoginService {
 
     private final TokenProvider tokenProvider;
     private final GoogleFeignClient googleFeignClient;
+    private final KakaoFeignClient kakaoFeignClient;
     private final ModelMapper modelMapper;
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
@@ -50,8 +53,29 @@ public class LoginService {
                     .socialType(SocialType.GOOGLE)
                     .password(passwordEncoder.encode(pass))
                     .build();
+        } else if (socialType.equals(SocialType.KAKAO)) {
+
+            String contentType = "application/x-www-form-urlencoded;charset=utf-8";
+            KakaoUserInfo kakaoUserInfo = kakaoFeignClient.kakaoLogin(contentType, "Bearer " + accessToken);
+            log.info("kakao email: " + kakaoUserInfo.getKakaoAccount().getEmail());
+            log.info("kakao nickname: " + kakaoUserInfo.getKakaoAccount().getProfile().getNickname());
+
+            oAuthAttributes = OAuthAttributes.builder()
+                    .email(kakaoUserInfo.getKakaoAccount().getEmail())
+                    .name(kakaoUserInfo.getKakaoAccount().getProfile().getNickname())
+                    .socialType(SocialType.KAKAO)
+                    .password(passwordEncoder.encode(pass))
+                    .build();
+        } else if (socialType.equals(SocialType.APPLE)) {
+
+        } else {
+            try {
+                throw new MissingServletRequestParameterException("socialType", "SocialType");
+            } catch (MissingServletRequestParameterException e) {
+                e.printStackTrace();
+            }
         }
-        TokenDto tokenDto = tokenProvider.createTokenDto(oAuthAttributes.getEmail());
+        TokenDto tokenDto = tokenProvider.createTokenDto(oAuthAttributes.getEmail()); //TODO oAuthAttributes null일때 처리
 
         // 회원가입
         Member member = memberService.saveMember(oAuthAttributes, tokenDto);
