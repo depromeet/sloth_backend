@@ -35,17 +35,18 @@ public class OAuthAttributes {
      * @param attributes
      * @return
      */
-    public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
-        return ofGoogle(userNameAttributeName, attributes);
+    public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes, String password) {
+        return ofGoogle(userNameAttributeName, attributes, password);
     }
 
-    private static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes) {
+    private static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes, String password) {
         return OAuthAttributes.builder()
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .socialType(SocialType.GOOGLE)
+                .password(password)
                 .build();
     }
 
@@ -54,6 +55,8 @@ public class OAuthAttributes {
                 .name(name)
                 .email(email)
                 .role(Role.ADMIN)
+                .password(password)
+                .socialType(SocialType.GOOGLE)
                 .build();
     }
 
