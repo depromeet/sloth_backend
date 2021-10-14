@@ -1,4 +1,4 @@
-package com.sloth.api.oauth.dto;
+package com.sloth.api.oauth.google;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.sloth.api.oauth.dto;
+package com.sloth.api.oauth.kakao;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
