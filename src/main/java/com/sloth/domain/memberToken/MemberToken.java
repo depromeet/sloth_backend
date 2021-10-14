@@ -31,11 +31,15 @@ public class MemberToken extends BaseEntity {
     private Member member;
 
     public static MemberToken createMemberToken(Member member, String refreshToken, LocalDateTime tokenExpirationTime){
-        return MemberToken.builder()
+        MemberToken memberToken = MemberToken.builder()
                 .member(member)
                 .refreshToken(refreshToken)
                 .tokenExpirationTime(tokenExpirationTime)
                 .build();
+
+        member.setMemberToken(memberToken);
+
+        return memberToken;
     }
 
     /**

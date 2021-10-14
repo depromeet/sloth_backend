@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sloth.api.oauth.dto.SocialType;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.domain.BaseEntity;
+import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.member.constant.Role;
 import com.sloth.domain.member.dto.MemberFormDto;
 import com.sloth.domain.memberToken.MemberToken;
@@ -14,15 +15,15 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="member")
-@Getter
-@Setter
-@ToString(exclude = "memberToken")
+@Getter @Setter
+@ToString(exclude = {"memberToken","lessons"})
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor @NoArgsConstructor
 @SQLDelete(sql = "UPDATE member SET is_delete = true WHERE member_id=?")
 @Where(clause = "is_delete=false")
 public class Member extends BaseEntity {
@@ -56,6 +57,9 @@ public class Member extends BaseEntity {
 
     @JsonIgnore
     private boolean isDelete = false;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    private List<Lesson> lessons = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private MemberToken memberToken;
