@@ -14,10 +14,6 @@ import javax.validation.constraints.NotBlank;
 @ApiModel(value = "Oauth 로그인 요청 정보", description = "Oauth 로그인을 위한 요청")
 public class OauthRequestDto {
 
-    @ApiModelProperty(value = "access token")
-    @NotBlank(message = "access token은 필수 값 입니다.")
-    private String accessToken;
-
     @ApiModelProperty(value = "소셜 로그인 타입(GOOGLE, KAKAO, APPLE)")
     //@NotBlank(message = "소셜 로그인 타입은 필수 입니다.(GOOGLE, KAKAO, APPLE)")
     @Enumerated(EnumType.STRING)
