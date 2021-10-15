@@ -75,4 +75,25 @@ public class Lesson extends BaseEntity  {
         this.member = member;
         member.getLessons().add(this);
     }
+
+    public void plusPresentNumber() {
+        if (this.isFinished) {
+            return;
+        }
+        this.presentNumber++; // TODO 주차별 진도율 반환
+        checkLessonFinished();
+    }
+
+    private void checkLessonFinished() {
+        if (this.presentNumber == this.totalNumber) {
+            this.isFinished = true;
+        }
+    }
+
+    public void minusPresentNumber() {
+        if (this.presentNumber == 0) {
+            return;
+        }
+        this.presentNumber--;
+    }
 }
