@@ -1,8 +1,7 @@
-package com.sloth.api.oauth.service;
+package com.sloth.api.oauth.kakao;
 
-import com.sloth.api.oauth.KakaoFeignClient;
-import com.sloth.api.oauth.dto.KakaoUserInfo;
 import com.sloth.api.oauth.dto.SocialType;
+import com.sloth.api.oauth.service.SocialApiSerivce;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
