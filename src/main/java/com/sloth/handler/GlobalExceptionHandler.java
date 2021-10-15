@@ -173,4 +173,28 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(em);
     }
 
+    @ExceptionHandler(FeignClientException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ResponseEntity<ErrorMessage> memberNotFoundExceptionHandle(FeignClientException e, HttpServletRequest request) {
+        ErrorMessage em = ErrorMessage.builder()
+                .errorMessage(e.getMessage())
+                .code(e.getStatus())
+                .referedUrl(request.getRequestURI())
+                .build();
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(em);
+    }
+
+    @ExceptionHandler(InvalidParameterException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ResponseEntity<ErrorMessage> invaliParameterExceptionHandle(InvalidParameterException e, HttpServletRequest request) {
+        ErrorMessage em = ErrorMessage.builder()
+                .errorMessage(e.getMessage())
+                .code(HttpStatus.BAD_REQUEST.value())
+                .referedUrl(request.getRequestURI())
+                .build();
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(em);
+    }
+
 }
