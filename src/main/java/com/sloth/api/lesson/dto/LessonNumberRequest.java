@@ -8,4 +8,5 @@ import lombok.Data;
 public class LessonNumberRequest {
 
     private Long id;
+    private int count;
 }

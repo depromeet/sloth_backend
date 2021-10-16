@@ -7,7 +7,10 @@ import com.sloth.domain.site.Site;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Getter
@@ -76,24 +79,25 @@ public class Lesson extends BaseEntity  {
         member.getLessons().add(this);
     }
 
-    public void plusPresentNumber() {
+    public void plusPresentNumber(int count) {
         if (this.isFinished) {
             return;
-        }
-        this.presentNumber++; // TODO 주차별 진도율 반환
-        checkLessonFinished();
-    }
-
-    private void checkLessonFinished() {
-        if (this.presentNumber == this.totalNumber) {
+        } else if (this.presentNumber + count >= this.totalNumber) {
+            this.presentNumber = totalNumber;
             this.isFinished = true;
+        }else {
+            this.presentNumber += count; // TODO 주차별 진도율 반환
         }
     }
 
-    public void minusPresentNumber() {
+    public void minusPresentNumber(int count) {
         if (this.presentNumber == 0) {
             return;
+        } else if (this.presentNumber - count <= 0) {
+            this.presentNumber = 0;
+            this.isFinished = false;
+        }else {
+            this.presentNumber -= count;
         }
-        this.presentNumber--;
     }
 }
