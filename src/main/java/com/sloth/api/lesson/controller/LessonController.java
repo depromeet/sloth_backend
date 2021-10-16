@@ -2,6 +2,7 @@ package com.sloth.api.lesson.controller;
 
 import com.sloth.api.lesson.dto.LessonNumberRequest;
 import com.sloth.api.lesson.dto.LessonNumberResponse;
+import com.sloth.api.lesson.dto.LessonThisWeekResponse;
 import com.sloth.api.site.dto.SiteNameDto;
 import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.lesson.repository.LessonRepository;
@@ -33,7 +34,7 @@ public class LessonController {
     @PostMapping(value = "/lesson/number/plus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LessonNumberResponse> plusPresentNumber(@Valid @RequestBody LessonNumberRequest request) {
         Lesson lesson = lessonRepository.findById(request.getId()).orElseThrow(() -> new LessonNotFoundException("해당 강의는 존재하지 않습니다."));
-        lesson.plusPresentNumber();
+        lesson.plusPresentNumber(request.getCount());
         LessonNumberResponse response = LessonNumberResponse.builder().id(lesson.getId()).presentNumber(lesson.getPresentNumber()).isFinished(lesson.getIsFinished()).build();
         return ResponseEntity.ok(response);
     }
@@ -42,9 +43,10 @@ public class LessonController {
     @PostMapping(value = "/lesson/number/minus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LessonNumberResponse> minusPresentNumber(@Valid @RequestBody LessonNumberRequest request) {
         Lesson lesson = lessonRepository.findById(request.getId()).orElseThrow(() -> new LessonNotFoundException("해당 강의는 존재하지 않습니다."));
-        lesson.minusPresentNumber();
+        lesson.minusPresentNumber(request.getCount());
         LessonNumberResponse response = LessonNumberResponse.builder().id(lesson.getId()).presentNumber(lesson.getPresentNumber()).isFinished(lesson.getIsFinished()).build();
         return ResponseEntity.ok(response);
     }
+
 
 }
