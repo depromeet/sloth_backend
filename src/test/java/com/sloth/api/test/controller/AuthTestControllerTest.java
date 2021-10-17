@@ -3,7 +3,6 @@ package com.sloth.api.test.controller;
 import com.sloth.api.BaseApiController;
 import com.sloth.config.auth.TokenProvider;
 import com.sloth.domain.member.Member;
-import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;
 import org.junit.jupiter.api.DisplayName;
