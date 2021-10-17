@@ -1,15 +1,13 @@
 package com.sloth.domain.category;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @NoArgsConstructor @AllArgsConstructor
+@Builder
 @EqualsAndHashCode(of = "id")
 @Table(name = "category")
 public class Category {
@@ -23,7 +21,7 @@ public class Category {
 
     private int categoryLvl;
 
-    private String rootCategoryId;
+    private Long rootCategoryId;
 
     private String rootCategoryName;
 
