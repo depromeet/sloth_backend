@@ -18,6 +18,14 @@ import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedEntityGraph(name = "Member.withAll", attributeNodes = {
+        @NamedAttributeNode(value = "lessons", subgraph = "lessons")
+},
+        subgraphs = @NamedSubgraph(name = "lessons", attributeNodes = {
+                @NamedAttributeNode("site"),
+                @NamedAttributeNode("category")
+        })
+)
 @Entity
 @Table(name="member")
 @Getter @Setter
@@ -71,6 +79,7 @@ public class Member extends BaseEntity {
                 .socialType(memberFormDto.getSocialType())
                 .password(memberFormDto.getPassword())
                 .role(Role.ADMIN)
+                .lessons(new ArrayList<>())
                 .build();
     }
 
@@ -80,6 +89,7 @@ public class Member extends BaseEntity {
                 .email(oAuthAttributes.getEmail())
                 .socialType(oAuthAttributes.getSocialType())
                 .password(oAuthAttributes.getPassword())
+                .lessons(new ArrayList<>())
                 .role(Role.USER)
                 .build();
     }

@@ -1,14 +1,8 @@
 package com.sloth.api.lesson.controller;
 
-import com.sloth.api.lesson.dto.LessonDetailRequest;
-import com.sloth.api.lesson.dto.LessonDetailResponse;
-import com.sloth.api.lesson.dto.LessonNumberRequest;
-import com.sloth.api.lesson.dto.LessonNumberResponse;
-import com.sloth.api.site.dto.SiteNameDto;
+import com.sloth.api.lesson.dto.*;
 import com.sloth.domain.lesson.Lesson;
-import com.sloth.domain.lesson.repository.LessonRepository;
 import com.sloth.domain.lesson.service.LessonService;
-import com.sloth.exception.LessonNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @Transactional
@@ -35,7 +32,7 @@ public class LessonController {
     public ResponseEntity<LessonNumberResponse> plusPresentNumber(@Valid @RequestBody LessonNumberRequest request) {
         Lesson lesson = lessonService.findLesson(request.getId());
         lesson.plusPresentNumber(request.getCount());
-        LessonNumberResponse response = LessonNumberResponse.createLessonNumberResponse(lesson);
+        LessonNumberResponse response = LessonNumberResponse.create(lesson);
         return ResponseEntity.ok(response);
     }
 
@@ -44,7 +41,7 @@ public class LessonController {
     public ResponseEntity<LessonNumberResponse> minusPresentNumber(@Valid @RequestBody LessonNumberRequest request) {
         Lesson lesson = lessonService.findLesson(request.getId());
         lesson.minusPresentNumber(request.getCount());
-        LessonNumberResponse response = LessonNumberResponse.createLessonNumberResponse(lesson);
+        LessonNumberResponse response = LessonNumberResponse.create(lesson);
         return ResponseEntity.ok(response);
     }
 
@@ -52,9 +49,19 @@ public class LessonController {
     @GetMapping(value = "/lesson/detail", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LessonDetailResponse> getLessonDetail(@Valid @RequestBody LessonDetailRequest request) {
         Lesson lesson = lessonService.findLessonWithSiteCategory(request.getId());
-        LessonDetailResponse lessonDetail = LessonDetailResponse.createLessonDetail(lesson);
+        LessonDetailResponse lessonDetail = LessonDetailResponse.create(lesson);
         return ResponseEntity.ok(lessonDetail);
     }
 
+    @GetMapping("/lesson/doing")
+    public ResponseEntity<List<DoingLessonResponse>> getDoingLesson(DoingLessonRequest request) {
+        List<Lesson> lessons = lessonService.getDoingLessons(request.getMemberId());
+        List<DoingLessonResponse> doingLessonResponses = new ArrayList<>();
+        for (Lesson lesson : lessons) {
+            DoingLessonResponse doingLessonResponse = DoingLessonResponse.create(lesson);
+            doingLessonResponses.add(doingLessonResponse);
+        }
+        return ResponseEntity.ok(doingLessonResponses);
+    }
 
 }

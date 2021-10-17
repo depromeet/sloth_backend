@@ -27,11 +27,11 @@ public class LessonDetailResponse {
     private String message;
     private int wastePrice; // TODO 날린돈 계산
 
-    public static LessonDetailResponse createLessonDetail(Lesson lesson) {
+    public static LessonDetailResponse create(Lesson lesson) {
         return LessonDetailResponse.builder()
                 .id(lesson.getId())
                 .isFinished(lesson.getIsFinished())
-                .restDate(Period.between(lesson.getEndDate(), LocalDate.now()).getDays())
+                .restDate(lesson.getRestDate())
                 .name(lesson.getName())
                 .category(lesson.getCategory().getName())
                 .site(lesson.getSite().getName())

@@ -13,7 +13,7 @@ public class LessonNumberResponse {
     private Boolean isFinished;
     private Boolean weeklyFinished;
 
-    public static LessonNumberResponse createLessonNumberResponse(Lesson lesson) {
+    public static LessonNumberResponse create(Lesson lesson) {
         return LessonNumberResponse.builder()
                 .id(lesson.getId())
                 .presentNumber(lesson.getPresentNumber())
