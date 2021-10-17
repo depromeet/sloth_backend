@@ -1,4 +1,4 @@
-package com.sloth.domain.lesson.service;
+package com.sloth.api.lesson.service;
 
 import com.sloth.app.member.service.MemberService;
 import com.sloth.domain.lesson.Lesson;
@@ -24,7 +24,7 @@ public class LessonService {
     }
 
     public Lesson findLessonWithSiteCategory(Long id) {
-         return lessonRepository.findById(id).orElseThrow(()->{
+         return lessonRepository.findLessonWithSiteCategoryById(id).orElseThrow(()->{
              throw new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다.");
          });
     }
@@ -34,4 +34,15 @@ public class LessonService {
         return lessons.stream().filter(Lesson::isDoingLesson).collect(Collectors.toList()); // TODO 로직 개선 필요할 듯
     }
 
+    public Lesson plusPresentNumber(Long id, int count) {
+        Lesson lesson = findLesson(id);
+        lesson.plusPresentNumber(count);
+        return lesson;
+    }
+
+    public Lesson minusPresentNumber(Long id, int count) {
+        Lesson lesson = findLesson(id);
+        lesson.minusPresentNumber(count);
+        return lesson;
+    }
 }
