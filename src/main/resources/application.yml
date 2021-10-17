@@ -58,6 +58,8 @@ logging:
 server:
   servlet:
     context-path: /
+  error:
+    include-stacktrace: never
 
 restemplate:
   readTimeout: 50000
