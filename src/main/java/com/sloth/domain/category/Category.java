@@ -25,4 +25,10 @@ public class Category {
 
     private String rootCategoryName;
 
+    public Category(String name, int categoryLvl, Long rootCategoryId, String rootCategoryName) {
+        this.name = name;
+        this.categoryLvl = categoryLvl;
+        this.rootCategoryId = rootCategoryId;
+        this.rootCategoryName = rootCategoryName;
+    }
 }
