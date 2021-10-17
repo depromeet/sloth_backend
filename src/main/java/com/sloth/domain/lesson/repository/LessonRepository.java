@@ -16,4 +16,5 @@ public interface LessonRepository extends JpaRepository<Lesson, Long> {
     @EntityGraph(attributePaths = {"site","category"})
     Optional<Lesson> getLessonWithSiteCategoryById(Long id);
 
+    Optional<Lesson> findByName(String name);
 }

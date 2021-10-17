@@ -20,4 +20,8 @@ public class Site {
 
     @Column(nullable = false, length = 100)
     private String name;
+
+    public Site(String name) {
+        this.name = name;
+    }
 }

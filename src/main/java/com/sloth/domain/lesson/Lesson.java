@@ -62,10 +62,11 @@ public class Lesson extends BaseEntity  {
     private Member member;
 
     @Builder
-    public Lesson(Member member, String name, LocalDate startDate, LocalDate endDate, int price, String alertDays) {
+    public Lesson(Member member, String name, LocalDate startDate, LocalDate endDate,int totalNumber, int price, String alertDays) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.totalNumber = totalNumber;
         this.price = price;
         this.alertDays = alertDays;
 
@@ -99,5 +100,13 @@ public class Lesson extends BaseEntity  {
         }else {
             this.presentNumber -= count;
         }
+    }
+
+    public boolean isDoingLesson() {
+        return this.getStartDate().isBefore(LocalDate.now()) && this.getEndDate().isAfter(LocalDate.now());
+    }
+
+    public int getRestDate() {
+        return Period.between(this.getEndDate(), LocalDate.now()).getDays();
     }
 }

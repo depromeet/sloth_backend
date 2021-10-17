@@ -1,23 +1,16 @@
 package com.sloth.app.member.service;
 
-import com.sloth.api.oauth.dto.SocialType;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.config.auth.dto.TokenDto;
-import com.sloth.domain.member.dto.MemberFormDto;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.util.DateTimeUtils;
 import lombok.RequiredArgsConstructor;
-import com.sloth.domain.member.model.SecurityMember;
 import com.sloth.domain.member.Member;
-import com.sloth.exception.BusinessException;
 import com.sloth.domain.member.repository.MemberRepository;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
@@ -56,6 +49,12 @@ public class MemberService {
         MemberToken memberToken = MemberToken.createMemberToken(member, tokenDto.getRefreshToken(), tokenExpiredTime);
         member.setMemberToken(memberToken);
         memberRepository.save(member);
+    }
+
+    public Member findMemberWithAll(Long id) {
+        return memberRepository.findWithAllById(id).orElseThrow(() -> {
+            throw new UsernameNotFoundException("해당 회원을 찾을 수 없습니다.");
+        });
     }
 
 }
