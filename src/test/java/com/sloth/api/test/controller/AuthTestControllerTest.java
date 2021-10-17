@@ -25,9 +25,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class AuthTestControllerTest extends BaseApiController {
 
-    @Autowired
-    private TokenProvider tokenProvider;
-
     @MockBean
     private MemberTokenRepository memberTokenRepository;
 
