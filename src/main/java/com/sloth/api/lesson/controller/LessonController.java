@@ -1,12 +1,19 @@
 package com.sloth.api.lesson.controller;
 
+import com.sloth.api.category.dto.ResponseCategoryDto;
+import com.sloth.api.category.service.ApiCategoryService;
 import com.sloth.api.lesson.dto.*;
+import com.sloth.api.lesson.service.ApiLessionService;
 import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.lesson.service.LessonService;
+import feign.Request;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +33,7 @@ public class LessonController {
 
     private final ModelMapper modelMapper;
     private final LessonService lessonService;
+    private final ApiLessionService apiLessonService;
 
     @Operation(summary = "Plus lesson number api", description = "들은 강의 수 추가 api")
     @PostMapping(value = "/lesson/number/plus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -62,6 +70,13 @@ public class LessonController {
             doingLessonResponses.add(doingLessonResponse);
         }
         return ResponseEntity.ok(doingLessonResponses);
+    }
+
+    @Operation(summary = "LESSON API", description = "인터넷강의 생성 API")
+    @PostMapping("/lesson")
+    public ResponseEntity<RequestLessonDto> saveLesson(@RequestBody RequestLessonDto requestDto) {
+        apiLessonService.save(requestDto);
+        return new ResponseEntity<RequestLessonDto>(requestDto, HttpStatus.CREATED);
     }
 
 }
