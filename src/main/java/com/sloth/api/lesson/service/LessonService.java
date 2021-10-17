@@ -24,7 +24,7 @@ public class LessonService {
     }
 
     public Lesson findLessonWithSiteCategory(Long id) {
-         return lessonRepository.findById(id).orElseThrow(()->{
+         return lessonRepository.findLessonWithSiteCategoryById(id).orElseThrow(()->{
              throw new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다.");
          });
     }

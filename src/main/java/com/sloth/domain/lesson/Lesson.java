@@ -62,13 +62,16 @@ public class Lesson extends BaseEntity  {
     private Member member;
 
     @Builder
-    public Lesson(Member member, String name, LocalDate startDate, LocalDate endDate,int totalNumber, int price, String alertDays) {
+    public Lesson(Member member, String name, LocalDate startDate, LocalDate endDate,int totalNumber,
+                  int price, String alertDays, Site site, Category category) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.totalNumber = totalNumber;
         this.price = price;
         this.alertDays = alertDays;
+        this.site = site;
+        this.category = category;
 
         this.isFinished = false;
 
