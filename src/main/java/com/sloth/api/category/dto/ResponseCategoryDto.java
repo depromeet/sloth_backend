@@ -12,6 +12,6 @@ public class ResponseCategoryDto {
 
     private Long categoryId;
 
-    private String categroyName;
+    private String categoryName;
 
 }

@@ -73,8 +73,8 @@ public class LessonController {
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
     @PatchMapping("/{lessonId}")
-    public ResponseEntity<LessonUpdateDto.ResponseLessonUpdateDto> updateLesson(@PathVariable("lessonId") Long lessonId,
-                                                                                @Valid @RequestBody LessonUpdateDto.RequestLessonUpateDto lessonUpdateDto,
+    public ResponseEntity<LessonUpdateDto.Response> updateLesson(@PathVariable("lessonId") Long lessonId,
+                                                                                @Valid @RequestBody LessonUpdateDto.Request lessonUpdateDto,
                                                                                 BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
@@ -87,7 +87,7 @@ public class LessonController {
             throw new InvalidParameterException(sb.toString());
         }
 
-        LessonUpdateDto.ResponseLessonUpdateDto responseLessonUpdateDto = LessonUpdateDto.ResponseLessonUpdateDto.builder()
+        LessonUpdateDto.Response responseLessonUpdateDto = LessonUpdateDto.Response.builder()
                 .lessonId(lessonId)
                 .lessonName(lessonUpdateDto.getLessonName())
                 .totalNumber(lessonUpdateDto.getTotalNumber())
@@ -103,13 +103,13 @@ public class LessonController {
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
     @GetMapping("/list")
-    public ResponseEntity<List<ResponseMainLessonDto>> getLessonList() {
+    public ResponseEntity<List<MainLessonDto.Response>> getLessonList() {
 
-        List<ResponseMainLessonDto> responseMainLessonDtos = new ArrayList<>();
+        List<MainLessonDto.Response> mainLessonDtos = new ArrayList<>();
 
 
         // 1. 진행중인 강의
-        ResponseMainLessonDto currentLesson1 = ResponseMainLessonDto.builder()
+        MainLessonDto.Response currentLesson1 = MainLessonDto.Response.builder()
                 .lessonId(10L)
                 .type(LessonType.CURRENT.name())
                 .remainDay(10)
@@ -124,7 +124,7 @@ public class LessonController {
                 .totalNumber(15)
                 .build();
 
-        ResponseMainLessonDto currentLesson2 = ResponseMainLessonDto.builder()
+        MainLessonDto.Response currentLesson2 = MainLessonDto.Response.builder()
                 .lessonId(10L)
                 .type(LessonType.CURRENT.name())
                 .remainDay(10)
@@ -139,7 +139,7 @@ public class LessonController {
                 .totalNumber(13)
                 .build();
 
-        ResponseMainLessonDto currentLesson3 = ResponseMainLessonDto.builder()
+        MainLessonDto.Response currentLesson3 = MainLessonDto.Response.builder()
                 .lessonId(10L)
                 .type(LessonType.CURRENT.name())
                 .remainDay(10)
@@ -154,12 +154,12 @@ public class LessonController {
                 .totalNumber(13)
                 .build();
 
-        responseMainLessonDtos.add(currentLesson1);
-        responseMainLessonDtos.add(currentLesson2);
-        responseMainLessonDtos.add(currentLesson3);
+        mainLessonDtos.add(currentLesson1);
+        mainLessonDtos.add(currentLesson2);
+        mainLessonDtos.add(currentLesson3);
 
         // 2. 완료한 강의
-        ResponseMainLessonDto finishedLesson1 = ResponseMainLessonDto.builder()
+        MainLessonDto.Response finishedLesson1 = MainLessonDto.Response.builder()
                 .lessonId(10L)
                 .type(LessonType.FINISH.name())
                 .remainDay(0)
@@ -175,7 +175,7 @@ public class LessonController {
                 .isSuccess(true)
                 .build();
 
-        ResponseMainLessonDto finishedLesson2 =ResponseMainLessonDto.builder()
+        MainLessonDto.Response finishedLesson2 =MainLessonDto.Response.builder()
                 .lessonId(11L)
                 .type(LessonType.FINISH.name())
                 .remainDay(0)
@@ -191,7 +191,7 @@ public class LessonController {
                 .isSuccess(true)
                 .build();
 
-        ResponseMainLessonDto finishedLesson3 =ResponseMainLessonDto.builder()
+        MainLessonDto.Response finishedLesson3 =MainLessonDto.Response.builder()
                 .lessonId(11L)
                 .type(LessonType.FINISH.name())
                 .remainDay(0)
@@ -207,11 +207,11 @@ public class LessonController {
                 .isSuccess(false)
                 .build();
 
-        responseMainLessonDtos.add(finishedLesson1);
-        responseMainLessonDtos.add(finishedLesson2);
-        responseMainLessonDtos.add(finishedLesson3);
+        mainLessonDtos.add(finishedLesson1);
+        mainLessonDtos.add(finishedLesson2);
+        mainLessonDtos.add(finishedLesson3);
 
-        return ResponseEntity.ok(responseMainLessonDtos);
+        return ResponseEntity.ok(mainLessonDtos);
     }
 
 }

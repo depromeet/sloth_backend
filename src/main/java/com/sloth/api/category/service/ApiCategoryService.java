@@ -23,7 +23,7 @@ public class ApiCategoryService {
 
         List<ResponseCategoryDto> categoryDtos = categorys.stream().map(category -> ResponseCategoryDto.builder()
                 .categoryId(category.getId())
-                .categroyName(category.getName())
+                .categoryName(category.getName())
                 .build()
         ).collect(Collectors.toList());
 
