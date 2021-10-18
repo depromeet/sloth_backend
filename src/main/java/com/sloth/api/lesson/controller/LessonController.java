@@ -1,12 +1,11 @@
 package com.sloth.api.lesson.controller;
 
 import com.sloth.api.lesson.dto.*;
-import com.sloth.api.lesson.service.LessionService;
+import com.sloth.api.lesson.service.LessonService;
 import com.sloth.domain.lesson.Lesson;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +23,7 @@ import java.util.List;
 @Slf4j
 public class LessonController {
 
-    private final ModelMapper modelMapper;
-    private final LessionService lessonService;
+    private final LessonService lessonService;
 
     @Operation(summary = "Plus lesson number api", description = "들은 강의 수 추가 api")
     @PostMapping(value = "/number/plus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -62,10 +60,10 @@ public class LessonController {
         return ResponseEntity.ok(doingLessonResponses);
     }
 
-    @Operation(summary = "LESSON API", description = "인터넷강의 생성 API")
+    @Operation(summary = "강의 생성 API", description = "강의 생성 API")
     @PostMapping
-    public ResponseEntity<RequestLessonDto> saveLesson(@RequestBody RequestLessonDto requestDto) {
-        lessonService.save(requestDto);
+    public ResponseEntity<RequestLessonDto> saveLesson(RequestLessonDto requestDto) {
+        lessonService.saveLesson(requestDto);
         return new ResponseEntity<RequestLessonDto>(requestDto, HttpStatus.CREATED);
     }
 

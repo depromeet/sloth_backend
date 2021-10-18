@@ -3,6 +3,7 @@ package com.sloth.app.member.service;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.config.auth.dto.TokenDto;
 import com.sloth.domain.memberToken.MemberToken;
+import com.sloth.exception.BusinessException;
 import com.sloth.util.DateTimeUtils;
 import lombok.RequiredArgsConstructor;
 import com.sloth.domain.member.Member;
@@ -55,6 +56,11 @@ public class MemberService {
         return memberRepository.findWithAllById(id).orElseThrow(() -> {
             throw new UsernameNotFoundException("해당 회원을 찾을 수 없습니다.");
         });
+    }
+
+    public Member findMember(Long id) {
+        return memberRepository.findById(id)
+                .orElseThrow(()-> new UsernameNotFoundException("해당 회원을 찾을 수 없습니다."));
     }
 
 }
