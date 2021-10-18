@@ -26,7 +26,7 @@ import java.util.List;
 
 @RestController
 @Transactional
-@RequestMapping("/api")
+@RequestMapping("/api/lesson")
 @RequiredArgsConstructor
 @Slf4j
 public class LessonController {
@@ -36,7 +36,7 @@ public class LessonController {
     private final ApiLessionService apiLessonService;
 
     @Operation(summary = "Plus lesson number api", description = "들은 강의 수 추가 api")
-    @PostMapping(value = "/lesson/number/plus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/number/plus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LessonNumberResponse> plusPresentNumber(@Valid @RequestBody LessonNumberRequest request) {
         Lesson lesson = lessonService.findLesson(request.getId());
         lesson.plusPresentNumber(request.getCount());
@@ -45,7 +45,7 @@ public class LessonController {
     }
 
     @Operation(summary = "Minus lesson number api", description = "들은 강의 수 감소 api")
-    @PostMapping(value = "/lesson/number/minus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/number/minus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LessonNumberResponse> minusPresentNumber(@Valid @RequestBody LessonNumberRequest request) {
         Lesson lesson = lessonService.findLesson(request.getId());
         lesson.minusPresentNumber(request.getCount());
@@ -54,14 +54,14 @@ public class LessonController {
     }
 
     @Operation(summary = "Get lesson detail", description = "강의 상세 조회 api")
-    @GetMapping(value = "/lesson/detail", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/detail", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LessonDetailResponse> getLessonDetail(@Valid @RequestBody LessonDetailRequest request) {
         Lesson lesson = lessonService.findLessonWithSiteCategory(request.getId());
         LessonDetailResponse lessonDetail = LessonDetailResponse.create(lesson);
         return ResponseEntity.ok(lessonDetail);
     }
 
-    @GetMapping("/lesson/doing")
+    @GetMapping("/doing")
     public ResponseEntity<List<DoingLessonResponse>> getDoingLesson(DoingLessonRequest request) {
         List<Lesson> lessons = lessonService.getDoingLessons(request.getMemberId());
         List<DoingLessonResponse> doingLessonResponses = new ArrayList<>();
@@ -73,7 +73,7 @@ public class LessonController {
     }
 
     @Operation(summary = "LESSON API", description = "인터넷강의 생성 API")
-    @PostMapping("/lesson")
+    @PostMapping
     public ResponseEntity<RequestLessonDto> saveLesson(@RequestBody RequestLessonDto requestDto) {
         apiLessonService.save(requestDto);
         return new ResponseEntity<RequestLessonDto>(requestDto, HttpStatus.CREATED);
