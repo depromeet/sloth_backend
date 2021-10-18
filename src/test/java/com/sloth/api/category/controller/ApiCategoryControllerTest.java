@@ -24,7 +24,7 @@ public class ApiCategoryControllerTest extends BaseApiController {
     @MockBean
     private CategoryRepository categoryRepository;
 
-    private List<Category> getCaegorys() {
+    private List<Category> createCategorys() {
         List<Category> categoryDtos = new ArrayList<>();
         Category category1 = Category.builder()
                 .id(1L)
@@ -55,7 +55,7 @@ public class ApiCategoryControllerTest extends BaseApiController {
     public void getCategorys() throws Exception {
 
         //given
-        List<Category> categoryDtos = getCaegorys();
+        List<Category> categoryDtos = createCategorys();
         Category category1 = categoryDtos.get(0);
         Category category2 = categoryDtos.get(1);
 
