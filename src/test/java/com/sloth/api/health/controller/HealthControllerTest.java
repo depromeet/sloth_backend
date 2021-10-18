@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-class HealthControllerTest extends BaseApiController {
+public class HealthControllerTest extends BaseApiController {
 
     @Test
     @DisplayName("profile api 테스트")

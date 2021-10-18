@@ -42,7 +42,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor())
                 .order(1)
-                .addPathPatterns("/api/**", "/api2/**")
+                .addPathPatterns("/api/**","/api2/**")
                 .excludePathPatterns("/api/health", "/api/profile", "/api/oauth/login");
     }
 
@@ -55,6 +55,7 @@ public class WebConfig implements WebMvcConfigurer {
                         HttpMethod.HEAD.name(),
                         HttpMethod.POST.name(),
                         HttpMethod.PUT.name(),
+                        HttpMethod.PATCH.name(),
                         HttpMethod.DELETE.name()
                 );
     }

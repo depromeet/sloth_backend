@@ -55,8 +55,10 @@ dependencies {
     implementation group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '3.0.3'
     implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.68'
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
     compile('org.springframework.cloud:spring-cloud-starter-openfeign')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4')
     compile group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '2.4.1'
     compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
@@ -71,6 +73,9 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'

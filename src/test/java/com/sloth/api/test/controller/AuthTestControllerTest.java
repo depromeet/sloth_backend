@@ -3,7 +3,6 @@ package com.sloth.api.test.controller;
 import com.sloth.api.BaseApiController;
 import com.sloth.config.auth.TokenProvider;
 import com.sloth.domain.member.Member;
-import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -25,9 +24,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class AuthTestControllerTest extends BaseApiController {
-
-    @Autowired
-    private TokenProvider tokenProvider;
 
     @MockBean
     private MemberTokenRepository memberTokenRepository;

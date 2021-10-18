@@ -18,7 +18,7 @@ public class MemberDbInit {
     /**
      * 테스트 멤버 세팅
      */
-    @PostConstruct
+    //@PostConstruct
     public void initMember() {
         for (int i = 0; i < 25; i++) {
             MemberFormDto memberFormDto = new MemberFormDto();

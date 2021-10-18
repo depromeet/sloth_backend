@@ -18,7 +18,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql : true
@@ -58,6 +58,8 @@ logging:
 server:
   servlet:
     context-path: /
+  error:
+    include-stacktrace: never
 
 restemplate:
   readTimeout: 50000

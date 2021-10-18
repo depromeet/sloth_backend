@@ -1,11 +1,15 @@
 package com.sloth.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sloth.config.auth.TokenProvider;
+import org.junit.jupiter.api.BeforeEach;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.Date;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -15,9 +19,21 @@ public class BaseApiController {
     protected MockMvc mockMvc;
 
     @Autowired
-    public ModelMapper modelMapper;
+    protected ModelMapper modelMapper;
 
     @Autowired
-    public ObjectMapper objectMapper;
+    protected ObjectMapper objectMapper;
+
+    @Autowired
+    protected TokenProvider tokenProvider;
+
+    protected String accessToken;
+
+    @BeforeEach
+    void init() {
+        String email = "test@gmail.com";
+        Date accessTokenExpireTime = tokenProvider.createAccessTokenExpireTime();
+        accessToken = tokenProvider.createAccessToken(email, accessTokenExpireTime);
+    }
 
 }

@@ -35,3 +35,4 @@ out/
 
 ### VS Code ###
 .vscode/
+src/main/java/com/sloth/api/oauth/controller/OAuthController.java
