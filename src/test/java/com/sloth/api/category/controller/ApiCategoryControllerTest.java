@@ -71,9 +71,9 @@ public class ApiCategoryControllerTest extends BaseApiController {
         result.andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(jsonPath("$[0]").exists())
                 .andExpect(jsonPath("$[1]").exists())
-                .andExpect(jsonPath("$[0].categroyName").value(equalTo(category1.getName())))
+                .andExpect(jsonPath("$[0].categoryName").value(equalTo(category1.getName())))
                 .andExpect(jsonPath("$[0].categoryId").value(equalTo(1)))
-                .andExpect(jsonPath("$[1].categroyName").value(equalTo(category2.getName())))
+                .andExpect(jsonPath("$[1].categoryName").value(equalTo(category2.getName())))
                 .andExpect(jsonPath("$[1].categoryId").value(equalTo(2)))
         ;
     }
