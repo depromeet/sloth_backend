@@ -1,15 +1,8 @@
 package com.sloth.api.lesson.controller;
 
-import com.sloth.api.category.dto.ResponseCategoryDto;
-import com.sloth.api.category.service.ApiCategoryService;
 import com.sloth.api.lesson.dto.*;
 import com.sloth.api.lesson.service.ApiLessionService;
 import com.sloth.domain.lesson.Lesson;
-import com.sloth.domain.lesson.service.LessonService;
-import feign.Request;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import com.sloth.api.lesson.service.LessonService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
