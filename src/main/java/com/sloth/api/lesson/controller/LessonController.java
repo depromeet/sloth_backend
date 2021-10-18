@@ -8,8 +8,6 @@ import com.sloth.exception.InvalidParameterException;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 
-import com.sloth.api.lesson.service.ApiLessionService;
-
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -61,7 +59,7 @@ public class LessonController {
 
     @GetMapping("/doing")
     public ResponseEntity<List<DoingLessonResponse>> getDoingLesson(@Valid @RequestBody DoingLessonRequest request) {
-        List<Lesson> lessons = apiLessonService.getDoingLessons(request.getMemberId());
+        List<Lesson> lessons = lessonService.getDoingLessons(request.getMemberId());
         List<DoingLessonResponse> doingLessonResponses = new ArrayList<>();
         for (Lesson lesson : lessons) {
             DoingLessonResponse doingLessonResponse = DoingLessonResponse.create(lesson);
