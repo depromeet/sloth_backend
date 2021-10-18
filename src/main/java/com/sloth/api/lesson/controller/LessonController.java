@@ -1,14 +1,9 @@
 package com.sloth.api.lesson.controller;
 
-import com.sloth.api.category.dto.ResponseCategoryDto;
-import com.sloth.api.category.service.ApiCategoryService;
 import com.sloth.api.lesson.dto.*;
 import com.sloth.api.lesson.service.ApiLessionService;
 import com.sloth.domain.lesson.Lesson;
-import com.sloth.domain.lesson.service.LessonService;
-import feign.Request;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
+import com.sloth.api.lesson.service.LessonService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,8 +32,7 @@ public class LessonController {
     @Operation(summary = "Plus lesson number api", description = "들은 강의 수 추가 api")
     @PostMapping(value = "/number/plus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LessonNumberResponse> plusPresentNumber(@Valid @RequestBody LessonNumberRequest request) {
-        Lesson lesson = lessonService.findLesson(request.getId());
-        lesson.plusPresentNumber(request.getCount());
+        Lesson lesson =lessonService.plusPresentNumber(request.getId(), request.getCount());
         LessonNumberResponse response = LessonNumberResponse.create(lesson);
         return ResponseEntity.ok(response);
     }
@@ -47,8 +40,7 @@ public class LessonController {
     @Operation(summary = "Minus lesson number api", description = "들은 강의 수 감소 api")
     @PostMapping(value = "/number/minus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LessonNumberResponse> minusPresentNumber(@Valid @RequestBody LessonNumberRequest request) {
-        Lesson lesson = lessonService.findLesson(request.getId());
-        lesson.minusPresentNumber(request.getCount());
+        Lesson lesson = lessonService.minusPresentNumber(request.getId(), request.getCount());
         LessonNumberResponse response = LessonNumberResponse.create(lesson);
         return ResponseEntity.ok(response);
     }
