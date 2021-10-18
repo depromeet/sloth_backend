@@ -2,15 +2,20 @@ package com.sloth.api.lesson.controller;
 
 import com.sloth.api.lesson.constant.LessonType;
 import com.sloth.api.lesson.dto.*;
+
 import com.sloth.api.lesson.service.LessonService;
 import com.sloth.domain.lesson.Lesson;
 import com.sloth.exception.InvalidParameterException;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+
+import com.sloth.api.lesson.service.ApiLessionService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,12 +36,12 @@ import java.util.List;
 public class LessonController {
 
     private final ModelMapper modelMapper;
-    private final LessonService lessonService;
+    private final ApiLessionService apiLessonService;
 
     @Operation(summary = "Plus lesson number api", description = "들은 강의 수 추가 api")
     @PatchMapping(value = "/number/plus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LessonNumberResponse> plusPresentNumber(@Valid @RequestBody LessonNumberRequest request) {
-        Lesson lesson =lessonService.plusPresentNumber(request.getId(), request.getCount());
+        Lesson lesson =apiLessonService.plusPresentNumber(request.getId(), request.getCount());
         LessonNumberResponse response = LessonNumberResponse.create(lesson);
         return ResponseEntity.ok(response);
     }
@@ -44,7 +49,7 @@ public class LessonController {
     @Operation(summary = "Minus lesson number api", description = "들은 강의 수 감소 api")
     @PatchMapping(value = "/number/minus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LessonNumberResponse> minusPresentNumber(@Valid @RequestBody LessonNumberRequest request) {
-        Lesson lesson = lessonService.minusPresentNumber(request.getId(), request.getCount());
+        Lesson lesson = apiLessonService.minusPresentNumber(request.getId(), request.getCount());
         LessonNumberResponse response = LessonNumberResponse.create(lesson);
         return ResponseEntity.ok(response);
     }
@@ -52,7 +57,7 @@ public class LessonController {
     @Operation(summary = "Get lesson detail", description = "강의 상세 조회 api")
     @GetMapping(value = "/detail", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LessonDetailResponse> getLessonDetail(@Valid @RequestBody LessonDetailRequest request) {
-        Lesson lesson = lessonService.findLessonWithSiteCategory(request.getId());
+        Lesson lesson = apiLessonService.findLessonWithSiteCategory(request.getId());
         LessonDetailResponse lessonDetail = LessonDetailResponse.create(lesson);
         return ResponseEntity.ok(lessonDetail);
     }
@@ -212,6 +217,13 @@ public class LessonController {
         mainLessonDtos.add(finishedLesson3);
 
         return ResponseEntity.ok(mainLessonDtos);
+    }
+  
+    @Operation(summary = "LESSON API", description = "인터넷강의 생성 API")
+    @PostMapping
+    public ResponseEntity<RequestLessonDto> saveLesson(@RequestBody RequestLessonDto requestDto) {
+        apiLessonService.save(requestDto);
+        return new ResponseEntity<RequestLessonDto>(requestDto, HttpStatus.CREATED);
     }
 
 }

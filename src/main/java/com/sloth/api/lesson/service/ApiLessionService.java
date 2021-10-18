@@ -1,22 +1,23 @@
 package com.sloth.api.lesson.service;
 
+import com.sloth.api.lesson.dto.RequestLessonDto;
 import com.sloth.app.member.service.MemberService;
 import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.lesson.repository.LessonRepository;
 import com.sloth.exception.LessonNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
-@Transactional
 @RequiredArgsConstructor
-public class LessonService {
+@Service
+public class ApiLessionService {
 
     private final LessonRepository lessonRepository;
+
     private final MemberService memberService;
 
     public Lesson findLesson(Long id) {
@@ -24,9 +25,9 @@ public class LessonService {
     }
 
     public Lesson findLessonWithSiteCategory(Long id) {
-         return lessonRepository.findLessonWithSiteCategoryById(id).orElseThrow(()->{
-             throw new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다.");
-         });
+        return lessonRepository.findLessonWithSiteCategoryById(id).orElseThrow(()->{
+            throw new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다.");
+        });
     }
 
     public List<Lesson> getDoingLessons(Long memberId) {
@@ -44,5 +45,10 @@ public class LessonService {
         Lesson lesson = findLesson(id);
         lesson.minusPresentNumber(count);
         return lesson;
+    }
+
+    @Transactional
+    public Long save(RequestLessonDto requestDto) {
+        return lessonRepository.save(requestDto.toEntity()).getId();
     }
 }
