@@ -3,7 +3,6 @@ package com.sloth.api.lesson.controller;
 import com.sloth.api.lesson.constant.LessonType;
 import com.sloth.api.lesson.dto.*;
 
-import com.sloth.api.lesson.service.LessonService;
 import com.sloth.domain.lesson.Lesson;
 import com.sloth.exception.InvalidParameterException;
 import io.swagger.annotations.ApiImplicitParam;
@@ -64,7 +63,7 @@ public class LessonController {
 
     @GetMapping("/doing")
     public ResponseEntity<List<DoingLessonResponse>> getDoingLesson(@Valid @RequestBody DoingLessonRequest request) {
-        List<Lesson> lessons = lessonService.getDoingLessons(request.getMemberId());
+        List<Lesson> lessons = apiLessonService.getDoingLessons(request.getMemberId());
         List<DoingLessonResponse> doingLessonResponses = new ArrayList<>();
         for (Lesson lesson : lessons) {
             DoingLessonResponse doingLessonResponse = DoingLessonResponse.create(lesson);
