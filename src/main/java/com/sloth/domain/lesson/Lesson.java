@@ -75,7 +75,7 @@ public class Lesson extends BaseEntity  {
 
         this.isFinished = false;
 
-        connectMember(member);
+        //connectMember(member);
     }
 
     private void connectMember(Member member) {

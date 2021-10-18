@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class ApiLessionService {
+public class LessionService {
 
     private final LessonRepository lessonRepository;
 
