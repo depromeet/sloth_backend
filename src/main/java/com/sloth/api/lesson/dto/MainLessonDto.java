@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import java.time.LocalDate;
+
 
 @ApiModel(value = "강의 목록 조회 API 반환 객체", description = "강의 목록 조회 API 반환 객체")
 public class MainLessonDto {
@@ -52,6 +54,24 @@ public class MainLessonDto {
 
         @ApiModelProperty(value = "강의 완강 성공 여부")
         private Boolean isSuccess;
+    }
+
+    @Getter
+    @NoArgsConstructor
+    @ApiModel(value = "강의 생성 요청 객체", description = "강의 생성 요청 객체")
+    public static class Request {
+
+        private String name;
+        private LocalDate startDate;
+        private LocalDate endDate;
+        private int price;
+        private String alertDays;
+        private Boolean isFinished;
+        private int totalNumber;
+        private Long memberId;
+        private Long siteId;
+        private Long categoryId;
+
     }
 
 }

@@ -34,35 +34,47 @@ public class LessonController {
     private final LessonService lessonService;
 
     @Operation(summary = "Plus lesson number api", description = "들은 강의 수 추가 api")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
+    })
     @PatchMapping(value = "/number/plus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<LessonNumberResponse> plusPresentNumber(@Valid @RequestBody LessonNumberRequest request) {
+    public ResponseEntity<LessonNumberDto.Response> plusPresentNumber(@Valid @RequestBody LessonNumberDto.Request request) {
         Lesson lesson = lessonService.plusPresentNumber(request.getId(), request.getCount());
-        LessonNumberResponse response = LessonNumberResponse.create(lesson);
+        LessonNumberDto.Response response = LessonNumberDto.Response.create(lesson);
         return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "Minus lesson number api", description = "들은 강의 수 감소 api")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
+    })
     @PatchMapping(value = "/number/minus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<LessonNumberResponse> minusPresentNumber(@Valid @RequestBody LessonNumberRequest request) {
+    public ResponseEntity<LessonNumberDto.Response> minusPresentNumber(@Valid @RequestBody LessonNumberDto.Request request) {
         Lesson lesson = lessonService.minusPresentNumber(request.getId(), request.getCount());
-        LessonNumberResponse response = LessonNumberResponse.create(lesson);
+        LessonNumberDto.Response response = LessonNumberDto.Response.create(lesson);
         return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "Get lesson detail", description = "강의 상세 조회 api")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
+    })
     @GetMapping(value = "/detail", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<LessonDetailResponse> getLessonDetail(@Valid @RequestBody LessonDetailRequest request) {
-        Lesson lesson = lessonService.findLessonWithSiteCategory(request.getId());
-        LessonDetailResponse lessonDetail = LessonDetailResponse.create(lesson);
+    public ResponseEntity<LessonDetailDto.Response> getLessonDetail(@Valid @RequestBody LessonDetailDto.Request request) {
+        Lesson lesson = lessonService.findLessonWithSiteCategory(request.getLessonDetailId());
+        LessonDetailDto.Response lessonDetail = LessonDetailDto.Response.create(lesson);
         return ResponseEntity.ok(lessonDetail);
     }
 
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
+    })
     @GetMapping("/doing")
-    public ResponseEntity<List<DoingLessonResponse>> getDoingLesson(@Valid @RequestBody DoingLessonRequest request) {
+    public ResponseEntity<List<DoingLessonDto.Response>> getDoingLesson(@Valid @RequestBody DoingLessonDto.Request request) {
         List<Lesson> lessons = lessonService.getDoingLessons(request.getMemberId());
-        List<DoingLessonResponse> doingLessonResponses = new ArrayList<>();
+        List<DoingLessonDto.Response> doingLessonResponses = new ArrayList<>();
         for (Lesson lesson : lessons) {
-            DoingLessonResponse doingLessonResponse = DoingLessonResponse.create(lesson);
+            DoingLessonDto.Response doingLessonResponse = DoingLessonDto.Response.create(lesson);
             doingLessonResponses.add(doingLessonResponse);
         }
         return ResponseEntity.ok(doingLessonResponses);
@@ -100,9 +112,6 @@ public class LessonController {
     }
 
     @Operation(summary = "강의 목록 조회 API", description = "강의 목록 리스트 조회 API")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
-    })
     @GetMapping("/list")
     public ResponseEntity<List<MainLessonDto.Response>> getLessonList() {
 
@@ -217,9 +226,9 @@ public class LessonController {
   
     @Operation(summary = "강의 생성 API", description = "강의 생성 API")
     @PostMapping
-    public ResponseEntity<RequestLessonDto> saveLesson(RequestLessonDto requestDto) {
-        lessonService.saveLesson(requestDto);
-        return new ResponseEntity<RequestLessonDto>(requestDto, HttpStatus.CREATED);
+    public ResponseEntity<Long> saveLesson(@RequestBody MainLessonDto.Request requestDto) {
+        Long lessonId = lessonService.saveLesson(requestDto);
+        return new ResponseEntity<Long>(lessonId, HttpStatus.CREATED);
     }
 
 }
