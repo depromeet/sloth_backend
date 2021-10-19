@@ -1,6 +1,7 @@
 package com.sloth.api.category.controller;
 
 import com.sloth.api.BaseApiController;
+import com.sloth.api.lesson.service.LessonService;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -23,6 +24,9 @@ public class ApiCategoryControllerTest extends BaseApiController {
 
     @MockBean
     private CategoryRepository categoryRepository;
+
+    @MockBean
+    LessonService lessonService;
 
     private List<Category> createCategorys() {
         List<Category> categoryDtos = new ArrayList<>();

@@ -7,13 +7,12 @@ import org.junit.jupiter.api.Test;
 
 public class EncryptTest {
 
-    @Test
+    //@Test
     public void checkEncrypt(){
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         encryptor.setProvider(new BouncyCastleProvider());
         encryptor.setPoolSize(2);
         encryptor.setAlgorithm("PBEWithSHA256And128BitAES-CBC-BC");
-
         String cliendId = "depman11*"; // 암호화 할 내용
         String encryptedText = encryptor.encrypt(cliendId); // 암호화
         String decryptedText = encryptor.decrypt(encryptedText); // 복호화
