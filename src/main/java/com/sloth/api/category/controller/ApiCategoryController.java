@@ -1,6 +1,6 @@
 package com.sloth.api.category.controller;
 
-import com.sloth.api.category.dto.ResponseCategoryDto;
+import com.sloth.api.category.dto.CategoryDto;
 import com.sloth.api.category.service.ApiCategoryService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/category")
 public class ApiCategoryController {
 
     private final ApiCategoryService apiCategoryService;
@@ -24,9 +24,9 @@ public class ApiCategoryController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    @GetMapping("/categorys")
-    public ResponseEntity<List<ResponseCategoryDto>> getCategorys() {
-        List<ResponseCategoryDto> categoryDtos = apiCategoryService.getCategoryDtos();
+    @GetMapping("/list")
+    public ResponseEntity<List<CategoryDto.Response>> getCategorys() {
+        List<CategoryDto.Response> categoryDtos = apiCategoryService.getCategoryDtos();
         return ResponseEntity.ok().body(categoryDtos);
     }
 
