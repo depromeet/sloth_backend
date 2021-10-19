@@ -15,7 +15,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/category")
 public class ApiCategoryController {
 
     private final ApiCategoryService apiCategoryService;
@@ -24,7 +24,7 @@ public class ApiCategoryController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    @GetMapping("/categorys")
+    @GetMapping("/list")
     public ResponseEntity<List<CategoryDto.Response>> getCategorys() {
         List<CategoryDto.Response> categoryDtos = apiCategoryService.getCategoryDtos();
         return ResponseEntity.ok().body(categoryDtos);

@@ -33,7 +33,7 @@ public class LessonController {
 
     private final LessonService lessonService;
 
-    @Operation(summary = "Plus lesson number api", description = "들은 강의 수 추가 api")
+    @Operation(summary = "들은 강의 수 수정 API", description = "들은 강의 수 추가 api")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
@@ -44,7 +44,7 @@ public class LessonController {
         return ResponseEntity.ok(response);
     }
 
-    @Operation(summary = "Minus lesson number api", description = "들은 강의 수 감소 api")
+    @Operation(summary = "들은 강의 수 수정 API", description = "들은 강의 수 감소 api")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
@@ -55,7 +55,7 @@ public class LessonController {
         return ResponseEntity.ok(response);
     }
 
-    @Operation(summary = "Get lesson detail", description = "강의 상세 조회 api")
+    @Operation(summary = "강의 조회 API", description = "강의 상세 조회 api")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
