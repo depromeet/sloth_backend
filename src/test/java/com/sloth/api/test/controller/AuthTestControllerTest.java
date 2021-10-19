@@ -1,13 +1,11 @@
 package com.sloth.api.test.controller;
 
 import com.sloth.api.BaseApiController;
-import com.sloth.config.auth.TokenProvider;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

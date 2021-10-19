@@ -1,6 +1,7 @@
 package com.sloth.api.category.controller;
 
 import com.sloth.api.BaseApiController;
+import com.sloth.api.lesson.service.LessonService;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -23,6 +24,9 @@ public class ApiCategoryControllerTest extends BaseApiController {
 
     @MockBean
     private CategoryRepository categoryRepository;
+
+    @MockBean
+    LessonService lessonService;
 
     private List<Category> createCategorys() {
         List<Category> categoryDtos = new ArrayList<>();
@@ -71,9 +75,9 @@ public class ApiCategoryControllerTest extends BaseApiController {
         result.andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(jsonPath("$[0]").exists())
                 .andExpect(jsonPath("$[1]").exists())
-                .andExpect(jsonPath("$[0].categroyName").value(equalTo(category1.getName())))
+                .andExpect(jsonPath("$[0].categoryName").value(equalTo(category1.getName())))
                 .andExpect(jsonPath("$[0].categoryId").value(equalTo(1)))
-                .andExpect(jsonPath("$[1].categroyName").value(equalTo(category2.getName())))
+                .andExpect(jsonPath("$[1].categoryName").value(equalTo(category2.getName())))
                 .andExpect(jsonPath("$[1].categoryId").value(equalTo(2)))
         ;
     }

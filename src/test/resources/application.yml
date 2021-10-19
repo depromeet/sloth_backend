@@ -1,0 +1,75 @@
+spring:
+  #아래 내용이 없어도 스프링부트에서 테스트돌릴 때 기본적으로 메모리 모드로 돌림
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  session:
+    jdbc:
+      initialize-schema: always
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql : true
+        default_batch_fetch_size: 100
+  #    open-in-view: false
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+
+  thymeleaf:
+    enabled: true
+    encoding: UTF-8
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+  profiles:
+    include: oauth
+
+  h2:
+    console:
+      enabled: true
+
+  messages:
+    basename: messages,errors
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+    org.springframework.security: info
+
+server:
+  servlet:
+    context-path: /
+  error:
+    include-stacktrace: never
+
+restemplate:
+  readTimeout: 50000
+  connectTimeout: 30000
+  maxConnTotal: 100
+  maxConnPerRoute: 5
+
+jasypt:
+  encryptor:
+    bean: encryptorBean
+
+token:
+  secret: sloth-backend
+  access-token-expiration-time: 900000  # 15분
+  refresh-token-expiration-time: 1210500000 # 2주
+
+
+my-pass: depman*
+
