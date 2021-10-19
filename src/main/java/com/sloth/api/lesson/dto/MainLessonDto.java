@@ -66,7 +66,6 @@ public class MainLessonDto {
         private LocalDate endDate;
         private int price;
         private String alertDays;
-        private Boolean isFinished;
         private int totalNumber;
         private Long memberId;
         private Long siteId;
