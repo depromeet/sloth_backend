@@ -1,8 +1,8 @@
 package com.sloth.api.lesson.controller;
 
 import com.sloth.api.BaseApiController;
-import com.sloth.api.lesson.dto.LessonDetailRequest;
-import com.sloth.api.lesson.dto.LessonNumberRequest;
+import com.sloth.api.lesson.dto.LessonDetailDto;
+import com.sloth.api.lesson.dto.LessonNumberDto;
 import com.sloth.api.oauth.dto.SocialType;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
@@ -110,7 +110,7 @@ public class LessonControllerTest extends BaseApiController {
         given(lessonRepository.findById(1L))
                 .willReturn(optionalLesson);
 
-        LessonNumberRequest request = new LessonNumberRequest(1L, 2);
+        LessonNumberDto.Request request = new LessonNumberDto.Request(1L, 2);
 
         //when
         mockMvc.perform(patch("/api/lesson/number/plus")
@@ -138,7 +138,7 @@ public class LessonControllerTest extends BaseApiController {
         given(lessonRepository.findById(1L))
                 .willReturn(optionalLesson);
 
-        LessonNumberRequest request = new LessonNumberRequest(1L, 12);
+        LessonNumberDto.Request request = new LessonNumberDto.Request(1L, 12);
 
         //when
         mockMvc.perform(patch("/api/lesson/number/plus")
@@ -168,7 +168,7 @@ public class LessonControllerTest extends BaseApiController {
         given(lessonRepository.findById(1L))
                 .willReturn(optionalLesson);
 
-        LessonNumberRequest minusRequest = new LessonNumberRequest(1L, 1);
+        LessonNumberDto.Request minusRequest = new LessonNumberDto.Request(1L, 1);
 
         mockMvc.perform(patch("/api/lesson/number/minus")
                         .header(HttpHeaders.AUTHORIZATION, accessToken)
@@ -195,7 +195,7 @@ public class LessonControllerTest extends BaseApiController {
         given(lessonRepository.findById(1L))
                 .willReturn(optionalLesson);
 
-        LessonNumberRequest minusRequest = new LessonNumberRequest(1L, 4);
+        LessonNumberDto.Request minusRequest = new LessonNumberDto.Request(1L, 4);
 
         //when
         mockMvc.perform(patch("/api/lesson/number/minus")
@@ -224,7 +224,7 @@ public class LessonControllerTest extends BaseApiController {
         given(lessonRepository.findById(1L))
                 .willReturn(optionalLesson);
 
-        LessonDetailRequest request = new LessonDetailRequest(1L);
+        LessonDetailDto.Request request = new LessonDetailDto.Request(1L);
 
         //when
         MvcResult mvcResult = mockMvc.perform(get("/api/lesson/detail")

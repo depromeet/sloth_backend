@@ -1,6 +1,6 @@
 package com.sloth.api.lesson.service;
 
-import com.sloth.api.lesson.dto.RequestLessonDto;
+import com.sloth.api.lesson.dto.MainLessonDto;
 import com.sloth.app.member.service.MemberService;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
@@ -55,7 +55,7 @@ public class LessonService {
         return lesson;
     }
 
-    public Long saveLesson(RequestLessonDto requestDto) {
+    public Long saveLesson(MainLessonDto.Request requestDto) {
         Member member = memberService.findMember(requestDto.getMemberId());
 
         Site site = siteRepository.findById(requestDto.getSiteId())

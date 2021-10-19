@@ -1,6 +1,6 @@
 package com.sloth.api.category.service;
 
-import com.sloth.api.category.dto.ResponseCategoryDto;
+import com.sloth.api.category.dto.CategoryDto;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +18,10 @@ public class ApiCategoryService {
     private final CategoryRepository categoryRepository;
 
     @Transactional(readOnly = true)
-    public List<ResponseCategoryDto> getCategoryDtos() {
+    public List<CategoryDto.Response> getCategoryDtos() {
         List<Category> categorys= categoryRepository.findAll();
 
-        List<ResponseCategoryDto> categoryDtos = categorys.stream().map(category -> ResponseCategoryDto.builder()
+        List<CategoryDto.Response> categoryDtos = categorys.stream().map(category -> CategoryDto.Response.builder()
                 .categoryId(category.getId())
                 .categoryName(category.getName())
                 .build()
