@@ -28,6 +28,7 @@ public class ApiMemberController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
+
     @PatchMapping("/{memberId}")
     public Long update(@PathVariable Long memberId, @RequestBody MemberUpdateDto requestDto) {
         return memberService.update(memberId, requestDto);

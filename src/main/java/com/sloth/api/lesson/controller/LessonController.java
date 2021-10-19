@@ -225,13 +225,10 @@ public class LessonController {
     }
   
     @Operation(summary = "강의 생성 API", description = "강의 생성 API")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
-    })
     @PostMapping
-    public ResponseEntity<MainLessonDto.Request> saveLesson(MainLessonDto.Request requestDto) {
-        lessonService.saveLesson(requestDto);
-        return new ResponseEntity<MainLessonDto.Request>(requestDto, HttpStatus.CREATED);
+    public ResponseEntity<Long> saveLesson(@RequestBody MainLessonDto.Request requestDto) {
+        Long lessonId = lessonService.saveLesson(requestDto);
+        return new ResponseEntity<Long>(lessonId, HttpStatus.CREATED);
     }
 
 }
