@@ -9,13 +9,13 @@ import lombok.Setter;
 
 @Getter
 @ApiModel(value = "마이페이지 조회 객체", description = "마이페이지 조회 객체")
-public class ResponseMemberDto {
+public class MemberDto {
 
     private Long id;
     private String name;
     private String email;
 
-    public  ResponseMemberDto(Member entity) {
+    public MemberDto(Member entity) {
         this.id = entity.getId();
         this.name = entity.getName();
         this.email = entity.getEmail();

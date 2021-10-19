@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @Transactional
-@RequestMapping("/api")
+@RequestMapping("/api/site")
 @RequiredArgsConstructor
 @Slf4j
 public class SiteController {
@@ -27,7 +27,7 @@ public class SiteController {
     private final SiteRepository siteRepository;
 
     @Operation(summary = "Get all Site api", description = "모든 사이트 조회 api")
-    @GetMapping(value = "/sites",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/list",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<SiteNameDto>> getAllSite() {
         List<Site> allSites = siteRepository.findAll();
         List<SiteNameDto> siteNameDtos = new ArrayList<>();

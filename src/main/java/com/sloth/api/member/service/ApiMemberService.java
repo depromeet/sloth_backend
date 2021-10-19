@@ -1,7 +1,7 @@
 package com.sloth.api.member.service;
 
 import com.sloth.api.member.dto.MemberUpdateDto;
-import com.sloth.api.member.dto.ResponseMemberDto;
+import com.sloth.api.member.dto.MemberDto;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,10 +15,10 @@ public class ApiMemberService {
 
     private final MemberRepository memberRepository;
 
-    public ResponseMemberDto findById (Long id) {
+    public MemberDto findById (Long id) {
         Member member = memberRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("해당 정보가 없습니다. id =" + id));
 
-        return  new ResponseMemberDto(member);
+        return  new MemberDto(member);
     }
 
     @Transactional
