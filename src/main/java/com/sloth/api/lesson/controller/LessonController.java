@@ -66,6 +66,7 @@ public class LessonController {
         return ResponseEntity.ok(lessonDetail);
     }
 
+    @Operation(summary = "멤버가 현재 진행중인 강의 조회 API", description = "멤버가 현재 진행중인 강의 조회 API")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
