@@ -26,7 +26,7 @@ public class ApiMemberService {
 
         Member member = memberRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 정보가 없습니다. id =" + id));
 
-        member.update(requestDto.getName());
+        member.update(requestDto.getMemberName());
 
         return id;
     }

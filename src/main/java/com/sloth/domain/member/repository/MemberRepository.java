@@ -14,11 +14,11 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     Optional<Member> findByEmail(String email);
 
-    Page<Member> findByName(String name, Pageable pageable);
+    Page<Member> findByMemberName(String name, Pageable pageable);
 
     boolean existsByEmail(String email);
 
     @EntityGraph("Member.withAll")
     //@Query("select m from Member m join fetch m.lessons l join fetch l.category c join fetch l.site s")
-    Optional<Member> findWithAllById(Long id);
+    Optional<Member> findWithAllByMemberId(Long id);
 }

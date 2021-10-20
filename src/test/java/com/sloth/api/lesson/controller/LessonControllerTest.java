@@ -55,7 +55,7 @@ public class LessonControllerTest extends BaseApiController {
     private Lesson createLesson(Member member, Site site, Category category) {
         return Lesson.builder()
                 .member(member)
-                .name("testLesson")
+                .lessonName("testLesson")
                 .startDate(LocalDate.now())
                 .endDate(LocalDate.now().plusMonths(1))
                 .totalNumber(10)
@@ -71,7 +71,7 @@ public class LessonControllerTest extends BaseApiController {
         for (int i = 0; i < 5; i++) {
             Lesson lesson = Lesson.builder()
                     .member(member)
-                    .name("testLesson" + i)
+                    .lessonName("testLesson" + i)
                     .startDate(LocalDate.now())
                     .endDate(LocalDate.now().plusMonths(1))
                     .totalNumber(10)
@@ -88,7 +88,7 @@ public class LessonControllerTest extends BaseApiController {
 
     private Member createTestMember() {
         return Member.builder()
-                .name("testMember")
+                .memberName("testMember")
                 .email("email@email.com")
                 .socialType(SocialType.KAKAO)
                 .lessons(new ArrayList<>())

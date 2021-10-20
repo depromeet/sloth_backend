@@ -13,14 +13,14 @@ public class LessonNumberDto {
     @Builder
     @ApiModel(value = "강의 갯수 반환 객체", description = "강의 갯수 반환 객체")
     public static class Response {
-        private Long id;
+        private Long lessonId;
         private Integer presentNumber;
         private Boolean isFinished;
         private Boolean weeklyFinished;
 
         public static LessonNumberDto.Response create(Lesson lesson) {
             return LessonNumberDto.Response.builder()
-                    .id(lesson.getId())
+                    .lessonId(lesson.getLessonId())
                     .presentNumber(lesson.getPresentNumber())
                     .isFinished(lesson.getIsFinished())
                     .build();
@@ -33,7 +33,7 @@ public class LessonNumberDto {
     @ApiModel(value = "강의 갯수 요청 객체", description = "강의 갯수 요청 객체")
     public static class Request {
 
-        private Long id;
+        private Long lessonId;
         private int count;
     }
 

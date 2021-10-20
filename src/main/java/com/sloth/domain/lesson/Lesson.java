@@ -7,25 +7,23 @@ import com.sloth.domain.site.Site;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.temporal.ChronoUnit;
 
 @Entity
 @Getter
 @AllArgsConstructor @NoArgsConstructor
 @ToString(exclude = "member")
-@EqualsAndHashCode(of = "id", callSuper = false)
+@EqualsAndHashCode(of = "lessonId", callSuper = false)
 @Table(name = "lesson")
 public class Lesson extends BaseEntity  {
 
     @Id @GeneratedValue
     @Column(name = "lesson_id")
-    private Long id;
+    private Long lessonId;
 
     @Column(nullable = false, length = 150)
-    private String name;
+    private String lessonName;
 
     private int presentNumber;
 
@@ -62,9 +60,9 @@ public class Lesson extends BaseEntity  {
     private Member member;
 
     @Builder
-    public Lesson(Member member, String name, LocalDate startDate, LocalDate endDate,int totalNumber,
+    public Lesson(Member member, String lessonName, LocalDate startDate, LocalDate endDate, int totalNumber,
                   int price, String alertDays, Site site, Category category) {
-        this.name = name;
+        this.lessonName = lessonName;
         this.startDate = startDate;
         this.endDate = endDate;
         this.totalNumber = totalNumber;

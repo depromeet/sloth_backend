@@ -13,7 +13,6 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +38,10 @@ public class Member extends BaseEntity {
     @Id
     @Column(name="member_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long memberId;
 
     @Column(nullable = false)
-    private String name;
+    private String memberName;
 
     @Email
     @Column(unique = true, nullable = false)
@@ -74,7 +73,7 @@ public class Member extends BaseEntity {
 
     public static Member createAdmin(MemberFormDto memberFormDto) {
         return Member.builder()
-                .name(memberFormDto.getName())
+                .memberName(memberFormDto.getMemberName())
                 .email(memberFormDto.getEmail())
                 .socialType(memberFormDto.getSocialType())
                 .password(memberFormDto.getPassword())
@@ -85,7 +84,7 @@ public class Member extends BaseEntity {
 
     public static Member createOauthMember(OAuthAttributes oAuthAttributes) {
         return Member.builder()
-                .name(oAuthAttributes.getName())
+                .memberName(oAuthAttributes.getName())
                 .email(oAuthAttributes.getEmail())
                 .socialType(oAuthAttributes.getSocialType())
                 .password(oAuthAttributes.getPassword())
@@ -100,7 +99,7 @@ public class Member extends BaseEntity {
     }
 
     public void update(String name) {
-        this.name = name;
+        this.memberName = name;
     }
 
 }

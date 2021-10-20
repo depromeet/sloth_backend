@@ -33,7 +33,7 @@ public class LessonService {
     }
 
     public Lesson findLessonWithSiteCategory(Long id) {
-        return lessonRepository.findLessonWithSiteCategoryById(id).orElseThrow(()->{
+        return lessonRepository.findLessonWithSiteCategoryByLessonId(id).orElseThrow(()->{
             throw new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다.");
         });
     }
@@ -65,7 +65,7 @@ public class LessonService {
                 .orElseThrow( () -> new BusinessException("카테고리가 존재하지 않습니다."));
 
         Lesson lesson = Lesson.builder()
-                .name(requestDto.getName())
+                .lessonName(requestDto.getLessonName())
                 .member(member)
                 .alertDays(requestDto.getAlertDays())
                 .totalNumber(requestDto.getTotalNumber())
@@ -76,6 +76,6 @@ public class LessonService {
                 .site(site)
                 .build();
 
-        return lessonRepository.save(lesson).getId();
+        return lessonRepository.save(lesson).getLessonId();
     }
 }

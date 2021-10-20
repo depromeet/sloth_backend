@@ -22,8 +22,8 @@ public class ApiCategoryService {
         List<Category> categorys= categoryRepository.findAll();
 
         List<CategoryDto.Response> categoryDtos = categorys.stream().map(category -> CategoryDto.Response.builder()
-                .categoryId(category.getId())
-                .categoryName(category.getName())
+                .categoryId(category.getCategoryId())
+                .categoryName(category.getCategoryName())
                 .build()
         ).collect(Collectors.toList());
 
