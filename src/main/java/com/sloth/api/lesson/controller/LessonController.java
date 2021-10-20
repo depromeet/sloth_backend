@@ -39,7 +39,7 @@ public class LessonController {
     })
     @PatchMapping(value = "/number/plus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LessonNumberDto.Response> plusPresentNumber(@Valid @RequestBody LessonNumberDto.Request request) {
-        Lesson lesson = lessonService.plusPresentNumber(request.getId(), request.getCount());
+        Lesson lesson = lessonService.plusPresentNumber(request.getLessonId(), request.getCount());
         LessonNumberDto.Response response = LessonNumberDto.Response.create(lesson);
         return ResponseEntity.ok(response);
     }
@@ -50,7 +50,7 @@ public class LessonController {
     })
     @PatchMapping(value = "/number/minus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LessonNumberDto.Response> minusPresentNumber(@Valid @RequestBody LessonNumberDto.Request request) {
-        Lesson lesson = lessonService.minusPresentNumber(request.getId(), request.getCount());
+        Lesson lesson = lessonService.minusPresentNumber(request.getLessonId(), request.getCount());
         LessonNumberDto.Response response = LessonNumberDto.Response.create(lesson);
         return ResponseEntity.ok(response);
     }

@@ -20,7 +20,7 @@ public class MemberToken extends BaseEntity {
     @Id
     @Column(name="member_token_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long memberTokenId;
 
     private String refreshToken;
 

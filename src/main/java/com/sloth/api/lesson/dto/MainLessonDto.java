@@ -61,7 +61,7 @@ public class MainLessonDto {
     @ApiModel(value = "강의 생성 요청 객체", description = "강의 생성 요청 객체")
     public static class Request {
 
-        private String name;
+        private String lessonName;
         private LocalDate startDate;
         private LocalDate endDate;
         private int price;

@@ -73,7 +73,7 @@ public class Member extends BaseEntity {
 
     public static Member createAdmin(MemberFormDto memberFormDto) {
         return Member.builder()
-                .memberName(memberFormDto.getName())
+                .memberName(memberFormDto.getMemberName())
                 .email(memberFormDto.getEmail())
                 .socialType(memberFormDto.getSocialType())
                 .password(memberFormDto.getPassword())

@@ -31,7 +31,7 @@ public class SiteController {
         List<Site> allSites = siteRepository.findAll();
         List<SiteNameDto> siteNameDtos = new ArrayList<>();
         for (Site l : allSites) {
-            siteNameDtos.add(SiteNameDto.builder().id(l.getSiteId()).name(l.getSiteName()).build()); // TODO modelMapper 로 바꾸기
+            siteNameDtos.add(SiteNameDto.builder().siteId(l.getSiteId()).siteName(l.getSiteName()).build()); // TODO modelMapper 로 바꾸기
         }
         return ResponseEntity.ok(siteNameDtos);
     }

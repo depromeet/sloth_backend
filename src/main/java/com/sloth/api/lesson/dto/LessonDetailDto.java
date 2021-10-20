@@ -19,7 +19,7 @@ public class LessonDetailDto {
         private Long lessonDetailId;
         private Boolean isFinished;
         private int restDate;
-        private String name;
+        private String lessonName;
         private String category;
         private String site;
         private String presentProgress;
@@ -37,7 +37,7 @@ public class LessonDetailDto {
                     .lessonDetailId(lesson.getLessonId())
                     .isFinished(lesson.getIsFinished())
                     .restDate(lesson.getRestDate())
-                    .name(lesson.getLessonName())
+                    .lessonName(lesson.getLessonName())
                     .category(lesson.getCategory().getCategoryName())
                     .site(lesson.getSite().getSiteName())
                     .presentProgress("40%") // TODO 계산하기
