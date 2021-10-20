@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface LessonRepository extends JpaRepository<Lesson, Long> {
 
     @EntityGraph(attributePaths = {"site","category"})
-    Optional<Lesson> findLessonWithSiteCategoryById(Long id);
+    Optional<Lesson> findLessonWithSiteCategoryByLessonId(Long id);
 
-    Optional<Lesson> findByName(String name);
+    Optional<Lesson> findByLessonName(String name);
 }

@@ -1,7 +1,6 @@
 package com.sloth.api.site.controller;
 
 import com.sloth.api.site.dto.SiteNameDto;
-import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.site.Site;
 import com.sloth.domain.site.repository.SiteRepository;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,7 +31,7 @@ public class SiteController {
         List<Site> allSites = siteRepository.findAll();
         List<SiteNameDto> siteNameDtos = new ArrayList<>();
         for (Site l : allSites) {
-            siteNameDtos.add(SiteNameDto.builder().id(l.getId()).name(l.getName()).build()); // TODO modelMapper 로 바꾸기
+            siteNameDtos.add(SiteNameDto.builder().id(l.getSiteId()).name(l.getSiteName()).build()); // TODO modelMapper 로 바꾸기
         }
         return ResponseEntity.ok(siteNameDtos);
     }

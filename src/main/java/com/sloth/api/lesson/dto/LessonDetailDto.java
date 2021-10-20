@@ -34,12 +34,12 @@ public class LessonDetailDto {
 
         public static LessonDetailDto.Response create(Lesson lesson) {
             return Response.builder()
-                    .lessonDetailId(lesson.getId())
+                    .lessonDetailId(lesson.getLessonId())
                     .isFinished(lesson.getIsFinished())
                     .restDate(lesson.getRestDate())
-                    .name(lesson.getName())
-                    .category(lesson.getCategory().getName())
-                    .site(lesson.getSite().getName())
+                    .name(lesson.getLessonName())
+                    .category(lesson.getCategory().getCategoryName())
+                    .site(lesson.getSite().getSiteName())
                     .presentProgress("40%") // TODO 계산하기
                     .targetProgress("50%")
                     .presentNumber(lesson.getPresentNumber())

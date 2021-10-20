@@ -8,16 +8,16 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor @AllArgsConstructor
 @Builder
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "categoryId")
 @Table(name = "category")
 public class Category {
 
     @Id @GeneratedValue
     @Column(name = "category_id")
-    private Long id;
+    private Long categoryId;
 
     @Column(nullable = false)
-    private String name;
+    private String categoryName;
 
     private int categoryLvl;
 
@@ -25,8 +25,8 @@ public class Category {
 
     private String rootCategoryName;
 
-    public Category(String name, int categoryLvl, Long rootCategoryId, String rootCategoryName) {
-        this.name = name;
+    public Category(String categoryName, int categoryLvl, Long rootCategoryId, String rootCategoryName) {
+        this.categoryName = categoryName;
         this.categoryLvl = categoryLvl;
         this.rootCategoryId = rootCategoryId;
         this.rootCategoryName = rootCategoryName;

@@ -31,18 +31,18 @@ public class ApiCategoryControllerTest extends BaseApiController {
     private List<Category> createCategorys() {
         List<Category> categoryDtos = new ArrayList<>();
         Category category1 = Category.builder()
-                .id(1L)
+                .categoryId(1L)
                 .categoryLvl(1)
                 .rootCategoryId(1L)
-                .name("개발")
+                .categoryName("개발")
                 .rootCategoryName("개발")
                 .build();
 
         Category category2 = Category.builder()
-                .id(2L)
+                .categoryId(2L)
                 .categoryLvl(1)
                 .rootCategoryId(2L)
-                .name("디자인")
+                .categoryName("디자인")
                 .rootCategoryName("디자인")
                 .build();
 
@@ -75,9 +75,9 @@ public class ApiCategoryControllerTest extends BaseApiController {
         result.andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(jsonPath("$[0]").exists())
                 .andExpect(jsonPath("$[1]").exists())
-                .andExpect(jsonPath("$[0].categoryName").value(equalTo(category1.getName())))
+                .andExpect(jsonPath("$[0].categoryName").value(equalTo(category1.getCategoryName())))
                 .andExpect(jsonPath("$[0].categoryId").value(equalTo(1)))
-                .andExpect(jsonPath("$[1].categoryName").value(equalTo(category2.getName())))
+                .andExpect(jsonPath("$[1].categoryName").value(equalTo(category2.getCategoryName())))
                 .andExpect(jsonPath("$[1].categoryId").value(equalTo(2)))
         ;
     }

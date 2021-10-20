@@ -10,18 +10,18 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "siteId")
 @Table(name = "site")
 public class Site {
 
     @Id @GeneratedValue
     @Column(name = "site_id")
-    private Long id;
+    private Long siteId;
 
     @Column(nullable = false, length = 100)
-    private String name;
+    private String siteName;
 
-    public Site(String name) {
-        this.name = name;
+    public Site(String siteName) {
+        this.siteName = siteName;
     }
 }

@@ -20,7 +20,7 @@ public class LessonNumberDto {
 
         public static LessonNumberDto.Response create(Lesson lesson) {
             return LessonNumberDto.Response.builder()
-                    .id(lesson.getId())
+                    .id(lesson.getLessonId())
                     .presentNumber(lesson.getPresentNumber())
                     .isFinished(lesson.getIsFinished())
                     .build();

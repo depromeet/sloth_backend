@@ -24,11 +24,11 @@ public class DoingLessonDto {
 
         public static DoingLessonDto.Response create (Lesson lesson) {
             return Response.builder()
-                    .doingLessonId(lesson.getId())
+                    .doingLessonId(lesson.getLessonId())
                     .weeklyFinished(false) // TODO 계산 필요
                     .restDate(lesson.getRestDate())// });
-                    .site(lesson.getSite().getName())
-                    .category(lesson.getCategory().getName())
+                    .site(lesson.getSite().getSiteName())
+                    .category(lesson.getCategory().getCategoryName())
                     .presentNumber(lesson.getPresentNumber())
                     .todoNumber(lesson.getTotalNumber() - lesson.getPresentNumber())
                     .build();
