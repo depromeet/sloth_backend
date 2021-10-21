@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional
@@ -39,8 +38,7 @@ public class LessonService {
     }
 
     public List<Lesson> getDoingLessons(Long memberId) {
-        List<Lesson> lessons = memberService.findMemberWithAll(memberId).getLessons();
-        return lessons.stream().filter(Lesson::isDoingLesson).collect(Collectors.toList()); // TODO 로직 개선 필요할 듯
+        return lessonRepository.getDoingLessonsDetail(memberId);
     }
 
     public Lesson plusPresentNumber(Long id, int count) {
