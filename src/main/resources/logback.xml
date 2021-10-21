@@ -7,7 +7,7 @@
     <!--Tcp 통신하는 것 같고, 공식문서를 보니 비동기라고 함! -->
     <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <!-- 목적지로 쏴줄 것임. 값은 K8S 외부 주입때문에 저러함. host:port로 설정하길-->
-        <destination>${LOGSTASH_URL:-localhost:5000}</destination>
+        <destination>13.124.140.7:5000</destination>
         <!-- ES가 알아먹도록 JSON 형태로 인코딩까지 해주고-->
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
