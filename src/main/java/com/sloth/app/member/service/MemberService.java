@@ -51,12 +51,6 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-    public Member findMemberWithAll(Long id) {
-        return memberRepository.findWithAllByMemberId(id).orElseThrow(() -> {
-            throw new UsernameNotFoundException("해당 회원을 찾을 수 없습니다.");
-        });
-    }
-
     public Member findMember(Long id) {
         return memberRepository.findById(id)
                 .orElseThrow(()-> new UsernameNotFoundException("해당 회원을 찾을 수 없습니다."));

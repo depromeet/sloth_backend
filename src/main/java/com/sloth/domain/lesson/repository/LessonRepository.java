@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
-public interface LessonRepository extends JpaRepository<Lesson, Long> {
+public interface LessonRepository extends JpaRepository<Lesson, Long> ,CustomLessonRepository{
 
     @EntityGraph(attributePaths = {"site","category"})
     Optional<Lesson> findLessonWithSiteCategoryByLessonId(Long id);
