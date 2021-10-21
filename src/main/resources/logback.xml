@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- logback에 대한 기본적인 설정을 base.xml을 통해서 제공함.console,file appender 를 base.xml에 include 하고 있음-->
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+    <!--appender는 출력을 담달하는데 정의에 따라서 통신, 이메일 파일출력등이 가능- https://hongkyu.tistory.com/76 -->
+    <!--Tcp 통신하는 것 같고, 공식문서를 보니 비동기라고 함! -->
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <!-- 목적지로 쏴줄 것임. 값은 K8S 외부 주입때문에 저러함. host:port로 설정하길-->
+        <destination>${LOGSTASH_URL:-localhost:5000}</destination>
+        <!-- ES가 알아먹도록 JSON 형태로 인코딩까지 해주고-->
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <mdc />
+                <pattern>
+                    <!-- 아래와 같은 키밸류 타입이 들어가면서 나중에 키바나에서 찾기 수월함-->
+                    <pattern>{"serviceID":"myServiceName"}</pattern>
+                </pattern>
+                <timestamp />
+                <!--<version />-->
+                <context />
+                <threadName />
+                <logLevel />
+                <message />
+                <loggerName />
+                <logstashMarkers />
+                <stackTrace />
+                <callerData />
+            </providers>
+        </encoder>
+    </appender>
+
+    <!-- 다른 불필요 설정 생략~~~ -->
+
+    <!--kr.co.lsoft 는 패키지명 해당 패키지는 TRACE 레벨 이상이면, CONSOLE과 LOGSTASH 설정을 참고함. -->
+    <logger name="kr.co.lsoft" level="TRACE" additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="LOGSTASH" />
+    </logger>
+
+    <!-- TRACE > DEBUG > INFO > WARN > ERROR, 대소문자 구분 안함 -->
+    <!-- root는 전역으로 INFO 레벨 이상인 로그만 남기고 있다.-->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="LOGSTASH" />
+    </root>
+</configuration>
