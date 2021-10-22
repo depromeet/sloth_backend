@@ -2,6 +2,7 @@ package com.sloth.api.lesson.dto;
 
 import com.sloth.domain.lesson.Lesson;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,32 +17,65 @@ public class LessonDetailDto {
     @Builder
     @ApiModel(value = "강의 상세정보 반환 객체", description = "강의 상세정보 반환 객체")
     public static class Response {
-        private Long lessonDetailId;
-        private Boolean isFinished;
-        private int restDate;
+        @ApiModelProperty(value = "강의 아이디")
+        private Long lessonId;
+
+        @ApiModelProperty(value = "강의 목표 남은일수")
+        private int remainDay;
+
+        @ApiModelProperty(value = "카테고리명")
+        private String categoryName;
+
+        @ApiModelProperty(value = "사이트명")
+        private String siteName;
+
+        @ApiModelProperty(value = "강의명")
         private String lessonName;
-        private String category;
-        private String site;
-        private String presentProgress;
-        private String targetProgress;
-        private int presentNumber;
+
+        @ApiModelProperty(value = "강의 가격")
+        private Integer price;
+
+        @ApiModelProperty(value = "강의 현재 진도율")
+        private double currentProgressRate;
+
+        @ApiModelProperty(value = "강의 목표 진도율")
+        private double goalProgressRate;
+
+        @ApiModelProperty(value = "강의 시작일")
         private LocalDate startDate;
+
+        @ApiModelProperty(value = "강의 목표 종료일")
         private LocalDate endDate;
-        private int price;
+
+        @ApiModelProperty(value = "강의 개수")
+        private int totalNumber;
+
+        @ApiModelProperty(value = "강의 완강 성공 여부")
+        private Boolean isFinished;
+
+        @ApiModelProperty(value = "완강한 강의 개수")
+        private int presentNumber;
+
+        @ApiModelProperty(value = "강의 알림일")
         private String alertDays;
+
+        @ApiModelProperty(value = "각오 메세지")
         private String message;
+
+        @ApiModelProperty(value = "낭비한 금액")
         private int wastePrice; // TODO 날린돈 계산
 
         public static LessonDetailDto.Response create(Lesson lesson) {
             return Response.builder()
-                    .lessonDetailId(lesson.getLessonId())
+                    .lessonId(lesson.getLessonId())
                     .isFinished(lesson.getIsFinished())
-                    .restDate(lesson.getRestDate())
+                    .remainDay(lesson.getRemainDay())
                     .lessonName(lesson.getLessonName())
-                    .category(lesson.getCategory().getCategoryName())
-                    .site(lesson.getSite().getSiteName())
-                    .presentProgress("40%") // TODO 계산하기
-                    .targetProgress("50%")
+                    .categoryName(lesson.getCategory().getCategoryName())
+                    .siteName(lesson.getSite().getSiteName())
+                    .currentProgressRate(lesson.getCurrentProgressRate())
+                    .goalProgressRate(lesson.getGoalProgressRate())
+                    .totalNumber(lesson.getTotalNumber())
                     .presentNumber(lesson.getPresentNumber())
                     .startDate(lesson.getStartDate())
                     .endDate(lesson.getEndDate())
@@ -58,7 +92,7 @@ public class LessonDetailDto {
     @AllArgsConstructor
     @ApiModel(value = "강의 상세정보 요청 객체", description = "강의 상세정보 요청 객체")
     public static class Request {
-        private Long lessonDetailId;
+        private Long lessonId;
     }
 
 

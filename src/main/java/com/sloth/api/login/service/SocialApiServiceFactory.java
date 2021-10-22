@@ -1,6 +1,6 @@
-package com.sloth.api.oauth.service;
+package com.sloth.api.login.service;
 
-import com.sloth.api.oauth.dto.SocialType;
+import com.sloth.domain.member.constant.SocialType;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;

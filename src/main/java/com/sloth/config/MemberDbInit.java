@@ -1,10 +1,9 @@
 package com.sloth.config;
 
-import com.sloth.api.oauth.dto.SocialType;
+import com.sloth.domain.member.dto.MemberFormDto;
 import com.sloth.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import com.sloth.domain.member.Member;
-import com.sloth.domain.member.dto.MemberFormDto;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -19,12 +18,11 @@ public class MemberDbInit {
     //@PostConstruct
     public void initMember() {
         for (int i = 0; i < 25; i++) {
-            MemberFormDto memberFormDto = new MemberFormDto();
-            memberFormDto.setEmail("testtest"+ + i + "@google.com");
-            memberFormDto.setMemberName("test name" + i);
-            memberFormDto.setPassword("test");
-            memberFormDto.setSocialType(SocialType.GOOGLE);
-            Member member = Member.createAdmin(memberFormDto);
+            MemberFormDto formRequestDto = new MemberFormDto();
+            formRequestDto.setEmail("testtest"+ + i + "@google.com");
+            formRequestDto.setMemberName("test name" + i);
+            formRequestDto.setPassword("test");
+            Member member = Member.createAdmin(formRequestDto);
             memberRepository.save(member);
         }
     }

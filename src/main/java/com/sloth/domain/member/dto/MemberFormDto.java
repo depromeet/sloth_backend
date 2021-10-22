@@ -1,6 +1,6 @@
 package com.sloth.domain.member.dto;
 
-import com.sloth.api.oauth.dto.SocialType;
+import com.sloth.domain.member.constant.SocialType;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 

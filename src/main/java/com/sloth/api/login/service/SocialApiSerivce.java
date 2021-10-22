@@ -1,4 +1,4 @@
-package com.sloth.api.oauth.service;
+package com.sloth.api.login.service;
 
 import com.sloth.config.auth.dto.OAuthAttributes;
 

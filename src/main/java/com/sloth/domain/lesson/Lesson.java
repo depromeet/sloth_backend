@@ -107,7 +107,15 @@ public class Lesson extends BaseEntity  {
         return this.getStartDate().isBefore(LocalDate.now()) && this.getEndDate().isAfter(LocalDate.now());
     }
 
-    public int getRestDate() {
-        return Period.between(this.getEndDate(), LocalDate.now()).getDays();
+    public int getRemainDay() {
+        return Period.between(LocalDate.now(), this.endDate).getDays();
+    }
+
+    public double getGoalProgressRate() {
+        return (double) Period.between(this.startDate, this.endDate).getDays() / (double) Period.between(this.startDate, LocalDate.now()).getDays();
+    }
+
+    public double getCurrentProgressRate() {
+        return (double) this.totalNumber / (double) this.presentNumber;
     }
 }

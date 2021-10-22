@@ -34,4 +34,15 @@ public class CustomLessonRepositoryImpl implements CustomLessonRepository{
                                 .and(lesson.startDate.loe(LocalDate.now())))
                 .fetch();
     }
+
+    @Override
+    public List<Lesson> getLessonsDetail(Long memberId) {
+        return jpaQueryFactory
+                .selectFrom(lesson)
+                .leftJoin(lesson.site, site).fetchJoin()
+                .leftJoin(lesson.category, category).fetchJoin()
+                .where(lesson.member.memberId.eq(memberId))
+                .fetch();
+
+    }
 }

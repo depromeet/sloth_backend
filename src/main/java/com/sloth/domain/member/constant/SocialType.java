@@ -1,4 +1,4 @@
-package com.sloth.api.oauth.dto;
+package com.sloth.domain.member.constant;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Getter
 public enum SocialType {
 
-    GOOGLE, KAKAO, APPLE;
+    GOOGLE, KAKAO, APPLE, FORM;
 
     @JsonCreator
     public static SocialType from(String type) {

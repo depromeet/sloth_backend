@@ -11,7 +11,6 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +22,8 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @Transactional
@@ -41,7 +42,7 @@ public class LessonController {
     public ResponseEntity<LessonNumberDto.Response> plusPresentNumber(@Valid @RequestBody LessonNumberDto.Request request) {
         Lesson lesson = lessonService.plusPresentNumber(request.getLessonId(), request.getCount());
         LessonNumberDto.Response response = LessonNumberDto.Response.create(lesson);
-        return ResponseEntity.ok(response);
+        return ok(response);
     }
 
     @Operation(summary = "들은 강의 수 수정 API", description = "들은 강의 수 감소 api")
@@ -52,7 +53,7 @@ public class LessonController {
     public ResponseEntity<LessonNumberDto.Response> minusPresentNumber(@Valid @RequestBody LessonNumberDto.Request request) {
         Lesson lesson = lessonService.minusPresentNumber(request.getLessonId(), request.getCount());
         LessonNumberDto.Response response = LessonNumberDto.Response.create(lesson);
-        return ResponseEntity.ok(response);
+        return ok(response);
     }
 
     @Operation(summary = "강의 조회 API", description = "강의 상세 조회 api")
@@ -61,9 +62,9 @@ public class LessonController {
     })
     @GetMapping(value = "/detail", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LessonDetailDto.Response> getLessonDetail(@Valid @RequestBody LessonDetailDto.Request request) {
-        Lesson lesson = lessonService.findLessonWithSiteCategory(request.getLessonDetailId());
+        Lesson lesson = lessonService.findLessonWithSiteCategory(request.getLessonId());
         LessonDetailDto.Response lessonDetail = LessonDetailDto.Response.create(lesson);
-        return ResponseEntity.ok(lessonDetail);
+        return ok(lessonDetail);
     }
 
     @Operation(summary = "멤버가 현재 진행중인 강의 조회 API", description = "멤버가 현재 진행중인 강의 조회 API")
@@ -78,7 +79,7 @@ public class LessonController {
             DoingLessonDto.Response doingLessonResponse = DoingLessonDto.Response.create(lesson);
             doingLessonResponses.add(doingLessonResponse);
         }
-        return ResponseEntity.ok(doingLessonResponses);
+        return ok(doingLessonResponses);
     }
 
 
@@ -92,13 +93,7 @@ public class LessonController {
                                                                                 BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
-            StringBuilder sb = new StringBuilder();
-            List<ObjectError> allErrors = bindingResult.getAllErrors();
-            for (ObjectError error : allErrors) {
-                sb.append(error.getDefaultMessage());
-            }
-
-            throw new InvalidParameterException(sb.toString());
+            InvalidParameterException.throwErrorMessage(bindingResult);
         }
 
         LessonUpdateDto.Response responseLessonUpdateDto = LessonUpdateDto.Response.builder()
@@ -109,127 +104,31 @@ public class LessonController {
                 .categoryId(lessonUpdateDto.getCategoryId())
                 .build();
 
-        return ResponseEntity.ok(responseLessonUpdateDto);
+        return ok(responseLessonUpdateDto);
     }
 
     @Operation(summary = "강의 목록 조회 API", description = "강의 목록 리스트 조회 API")
     @GetMapping("/list")
-    public ResponseEntity<List<MainLessonDto.Response>> getLessonList() {
+    public ResponseEntity<List<LessonListDto.Response>> getLessonList(@RequestBody LessonListDto.Request request) {
 
-        List<MainLessonDto.Response> mainLessonDtos = new ArrayList<>();
+        List<LessonListDto.Response> lessonListDto = new ArrayList<>();
 
+        List<Lesson> lessons = lessonService.getLessons(request.getMemberId());
+        for (Lesson lesson : lessons) {
+            lessonListDto.add(LessonListDto.Response.create(lesson));
+        }
 
-        // 1. 진행중인 강의
-        MainLessonDto.Response currentLesson1 = MainLessonDto.Response.builder()
-                .lessonId(10L)
-                .type(LessonType.CURRENT.name())
-                .remainDay(10)
-                .categoryName("디자인")
-                .siteName("인프런")
-                .lessonName("디자인 입문")
-                .price(5000)
-                .currentProgressRate(50)
-                .goalProgressRate(60)
-                .startDate(LocalDate.now().minusDays(10).getMonth().getValue() + "/" + "01")
-                .endDate(LocalDate.now().plusDays(10).getMonth().getValue() + "/" + "01")
-                .totalNumber(15)
-                .build();
-
-        MainLessonDto.Response currentLesson2 = MainLessonDto.Response.builder()
-                .lessonId(10L)
-                .type(LessonType.CURRENT.name())
-                .remainDay(10)
-                .categoryName("디자인")
-                .siteName("인프런")
-                .lessonName("포토샵 강의 입문")
-                .price(350000)
-                .currentProgressRate(80)
-                .goalProgressRate(30)
-                .startDate(LocalDate.now().minusDays(5).getMonth().getValue() + "/" + "01")
-                .endDate(LocalDate.now().plusDays(10).getMonth().getValue() + "/" + "01")
-                .totalNumber(13)
-                .build();
-
-        MainLessonDto.Response currentLesson3 = MainLessonDto.Response.builder()
-                .lessonId(10L)
-                .type(LessonType.CURRENT.name())
-                .remainDay(10)
-                .categoryName("디자인")
-                .siteName("인프런")
-                .lessonName("디자인이란 무엇인가?")
-                .price(3500)
-                .currentProgressRate(50)
-                .goalProgressRate(50)
-                .startDate(LocalDate.now().minusDays(5).getMonth().getValue() + "/" + "01")
-                .endDate(LocalDate.now().plusDays(10).getMonth().getValue() + "/" + "01")
-                .totalNumber(13)
-                .build();
-
-        mainLessonDtos.add(currentLesson1);
-        mainLessonDtos.add(currentLesson2);
-        mainLessonDtos.add(currentLesson3);
-
-        // 2. 완료한 강의
-        MainLessonDto.Response finishedLesson1 = MainLessonDto.Response.builder()
-                .lessonId(10L)
-                .type(LessonType.FINISH.name())
-                .remainDay(0)
-                .categoryName("개발")
-                .siteName("인프런")
-                .lessonName("파이썬 입문")
-                .price(50000)
-                .currentProgressRate(100)
-                .goalProgressRate(100)
-                .startDate(LocalDate.now().minusDays(10).getMonth().getValue() + "/" + "15")
-                .endDate(LocalDate.now().plusDays(10).getMonth().getValue() + "/" + "15")
-                .totalNumber(50)
-                .isSuccess(true)
-                .build();
-
-        MainLessonDto.Response finishedLesson2 =MainLessonDto.Response.builder()
-                .lessonId(11L)
-                .type(LessonType.FINISH.name())
-                .remainDay(0)
-                .categoryName("개발")
-                .siteName("인프런")
-                .lessonName("데이터베이스 입문")
-                .price(40000)
-                .currentProgressRate(100)
-                .goalProgressRate(100)
-                .startDate(LocalDate.now().minusDays(10).getMonth().getValue() + "/" + "20")
-                .endDate(LocalDate.now().plusDays(10).getMonth().getValue() + "/" + "20")
-                .totalNumber(30)
-                .isSuccess(true)
-                .build();
-
-        MainLessonDto.Response finishedLesson3 =MainLessonDto.Response.builder()
-                .lessonId(11L)
-                .type(LessonType.FINISH.name())
-                .remainDay(0)
-                .categoryName("개발")
-                .siteName("인프런")
-                .lessonName("데이터베이스 입문")
-                .price(100000)
-                .currentProgressRate(70)
-                .goalProgressRate(100)
-                .startDate(LocalDate.now().minusDays(5).getMonth().getValue() + "/" + "10")
-                .endDate(LocalDate.now().plusDays(15).getMonth().getValue() + "/" + "20")
-                .totalNumber(40)
-                .isSuccess(false)
-                .build();
-
-        mainLessonDtos.add(finishedLesson1);
-        mainLessonDtos.add(finishedLesson2);
-        mainLessonDtos.add(finishedLesson3);
-
-        return ResponseEntity.ok(mainLessonDtos);
+        return ok(lessonListDto);
     }
   
     @Operation(summary = "강의 생성 API", description = "강의 생성 API")
     @PostMapping
-    public ResponseEntity<Long> saveLesson(@RequestBody MainLessonDto.Request requestDto) {
+    public ResponseEntity<LessonCreateDto.Response> saveLesson(@RequestBody LessonCreateDto.Request requestDto) {
         Long lessonId = lessonService.saveLesson(requestDto);
-        return new ResponseEntity<Long>(lessonId, HttpStatus.CREATED);
+        LessonCreateDto.Response response= LessonCreateDto.Response.builder()
+                .lessonId(lessonId)
+                .build();
+        return ok(response);
     }
 
 }

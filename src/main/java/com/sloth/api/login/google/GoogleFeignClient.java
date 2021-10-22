@@ -1,4 +1,4 @@
-package com.sloth.api.oauth.google;
+package com.sloth.api.login.google;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;

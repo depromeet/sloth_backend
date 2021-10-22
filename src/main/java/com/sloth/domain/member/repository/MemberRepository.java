@@ -21,4 +21,5 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @EntityGraph("Member.withAll")
     //@Query("select m from Member m join fetch m.lessons l join fetch l.category c join fetch l.site s")
     Optional<Member> findWithAllByMemberId(Long id);
+
 }
