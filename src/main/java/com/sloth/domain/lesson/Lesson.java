@@ -13,7 +13,8 @@ import java.time.Period;
 @Entity
 @Getter
 @AllArgsConstructor @NoArgsConstructor
-@ToString(exclude = "member")
+@ToString(of = {"lessonId", "lessonName", "presentNumber", "totalNumber", "startDate", "endDate",
+        "price", "alertDays", "message", "isFinished"})
 @EqualsAndHashCode(of = "lessonId", callSuper = false)
 @Table(name = "lesson")
 public class Lesson extends BaseEntity  {

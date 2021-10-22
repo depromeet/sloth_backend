@@ -27,8 +27,8 @@ import java.util.List;
 )
 @Entity
 @Table(name="member")
-@Getter @Setter
-@ToString(exclude = {"memberToken","lessons"})
+@Getter
+@ToString(of = {"memberId", "memberName", "email", "socialType", "picture", "role"})
 @Builder
 @AllArgsConstructor @NoArgsConstructor
 @SQLDelete(sql = "UPDATE member SET is_delete = true WHERE member_id=?")
@@ -102,4 +102,7 @@ public class Member extends BaseEntity {
         this.memberName = name;
     }
 
+    public void updateMemberToken(MemberToken memberToken) {
+        this.memberToken = memberToken;
+    }
 }
