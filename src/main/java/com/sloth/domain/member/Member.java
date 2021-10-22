@@ -1,7 +1,8 @@
 package com.sloth.domain.member;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sloth.api.oauth.dto.SocialType;
+import com.sloth.api.login.dto.FormJoinDto;
+import com.sloth.domain.member.constant.SocialType;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.domain.BaseEntity;
 import com.sloth.domain.lesson.Lesson;
@@ -71,12 +72,12 @@ public class Member extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private MemberToken memberToken;
 
-    public static Member createAdmin(MemberFormDto memberFormDto) {
+    public static Member createAdmin(MemberFormDto formRequestDto) {
         return Member.builder()
-                .memberName(memberFormDto.getMemberName())
-                .email(memberFormDto.getEmail())
-                .socialType(memberFormDto.getSocialType())
-                .password(memberFormDto.getPassword())
+                .memberName(formRequestDto.getMemberName())
+                .email(formRequestDto.getEmail())
+                .socialType(formRequestDto.getSocialType())
+                .password(formRequestDto.getPassword())
                 .role(Role.ADMIN)
                 .lessons(new ArrayList<>())
                 .build();
@@ -88,6 +89,17 @@ public class Member extends BaseEntity {
                 .email(oAuthAttributes.getEmail())
                 .socialType(oAuthAttributes.getSocialType())
                 .password(oAuthAttributes.getPassword())
+                .lessons(new ArrayList<>())
+                .role(Role.USER)
+                .build();
+    }
+
+    public static Member createFormMember(FormJoinDto formRequestDto, String encodedPassword) {
+        return Member.builder()
+                .memberName(formRequestDto.getMemberName())
+                .email(formRequestDto.getEmail())
+                .socialType(SocialType.FORM)
+                .password(encodedPassword)
                 .lessons(new ArrayList<>())
                 .role(Role.USER)
                 .build();

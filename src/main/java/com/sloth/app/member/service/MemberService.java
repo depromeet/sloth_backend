@@ -1,13 +1,16 @@
 package com.sloth.app.member.service;
 
+import com.sloth.api.login.dto.FormJoinDto;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.config.auth.dto.TokenDto;
 import com.sloth.domain.memberToken.MemberToken;
+import com.sloth.exception.InvalidParameterException;
 import com.sloth.util.DateTimeUtils;
 import lombok.RequiredArgsConstructor;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.repository.MemberRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,27 +24,35 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public Member saveMember(OAuthAttributes oAuthAttributes, TokenDto tokenDto) {
+    public void saveMember(OAuthAttributes oAuthAttributes, TokenDto tokenDto) {
         Optional<Member> optionalMember = memberRepository.findByEmail(oAuthAttributes.getEmail());
-        Member member = null;
 
         if(optionalMember.isEmpty()) {
-            member = Member.createOauthMember(oAuthAttributes);
+            Member member = Member.createOauthMember(oAuthAttributes);
             Member savedMember = memberRepository.save(member);
 
             //리프레시 토큰 저장
             saveRefreshToken(savedMember, tokenDto);
         }
+    }
 
-        return member;
+    public void saveMember(FormJoinDto formRequestDto) {
+        Optional<Member> optionalMember = memberRepository.findByEmail(formRequestDto.getEmail());
+        if (optionalMember.isPresent()) {
+            throw new InvalidParameterException("이미 존재하는 이메일입니다.");
+        }
+
+        Member member = Member.createFormMember(formRequestDto, passwordEncoder.encode(formRequestDto.getPassword()));
+        memberRepository.save(member);
     }
 
     /**
      * refresh token 저장
      * @param tokenDto
      */
-    private void saveRefreshToken(Member member, TokenDto tokenDto) {
+    public void saveRefreshToken(Member member, TokenDto tokenDto) {
         Date refreshTokenExpireTime = tokenDto.getRefreshTokenExpireTime();
 
         LocalDateTime tokenExpiredTime = DateTimeUtils.convertToLocalDateTime(refreshTokenExpireTime);
@@ -54,6 +65,11 @@ public class MemberService {
     public Member findMember(Long id) {
         return memberRepository.findById(id)
                 .orElseThrow(()-> new UsernameNotFoundException("해당 회원을 찾을 수 없습니다."));
+    }
+
+    public Member findByEmail (String email) {
+        return memberRepository.findByEmail(email)
+                .orElseThrow( () -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
     }
 
 }

@@ -1,7 +1,7 @@
-package com.sloth.api.oauth.google;
+package com.sloth.api.login.apple;
 
-import com.sloth.api.oauth.dto.SocialType;
-import com.sloth.api.oauth.service.SocialApiSerivce;
+import com.sloth.api.login.google.GoogleFeignClient;
+import com.sloth.api.login.service.SocialApiSerivce;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class GoogleApiServiceImpl implements SocialApiSerivce {
+public class AppleApiServiceImpl implements SocialApiSerivce {
 
     private final GoogleFeignClient googleFeignClient;
     private final PasswordEncoder passwordEncoder;
@@ -24,18 +24,7 @@ public class GoogleApiServiceImpl implements SocialApiSerivce {
 
     @Override
     public OAuthAttributes getUserInfo(String accessToken) {
-        accessToken = "Bearer " + accessToken.replace("Bearer", "").trim();
-        log.info("accessToken : " + accessToken);
-
-        GoogleUserInfo googleUserInfo = googleFeignClient.googleLogin(accessToken);
-        log.info("email : " + googleUserInfo.getEmail());
-        log.info("name : " + googleUserInfo.getName());
-
         return OAuthAttributes.builder()
-                .email(googleUserInfo.getEmail())
-                .name(googleUserInfo.getName())
-                .socialType(SocialType.GOOGLE)
-                .password(passwordEncoder.encode(pass))
                 .build();
     }
 }

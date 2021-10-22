@@ -4,7 +4,7 @@ import com.sloth.api.BaseApiController;
 
 import com.sloth.api.lesson.dto.LessonDetailDto;
 import com.sloth.api.lesson.dto.LessonNumberDto;
-import com.sloth.api.oauth.dto.SocialType;
+import com.sloth.domain.member.constant.SocialType;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
 import com.sloth.domain.lesson.Lesson;

@@ -93,13 +93,7 @@ public class LessonController {
                                                                                 BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
-            StringBuilder sb = new StringBuilder();
-            List<ObjectError> allErrors = bindingResult.getAllErrors();
-            for (ObjectError error : allErrors) {
-                sb.append(error.getDefaultMessage());
-            }
-
-            throw new InvalidParameterException(sb.toString());
+            InvalidParameterException.throwErrorMessage(bindingResult);
         }
 
         LessonUpdateDto.Response responseLessonUpdateDto = LessonUpdateDto.Response.builder()
