@@ -68,8 +68,8 @@ public class LessonListDto {
                     .siteName(lesson.getSite().getSiteName())
                     .lessonName(lesson.getLessonName())
                     .price(lesson.getPrice())
-                    .currentProgressRate(30) // TODO 수정
-                    .goalProgressRate(40) // TODO 수정
+                    .currentProgressRate(lesson.getCurrentProgressRate())
+                    .goalProgressRate(lesson.getGoalProgressRate())
                     .startDate(DateTimeUtils.convertToString(lesson.getStartDate()))
                     .endDate(DateTimeUtils.convertToString(lesson.getEndDate()))
                     .totalNumber(lesson.getTotalNumber())
