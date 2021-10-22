@@ -1,6 +1,6 @@
 package com.sloth.api.lesson.service;
 
-import com.sloth.api.lesson.dto.MainLessonDto;
+import com.sloth.api.lesson.dto.LessonCreateDto;
 import com.sloth.app.member.service.MemberService;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
@@ -37,10 +37,6 @@ public class LessonService {
         });
     }
 
-    public List<Lesson> getDoingLessons(Long memberId) {
-        return lessonRepository.getDoingLessonsDetail(memberId);
-    }
-
     public Lesson plusPresentNumber(Long id, int count) {
         Lesson lesson = findLesson(id);
         lesson.plusPresentNumber(count);
@@ -53,7 +49,7 @@ public class LessonService {
         return lesson;
     }
 
-    public Long saveLesson(MainLessonDto.Request requestDto) {
+    public Long saveLesson(LessonCreateDto.Request requestDto) {
         Member member = memberService.findMember(requestDto.getMemberId());
 
         Site site = siteRepository.findById(requestDto.getSiteId())
@@ -75,5 +71,13 @@ public class LessonService {
                 .build();
 
         return lessonRepository.save(lesson).getLessonId();
+    }
+
+    public List<Lesson> getDoingLessons(Long memberId) {
+        return lessonRepository.getDoingLessonsDetail(memberId);
+    }
+
+    public List<Lesson> getLessons(Long memberId) {
+        return lessonRepository.getLessonsDetail(memberId);
     }
 }
