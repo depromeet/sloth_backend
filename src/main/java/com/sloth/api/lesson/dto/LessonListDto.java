@@ -1,15 +1,19 @@
 package com.sloth.api.lesson.dto;
 
 
+import com.sloth.api.lesson.constant.LessonType;
+import com.sloth.domain.lesson.Lesson;
+import com.sloth.util.DateTimeUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 @ApiModel(value = "강의 목록 조회 API 반환 객체", description = "강의 목록 조회 API 반환 객체")
-public class MainLessonDto {
+public class LessonListDto {
 
     @NoArgsConstructor
     @AllArgsConstructor
@@ -53,24 +57,33 @@ public class MainLessonDto {
         private int totalNumber;
 
         @ApiModelProperty(value = "강의 완강 성공 여부")
-        private Boolean isSuccess;
+        private Boolean isFinished;
+
+        public static LessonListDto.Response create(Lesson lesson) {
+            return Response.builder()
+                    .lessonId(lesson.getLessonId())
+                    .type(LessonType.CURRENT.name()) // TODO 수정
+                    .remainDay(lesson.getRemainDay())
+                    .categoryName(lesson.getCategory().getCategoryName())
+                    .siteName(lesson.getSite().getSiteName())
+                    .lessonName(lesson.getLessonName())
+                    .price(lesson.getPrice())
+                    .currentProgressRate(30) // TODO 수정
+                    .goalProgressRate(40) // TODO 수정
+                    .startDate(DateTimeUtils.convertToString(lesson.getStartDate()))
+                    .endDate(DateTimeUtils.convertToString(lesson.getEndDate()))
+                    .totalNumber(lesson.getTotalNumber())
+                    .isFinished(lesson.getIsFinished())
+                    .build();
+        }
     }
 
-    @Getter
+    @Data
     @NoArgsConstructor
-    @ApiModel(value = "강의 생성 요청 객체", description = "강의 생성 요청 객체")
+    @AllArgsConstructor
+    @ApiModel(value = "강의 목록 조회 API 요청 객체", description = "강의 목록 조회 API 요청 객체")
     public static class Request {
 
-        private String lessonName;
-        private LocalDate startDate;
-        private LocalDate endDate;
-        private int price;
-        private String alertDays;
-        private int totalNumber;
         private Long memberId;
-        private Long siteId;
-        private Long categoryId;
-
     }
-
 }

@@ -108,7 +108,7 @@ public class Lesson extends BaseEntity  {
         return this.getStartDate().isBefore(LocalDate.now()) && this.getEndDate().isAfter(LocalDate.now());
     }
 
-    public int getRestDate() {
+    public int getRemainDay() {
         return Period.between(this.getEndDate(), LocalDate.now()).getDays();
     }
 }

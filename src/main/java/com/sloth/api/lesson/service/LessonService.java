@@ -1,6 +1,6 @@
 package com.sloth.api.lesson.service;
 
-import com.sloth.api.lesson.dto.MainLessonDto;
+import com.sloth.api.lesson.dto.LessonCreateDto;
 import com.sloth.app.member.service.MemberService;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional
@@ -38,11 +37,6 @@ public class LessonService {
         });
     }
 
-    public List<Lesson> getDoingLessons(Long memberId) {
-        List<Lesson> lessons = memberService.findMemberWithAll(memberId).getLessons();
-        return lessons.stream().filter(Lesson::isDoingLesson).collect(Collectors.toList()); // TODO 로직 개선 필요할 듯
-    }
-
     public Lesson plusPresentNumber(Long id, int count) {
         Lesson lesson = findLesson(id);
         lesson.plusPresentNumber(count);
@@ -55,7 +49,7 @@ public class LessonService {
         return lesson;
     }
 
-    public Long saveLesson(MainLessonDto.Request requestDto) {
+    public Long saveLesson(LessonCreateDto.Request requestDto) {
         Member member = memberService.findMember(requestDto.getMemberId());
 
         Site site = siteRepository.findById(requestDto.getSiteId())
@@ -77,5 +71,13 @@ public class LessonService {
                 .build();
 
         return lessonRepository.save(lesson).getLessonId();
+    }
+
+    public List<Lesson> getDoingLessons(Long memberId) {
+        return lessonRepository.getDoingLessonsDetail(memberId);
+    }
+
+    public List<Lesson> getLessons(Long memberId) {
+        return lessonRepository.getLessonsDetail(memberId);
     }
 }
