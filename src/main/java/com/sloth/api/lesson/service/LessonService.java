@@ -1,14 +1,13 @@
 package com.sloth.api.lesson.service;
 
 import com.sloth.api.lesson.dto.LessonCreateDto;
-import com.sloth.api.lesson.dto.LessonUpdateDto;
-import com.sloth.domain.member.service.MemberService;
 import com.sloth.api.lesson.dto.RenderOrderDto;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
 import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.lesson.repository.LessonRepository;
 import com.sloth.domain.member.Member;
+import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.site.Site;
 import com.sloth.domain.site.repository.SiteRepository;
 import com.sloth.exception.BusinessException;
@@ -20,7 +19,6 @@ import org.thymeleaf.util.StringUtils;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Transactional
@@ -83,8 +81,9 @@ public class LessonService {
         return lessonRepository.getDoingLessonsDetail(memberId);
     }
 
-    public List<Lesson> getLessons(Long memberId) {
-        return lessonRepository.getLessonsDetail(memberId);
+    public List<Lesson> getLessons(String email) {
+        Member member = memberService.findByEmail(email);
+        return lessonRepository.getLessons(member.getMemberId());
     }
 
     /**

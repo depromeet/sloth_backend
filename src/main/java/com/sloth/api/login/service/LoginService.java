@@ -1,14 +1,14 @@
 package com.sloth.api.login.service;
 
-import com.sloth.api.login.dto.FormLoginRequestDto;
 import com.sloth.api.login.dto.FormJoinDto;
+import com.sloth.api.login.dto.FormLoginRequestDto;
 import com.sloth.api.login.dto.ResponseJwtTokenDto;
-import com.sloth.domain.member.Member;
-import com.sloth.domain.member.constant.SocialType;
-import com.sloth.domain.member.service.MemberService;
 import com.sloth.config.auth.TokenProvider;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.config.auth.dto.TokenDto;
+import com.sloth.domain.member.Member;
+import com.sloth.domain.member.constant.SocialType;
+import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.exception.ForbiddenException;
 import com.sloth.exception.InvalidParameterException;
@@ -21,8 +21,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
-import javax.validation.Valid;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Slf4j
@@ -35,6 +33,7 @@ public class LoginService {
     private final ModelMapper modelMapper;
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
+    private final MailService mailService;
 
     /**
      * OAuth 로그인

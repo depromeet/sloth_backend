@@ -32,11 +32,11 @@ public class CustomLessonRepositoryImpl implements CustomLessonRepository{
     }
 
     @Override
-    public List<Lesson> getLessonsDetail(Long memberId) {
+    public List<Lesson> getLessons(Long memberId) {
         return jpaQueryFactory
                 .selectFrom(lesson)
-                .leftJoin(lesson.site, site).fetchJoin()
-                .leftJoin(lesson.category, category).fetchJoin()
+                .join(lesson.site, site).fetchJoin()
+                .join(lesson.category, category).fetchJoin()
                 .where(lesson.member.memberId.eq(memberId))
                 .fetch();
 

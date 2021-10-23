@@ -1,13 +1,13 @@
 package com.sloth.api.lesson.controller;
 
-import com.sloth.api.lesson.constant.LessonType;
 import com.sloth.api.lesson.dto.*;
 import com.sloth.api.lesson.service.LessonService;
 import com.sloth.domain.lesson.Lesson;
+import com.sloth.domain.member.dto.MemberInfo;
 import com.sloth.exception.InvalidParameterException;
+import com.sloth.resolver.Member;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
-
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,11 +15,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,11 +117,11 @@ public class LessonController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<List<LessonListDto.Response>> getLessonList(@RequestBody LessonListDto.Request request) {
+    public ResponseEntity<List<LessonListDto.Response>> getLessonList(@Member MemberInfo memberInfo) {
 
         List<LessonListDto.Response> lessonListDto = new ArrayList<>();
 
-        List<Lesson> lessons = lessonService.getLessons(request.getMemberId());
+        List<Lesson> lessons = lessonService.getLessons(memberInfo.getEmail());
         for (Lesson lesson : lessons) {
             lessonListDto.add(LessonListDto.Response.create(lesson));
         }

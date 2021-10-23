@@ -7,5 +7,5 @@ import java.util.List;
 public interface CustomLessonRepository {
     List<Lesson> getDoingLessonsDetail(Long memberId);
 
-    List<Lesson> getLessonsDetail(Long memberId);
+    List<Lesson> getLessons(Long memberId);
 }

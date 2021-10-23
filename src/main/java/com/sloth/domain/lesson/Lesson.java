@@ -2,6 +2,7 @@ package com.sloth.domain.lesson;
 
 import com.sloth.domain.BaseEntity;
 import com.sloth.domain.category.Category;
+import com.sloth.domain.lesson.constant.LessonStatus;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.site.Site;
 import lombok.*;
@@ -80,7 +81,9 @@ public class Lesson extends BaseEntity  {
 
     private void connectMember(Member member) {
         this.member = member;
-        member.getLessons().add(this);
+        if(member != null) {
+            member.getLessons().add(this);
+        }
     }
 
     public void plusPresentNumber(int count) {
@@ -113,16 +116,17 @@ public class Lesson extends BaseEntity  {
         return Period.between(LocalDate.now(), this.endDate).getDays();
     }
 
-    public int getGoalProgressRate() {
-        return (int) Math.floor((double) Period.between(this.startDate, this.endDate).getDays() / (double) Period.between(this.startDate, LocalDate.now()).getDays());
+    public int getCurrentProgressRate() {
+        return (int) Math.floor((double) this.presentNumber / (double) this.totalNumber * 100);
     }
 
-    public int getCurrentProgressRate() {
-        return (int) Math.floor((double) this.totalNumber / (double) this.presentNumber);
+    public int getGoalProgressRate() {
+        return (int) Math.floor( (double) Period.between(this.startDate, LocalDate.now()).getDays() / (double) Period.between(this.startDate, this.endDate).getDays() * 100);
     }
 
     public int getWastePrice() {
-        return (int) (price * ((double) (getGoalProgressRate() - getCurrentProgressRate()) / (double) 100));
+        int wastePrice = (int) (price * ((double) (getGoalProgressRate() - getCurrentProgressRate()) / (double) 100));
+        return wastePrice >= 0 ? wastePrice : 0;
     }
 
     public void updateLesson(Lesson lesson) {
@@ -136,5 +140,13 @@ public class Lesson extends BaseEntity  {
 
     public void updateCategory(Category category){
         this.category = category;
+    }
+
+    public LessonStatus getLessonStatus() {
+        if(LocalDate.now().isBefore(endDate)){
+            return LessonStatus.CURRENT;
+        }
+
+        return LessonStatus.PAST;
     }
 }
