@@ -1,6 +1,6 @@
 package com.sloth.config.auth.dto;
 
-import com.sloth.api.oauth.dto.SocialType;
+import com.sloth.domain.member.constant.SocialType;
 import lombok.Builder;
 import lombok.Getter;
 import com.sloth.domain.member.Member;

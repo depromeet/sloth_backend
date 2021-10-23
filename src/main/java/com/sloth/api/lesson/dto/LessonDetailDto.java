@@ -36,10 +36,10 @@ public class LessonDetailDto {
         private Integer price;
 
         @ApiModelProperty(value = "강의 현재 진도율")
-        private String currentProgressRate;
+        private double currentProgressRate;
 
         @ApiModelProperty(value = "강의 목표 진도율")
-        private String goalProgressRate;
+        private double goalProgressRate;
 
         @ApiModelProperty(value = "강의 시작일")
         private LocalDate startDate;
@@ -73,8 +73,8 @@ public class LessonDetailDto {
                     .lessonName(lesson.getLessonName())
                     .categoryName(lesson.getCategory().getCategoryName())
                     .siteName(lesson.getSite().getSiteName())
-                    .currentProgressRate("40%") // TODO 계산하기
-                    .goalProgressRate("50%")
+                    .currentProgressRate(lesson.getCurrentProgressRate())
+                    .goalProgressRate(lesson.getGoalProgressRate())
                     .totalNumber(lesson.getTotalNumber())
                     .presentNumber(lesson.getPresentNumber())
                     .startDate(lesson.getStartDate())
