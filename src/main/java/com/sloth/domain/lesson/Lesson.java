@@ -61,7 +61,7 @@ public class Lesson extends BaseEntity  {
 
     @Builder
     public Lesson(Member member, String lessonName, LocalDate startDate, LocalDate endDate, int totalNumber,
-                  int price, String alertDays, Site site, Category category) {
+                  int price, String alertDays, String message, Site site, Category category) {
         this.lessonName = lessonName;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -70,7 +70,7 @@ public class Lesson extends BaseEntity  {
         this.alertDays = alertDays;
         this.site = site;
         this.category = category;
-
+        this.message = message;
         this.isFinished = false;
 
         connectMember(member);

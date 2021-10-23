@@ -20,11 +20,11 @@ public class ApiCategoryController {
 
     private final ApiCategoryService apiCategoryService;
 
+    @GetMapping("/list")
     @Operation(summary = "카테고리 조회 API", description = "카테고리 리스트 조회 API")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    @GetMapping("/list")
     public ResponseEntity<List<CategoryDto.Response>> getCategorys() {
         List<CategoryDto.Response> categoryDtos = apiCategoryService.getCategoryDtos();
         return ResponseEntity.ok().body(categoryDtos);
