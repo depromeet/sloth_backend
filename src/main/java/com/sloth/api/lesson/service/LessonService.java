@@ -1,7 +1,7 @@
 package com.sloth.api.lesson.service;
 
 import com.sloth.api.lesson.dto.LessonCreateDto;
-import com.sloth.app.member.service.MemberService;
+import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
 import com.sloth.domain.lesson.Lesson;

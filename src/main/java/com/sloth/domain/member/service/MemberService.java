@@ -1,4 +1,4 @@
-package com.sloth.app.member.service;
+package com.sloth.domain.member.service;
 
 import com.sloth.api.login.dto.FormJoinDto;
 import com.sloth.config.auth.dto.OAuthAttributes;
