@@ -146,7 +146,7 @@ public class LessonController {
     public ResponseEntity<RenderOrderDto> viewRenderOrder(@PathVariable("page-number") int pageNumber) {
 
         if(pageNumber < 1) {
-            throw new InvalidParameterException("강의 화면은 1번부터 시작 입니다.");
+            throw new InvalidParameterException("강의 등록 화면은 1페이지부터 시작 입니다.");
         }
 
         RenderOrderDto renderOrderDto = lessonService.viewRenderOrder(pageNumber);
