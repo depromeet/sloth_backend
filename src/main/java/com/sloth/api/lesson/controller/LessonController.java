@@ -89,19 +89,26 @@ public class LessonController {
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
     public ResponseEntity<LessonUpdateDto.Response> updateLesson(@PathVariable("lessonId") Long lessonId,
-                                                                                @Valid @RequestBody LessonUpdateDto.Request lessonUpdateDto,
-                                                                                BindingResult bindingResult) {
+                                                                 @Valid @RequestBody LessonUpdateDto.Request lessonUpdateDto,
+                                                                 BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
             InvalidParameterException.throwErrorMessage(bindingResult);
         }
 
+        Lesson lesson = lessonUpdateDto.toEntity(lessonId);
+
+        // 강의 업데이트
+        Lesson updatedLesson = lessonService.updateLesson(lessonUpdateDto.getMemberId(), lessonUpdateDto.getSiteId(),
+                lessonUpdateDto.getCategoryId(), lesson);
+
+        // 반환 객체 생성
         LessonUpdateDto.Response responseLessonUpdateDto = LessonUpdateDto.Response.builder()
-                .lessonId(lessonId)
-                .lessonName(lessonUpdateDto.getLessonName())
-                .totalNumber(lessonUpdateDto.getTotalNumber())
-                .siteId(lessonUpdateDto.getSiteId())
-                .categoryId(lessonUpdateDto.getCategoryId())
+                .lessonId(updatedLesson.getLessonId())
+                .lessonName(updatedLesson.getLessonName())
+                .totalNumber(updatedLesson.getTotalNumber())
+                .siteId(updatedLesson.getSite().getSiteId())
+                .categoryId(updatedLesson.getCategory().getCategoryId())
                 .build();
 
         return ok(responseLessonUpdateDto);

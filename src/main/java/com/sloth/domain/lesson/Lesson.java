@@ -61,8 +61,9 @@ public class Lesson extends BaseEntity  {
     private Member member;
 
     @Builder
-    public Lesson(Member member, String lessonName, LocalDate startDate, LocalDate endDate, int totalNumber,
+    public Lesson(Long lessonId, Member member, String lessonName, LocalDate startDate, LocalDate endDate, int totalNumber,
                   int price, String alertDays, String message, Site site, Category category) {
+        this.lessonId = lessonId;
         this.lessonName = lessonName;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -122,5 +123,18 @@ public class Lesson extends BaseEntity  {
 
     public int getWastePrice() {
         return (int) (price * ((double) (getGoalProgressRate() - getCurrentProgressRate()) / (double) 100));
+    }
+
+    public void updateLesson(Lesson lesson) {
+        this.lessonName = lesson.getLessonName();
+        this.totalNumber = lesson.getTotalNumber();
+    }
+
+    public void updateSite(Site site) {
+        this.site = site;
+    }
+
+    public void updateCategory(Category category){
+        this.category = category;
     }
 }
