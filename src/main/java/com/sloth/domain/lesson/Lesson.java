@@ -111,11 +111,15 @@ public class Lesson extends BaseEntity  {
         return Period.between(LocalDate.now(), this.endDate).getDays();
     }
 
-    public double getGoalProgressRate() {
-        return (double) Period.between(this.startDate, this.endDate).getDays() / (double) Period.between(this.startDate, LocalDate.now()).getDays();
+    public int getGoalProgressRate() {
+        return (int) Math.floor((double) Period.between(this.startDate, this.endDate).getDays() / (double) Period.between(this.startDate, LocalDate.now()).getDays());
     }
 
-    public double getCurrentProgressRate() {
-        return (double) this.totalNumber / (double) this.presentNumber;
+    public int getCurrentProgressRate() {
+        return (int) Math.floor((double) this.totalNumber / (double) this.presentNumber);
+    }
+
+    public int getWastePrice() {
+        return (int) (price * ((double) (getGoalProgressRate() - getCurrentProgressRate()) / (double) 100));
     }
 }

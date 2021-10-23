@@ -36,10 +36,10 @@ public class LessonDetailDto {
         private Integer price;
 
         @ApiModelProperty(value = "강의 현재 진도율")
-        private double currentProgressRate;
+        private int currentProgressRate;
 
         @ApiModelProperty(value = "강의 목표 진도율")
-        private double goalProgressRate;
+        private int goalProgressRate;
 
         @ApiModelProperty(value = "강의 시작일")
         private LocalDate startDate;
@@ -63,7 +63,7 @@ public class LessonDetailDto {
         private String message;
 
         @ApiModelProperty(value = "낭비한 금액")
-        private int wastePrice; // TODO 날린돈 계산
+        private int wastePrice;
 
         public static LessonDetailDto.Response create(Lesson lesson) {
             return Response.builder()
@@ -82,7 +82,7 @@ public class LessonDetailDto {
                     .price(lesson.getPrice())
                     .alertDays(lesson.getAlertDays())
                     .message(lesson.getMessage())
-                    .wastePrice(40000) // TODO 계산하기
+                    .wastePrice(lesson.getWastePrice())
                     .build();
         }
     }
