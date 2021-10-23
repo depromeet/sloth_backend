@@ -118,4 +118,8 @@ public class Lesson extends BaseEntity  {
     public int getCurrentProgressRate() {
         return (int) Math.floor((double) this.totalNumber / (double) this.presentNumber);
     }
+
+    public int getWastePrice() {
+        return (int) (price * ((double) (getGoalProgressRate() - getCurrentProgressRate()) / (double) 100));
+    }
 }
