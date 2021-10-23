@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -38,14 +39,17 @@ public class MemberService {
         }
     }
 
-    public void saveMember(FormJoinDto formRequestDto) {
+    public Member saveMember(FormJoinDto formRequestDto) {
         Optional<Member> optionalMember = memberRepository.findByEmail(formRequestDto.getEmail());
         if (optionalMember.isPresent()) {
             throw new InvalidParameterException("이미 존재하는 이메일입니다.");
         }
 
-        Member member = Member.createFormMember(formRequestDto, passwordEncoder.encode(formRequestDto.getPassword()));
-        memberRepository.save(member);
+        String emailConfirmCode = UUID.randomUUID().toString();
+        Member member = Member.createFormMember(formRequestDto,
+                                            passwordEncoder.encode(formRequestDto.getPassword()),
+                                            emailConfirmCode);
+        return memberRepository.save(member);
     }
 
     /**

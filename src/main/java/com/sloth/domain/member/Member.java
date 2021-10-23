@@ -66,11 +66,20 @@ public class Member extends BaseEntity {
     @JsonIgnore
     private boolean isDelete = false;
 
+    @JsonIgnore
+    @Column
+    private String emailConfirmCode;
+
+    @JsonIgnore
+    @Column
+    private boolean isEmailConfirm = true;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     private List<Lesson> lessons = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private MemberToken memberToken;
+
 
     public static Member createAdmin(MemberFormDto formRequestDto) {
         return Member.builder()
@@ -78,8 +87,9 @@ public class Member extends BaseEntity {
                 .email(formRequestDto.getEmail())
                 .socialType(formRequestDto.getSocialType())
                 .password(formRequestDto.getPassword())
-                .role(Role.ADMIN)
                 .lessons(new ArrayList<>())
+                .isEmailConfirm(true)
+                .role(Role.ADMIN)
                 .build();
     }
 
@@ -94,12 +104,14 @@ public class Member extends BaseEntity {
                 .build();
     }
 
-    public static Member createFormMember(FormJoinDto formRequestDto, String encodedPassword) {
+    public static Member createFormMember(FormJoinDto formRequestDto, String encodedPassword, String emailConfirmCode) {
         return Member.builder()
                 .memberName(formRequestDto.getMemberName())
                 .email(formRequestDto.getEmail())
                 .socialType(SocialType.FORM)
                 .password(encodedPassword)
+                .emailConfirmCode(emailConfirmCode)
+                .isEmailConfirm(false)
                 .lessons(new ArrayList<>())
                 .role(Role.USER)
                 .build();
@@ -116,5 +128,12 @@ public class Member extends BaseEntity {
 
     public void updateMemberToken(MemberToken memberToken) {
         this.memberToken = memberToken;
+    }
+    public boolean confirmEmail(String confirmCode) {
+        return confirmCode.equals(this.getEmailConfirmCode());
+    }
+
+    public void activate() {
+        this.isEmailConfirm = true;
     }
 }
