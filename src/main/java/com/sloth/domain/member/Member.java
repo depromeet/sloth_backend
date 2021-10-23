@@ -134,4 +134,8 @@ public class Member extends BaseEntity {
     public void activate() {
         this.isEmailConfirm = true;
     }
+
+    public void updateMemberToken(MemberToken memberToken) {
+        this.memberToken = memberToken;
+    }
 }
