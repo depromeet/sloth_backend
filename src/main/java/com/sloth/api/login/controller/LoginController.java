@@ -37,9 +37,8 @@ public class LoginController {
 
     private final LoginService loginService;
 
-
-    @Operation(summary = "OAuth 로그인 API", description = "OAuth Access 토큰으로 로그인 시 JWT 토큰 반환, 현재 socialType은 GOOGLE, KAKAO만 구현 완료")
     @PostMapping(value = "/oauth/login" , headers = { "Content-type=application/json" }, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "OAuth 로그인 API", description = "OAuth Access 토큰으로 로그인 시 JWT 토큰 반환, 현재 socialType은 GOOGLE, KAKAO만 구현 완료")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="access token", dataType = "string", value = "access token", required = true, paramType = "header")
     })
@@ -64,8 +63,8 @@ public class LoginController {
         return ResponseEntity.ok(responseJwtTokenDto);
     }
 
-    @Operation(summary = "Form 회원가입 API", description = "폼 회원가입 API")
     @PostMapping(value = "/form/register", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Form 회원가입 API", description = "폼 회원가입 API")
     public ResponseEntity<ApiResult> register(@Valid @RequestBody FormJoinDto formRequestDto, Errors errors) {
         new FormRegisterValidator().validate(formRequestDto, errors);
 
@@ -85,8 +84,8 @@ public class LoginController {
         return ResponseEntity.ok(response);
     }
 
-    @Operation(summary = "Form 로그인 API", description = "폼 로그인 시 JWT 토큰 반환")
     @PostMapping(value = "/form/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Form 로그인 API", description = "폼 로그인 시 JWT 토큰 반환")
     public ResponseEntity<ResponseJwtTokenDto> login(@Valid @RequestBody FormLoginRequestDto formRequestDto, Errors errors) {
         new FormLoginValidator().validate(formRequestDto, errors);
 

@@ -25,8 +25,8 @@ public class SiteController {
 
     private final SiteRepository siteRepository;
 
-    @Operation(summary = "Get all Site api", description = "모든 사이트 조회 api")
     @GetMapping(value = "/list",produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Get all Site api", description = "모든 사이트 조회 api")
     public ResponseEntity<List<SiteNameDto>> getAllSite() {
         List<Site> allSites = siteRepository.findAll();
         List<SiteNameDto> siteNameDtos = new ArrayList<>();
