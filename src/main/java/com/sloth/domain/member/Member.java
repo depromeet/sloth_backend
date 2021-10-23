@@ -28,8 +28,8 @@ import java.util.List;
 )
 @Entity
 @Table(name="member")
-@Getter
-@ToString(of = {"memberId", "memberName", "email", "socialType", "picture", "role"})
+@Getter @Setter
+@ToString(exclude = {"memberToken","lessons"})
 @Builder
 @AllArgsConstructor @NoArgsConstructor
 @SQLDelete(sql = "UPDATE member SET is_delete = true WHERE member_id=?")
@@ -100,6 +100,7 @@ public class Member extends BaseEntity {
                 .socialType(oAuthAttributes.getSocialType())
                 .password(oAuthAttributes.getPassword())
                 .lessons(new ArrayList<>())
+                .isEmailConfirm(true)
                 .role(Role.USER)
                 .build();
     }
@@ -126,9 +127,6 @@ public class Member extends BaseEntity {
         this.memberName = name;
     }
 
-    public void updateMemberToken(MemberToken memberToken) {
-        this.memberToken = memberToken;
-    }
     public boolean confirmEmail(String confirmCode) {
         return confirmCode.equals(this.getEmailConfirmCode());
     }

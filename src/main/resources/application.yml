@@ -54,8 +54,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: sloth.backend@gmail.com
-    password: vvvxnwqaxiqnrqgq
+    username: ENC(Gxd8z03E8a5yIICXKgPPIhLi5tNML8rUtat5MSe5IMXZQ1NSTOGXM/P+SfxDMsLT)
+    password: ENC(g7UUsdfAr19S3p5FjQilNiW/UBYV4hegZ+8F9LnvG77MLCRhQrv73qveUtFMs7XG)
     properties.mail.smtp:
       auth: true
       starttls:

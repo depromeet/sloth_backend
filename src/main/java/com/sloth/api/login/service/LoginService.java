@@ -1,8 +1,12 @@
 package com.sloth.api.login.service;
 
+import com.sloth.api.login.dto.FormLoginRequestDto;
 import com.sloth.api.login.dto.FormJoinDto;
 import com.sloth.api.login.dto.FormLoginRequestDto;
 import com.sloth.api.login.dto.ResponseJwtTokenDto;
+import com.sloth.domain.member.Member;
+import com.sloth.domain.member.constant.SocialType;
+import com.sloth.app.member.service.MemberService;
 import com.sloth.config.auth.TokenProvider;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.config.auth.dto.TokenDto;
@@ -21,7 +25,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
+import javax.validation.Valid;
+import java.time.LocalDate;
+import javax.mail.MessagingException;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Slf4j
 @Service
