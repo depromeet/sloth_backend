@@ -22,24 +22,22 @@ public class ApiMemberController {
 
     private final ApiMemberService memberService;
 
-
+    @GetMapping("")
     @Operation(summary = "회원 정보 조회 API", description = "회원 정보 조회 API")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    @GetMapping("")
     public ResponseEntity<MemberInfoDto> getMemberInfo(HttpServletRequest httpServletRequest) {
         String token = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION);
         MemberInfoDto memberInfo = memberService.getMemberInfo(token);
         return ResponseEntity.ok(memberInfo);
     }
 
-
+    @PatchMapping("/{memberId}")
     @Operation(summary = "회원 정보 수정 API", description = "회원 정보 수정 API")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    @PatchMapping("/{memberId}")
     public Long update(@PathVariable Long memberId, @RequestBody MemberUpdateDto requestDto) {
         return memberService.update(memberId, requestDto);
     }

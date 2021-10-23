@@ -21,8 +21,8 @@ public class HealthController {
 
     private final Environment env;
 
-    @Operation(summary = "profile check api", description = "현재 실행중인 profile 체크 api")
     @GetMapping(value = "/profile", produces = MediaType.TEXT_PLAIN_VALUE)
+    @Operation(summary = "profile check api", description = "현재 실행중인 profile 체크 api")
     public ResponseEntity<String> profile() {
 
         List<String> profiles = Arrays.asList(env.getActiveProfiles());
@@ -41,8 +41,8 @@ public class HealthController {
         return ResponseEntity.ok(activeProfile);
     }
 
-    @Operation(summary = "health check api", description = "서버 health check용 API")
     @GetMapping(value = "/health", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "health check api", description = "서버 health check용 API")
     public ResponseEntity<ResponseHealthCheckDto> healthCheck() {
         ResponseHealthCheckDto responseHealthCheckDto = ResponseHealthCheckDto.builder()
                 .status(true)

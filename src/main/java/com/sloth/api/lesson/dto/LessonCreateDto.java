@@ -40,6 +40,9 @@ public class LessonCreateDto {
         @ApiModelProperty(value = "강의 개수")
         private int totalNumber;
 
+        @ApiModelProperty(value = "각오 한 마디")
+        private String message;
+
         @ApiModelProperty(value = "강의 생성하는 멤버 아이디")
         private Long memberId;
 
