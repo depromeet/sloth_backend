@@ -1,5 +1,6 @@
 package com.sloth.api.lesson.dto;
 
+import com.sloth.domain.lesson.Lesson;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -8,6 +9,38 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class LessonUpdateDto {
+
+    @Getter @Setter
+    @ApiModel(value = "강의 업데이트 요청 객체", description = "강의 업데이트 요청 객체")
+    public static class Request {
+
+        @ApiModelProperty(value = "강의 생성하는 멤버 아이디")
+        private Long memberId;
+
+        @ApiModelProperty(value = "강의명")
+        @NotBlank(message = "강의명을 입력해 주세요")
+        private String lessonName;
+
+        @ApiModelProperty(value = "강의 총개수")
+        @NotNull(message = "강의 총개수를 입력해 주세요")
+        private Integer totalNumber;
+
+        @ApiModelProperty(value = "카테고리 아이디")
+        @NotNull(message = "카테고리 아이디를 입력해 주세요")
+        private Long categoryId;
+
+        @ApiModelProperty(value = "사이트 아이디")
+        @NotNull(message = "사이트 아이디를 입력해 주세요")
+        private Long siteId;
+
+        public Lesson toEntity(Long lessonId) {
+            return Lesson.builder()
+                    .lessonId(lessonId)
+                    .lessonName(lessonName)
+                    .totalNumber(totalNumber)
+                    .build();
+        }
+    }
 
     @Builder
     @NoArgsConstructor
@@ -32,25 +65,4 @@ public class LessonUpdateDto {
         private Long siteId;
     }
 
-    @Getter @Setter
-    @ApiModel(value = "강의 업데이트 요청 객체", description = "강의 업데이트 요청 객체")
-    public static class Request {
-
-        @ApiModelProperty(value = "강의명")
-        @NotBlank(message = "강의명을 입력해 주세요")
-        private String lessonName;
-
-        @ApiModelProperty(value = "강의 총개수")
-        @NotNull(message = "강의 총개수를 입력해 주세요")
-        private Integer totalNumber;
-
-        @ApiModelProperty(value = "카테고리 아이디")
-        @NotNull(message = "카테고리 아이디를 입력해 주세요")
-        private Long categoryId;
-
-        @ApiModelProperty(value = "사이트 아이디")
-        @NotNull(message = "사이트 아이디를 입력해 주세요")
-        private Long siteId;
-
-    }
 }

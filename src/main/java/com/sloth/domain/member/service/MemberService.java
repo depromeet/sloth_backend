@@ -1,4 +1,4 @@
-package com.sloth.app.member.service;
+package com.sloth.domain.member.service;
 
 import com.sloth.api.login.dto.FormJoinDto;
 import com.sloth.config.auth.dto.OAuthAttributes;
@@ -62,7 +62,7 @@ public class MemberService {
         LocalDateTime tokenExpiredTime = DateTimeUtils.convertToLocalDateTime(refreshTokenExpireTime);
 
         MemberToken memberToken = MemberToken.createMemberToken(member, tokenDto.getRefreshToken(), tokenExpiredTime);
-        member.setMemberToken(memberToken);
+        member.updateMemberToken(memberToken);
         memberRepository.save(member);
     }
 

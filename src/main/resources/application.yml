@@ -22,9 +22,9 @@ spring:
     properties:
       hibernate:
         format_sql : true
-        default_batch_fetch_size: 100
+        default_batch_fetch_size: 1000
         use_sql_comments: true
-  #    open-in-view: false
+        open-in-view: false
   devtools:
     livereload:
       enabled: true

@@ -1,18 +1,19 @@
 package com.sloth.api.lesson.controller;
 
 import com.sloth.api.BaseApiController;
-
-import com.sloth.api.lesson.dto.LessonDetailDto;
 import com.sloth.api.lesson.dto.LessonNumberDto;
-import com.sloth.domain.member.constant.SocialType;
+import com.sloth.api.lesson.dto.LessonUpdateDto;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
 import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.lesson.repository.LessonRepository;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.constant.Role;
+import com.sloth.domain.member.constant.SocialType;
+import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.site.Site;
 import com.sloth.domain.site.repository.SiteRepository;
+import com.sloth.util.DateTimeUtils;
 import com.sloth.util.TestUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,10 +31,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class LessonControllerTest extends BaseApiController {
@@ -44,16 +50,28 @@ public class LessonControllerTest extends BaseApiController {
     @MockBean
     CategoryRepository categoryRepository;
 
-    private Category createCategory() {
-        return new Category("개발", 1, 1l, "개발");
+    @MockBean
+    MemberRepository memberRepository;
+
+    private Category createCategory(Long categoryId) {
+        return Category.builder()
+                .categoryId(categoryId)
+                .categoryName("개발")
+                .categoryLvl(0)
+                .rootCategoryName("개발")
+                .build();
     }
 
-    private Site createSite() {
-        return new Site("testSite");
+    private Site createSite(Long id) {
+        return Site.builder()
+                .siteId(id)
+                .siteName("테스트 사이트")
+                .build();
     }
 
-    private Lesson createLesson(Member member, Site site, Category category) {
+    private Lesson createLesson(Long lessonId, Member member, Site site, Category category) {
         return Lesson.builder()
+                .lessonId(lessonId)
                 .member(member)
                 .lessonName("testLesson")
                 .startDate(LocalDate.now())
@@ -66,28 +84,9 @@ public class LessonControllerTest extends BaseApiController {
                 .build();
     }
 
-    private List<Lesson> createLessons(Member member, Site site, Category category) {
-        List<Lesson> lessons = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Lesson lesson = Lesson.builder()
-                    .member(member)
-                    .lessonName("testLesson" + i)
-                    .startDate(LocalDate.now())
-                    .endDate(LocalDate.now().plusMonths(1))
-                    .totalNumber(10)
-                    .price(200000)
-                    .alertDays("월")
-                    .site(site)
-                    .category(category)
-                    .build();
-            lessons.add(lesson);
-        }
-
-        return lessons;
-    }
-
-    private Member createTestMember() {
+    private Member createTestMember(Long memberId) {
         return Member.builder()
+                .memberId(memberId)
                 .memberName("testMember")
                 .email("email@email.com")
                 .socialType(SocialType.KAKAO)
@@ -102,13 +101,13 @@ public class LessonControllerTest extends BaseApiController {
     void plusPresentNumber_underTotal() throws Exception {
 
         //given
-        Member member = createTestMember();
-        Site site = createSite();
-        Category category = createCategory();
-        Lesson lesson = createLesson(member, site, category);
+        Member member = createTestMember(null);
+        Site site = createSite(null);
+        Category category = createCategory(null);
+        Lesson lesson = createLesson(1L, member, site, category);
         Optional<Lesson> optionalLesson = Optional.of(lesson);
 
-        given(lessonRepository.findById(1L))
+        given(lessonRepository.findById(lesson.getLessonId()))
                 .willReturn(optionalLesson);
 
         LessonNumberDto.Request request = new LessonNumberDto.Request(1L, 2);
@@ -131,15 +130,15 @@ public class LessonControllerTest extends BaseApiController {
     void plusPresentNumber_overTotal() throws Exception {
 
         //given
-        Member member = createTestMember();
-        Site site = createSite();
-        Category category = createCategory();
-        Lesson lesson = createLesson(member, site, category);
+        Member member = createTestMember(null);
+        Site site = createSite(2L);
+        Category category = createCategory(3L);
+        Lesson lesson = createLesson(1L, member, site, category);
         Optional<Lesson> optionalLesson = Optional.of(lesson);
-        given(lessonRepository.findById(1L))
+        given(lessonRepository.findById(lesson.getLessonId()))
                 .willReturn(optionalLesson);
 
-        LessonNumberDto.Request request = new LessonNumberDto.Request(1L, 12);
+        LessonNumberDto.Request request = new LessonNumberDto.Request(lesson.getLessonId(), 12);
 
         //when
         mockMvc.perform(patch("/api/lesson/number/plus")
@@ -159,17 +158,17 @@ public class LessonControllerTest extends BaseApiController {
     void minusPresentNumber_overZero() throws Exception {
 
         //given
-        Member member = createTestMember();
-        Site site = createSite();
-        Category category = createCategory();
-        Lesson lesson = createLesson(member, site, category);
+        Member member = createTestMember(null);
+        Site site = createSite(null);
+        Category category = createCategory(null);
+        Lesson lesson = createLesson(1L, member, site, category);
         lesson.plusPresentNumber(4);
 
         Optional<Lesson> optionalLesson = Optional.of(lesson);
         given(lessonRepository.findById(1L))
                 .willReturn(optionalLesson);
 
-        LessonNumberDto.Request minusRequest = new LessonNumberDto.Request(1L, 1);
+        LessonNumberDto.Request minusRequest = new LessonNumberDto.Request(lesson.getLessonId(), 1);
 
         mockMvc.perform(patch("/api/lesson/number/minus")
                 .header(HttpHeaders.AUTHORIZATION, accessToken)
@@ -187,16 +186,16 @@ public class LessonControllerTest extends BaseApiController {
     void minusPresentNumber_underZero() throws Exception {
 
         //given
-        Member member = createTestMember();
-        Site site = createSite();
-        Category category = createCategory();
-        Lesson lesson = createLesson(member, site, category);
+        Member member = createTestMember(null);
+        Site site = createSite(null);
+        Category category = createCategory(null);
+        Lesson lesson = createLesson(1L, member, site, category);
         lesson.plusPresentNumber(2);
         Optional<Lesson> optionalLesson = Optional.of(lesson);
         given(lessonRepository.findById(1L))
                 .willReturn(optionalLesson);
 
-        LessonNumberDto.Request minusRequest = new LessonNumberDto.Request(1L, 4);
+        LessonNumberDto.Request minusRequest = new LessonNumberDto.Request(lesson.getLessonId(), 4);
 
         //when
         mockMvc.perform(patch("/api/lesson/number/minus")
@@ -216,16 +215,21 @@ public class LessonControllerTest extends BaseApiController {
     void getLessonDetail() throws Exception {
 
         //given
-        Member member = createTestMember();
-        Site site = createSite();
-        Category category = createCategory();
-        Lesson lesson = createLesson(member, site, category);
+        Member member = createTestMember(null);
+        Site site = createSite(null);
+        Category category = createCategory(null);
+        Lesson lesson = createLesson(1L, member, site, category);
         lesson.plusPresentNumber(2);
         Optional<Lesson> optionalLesson = Optional.of(lesson);
-        given(lessonRepository.findById(1L))
+        given(lessonRepository.findById(lesson.getLessonId()))
                 .willReturn(optionalLesson);
 
-        LessonDetailDto.Request request = new LessonDetailDto.Request(1L);
+        LessonUpdateDto.Request request = new LessonUpdateDto.Request();
+        request.setLessonName("업데이트 강의명");
+        request.setCategoryId(2L);
+        request.setSiteId(1L);
+        request.setMemberId(1L);
+        request.setTotalNumber(null);
 
         //when
         MvcResult mvcResult = mockMvc.perform(get("/api/lesson/detail")
@@ -240,6 +244,105 @@ public class LessonControllerTest extends BaseApiController {
         HashMap resultMap = TestUtil.convert(mvcResult);
         assertEquals("testSite", resultMap.get("site"));
         assertEquals("testCategory", resultMap.get("category"));
+    }
+
+    @Test
+    @DisplayName("강위 수정 API 테스트")
+    void updateLesson() throws Exception {
+
+        //given
+        Member member = createTestMember(1L);
+        Site site = createSite(2L);
+        Category category = createCategory(3L);
+        Lesson lesson = createLesson(4L, member, site, category);
+
+        Optional<Lesson> optionalLesson = Optional.of(lesson);
+        Optional<Site> optionalSite = Optional.of(site);
+        Optional<Category> optionalCategory = Optional.of(category);
+        Optional<Member> optionalMember = Optional.of(member);
+
+        given(memberRepository.findById(member.getMemberId()))
+                .willReturn(optionalMember);
+
+        given(siteRepository.findById(site.getSiteId()))
+                .willReturn(optionalSite);
+
+        given(lessonRepository.findById(lesson.getLessonId()))
+                .willReturn(optionalLesson);
+
+        given(categoryRepository.findById(category.getCategoryId()))
+                .willReturn(optionalCategory);
+
+        LessonUpdateDto.Request request = new LessonUpdateDto.Request();
+        request.setLessonName("lesson name update");
+        request.setCategoryId(category.getCategoryId());
+        request.setSiteId(site.getSiteId());
+        request.setMemberId(member.getMemberId());
+        request.setTotalNumber(20);
+
+        //when
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.patch("/api/lesson/" + String.valueOf(lesson.getLessonId()))
+                .header(HttpHeaders.AUTHORIZATION, accessToken)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        //then
+        HashMap resultMap = TestUtil.convert(mvcResult);
+        assertEquals(request.getLessonName(), resultMap.get("lessonName"));
+    }
+
+    @Test
+    @DisplayName("강위 수정 API 테스트")
+    void getLessonList() throws Exception {
+
+        //given
+        Member member = createTestMember(1L);
+        Optional<Member> optionalMember = Optional.of(member);
+        Site site = createSite(2L);
+        Category category = createCategory(3L);
+
+        List<Lesson> lessons = new ArrayList<>();
+
+        for(long i = 4; i< 8; i++) {
+            lessons.add( createLesson(i, member, site, category));
+        }
+        lessons.get(0).plusPresentNumber(2);
+
+        given(memberRepository.findByEmail(testEmail))
+                .willReturn(optionalMember);
+
+        given(lessonRepository.getLessons(member.getMemberId()))
+                .willReturn(lessons);
+
+        //when
+        ResultActions result = mockMvc.perform(MockMvcRequestBuilders.get("/api/lesson/list")
+                .header(HttpHeaders.AUTHORIZATION, accessToken)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON))
+                ;
+
+        //then
+        Lesson lesson1 = lessons.get(0);
+        result.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0]").exists())
+                .andExpect(jsonPath("$[3]").exists())
+                .andExpect(jsonPath("$[0].remainDay").value(equalTo(lesson1.getRemainDay())))
+                .andExpect(jsonPath("$[0].categoryName").value(equalTo(category.getCategoryName())))
+                .andExpect(jsonPath("$[0].siteName").value(equalTo(site.getSiteName())))
+                .andExpect(jsonPath("$[0].lessonName").value(equalTo(lesson1.getLessonName())))
+
+                .andExpect(jsonPath("$[0].price").value(equalTo(lesson1.getPrice())))
+                //.andExpect(jsonPath("$[0].currentProgressRate").value(equalTo(lesson1.currentProgressRate())))
+                //.andExpect(jsonPath("$[0].goalProgressRate").value(equalTo(lesson1.goalProgressRate())))
+                .andExpect(jsonPath("$[0].startDate").value(equalTo(DateTimeUtils.convertToString(lesson1.getStartDate()))))
+                .andExpect(jsonPath("$[0].endDate").value(equalTo(DateTimeUtils.convertToString(lesson1.getEndDate()))))
+                .andExpect(jsonPath("$[0].totalNumber").value(equalTo(lesson1.getTotalNumber())))
+                .andExpect(jsonPath("$[0].isFinished").value(equalTo(lesson1.getIsFinished())))
+                .andExpect(jsonPath("$[0].lessonStatus").value(equalTo(lesson1.getLessonStatus().name())))
+                ;
     }
 
 }

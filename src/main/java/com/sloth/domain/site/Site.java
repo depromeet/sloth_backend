@@ -1,14 +1,12 @@
 package com.sloth.domain.site;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor @AllArgsConstructor
 @EqualsAndHashCode(of = "siteId")
 @Table(name = "site")

@@ -2,18 +2,19 @@ package com.sloth.api.lesson.service;
 
 import com.sloth.api.lesson.dto.LessonCreateDto;
 import com.sloth.api.lesson.dto.RenderOrderDto;
-import com.sloth.app.member.service.MemberService;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
 import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.lesson.repository.LessonRepository;
 import com.sloth.domain.member.Member;
+import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.site.Site;
 import com.sloth.domain.site.repository.SiteRepository;
 import com.sloth.exception.BusinessException;
 import com.sloth.exception.LessonNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -80,8 +81,41 @@ public class LessonService {
         return lessonRepository.getDoingLessonsDetail(memberId);
     }
 
-    public List<Lesson> getLessons(Long memberId) {
-        return lessonRepository.getLessonsDetail(memberId);
+    public List<Lesson> getLessons(String email) {
+        Member member = memberService.findByEmail(email);
+        return lessonRepository.getLessons(member.getMemberId());
+    }
+
+    /**
+     * 강의 업데이트
+     * @param memberId
+     * @param siteId
+     * @param cateogoryId
+     * @param lesson
+     * @return
+     */
+    public Lesson updateLesson(Long memberId, Long siteId, Long cateogoryId, Lesson lesson) {
+
+        Member member = memberService.findMember(memberId);
+
+        Site site = siteRepository.findById(siteId)
+                .orElseThrow( () -> new BusinessException("사이트가 존재하지 않습니다."));
+
+        Category category = categoryRepository.findById(cateogoryId)
+                .orElseThrow( () -> new BusinessException("카테고리가 존재하지 않습니다."));
+
+        Lesson updateLesson = lessonRepository.findById(lesson.getLessonId())
+                .orElseThrow(() -> new BusinessException("해당 강의가 존재하지 않습니다."));
+
+        if(!StringUtils.equals(member.getMemberId(), updateLesson.getMember().getMemberId())) {
+            throw new BusinessException("해당 강의 입력자와, 수정 요청한 회원 아이디가 다릅니다.");
+        }
+
+        updateLesson.updateLesson(lesson);
+        updateLesson.updateSite(site);
+        updateLesson.updateCategory(category);
+
+        return updateLesson;
     }
 
     /**

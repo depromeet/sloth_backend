@@ -1,14 +1,14 @@
 package com.sloth.api.login.service;
 
-import com.sloth.api.login.dto.FormLoginRequestDto;
 import com.sloth.api.login.dto.FormJoinDto;
+import com.sloth.api.login.dto.FormLoginRequestDto;
 import com.sloth.api.login.dto.ResponseJwtTokenDto;
-import com.sloth.domain.member.Member;
-import com.sloth.domain.member.constant.SocialType;
-import com.sloth.app.member.service.MemberService;
 import com.sloth.config.auth.TokenProvider;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.config.auth.dto.TokenDto;
+import com.sloth.domain.member.Member;
+import com.sloth.domain.member.constant.SocialType;
+import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.exception.ForbiddenException;
 import com.sloth.exception.InvalidParameterException;
@@ -16,16 +16,12 @@ import com.sloth.util.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
-import javax.validation.Valid;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Slf4j
 @Service
