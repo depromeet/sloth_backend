@@ -6,10 +6,12 @@ import com.sloth.api.login.dto.FormLoginRequestDto;
 import com.sloth.api.login.dto.OauthRequestDto;
 import com.sloth.api.login.dto.ResponseJwtTokenDto;
 import com.sloth.api.login.validator.FormLoginValidator;
+import com.sloth.domain.member.Member;
 import com.sloth.domain.member.constant.SocialType;
 import com.sloth.api.login.service.LoginService;
 import com.sloth.api.login.validator.FormRegisterValidator;
 import com.sloth.exception.InvalidParameterException;
+import com.sloth.util.MailService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,12 +22,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -65,21 +68,17 @@ public class LoginController {
 
     @PostMapping(value = "/form/register", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Form 회원가입 API", description = "폼 회원가입 API")
-    public ResponseEntity<ApiResult> register(@Valid @RequestBody FormJoinDto formRequestDto, Errors errors) {
+    public ResponseEntity<ApiResult> register(@Valid @RequestBody FormJoinDto formRequestDto, Errors errors) throws MessagingException {
         new FormRegisterValidator().validate(formRequestDto, errors);
 
         if(errors.hasErrors()) {
             InvalidParameterException.throwErrorMessage(errors);
         }
 
-        loginService.register(formRequestDto);
+        Member savedMember = loginService.register(formRequestDto);
+        loginService.sendConfirmEmail(savedMember);
 
-        // TODO 이메일 인증 추가
-
-        ApiResult response = ApiResult.builder()
-                .code(String.valueOf(HttpStatus.OK.value()))
-                .message("success")
-                .build();
+        ApiResult response = ApiResult.createOk();
 
         return ResponseEntity.ok(response);
     }
@@ -100,5 +99,12 @@ public class LoginController {
     // TODO ID 찾기
     // TODO 비밀번호 찾기
     // TODO 이메일로 로그인하기
+
+    @GetMapping("/email-confirm")
+    public ResponseEntity<ApiResult> confirmEmail(@RequestParam("email") String email, @RequestParam("code") String confirmCode) {
+        loginService.confirmEmail(email, confirmCode); // TODO 이메링 링크 클릭 시 앱으로 이동
+        // TODO isEmailConfirm 필드에 따라 기능 제한하기
+        return ResponseEntity.ok(ApiResult.createOk());
+    }
 
 }

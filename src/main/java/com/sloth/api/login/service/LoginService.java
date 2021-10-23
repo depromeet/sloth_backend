@@ -10,7 +10,9 @@ import com.sloth.config.auth.TokenProvider;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.config.auth.dto.TokenDto;
 import com.sloth.domain.memberToken.MemberToken;
+import com.sloth.exception.ForbiddenException;
 import com.sloth.exception.InvalidParameterException;
+import com.sloth.util.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -19,6 +21,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -33,6 +37,7 @@ public class LoginService {
     private final ModelMapper modelMapper;
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
+    private final MailService mailService;
 
     /**
      * OAuth 로그인
@@ -64,8 +69,8 @@ public class LoginService {
      * 폼 회원가입
      * @param formRequestDto
      */
-    public void register(FormJoinDto formRequestDto) {
-        memberService.saveMember(formRequestDto);
+    public Member register(FormJoinDto formRequestDto) {
+        return memberService.saveMember(formRequestDto);
     }
 
     /**
@@ -78,6 +83,10 @@ public class LoginService {
 
         if(!passwordEncoder.matches(formLoginRequestDto.getPassword(), member.getPassword())) {
             throw new InvalidParameterException("비밀번호를 확인해주세요");
+        }
+
+        if (!member.isEmailConfirm()) {
+            throw new ForbiddenException("이메일 인증을 하지 않은 사용자입니다.");
         }
 
         MemberToken memberToken = member.getMemberToken();
@@ -99,4 +108,22 @@ public class LoginService {
         return modelMapper.map(tokenDto, ResponseJwtTokenDto.class);
     }
 
+    public void sendConfirmEmail(Member member) throws MessagingException {
+        String body = "<html><body><h1> 나나공 이메일 인증 </h1>" +
+                "<div>나나공 서비스를 이용하시려면 아래 링크를 클릭해 이메일을 인증해주세요.</div>" +
+                "<div><a href='https://slothbackend.hopto.org/api/email-confirm?email=" + member.getEmail() + "&code=" + member.getEmailConfirmCode() + "'>나나공 이메일 인증하기</a></div>" +
+                "</body></html>";
+        String to = member.getEmail();
+        String subject = "나나공 서비스 인증 이메일";
+
+        mailService.sendEmail(to, subject, body);
+    }
+
+    public void confirmEmail(String email, String confirmCode) {
+        Member member = memberService.findByEmail(email);
+        if (!member.confirmEmail(confirmCode)) {
+            throw new IllegalArgumentException("인증에 실패했습니다.");
+        }
+        member.activate();
+    }
 }

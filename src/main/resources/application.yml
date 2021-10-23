@@ -50,6 +50,17 @@ spring:
   messages:
     basename: messages,errors
 
+  # java mail
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: sloth.backend@gmail.com
+    password: vvvxnwqaxiqnrqgq
+    properties.mail.smtp:
+      auth: true
+      starttls:
+        enable: true
+
 logging:
   level:
     org.hibernate.SQL: debug
@@ -76,7 +87,6 @@ token:
   secret: sloth-backend
   access-token-expiration-time: 900000  # 15분
   refresh-token-expiration-time: 1210500000 # 2주
-
 
 my-pass: depman*
 
