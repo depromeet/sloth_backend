@@ -36,10 +36,10 @@ public class LessonDetailDto {
         private Integer price;
 
         @ApiModelProperty(value = "강의 현재 진도율")
-        private double currentProgressRate;
+        private int currentProgressRate;
 
         @ApiModelProperty(value = "강의 목표 진도율")
-        private double goalProgressRate;
+        private int goalProgressRate;
 
         @ApiModelProperty(value = "강의 시작일")
         private LocalDate startDate;
