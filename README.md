@@ -12,6 +12,6 @@
 - Swagger
 
 ## 트러블 슈팅
-- 로그인 요청시 OAuth 로그인 후 JWT토큰 발급
+- OAuth 로그인 or 폼 로그인 요청시 JWT토큰 발급
 - Github Action & Docker로 CI/CD
 - 무중단 배포
