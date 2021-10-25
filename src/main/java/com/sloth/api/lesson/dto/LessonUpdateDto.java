@@ -14,9 +14,6 @@ public class LessonUpdateDto {
     @ApiModel(value = "강의 업데이트 요청 객체", description = "강의 업데이트 요청 객체")
     public static class Request {
 
-        @ApiModelProperty(value = "강의 생성하는 멤버 아이디")
-        private Long memberId;
-
         @ApiModelProperty(value = "강의명")
         @NotBlank(message = "강의명을 입력해 주세요")
         private String lessonName;
@@ -32,14 +29,6 @@ public class LessonUpdateDto {
         @ApiModelProperty(value = "사이트 아이디")
         @NotNull(message = "사이트 아이디를 입력해 주세요")
         private Long siteId;
-
-        public Lesson toEntity(Long lessonId) {
-            return Lesson.builder()
-                    .lessonId(lessonId)
-                    .lessonName(lessonName)
-                    .totalNumber(totalNumber)
-                    .build();
-        }
     }
 
     @Builder

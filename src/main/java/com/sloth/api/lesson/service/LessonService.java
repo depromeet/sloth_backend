@@ -1,6 +1,7 @@
 package com.sloth.api.lesson.service;
 
 import com.sloth.api.lesson.dto.LessonCreateDto;
+import com.sloth.api.lesson.dto.LessonUpdateDto;
 import com.sloth.api.lesson.dto.RenderOrderDto;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
@@ -11,6 +12,7 @@ import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.site.Site;
 import com.sloth.domain.site.repository.SiteRepository;
 import com.sloth.exception.BusinessException;
+import com.sloth.exception.ForbiddenException;
 import com.sloth.exception.LessonNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,34 +28,36 @@ import java.util.List;
 public class LessonService {
 
     private final LessonRepository lessonRepository;
-    private final MemberService memberService;
     private final SiteRepository siteRepository;
     private final CategoryRepository categoryRepository;
 
-    public Lesson findLesson(Long id) {
-        return lessonRepository.findById(id).orElseThrow(() -> new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다."));
-    }
-
-    public Lesson findLessonWithSiteCategory(Long id) {
-        return lessonRepository.findLessonWithSiteCategoryByLessonId(id).orElseThrow(()->{
+    public Lesson findLessonWithSiteCategory(Member member, Long id) {
+        Lesson lesson = lessonRepository.findWithSiteCategoryMemberByLessonId(id).orElseThrow(() -> {
             throw new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다.");
         });
+        checkAuthority(member, lesson);
+        return lesson;
     }
 
-    public Lesson plusPresentNumber(Long id, int count) {
-        Lesson lesson = findLesson(id);
+    public Lesson plusPresentNumber(Member member, Long id, int count) {
+        Lesson lesson = findLessonWithMember(id);
+        checkAuthority(member, lesson);
         lesson.plusPresentNumber(count);
         return lesson;
     }
 
-    public Lesson minusPresentNumber(Long id, int count) {
-        Lesson lesson = findLesson(id);
+    public Lesson minusPresentNumber(Member member, Long id, int count) {
+        Lesson lesson = findLessonWithMember(id);
+        checkAuthority(member, lesson);
         lesson.minusPresentNumber(count);
         return lesson;
     }
 
-    public Long saveLesson(LessonCreateDto.Request requestDto) {
-        Member member = memberService.findMember(requestDto.getMemberId());
+    private Lesson findLessonWithMember(Long id) {
+        return lessonRepository.findWithMemberByLessonId(id).orElseThrow(() -> new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다."));
+    }
+
+    public Long saveLesson(Member member, LessonCreateDto.Request requestDto) {
 
         Site site = siteRepository.findById(requestDto.getSiteId())
                 .orElseThrow( () -> new BusinessException("사이트가 존재하지 않습니다."));
@@ -77,12 +81,11 @@ public class LessonService {
         return lessonRepository.save(lesson).getLessonId();
     }
 
-    public List<Lesson> getDoingLessons(Long memberId) {
-        return lessonRepository.getDoingLessonsDetail(memberId);
+    public List<Lesson> getDoingLessons(Member member) {
+        return lessonRepository.getDoingLessonsDetail(member.getMemberId());
     }
 
-    public List<Lesson> getLessons(String email) {
-        Member member = memberService.findByEmail(email);
+    public List<Lesson> getLessons(Member member) {
         return lessonRepository.getLessons(member.getMemberId());
     }
 
@@ -90,32 +93,33 @@ public class LessonService {
      * 강의 업데이트
      * @param memberId
      * @param siteId
-     * @param cateogoryId
+     * @param categoryId
      * @param lesson
      * @return
      */
-    public Lesson updateLesson(Long memberId, Long siteId, Long cateogoryId, Lesson lesson) {
+    public Lesson updateLesson(Member member, LessonUpdateDto.Request request, Long lessonId) {
 
-        Member member = memberService.findMember(memberId);
-
-        Site site = siteRepository.findById(siteId)
-                .orElseThrow( () -> new BusinessException("사이트가 존재하지 않습니다."));
-
-        Category category = categoryRepository.findById(cateogoryId)
-                .orElseThrow( () -> new BusinessException("카테고리가 존재하지 않습니다."));
-
-        Lesson updateLesson = lessonRepository.findById(lesson.getLessonId())
+        Lesson lesson = lessonRepository.findWithMemberByLessonId(lessonId)
                 .orElseThrow(() -> new BusinessException("해당 강의가 존재하지 않습니다."));
 
-        if(!StringUtils.equals(member.getMemberId(), updateLesson.getMember().getMemberId())) {
-            throw new BusinessException("해당 강의 입력자와, 수정 요청한 회원 아이디가 다릅니다.");
+        checkAuthority(member, lesson);
+
+        Site site = siteRepository.findById(request.getSiteId())
+                .orElseThrow( () -> new BusinessException("사이트가 존재하지 않습니다."));
+
+        Category category = categoryRepository.findById(request.getCategoryId())
+                .orElseThrow( () -> new BusinessException("카테고리가 존재하지 않습니다."));
+
+        lesson.updateLesson(request.getLessonName(), request.getTotalNumber(), category, site);
+
+        return lesson;
+    }
+
+
+    private void checkAuthority(Member member, Lesson lesson) {
+        if (!StringUtils.equals(lesson.getMember().getMemberId(), member.getMemberId())) {
+            throw new ForbiddenException("해당 강의에 대한 권한이 없습니다.");
         }
-
-        updateLesson.updateLesson(lesson);
-        updateLesson.updateSite(site);
-        updateLesson.updateCategory(category);
-
-        return updateLesson;
     }
 
     /**

@@ -3,9 +3,9 @@ package com.sloth.api.lesson.controller;
 import com.sloth.api.lesson.dto.*;
 import com.sloth.api.lesson.service.LessonService;
 import com.sloth.domain.lesson.Lesson;
-import com.sloth.domain.member.dto.MemberInfo;
+import com.sloth.domain.member.Member;
 import com.sloth.exception.InvalidParameterException;
-import com.sloth.resolver.Member;
+import com.sloth.resolver.CurrentMember;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,11 +23,11 @@ import java.util.List;
 
 import static org.springframework.http.ResponseEntity.ok;
 
+@Slf4j
 @RestController
 @Transactional
 @RequestMapping("/api/lesson")
 @RequiredArgsConstructor
-@Slf4j
 public class LessonController {
 
     private final LessonService lessonService;
@@ -37,8 +37,8 @@ public class LessonController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<LessonNumberDto.Response> plusPresentNumber(@Valid @RequestBody LessonNumberDto.Request request) {
-        Lesson lesson = lessonService.plusPresentNumber(request.getLessonId(), request.getCount());
+    public ResponseEntity<LessonNumberDto.Response> plusPresentNumber(@CurrentMember Member member, @Valid @RequestBody LessonNumberDto.Request request) {
+        Lesson lesson = lessonService.plusPresentNumber(member, request.getLessonId(), request.getCount());
         LessonNumberDto.Response response = LessonNumberDto.Response.create(lesson);
         return ok(response);
     }
@@ -48,8 +48,8 @@ public class LessonController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<LessonNumberDto.Response> minusPresentNumber(@Valid @RequestBody LessonNumberDto.Request request) {
-        Lesson lesson = lessonService.minusPresentNumber(request.getLessonId(), request.getCount());
+    public ResponseEntity<LessonNumberDto.Response> minusPresentNumber(@CurrentMember Member member, @Valid @RequestBody LessonNumberDto.Request request) {
+        Lesson lesson = lessonService.minusPresentNumber(member, request.getLessonId(), request.getCount());
         LessonNumberDto.Response response = LessonNumberDto.Response.create(lesson);
         return ok(response);
     }
@@ -59,8 +59,8 @@ public class LessonController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<LessonDetailDto.Response> getLessonDetail(@Valid @RequestBody LessonDetailDto.Request request) {
-        Lesson lesson = lessonService.findLessonWithSiteCategory(request.getLessonId());
+    public ResponseEntity<LessonDetailDto.Response> getLessonDetail(@CurrentMember Member member, @Valid @RequestBody LessonDetailDto.Request request) {
+        Lesson lesson = lessonService.findLessonWithSiteCategory(member, request.getLessonId());
         LessonDetailDto.Response lessonDetail = LessonDetailDto.Response.create(lesson);
         return ok(lessonDetail);
     }
@@ -70,8 +70,11 @@ public class LessonController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<List<DoingLessonDto.Response>> getDoingLesson(@Valid @RequestBody DoingLessonDto.Request request) {
-        List<Lesson> lessons = lessonService.getDoingLessons(request.getMemberId());
+    public ResponseEntity<List<DoingLessonDto.Response>> getDoingLesson(@CurrentMember Member member) {
+        List<Lesson> lessons = lessonService.getDoingLessons(member);
+        if (lessons == null) {
+            return ResponseEntity.notFound().build();
+        }
         List<DoingLessonDto.Response> doingLessonResponses = new ArrayList<>();
         for (Lesson lesson : lessons) {
             DoingLessonDto.Response doingLessonResponse = DoingLessonDto.Response.create(lesson);
@@ -87,6 +90,7 @@ public class LessonController {
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
     public ResponseEntity<LessonUpdateDto.Response> updateLesson(@PathVariable("lessonId") Long lessonId,
+                                                                 @CurrentMember Member member,
                                                                  @Valid @RequestBody LessonUpdateDto.Request lessonUpdateDto,
                                                                  BindingResult bindingResult) {
 
@@ -94,11 +98,8 @@ public class LessonController {
             InvalidParameterException.throwErrorMessage(bindingResult);
         }
 
-        Lesson lesson = lessonUpdateDto.toEntity(lessonId);
-
         // 강의 업데이트
-        Lesson updatedLesson = lessonService.updateLesson(lessonUpdateDto.getMemberId(), lessonUpdateDto.getSiteId(),
-                lessonUpdateDto.getCategoryId(), lesson);
+        Lesson updatedLesson = lessonService.updateLesson(member, lessonUpdateDto, lessonId);
 
         // 반환 객체 생성
         LessonUpdateDto.Response responseLessonUpdateDto = LessonUpdateDto.Response.builder()
@@ -117,11 +118,15 @@ public class LessonController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<List<LessonListDto.Response>> getLessonList(@Member MemberInfo memberInfo) {
+    public ResponseEntity<List<LessonListDto.Response>> getLessonList(@CurrentMember Member member) {
 
         List<LessonListDto.Response> lessonListDto = new ArrayList<>();
 
-        List<Lesson> lessons = lessonService.getLessons(memberInfo.getEmail());
+        List<Lesson> lessons = lessonService.getLessons(member);
+
+        if (lessons == null) {
+            return ResponseEntity.noContent().build();
+        }
         for (Lesson lesson : lessons) {
             lessonListDto.add(LessonListDto.Response.create(lesson));
         }
@@ -134,8 +139,8 @@ public class LessonController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<LessonCreateDto.Response> saveLesson(@RequestBody LessonCreateDto.Request requestDto) {
-        Long lessonId = lessonService.saveLesson(requestDto);
+    public ResponseEntity<LessonCreateDto.Response> saveLesson(@CurrentMember Member member, @RequestBody LessonCreateDto.Request requestDto) {
+        Long lessonId = lessonService.saveLesson(member, requestDto);
         LessonCreateDto.Response response= LessonCreateDto.Response.builder()
                 .lessonId(lessonId)
                 .build();
