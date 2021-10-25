@@ -244,9 +244,6 @@ public class LessonControllerTest extends BaseApiController {
         }
         lessons.get(0).plusPresentNumber(2);
 
-        given(memberRepository.findByEmail(testEmail))
-                .willReturn(optionalMember);
-
         given(lessonRepository.getLessons(member.getMemberId()))
                 .willReturn(lessons);
 

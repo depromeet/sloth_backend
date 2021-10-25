@@ -25,11 +25,10 @@ public class ApiMemberService {
     }
 
     @Transactional
-    public Long update(Long id, MemberUpdateDto requestDto) {
-        Member member = memberRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 정보가 없습니다. id =" + id));
+    public Long update(Member member, MemberUpdateDto requestDto) {
         member.update(requestDto.getMemberName());
 
-        return id;
+        return member.getMemberId();
     }
 
     public MemberInfoDto getMemberInfo(String token) {
