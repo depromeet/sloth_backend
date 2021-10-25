@@ -13,8 +13,11 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface LessonRepository extends JpaRepository<Lesson, Long> ,CustomLessonRepository{
 
-    @EntityGraph(attributePaths = {"site","category"})
-    Optional<Lesson> findLessonWithSiteCategoryByLessonId(Long id);
+    @EntityGraph(attributePaths = {"site","category","member"})
+    Optional<Lesson> findWithSiteCategoryMemberByLessonId(Long id);
 
     Optional<Lesson> findByLessonName(String name);
+
+    @EntityGraph(attributePaths = {"member"})
+    Optional<Lesson> findWithMemberByLessonId(Long id);
 }

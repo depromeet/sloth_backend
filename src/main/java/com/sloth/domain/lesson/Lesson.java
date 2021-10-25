@@ -129,24 +129,18 @@ public class Lesson extends BaseEntity  {
         return wastePrice >= 0 ? wastePrice : 0;
     }
 
-    public void updateLesson(Lesson lesson) {
-        this.lessonName = lesson.getLessonName();
-        this.totalNumber = lesson.getTotalNumber();
-    }
-
-    public void updateSite(Site site) {
-        this.site = site;
-    }
-
-    public void updateCategory(Category category){
-        this.category = category;
-    }
-
     public LessonStatus getLessonStatus() {
         if(LocalDate.now().isBefore(endDate)){
             return LessonStatus.CURRENT;
         }
 
         return LessonStatus.PAST;
+    }
+
+    public void updateLesson(String lessonName, Integer totalNumber, Category category, Site site) {
+        this.lessonName = lessonName;
+        this.totalNumber = totalNumber;
+        this.category = category;
+        this.site = site;
     }
 }

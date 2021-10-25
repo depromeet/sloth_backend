@@ -29,8 +29,8 @@ public class ApiMemberController {
     })
     public ResponseEntity<MemberInfoDto> getMemberInfo(HttpServletRequest httpServletRequest) {
         String token = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION);
-        MemberInfoDto memberInfo = memberService.getMemberInfo(token);
-        return ResponseEntity.ok(memberInfo);
+        MemberInfoDto memberInfoDto = memberService.getMemberInfo(token);
+        return ResponseEntity.ok(memberInfoDto);
     }
 
     @PatchMapping("/{memberId}")
