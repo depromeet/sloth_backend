@@ -1,7 +1,10 @@
 package com.sloth.config;
 
+import com.sloth.domain.member.Member;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -23,6 +26,11 @@ public class SwaggerConfig {
         Server serverLocal = new Server("local", "http://localhost:8080", "for local usages", Collections.emptyList(), Collections.emptyList());
         Server testServer = new Server("test", "https://slothbackend.hopto.org", "for testing", Collections.emptyList(), Collections.emptyList());
         return new Docket(DocumentationType.OAS_30)
+                .ignoredParameterTypes(Member.class)
+                .ignoredParameterTypes(Errors.class)
+                .ignoredParameterTypes(Member.class)
+                .ignoredParameterTypes(Errors.class)
+                .ignoredParameterTypes(BindingResult.class)
                 .servers(serverLocal, testServer)
                 .groupName("sloth")
                 .apiInfo(this.apiInfo())

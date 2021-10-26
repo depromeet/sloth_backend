@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -45,7 +46,8 @@ public class MemberService {
             throw new InvalidParameterException("이미 존재하는 이메일입니다.");
         }
 
-        String emailConfirmCode = UUID.randomUUID().toString();
+        Random random = new Random();
+        String emailConfirmCode = String.valueOf(random.nextInt(899999) + 100000);
         Member member = Member.createFormMember(formRequestDto,
                                             passwordEncoder.encode(formRequestDto.getPassword()),
                                             emailConfirmCode);

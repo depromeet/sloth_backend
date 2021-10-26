@@ -86,25 +86,19 @@ public class Lesson extends BaseEntity  {
         }
     }
 
-    public void plusPresentNumber(int count) {
+    public void updatePresentNumber(int count) {
         if (this.isFinished) {
             return;
-        } else if (this.presentNumber + count >= this.totalNumber) {
+        } else {
+            this.presentNumber += count;
+        }
+
+        if (this.presentNumber >= totalNumber) {
             this.presentNumber = totalNumber;
             this.isFinished = true;
-        }else {
-            this.presentNumber += count; // TODO 주차별 진도율 반환
-        }
-    }
-
-    public void minusPresentNumber(int count) {
-        if (this.presentNumber == 0) {
-            return;
-        } else if (this.presentNumber - count <= 0) {
+        } else if (this.presentNumber <= 0) {
             this.presentNumber = 0;
             this.isFinished = false;
-        }else {
-            this.presentNumber -= count;
         }
     }
 

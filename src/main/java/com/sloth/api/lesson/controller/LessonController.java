@@ -32,24 +32,13 @@ public class LessonController {
 
     private final LessonService lessonService;
 
-    @PatchMapping(value = "/number/plus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "들은 강의 수 수정 API", description = "들은 강의 수 추가 api")
+    @PatchMapping(value = "/number", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "들은 강의 수 수정 API", description = "들은 강의 수 수정 api")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
     public ResponseEntity<LessonNumberDto.Response> plusPresentNumber(@CurrentMember Member member, @Valid @RequestBody LessonNumberDto.Request request) {
-        Lesson lesson = lessonService.plusPresentNumber(member, request.getLessonId(), request.getCount());
-        LessonNumberDto.Response response = LessonNumberDto.Response.create(lesson);
-        return ok(response);
-    }
-
-    @PatchMapping(value = "/number/minus", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "들은 강의 수 수정 API", description = "들은 강의 수 감소 api")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
-    })
-    public ResponseEntity<LessonNumberDto.Response> minusPresentNumber(@CurrentMember Member member, @Valid @RequestBody LessonNumberDto.Request request) {
-        Lesson lesson = lessonService.minusPresentNumber(member, request.getLessonId(), request.getCount());
+        Lesson lesson = lessonService.updatePresentNumber(member, request.getLessonId(), request.getCount());
         LessonNumberDto.Response response = LessonNumberDto.Response.create(lesson);
         return ok(response);
     }
@@ -146,21 +135,4 @@ public class LessonController {
                 .build();
         return ok(response);
     }
-
-    @GetMapping("/render/{page-number}")
-    @Operation(summary = "강의 등록 화면 렌더링 순서 API", description = "강의 등록 화면 렌더링 순서 API")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header"),
-            @ApiImplicitParam(name = "page-number", defaultValue ="1", dataType = "string", value = "렌더링할 페이지 번호", required = true, paramType = "path")
-    })
-    public ResponseEntity<RenderOrderDto> viewRenderOrder(@PathVariable("page-number") int pageNumber) {
-
-        if(pageNumber < 1) {
-            throw new InvalidParameterException("강의 등록 화면은 1페이지부터 시작 입니다.");
-        }
-
-        RenderOrderDto renderOrderDto = lessonService.viewRenderOrder(pageNumber);
-        return ResponseEntity.ok(renderOrderDto);
-    }
-
 }

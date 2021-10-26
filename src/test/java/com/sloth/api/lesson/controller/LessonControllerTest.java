@@ -90,7 +90,7 @@ public class LessonControllerTest extends BaseApiController {
         LessonNumberDto.Request request = new LessonNumberDto.Request(lesson.getLessonId(), 2);
 
         //when
-        mockMvc.perform(patch("/api/lesson/number/plus")
+        mockMvc.perform(patch("/api/lesson/number")
                 .header(HttpHeaders.AUTHORIZATION, accessToken)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -111,7 +111,7 @@ public class LessonControllerTest extends BaseApiController {
         LessonNumberDto.Request request = new LessonNumberDto.Request(lesson.getLessonId(), 12);
 
         //when
-        mockMvc.perform(patch("/api/lesson/number/plus")
+        mockMvc.perform(patch("/api/lesson/number")
                 .header(HttpHeaders.AUTHORIZATION, accessToken)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -129,11 +129,11 @@ public class LessonControllerTest extends BaseApiController {
 
         //given
         
-        lesson.plusPresentNumber(4);
+        lesson.updatePresentNumber(4);
 
-        LessonNumberDto.Request minusRequest = new LessonNumberDto.Request(lesson.getLessonId(), 1);
+        LessonNumberDto.Request minusRequest = new LessonNumberDto.Request(lesson.getLessonId(), -1);
 
-        mockMvc.perform(patch("/api/lesson/number/minus")
+        mockMvc.perform(patch("/api/lesson/number")
                 .header(HttpHeaders.AUTHORIZATION, accessToken)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -150,12 +150,12 @@ public class LessonControllerTest extends BaseApiController {
 
         //given
 
-        lesson.plusPresentNumber(2);
+        lesson.updatePresentNumber(2);
 
-        LessonNumberDto.Request minusRequest = new LessonNumberDto.Request(lesson.getLessonId(), 4);
+        LessonNumberDto.Request minusRequest = new LessonNumberDto.Request(lesson.getLessonId(), -4);
 
         //when
-        mockMvc.perform(patch("/api/lesson/number/minus")
+        mockMvc.perform(patch("/api/lesson/number")
                 .header(HttpHeaders.AUTHORIZATION, accessToken)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -173,7 +173,7 @@ public class LessonControllerTest extends BaseApiController {
 
         //given
         
-        lesson.plusPresentNumber(2);
+        lesson.updatePresentNumber(2);
 
         LessonUpdateDto.Request request = new LessonUpdateDto.Request();
         request.setLessonName("업데이트 강의명");
@@ -242,7 +242,7 @@ public class LessonControllerTest extends BaseApiController {
         for(long i = 4; i< 8; i++) {
             lessons.add( createLesson(i, member, site, category));
         }
-        lessons.get(0).plusPresentNumber(2);
+        lessons.get(0).updatePresentNumber(2);
 
         given(lessonRepository.getLessons(member.getMemberId()))
                 .willReturn(lessons);
