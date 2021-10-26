@@ -1,15 +1,12 @@
 package com.sloth.api.lesson.dto;
 
 
-import com.sloth.api.lesson.constant.LessonType;
 import com.sloth.domain.lesson.Lesson;
+import com.sloth.domain.lesson.constant.LessonStatus;
 import com.sloth.util.DateTimeUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 
 @ApiModel(value = "강의 목록 조회 API 반환 객체", description = "강의 목록 조회 API 반환 객체")
@@ -22,9 +19,6 @@ public class LessonListDto {
     public static class Response {
         @ApiModelProperty(value = "강의 아이디")
         private Long lessonId;
-
-        @ApiModelProperty(value = "강의 타입 (CURRENT OR FINISH)")
-        private String type;                // 진행중인지 지난 강의인지 구분 타입
 
         @ApiModelProperty(value = "강의 목표 남은일 수")
         private int remainDay;              // 인강 목표 남은 일수
@@ -59,10 +53,12 @@ public class LessonListDto {
         @ApiModelProperty(value = "강의 완강 성공 여부")
         private Boolean isFinished;
 
+        @ApiModelProperty(value = "강의 상태 (CURRENT OR FINISH)")
+        private LessonStatus lessonStatus;
+
         public static LessonListDto.Response create(Lesson lesson) {
             return Response.builder()
                     .lessonId(lesson.getLessonId())
-                    .type(LessonType.CURRENT.name()) // TODO 수정
                     .remainDay(lesson.getRemainDay())
                     .categoryName(lesson.getCategory().getCategoryName())
                     .siteName(lesson.getSite().getSiteName())
@@ -74,16 +70,9 @@ public class LessonListDto {
                     .endDate(DateTimeUtils.convertToString(lesson.getEndDate()))
                     .totalNumber(lesson.getTotalNumber())
                     .isFinished(lesson.getIsFinished())
+                    .lessonStatus(lesson.getLessonStatus())
                     .build();
         }
     }
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @ApiModel(value = "강의 목록 조회 API 요청 객체", description = "강의 목록 조회 API 요청 객체")
-    public static class Request {
-
-        private Long memberId;
-    }
 }

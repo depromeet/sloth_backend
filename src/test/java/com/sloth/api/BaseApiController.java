@@ -31,11 +31,12 @@ public class BaseApiController {
 
     protected String accessToken;
 
+    protected final String testEmail = "email@email.com";
+
     @BeforeEach
     void init() {
-        String email = "test@gmail.com";
         Date accessTokenExpireTime = tokenProvider.createAccessTokenExpireTime();
-        accessToken = tokenProvider.createAccessToken(email, accessTokenExpireTime);
+        accessToken = tokenProvider.createAccessToken(testEmail, accessTokenExpireTime);
     }
 
 }

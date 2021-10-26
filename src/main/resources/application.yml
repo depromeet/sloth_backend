@@ -22,9 +22,9 @@ spring:
     properties:
       hibernate:
         format_sql : true
-        default_batch_fetch_size: 100
+        default_batch_fetch_size: 1000
         use_sql_comments: true
-  #    open-in-view: false
+        open-in-view: false
   devtools:
     livereload:
       enabled: true
@@ -49,6 +49,17 @@ spring:
 
   messages:
     basename: messages,errors
+
+  # java mail
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ENC(Gxd8z03E8a5yIICXKgPPIhLi5tNML8rUtat5MSe5IMXZQ1NSTOGXM/P+SfxDMsLT)
+    password: ENC(g7UUsdfAr19S3p5FjQilNiW/UBYV4hegZ+8F9LnvG77MLCRhQrv73qveUtFMs7XG)
+    properties.mail.smtp:
+      auth: true
+      starttls:
+        enable: true
 
 logging:
   level:
@@ -76,7 +87,6 @@ token:
   secret: sloth-backend
   access-token-expiration-time: 900000  # 15분
   refresh-token-expiration-time: 1210500000 # 2주
-
 
 my-pass: depman*
 

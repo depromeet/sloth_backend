@@ -37,7 +37,7 @@ public class MemberToken extends BaseEntity {
                 .tokenExpirationTime(tokenExpirationTime)
                 .build();
 
-        member.setMemberToken(memberToken);
+        member.updateMemberToken(memberToken);
 
         return memberToken;
     }

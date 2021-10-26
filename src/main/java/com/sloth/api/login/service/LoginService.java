@@ -1,27 +1,28 @@
 package com.sloth.api.login.service;
 
-import com.sloth.api.login.dto.FormLoginRequestDto;
+import com.sloth.api.login.dto.EmailConfirmRequestDto;
 import com.sloth.api.login.dto.FormJoinDto;
+import com.sloth.api.login.dto.FormLoginRequestDto;
 import com.sloth.api.login.dto.ResponseJwtTokenDto;
-import com.sloth.domain.member.Member;
-import com.sloth.domain.member.constant.SocialType;
-import com.sloth.app.member.service.MemberService;
 import com.sloth.config.auth.TokenProvider;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.config.auth.dto.TokenDto;
+import com.sloth.domain.member.Member;
+import com.sloth.domain.member.constant.SocialType;
+import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.memberToken.MemberToken;
+import com.sloth.exception.ForbiddenException;
 import com.sloth.exception.InvalidParameterException;
+import com.sloth.util.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import javax.mail.MessagingException;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Slf4j
 @Service
@@ -33,6 +34,7 @@ public class LoginService {
     private final ModelMapper modelMapper;
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
+    private final MailService mailService;
 
     /**
      * OAuth 로그인
@@ -64,8 +66,8 @@ public class LoginService {
      * 폼 회원가입
      * @param formRequestDto
      */
-    public void register(FormJoinDto formRequestDto) {
-        memberService.saveMember(formRequestDto);
+    public Member register(FormJoinDto formRequestDto) {
+        return memberService.saveMember(formRequestDto);
     }
 
     /**
@@ -78,6 +80,10 @@ public class LoginService {
 
         if(!passwordEncoder.matches(formLoginRequestDto.getPassword(), member.getPassword())) {
             throw new InvalidParameterException("비밀번호를 확인해주세요");
+        }
+
+        if (!member.isEmailConfirm()) {
+            throw new ForbiddenException("이메일 인증을 하지 않은 사용자입니다. 이메일로 보낸 코드를 확인하세요.");
         }
 
         MemberToken memberToken = member.getMemberToken();
@@ -99,4 +105,22 @@ public class LoginService {
         return modelMapper.map(tokenDto, ResponseJwtTokenDto.class);
     }
 
+    public void sendConfirmEmail(Member member) throws MessagingException {
+        String body = "<html><body><h1> 나나공 이메일 인증 </h1>" +
+                "<div>나나공 서비스를 이용하시려면 앱에서 아래 번호를 인증해주세요.</div>" +
+                "<div><b>"+ member.getEmailConfirmCode() +"</b></div>" +
+                "</body></html>";
+        String to = member.getEmail();
+        String subject = "나나공 서비스 인증 이메일";
+
+        mailService.sendEmail(to, subject, body);
+    }
+
+    public void confirmEmail(EmailConfirmRequestDto emailConfirmRequestDto) {
+        Member member = memberService.findByEmail(emailConfirmRequestDto.getEmail());
+        if (!member.confirmEmail(emailConfirmRequestDto.getEmailConfirmCode())) {
+            throw new IllegalArgumentException("인증에 실패했습니다.");
+        }
+        member.activate();
+    }
 }

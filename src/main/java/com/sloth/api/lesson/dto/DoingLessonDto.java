@@ -54,12 +54,4 @@ public class DoingLessonDto {
 
     }
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @ApiModel(value = "진행 중인 강의 요청 객체", description = "진행 중인 강의 요청 객체")
-    public static class Request {
-        private Long memberId;
-    }
-
 }
