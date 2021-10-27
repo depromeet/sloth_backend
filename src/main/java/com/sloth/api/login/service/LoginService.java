@@ -1,9 +1,6 @@
 package com.sloth.api.login.service;
 
-import com.sloth.api.login.dto.EmailConfirmRequestDto;
-import com.sloth.api.login.dto.FormJoinDto;
-import com.sloth.api.login.dto.FormLoginRequestDto;
-import com.sloth.api.login.dto.ResponseJwtTokenDto;
+import com.sloth.api.login.dto.*;
 import com.sloth.config.auth.TokenProvider;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.config.auth.dto.TokenDto;
@@ -122,5 +119,9 @@ public class LoginService {
             throw new IllegalArgumentException("인증에 실패했습니다.");
         }
         member.activate();
+    }
+
+    public Member updateConfirmEmailCode(EmailConfirmResendRequestDto requestDto) {
+        return memberService.updateConfirmEmailCode(requestDto);
     }
 }

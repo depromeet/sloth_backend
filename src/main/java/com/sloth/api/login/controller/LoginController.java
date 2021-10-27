@@ -8,7 +8,6 @@ import com.sloth.domain.member.constant.SocialType;
 import com.sloth.api.login.service.LoginService;
 import com.sloth.api.login.validator.FormRegisterValidator;
 import com.sloth.exception.InvalidParameterException;
-import com.sloth.util.MailService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,16 +15,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -98,12 +93,23 @@ public class LoginController {
     // TODO 이메일로 로그인하기
 
     @PostMapping("/email-confirm")
+    @Operation(summary = "이메일 검증 API", description = "이메일 검증 API")
     public ResponseEntity<ApiResult> confirmEmail(@Valid @RequestBody EmailConfirmRequestDto emailConfirmRequestDto, Errors errors) {
         if (errors.hasErrors()) {
             InvalidParameterException.throwErrorMessage(errors);
         }
-        loginService.confirmEmail(emailConfirmRequestDto); // TODO 이메링 링크 클릭 시 앱으로 이동
-        // TODO isEmailConfirm 필드에 따라 기능 제한하기
+        loginService.confirmEmail(emailConfirmRequestDto);
+        return ResponseEntity.ok(ApiResult.createOk());
+    }
+
+    @PostMapping("/email-confirm-resend")
+    @Operation(summary = "이메일 검증 재전송 API", description = "이메일 검증 재전송 API")
+    public ResponseEntity<ApiResult> confirmEmailResend(@Valid @RequestBody EmailConfirmResendRequestDto requestDto, Errors errors) throws MessagingException {
+        if (errors.hasErrors()) {
+            InvalidParameterException.throwErrorMessage(errors);
+        }
+        Member member = loginService.updateConfirmEmailCode(requestDto);
+        loginService.sendConfirmEmail(member);
         return ResponseEntity.ok(ApiResult.createOk());
     }
 
