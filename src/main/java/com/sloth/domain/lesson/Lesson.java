@@ -48,7 +48,7 @@ public class Lesson extends BaseEntity  {
     @Column(nullable = false)
     private int price;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String alertDays;
 
     @Column(length = 200)
