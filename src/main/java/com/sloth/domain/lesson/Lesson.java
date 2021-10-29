@@ -86,25 +86,19 @@ public class Lesson extends BaseEntity  {
         }
     }
 
-    public void plusPresentNumber(int count) {
+    public void updatePresentNumber(int count) {
         if (this.isFinished) {
             return;
-        } else if (this.presentNumber + count >= this.totalNumber) {
+        } else {
+            this.presentNumber += count;
+        }
+
+        if (this.presentNumber >= totalNumber) {
             this.presentNumber = totalNumber;
             this.isFinished = true;
-        }else {
-            this.presentNumber += count; // TODO 주차별 진도율 반환
-        }
-    }
-
-    public void minusPresentNumber(int count) {
-        if (this.presentNumber == 0) {
-            return;
-        } else if (this.presentNumber - count <= 0) {
+        } else if (this.presentNumber <= 0) {
             this.presentNumber = 0;
             this.isFinished = false;
-        }else {
-            this.presentNumber -= count;
         }
     }
 
@@ -129,24 +123,18 @@ public class Lesson extends BaseEntity  {
         return wastePrice >= 0 ? wastePrice : 0;
     }
 
-    public void updateLesson(Lesson lesson) {
-        this.lessonName = lesson.getLessonName();
-        this.totalNumber = lesson.getTotalNumber();
-    }
-
-    public void updateSite(Site site) {
-        this.site = site;
-    }
-
-    public void updateCategory(Category category){
-        this.category = category;
-    }
-
     public LessonStatus getLessonStatus() {
         if(LocalDate.now().isBefore(endDate)){
             return LessonStatus.CURRENT;
         }
 
         return LessonStatus.PAST;
+    }
+
+    public void updateLesson(String lessonName, Integer totalNumber, Category category, Site site) {
+        this.lessonName = lessonName;
+        this.totalNumber = totalNumber;
+        this.category = category;
+        this.site = site;
     }
 }

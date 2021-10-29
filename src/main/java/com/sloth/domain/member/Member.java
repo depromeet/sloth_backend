@@ -18,14 +18,6 @@ import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedEntityGraph(name = "Member.withAll", attributeNodes = {
-        @NamedAttributeNode(value = "lessons", subgraph = "lessons")
-},
-        subgraphs = @NamedSubgraph(name = "lessons", attributeNodes = {
-                @NamedAttributeNode("site"),
-                @NamedAttributeNode("category")
-        })
-)
 @Entity
 @Table(name="member")
 @Getter @Setter

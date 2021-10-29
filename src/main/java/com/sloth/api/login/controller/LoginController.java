@@ -1,10 +1,7 @@
 package com.sloth.api.login.controller;
 
 import com.sloth.api.dto.ApiResult;
-import com.sloth.api.login.dto.FormJoinDto;
-import com.sloth.api.login.dto.FormLoginRequestDto;
-import com.sloth.api.login.dto.OauthRequestDto;
-import com.sloth.api.login.dto.ResponseJwtTokenDto;
+import com.sloth.api.login.dto.*;
 import com.sloth.api.login.validator.FormLoginValidator;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.constant.SocialType;
@@ -100,9 +97,12 @@ public class LoginController {
     // TODO 비밀번호 찾기
     // TODO 이메일로 로그인하기
 
-    @GetMapping("/email-confirm")
-    public ResponseEntity<ApiResult> confirmEmail(@RequestParam("email") String email, @RequestParam("code") String confirmCode) {
-        loginService.confirmEmail(email, confirmCode); // TODO 이메링 링크 클릭 시 앱으로 이동
+    @PostMapping("/email-confirm")
+    public ResponseEntity<ApiResult> confirmEmail(@Valid @RequestBody EmailConfirmRequestDto emailConfirmRequestDto, Errors errors) {
+        if (errors.hasErrors()) {
+            InvalidParameterException.throwErrorMessage(errors);
+        }
+        loginService.confirmEmail(emailConfirmRequestDto); // TODO 이메링 링크 클릭 시 앱으로 이동
         // TODO isEmailConfirm 필드에 따라 기능 제한하기
         return ResponseEntity.ok(ApiResult.createOk());
     }

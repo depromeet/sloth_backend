@@ -4,6 +4,8 @@ package com.sloth.api.member.controller;
 import com.sloth.api.member.dto.MemberInfoDto;
 import com.sloth.api.member.dto.MemberUpdateDto;
 import com.sloth.api.member.service.ApiMemberService;
+import com.sloth.domain.member.Member;
+import com.sloth.resolver.CurrentMember;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,19 +29,17 @@ public class ApiMemberController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<MemberInfoDto> getMemberInfo(HttpServletRequest httpServletRequest) {
-        String token = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION);
-        MemberInfoDto memberInfo = memberService.getMemberInfo(token);
-        return ResponseEntity.ok(memberInfo);
+    public ResponseEntity<MemberInfoDto> getMemberInfo(@CurrentMember Member member) {
+        return ResponseEntity.ok(new MemberInfoDto(member));
     }
 
-    @PatchMapping("/{memberId}")
+    @PatchMapping("")
     @Operation(summary = "회원 정보 수정 API", description = "회원 정보 수정 API")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public Long update(@PathVariable Long memberId, @RequestBody MemberUpdateDto requestDto) {
-        return memberService.update(memberId, requestDto);
+    public Long update(@CurrentMember Member member, @RequestBody MemberUpdateDto requestDto) {
+        return memberService.update(member, requestDto);
     }
 
 }

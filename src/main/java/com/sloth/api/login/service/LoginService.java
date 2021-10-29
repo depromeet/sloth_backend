@@ -1,5 +1,6 @@
 package com.sloth.api.login.service;
 
+import com.sloth.api.login.dto.EmailConfirmRequestDto;
 import com.sloth.api.login.dto.FormJoinDto;
 import com.sloth.api.login.dto.FormLoginRequestDto;
 import com.sloth.api.login.dto.ResponseJwtTokenDto;
@@ -82,7 +83,7 @@ public class LoginService {
         }
 
         if (!member.isEmailConfirm()) {
-            throw new ForbiddenException("이메일 인증을 하지 않은 사용자입니다.");
+            throw new ForbiddenException("이메일 인증을 하지 않은 사용자입니다. 이메일로 보낸 코드를 확인하세요.");
         }
 
         MemberToken memberToken = member.getMemberToken();
@@ -106,8 +107,8 @@ public class LoginService {
 
     public void sendConfirmEmail(Member member) throws MessagingException {
         String body = "<html><body><h1> 나나공 이메일 인증 </h1>" +
-                "<div>나나공 서비스를 이용하시려면 아래 링크를 클릭해 이메일을 인증해주세요.</div>" +
-                "<div><a href='https://slothbackend.hopto.org/api/email-confirm?email=" + member.getEmail() + "&code=" + member.getEmailConfirmCode() + "'>나나공 이메일 인증하기</a></div>" +
+                "<div>나나공 서비스를 이용하시려면 앱에서 아래 번호를 인증해주세요.</div>" +
+                "<div><b>"+ member.getEmailConfirmCode() +"</b></div>" +
                 "</body></html>";
         String to = member.getEmail();
         String subject = "나나공 서비스 인증 이메일";
@@ -115,9 +116,9 @@ public class LoginService {
         mailService.sendEmail(to, subject, body);
     }
 
-    public void confirmEmail(String email, String confirmCode) {
-        Member member = memberService.findByEmail(email);
-        if (!member.confirmEmail(confirmCode)) {
+    public void confirmEmail(EmailConfirmRequestDto emailConfirmRequestDto) {
+        Member member = memberService.findByEmail(emailConfirmRequestDto.getEmail());
+        if (!member.confirmEmail(emailConfirmRequestDto.getEmailConfirmCode())) {
             throw new IllegalArgumentException("인증에 실패했습니다.");
         }
         member.activate();

@@ -3,12 +3,10 @@ package com.sloth.config;
 import com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter;
 import com.sloth.config.auth.TokenProvider;
 import com.sloth.config.auth.interceptor.AuthInterceptor;
-import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;
-import com.sloth.resolver.MemberInfoArgumentResolver;
+import com.sloth.resolver.CurrentMemberArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -25,6 +23,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     private final TokenProvider tokenProvider;
     private final MemberTokenRepository memberTokenRepository;
+    private final CurrentMemberArgumentResolver currentMemberArgumentResolver;
 
     @Bean
     public FilterRegistrationBean<XssEscapeServletFilter> filterRegistrationBean() {
@@ -64,6 +63,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new MemberInfoArgumentResolver());
+        resolvers.add(currentMemberArgumentResolver);
     }
 }

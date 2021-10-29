@@ -16,9 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CustomOAuth2UserService customOAuth2UserService;
-    private final MemberRepository memberRepository;
-    private final MemberTokenRepository memberTokenRepository;
-    private final TokenProvider tokenProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
