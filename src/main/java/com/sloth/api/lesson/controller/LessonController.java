@@ -43,13 +43,13 @@ public class LessonController {
         return ok(response);
     }
 
-    @GetMapping(value = "/detail", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/detail/{lessonId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "강의 조회 API", description = "강의 상세 조회 api")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<LessonDetailDto.Response> getLessonDetail(@CurrentMember Member member, @Valid @RequestBody LessonDetailDto.Request request) {
-        Lesson lesson = lessonService.findLessonWithSiteCategory(member, request.getLessonId());
+    public ResponseEntity<LessonDetailDto.Response> getLessonDetail(@CurrentMember Member member, @Valid @PathVariable Long lessonId) {
+        Lesson lesson = lessonService.findLessonWithSiteCategory(member, lessonId);
         LessonDetailDto.Response lessonDetail = LessonDetailDto.Response.create(lesson);
         return ok(lessonDetail);
     }
