@@ -10,6 +10,7 @@ import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.exception.ForbiddenException;
 import com.sloth.exception.InvalidParameterException;
+import com.sloth.exception.NeedEmailConfirmException;
 import com.sloth.util.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -80,7 +81,7 @@ public class LoginService {
         }
 
         if (!member.isEmailConfirm()) {
-            throw new ForbiddenException("이메일 인증을 하지 않은 사용자입니다. 이메일로 보낸 코드를 확인하세요.");
+            throw new NeedEmailConfirmException("이메일 인증을 하지 않은 사용자입니다. 이메일로 보낸 코드를 확인하세요.");
         }
 
         MemberToken memberToken = member.getMemberToken();
@@ -116,7 +117,7 @@ public class LoginService {
     public void confirmEmail(EmailConfirmRequestDto emailConfirmRequestDto) {
         Member member = memberService.findByEmail(emailConfirmRequestDto.getEmail());
         if (!member.confirmEmail(emailConfirmRequestDto.getEmailConfirmCode())) {
-            throw new IllegalArgumentException("인증에 실패했습니다.");
+            throw new InvalidParameterException("인증에 실패했습니다.");
         }
         member.activate();
     }

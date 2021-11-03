@@ -1,6 +1,7 @@
 package com.sloth.api.login.service;
 
 import com.sloth.domain.member.constant.SocialType;
+import com.sloth.exception.InvalidParameterException;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -30,7 +31,7 @@ public class SocialApiServiceFactory {
         SocialApiSerivce socialApiSerivce = socialApiServices.get(socialApiServiceBeanName);
 
         if(socialApiSerivce == null){
-            throw new IllegalArgumentException("잘못된 소셜 로그인 타입입니다.");
+            throw new InvalidParameterException("잘못된 소셜 로그인 타입입니다.");
         }
 
         return socialApiSerivce;

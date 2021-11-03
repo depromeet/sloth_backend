@@ -1,4 +1,11 @@
-create sequence hibernate_sequence;
+drop table if exists category CASCADE;
+drop table if exists lesson CASCADE;
+drop table if exists member CASCADE;
+drop table if exists member_token CASCADE;
+drop table if exists site CASCADE;
+drop sequence if exists hibernate_sequence;
+
+create sequence hibernate_sequence start 1 increment 1;
 
 create table category (
     category_id bigint not null,
@@ -71,7 +78,7 @@ create table site (
 );
 
 alter table member
-add constraint UK_mbmcqelty0fbrvxp1q58dn57t unique (email)
+add constraint uk_mbmcqelty0fbrvxp1q58dn57t unique (email)
 ;
 
 alter table lesson
