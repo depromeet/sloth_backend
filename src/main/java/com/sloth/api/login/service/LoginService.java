@@ -119,6 +119,9 @@ public class LoginService {
         if (!member.confirmEmail(emailConfirmRequestDto.getEmailConfirmCode())) {
             throw new InvalidParameterException("인증에 실패했습니다.");
         }
+        if (!passwordEncoder.matches(emailConfirmRequestDto.getPassword(), member.getPassword())) {
+            throw new InvalidParameterException("회원 정보가 옳지 않습니다.");
+        }
         member.activate();
     }
 

@@ -8,13 +8,16 @@ import com.sloth.domain.member.constant.SocialType;
 import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.exception.ForbiddenException;
+import com.sloth.util.MailService;
 import com.sloth.util.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
@@ -29,6 +32,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -39,21 +43,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 class LoginControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+    @Autowired private MockMvc mockMvc;
+    @Autowired private ObjectMapper objectMapper;
+    @Autowired private MemberRepository memberRepository;
+    @Autowired private EntityManager em;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+    @MockBean private PasswordEncoder passwordEncoder;
+    @MockBean private MailService mailService;
 
-    @Autowired
-    private MemberRepository memberRepository;
+    private String testPassword = "testPassword";
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private EntityManager em;
-
+    @BeforeEach
+    void beforeEach() {
+        when(passwordEncoder.matches(testPassword, testPassword)).thenReturn(true);
+        when(passwordEncoder.encode(testPassword)).thenReturn(testPassword);
+    }
 
     /*@Test
     @DisplayName("OAuth 로그인")
@@ -66,7 +70,7 @@ class LoginControllerTest {
     @DisplayName("폼 회원가입")
     void form_register() throws Exception {
         //given
-        FormJoinDto request = new FormJoinDto("test","testformemail@email.com","testpassword","testpassword");
+        FormJoinDto request = new FormJoinDto("test","testformemail@email.com",testPassword, testPassword);
 
         //when
         mockMvc.perform(post("/api/form/register")
@@ -88,11 +92,11 @@ class LoginControllerTest {
     @DisplayName("폼 로그인 - 이메일 인증 안함")
     void form_login_notEmailConfirm() throws Exception {
         //when
-        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", "testpassword", "testpassword");
-        Member member = Member.createFormMember(formJoinDto, passwordEncoder.encode(formJoinDto.getPassword()));
+        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", testPassword, testPassword);
+        Member member = Member.createFormMember(formJoinDto, testPassword);
         memberRepository.save(member);
 
-        FormLoginRequestDto request = new FormLoginRequestDto("testformemail@email.com", "testpassword");
+        FormLoginRequestDto request = new FormLoginRequestDto("testformemail@email.com", testPassword);
 
         mockMvc.perform(post("/api/form/login")
                         .accept(MediaType.APPLICATION_JSON)
@@ -106,12 +110,12 @@ class LoginControllerTest {
     @DisplayName("폼 로그인 - 이메일 인증 완료")
     void form_login_EmailConfirm() throws Exception {
         //when
-        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", "testpassword", "testpassword");
-        Member member = Member.createFormMember(formJoinDto, passwordEncoder.encode(formJoinDto.getPassword()));
+        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", testPassword, testPassword);
+        Member member = Member.createFormMember(formJoinDto, testPassword);
         member.setEmailConfirm(true);
         memberRepository.save(member);
 
-        FormLoginRequestDto request = new FormLoginRequestDto("testformemail@email.com", "testpassword");
+        FormLoginRequestDto request = new FormLoginRequestDto("testformemail@email.com", testPassword);
 
         MvcResult mvcResult = mockMvc.perform(post("/api/form/login")
                         .accept(MediaType.APPLICATION_JSON)
@@ -133,12 +137,12 @@ class LoginControllerTest {
     @Test
     @DisplayName("이메일 검증 - 실패")
     void confirm_email_fail() throws Exception {
-        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", "testpassword", "testpassword");
-        Member member = Member.createFormMember(formJoinDto, passwordEncoder.encode(formJoinDto.getPassword()));
+        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", testPassword, testPassword);
+        Member member = Member.createFormMember(formJoinDto, testPassword);
         member.updateConfirmEmailCode("111111", LocalDateTime.now());
         memberRepository.save(member);
 
-        EmailConfirmRequestDto requestDto = new EmailConfirmRequestDto("testformemail@email.com", "aaaaaa");
+        EmailConfirmRequestDto requestDto = new EmailConfirmRequestDto("testformemail@email.com", testPassword, "aaaaaa");
 
         mockMvc.perform(post("/api/email-confirm")
                     .accept(MediaType.APPLICATION_JSON)
@@ -153,12 +157,12 @@ class LoginControllerTest {
     @Test
     @DisplayName("이메일 검증 - 성공")
     void confirm_email_success() throws Exception {
-        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", "testpassword", "testpassword");
-        Member member = Member.createFormMember(formJoinDto, passwordEncoder.encode(formJoinDto.getPassword()));
+        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", testPassword, testPassword);
+        Member member = Member.createFormMember(formJoinDto, testPassword);
         member.updateConfirmEmailCode("111111", LocalDateTime.now());
         memberRepository.save(member);
 
-        EmailConfirmRequestDto requestDto = new EmailConfirmRequestDto("testformemail@email.com", member.getEmailConfirmCode());
+        EmailConfirmRequestDto requestDto = new EmailConfirmRequestDto("testformemail@email.com",testPassword, member.getEmailConfirmCode());
 
         mockMvc.perform(post("/api/email-confirm")
                         .accept(MediaType.APPLICATION_JSON)
@@ -172,12 +176,12 @@ class LoginControllerTest {
     @Test
     @DisplayName("이메일 검증 재전송 - 연속적인 요청으로 인한 실패")
     void confirm_email_resend_fail() throws Exception {
-        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", "testpassword", "testpassword");
-        Member member = Member.createFormMember(formJoinDto, passwordEncoder.encode(formJoinDto.getPassword()));
+        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", testPassword, testPassword);
+        Member member = Member.createFormMember(formJoinDto, testPassword);
         member.updateConfirmEmailCode("111111", LocalDateTime.now());
         memberRepository.save(member);
 
-        EmailConfirmResendRequestDto requestDto = new EmailConfirmResendRequestDto("testformemail@email.com", "testpassword");
+        EmailConfirmResendRequestDto requestDto = new EmailConfirmResendRequestDto("testformemail@email.com", testPassword);
 
         mockMvc.perform(post("/api/email-confirm-resend")
                         .accept(MediaType.APPLICATION_JSON)
@@ -192,13 +196,13 @@ class LoginControllerTest {
     @Test
     @DisplayName("이메일 검증 재전송 - 성공")
     void confirm_email_resend_success() throws Exception {
-        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", "testpassword", "testpassword");
-        Member member = Member.createFormMember(formJoinDto, passwordEncoder.encode(formJoinDto.getPassword()));
+        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", testPassword, testPassword);
+        Member member = Member.createFormMember(formJoinDto, testPassword);
         LocalDateTime overLimitDateTime = LocalDateTime.now().minusMinutes(6);
         member.updateConfirmEmailCode("111111", overLimitDateTime); // 5분안에 다시 보내기 안됨
         memberRepository.save(member);
 
-        EmailConfirmResendRequestDto requestDto = new EmailConfirmResendRequestDto("testformemail@email.com", "testpassword");
+        EmailConfirmResendRequestDto requestDto = new EmailConfirmResendRequestDto("testformemail@email.com", testPassword);
 
         mockMvc.perform(post("/api/email-confirm-resend")
                         .accept(MediaType.APPLICATION_JSON)
