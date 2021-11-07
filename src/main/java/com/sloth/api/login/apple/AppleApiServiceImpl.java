@@ -67,8 +67,8 @@ public class AppleApiServiceImpl implements SocialApiSerivce {
     private String pass;
 
     @Override
-     public OAuthAttributes getUserInfo(String idToken) {
-     //public String userIdFromApple(String idToken) {
+    public OAuthAttributes getUserInfo(String idToken) {
+        //public String userIdFromApple(String idToken) {
         StringBuffer result = new StringBuffer();
         try {
             URL url = new URL("https://appleid.apple.com/auth/keys");
