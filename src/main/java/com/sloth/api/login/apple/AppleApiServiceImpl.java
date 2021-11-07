@@ -60,11 +60,6 @@ import java.util.Objects;
 
 
 public class AppleApiServiceImpl implements SocialApiSerivce {
-    /**
-     * 1. apple로 부터 공개키 3개 가져옴
-     * 2. 내가 클라에서 가져온 token String과 비교해서 써야할 공개키 확인 (kid,alg 값 같은 것)
-     * 3. 그 공개키 재료들로 공개키 만들고, 이 공개키로 JWT토큰 부분의 바디 부분의 decode하면 유저 정보
-     */
 
     private final PasswordEncoder passwordEncoder;
 
