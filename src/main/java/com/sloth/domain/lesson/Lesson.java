@@ -137,7 +137,4 @@ public class Lesson extends BaseEntity  {
         this.site = site;
     }
 
-    public void deleteLesson() {
-
-    }
 }
