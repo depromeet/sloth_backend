@@ -13,12 +13,14 @@ import com.sloth.exception.BusinessException;
 import com.sloth.exception.ForbiddenException;
 import com.sloth.exception.LessonNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Transactional
 @Service
@@ -111,4 +113,16 @@ public class LessonService {
             throw new ForbiddenException("해당 강의에 대한 권한이 없습니다.");
         }
     }
+
+    public void deleteLesson(Member member, Long lessonId) {
+        Lesson lesson = lessonRepository.findById(lessonId)
+                .orElseThrow(() -> new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다."));
+
+        if(lesson.getMember().getMemberId() != member.getMemberId()) {
+            throw new BusinessException("회원 아이디와 강의 소유주가 다릅니다.");
+        }
+
+        lessonRepository.delete(lesson);
+    }
+
 }

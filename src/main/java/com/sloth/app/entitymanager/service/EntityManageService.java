@@ -39,7 +39,7 @@ public class EntityManageService {
     @SuppressWarnings("all")
     public Page<Map<String, Object>> findAll(String entityName, int page, int size, String type, String keyword) {
         JpaRepository repository = this.getJpaRepository(entityName);
-        Sort idBySort = Sort.by(Sort.Direction.DESC, "id");
+        Sort idBySort = Sort.by(Sort.Direction.DESC, entityName + "Id");
         Pageable pageable = PageRequest.of(page - 1, size, idBySort);
 
         Page result;

@@ -1,5 +1,6 @@
 package com.sloth.api.lesson.controller;
 
+import com.sloth.api.dto.ApiResult;
 import com.sloth.api.lesson.dto.*;
 import com.sloth.api.lesson.service.LessonService;
 import com.sloth.domain.lesson.Lesson;
@@ -43,13 +44,13 @@ public class LessonController {
         return ok(response);
     }
 
-    @GetMapping(value = "/detail", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/detail/{lessonId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "강의 조회 API", description = "강의 상세 조회 api")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<LessonDetailDto.Response> getLessonDetail(@CurrentMember Member member, @Valid @RequestBody LessonDetailDto.Request request) {
-        Lesson lesson = lessonService.findLessonWithSiteCategory(member, request.getLessonId());
+    public ResponseEntity<LessonDetailDto.Response> getLessonDetail(@CurrentMember Member member, @Valid @PathVariable Long lessonId) {
+        Lesson lesson = lessonService.findLessonWithSiteCategory(member, lessonId);
         LessonDetailDto.Response lessonDetail = LessonDetailDto.Response.create(lesson);
         return ok(lessonDetail);
     }
@@ -135,4 +136,26 @@ public class LessonController {
                 .build();
         return ok(response);
     }
+
+    @DeleteMapping("/{lessonId}")
+    @Operation(summary = "강의 삭제 API", description = "강의 삭제 API")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
+    })
+    public ResponseEntity<ApiResult> deleteLesson(@PathVariable("lessonId") Long lessonId,
+                                                                 @CurrentMember Member member) {
+
+        log.info("lesson delete start");
+        log.info("member id : {}", member.getMemberId());
+        log.info("delete lesson id : {}", lessonId);
+
+        // 강의 업데이트
+        lessonService.deleteLesson(member, lessonId);
+
+        ApiResult result = ApiResult.createOk();
+
+        log.info("lesson delete end");
+        return ok(result);
+    }
+
 }

@@ -87,13 +87,5 @@ public class LessonDetailDto {
         }
     }
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @ApiModel(value = "강의 상세정보 요청 객체", description = "강의 상세정보 요청 객체")
-    public static class Request {
-        private Long lessonId;
-    }
-
 
 }
