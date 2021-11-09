@@ -5,6 +5,7 @@ import com.sloth.api.login.service.SocialApiSerivce;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,8 +33,8 @@ public class GoogleApiServiceImpl implements SocialApiSerivce {
         log.info("name : " + googleUserInfo.getName());
 
         return OAuthAttributes.builder()
-                .email(googleUserInfo.getEmail())
-                .name(googleUserInfo.getName())
+                .email(StringUtils.isBlank(googleUserInfo.getEmail()) ? googleUserInfo.getId() : googleUserInfo.getEmail())
+                .name(googleUserInfo.getName()) // TODO 이름 랜덤 생성
                 .socialType(SocialType.GOOGLE)
                 .password(passwordEncoder.encode(pass))
                 .build();

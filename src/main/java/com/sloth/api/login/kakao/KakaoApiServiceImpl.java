@@ -5,6 +5,7 @@ import com.sloth.api.login.service.SocialApiSerivce;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,8 @@ public class KakaoApiServiceImpl implements SocialApiSerivce {
         log.info("kakao nickname: " + kakaoUserInfo.getKakaoAccount().getProfile().getNickname());
 
         return OAuthAttributes.builder()
-                .email(kakaoUserInfo.getKakaoAccount().getEmail())
-                .name(kakaoUserInfo.getKakaoAccount().getProfile().getNickname())
+                .email(StringUtils.isBlank(kakaoUserInfo.getKakaoAccount().getEmail()) ? kakaoUserInfo.getId() : kakaoUserInfo.getKakaoAccount().getEmail())
+                .name(kakaoUserInfo.getKakaoAccount().getProfile().getNickname()) // TODO 이름 랜덤 생성
                 .socialType(SocialType.KAKAO)
                 .password(passwordEncoder.encode(pass))
                 .build();

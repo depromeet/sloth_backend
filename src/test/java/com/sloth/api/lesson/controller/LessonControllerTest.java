@@ -275,6 +275,26 @@ public class LessonControllerTest extends BaseApiController {
                 ;
     }
 
+    @Test
+    @DisplayName("강의 삭제 API 테스트")
+    void deleteLesson() throws Exception {
+
+        //given
+        //given(lessonRepository.delete(lesson));
+        //        .willReturn(null);
+
+        //when
+        ResultActions result = mockMvc.perform(MockMvcRequestBuilders.delete("/api/lesson/" + lesson.getLessonId())
+                .header(HttpHeaders.AUTHORIZATION, accessToken)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON))
+                ;
+
+        //then
+        result.andExpect(MockMvcResultMatchers.status().isOk())
+        ;
+
+    }
 
     private Category createCategory(Long categoryId) {
         return Category.builder()
