@@ -32,33 +32,6 @@ import java.util.Objects;
 @Service
 @RequiredArgsConstructor
 @Transactional
-//public class AppleApiServiceImpl implements SocialApiSerivce {
-//
-//    private final AppleFeignClient appleFeignClient;
-//    private final PasswordEncoder passwordEncoder;
-//
-//    @Value("${my-pass}")
-//    private String pass;
-//
-//    @Override
-//    public OAuthAttributes getUserInfo(String accessToken) {
-//
-//        accessToken = "Bearer " + accessToken.replace("Bearer", "").trim();
-//        log.info("accessToken : " + accessToken);
-//
-//        AppleUserInfo appleUserInfo = appleFeignClient.appleLogin(accessToken);
-//        log.info("Apple email : " + appleUserInfo.getEmail());
-//        log.info("Apple name : " + appleUserInfo.getFullName());
-//
-//        return OAuthAttributes.builder()
-//                .email(appleUserInfo.getEmail())
-//                .name(appleUserInfo.getFullName())
-//                .socialType(SocialType.APPLE)
-//                .password(passwordEncoder.encode(pass))
-//                .build();
-//    }
-
-
 public class AppleApiServiceImpl implements SocialApiSerivce {
 
     private final PasswordEncoder passwordEncoder;
