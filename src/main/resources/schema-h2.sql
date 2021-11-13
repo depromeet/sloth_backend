@@ -3,6 +3,7 @@ drop table if exists lesson CASCADE;
 drop table if exists member CASCADE;
 drop table if exists member_token CASCADE;
 drop table if exists site CASCADE;
+drop table if exists nickname CASCADE;
 
 create table category (
     category_id bigint not null,
@@ -68,6 +69,16 @@ create table site (
     primary key (site_id)
 );
 
+create table nickname
+(
+    nickname_id bigint  not null
+        constraint nickname_pkey
+            primary key,
+    is_used     boolean not null,
+    name        varchar(50)
+);
+
+
 alter table member
 add constraint UK_mbmcqelty0fbrvxp1q58dn57t unique (email)
 ;
@@ -104,4 +115,12 @@ values(1, 0, '개발', 1, '개발')
 
 insert into category
 values(2, 0, '디자인', 2, '디자인')
+;
+
+insert into nickname
+values(3, false, '행복한 대왕 쭈꾸미')
+;
+
+insert into nickname
+values(4, false, '행복한 신화 표범')
 ;

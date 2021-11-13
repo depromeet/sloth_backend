@@ -85,9 +85,9 @@ public class Member extends BaseEntity {
                 .build();
     }
 
-    public static Member createOauthMember(OAuthAttributes oAuthAttributes) {
+    public static Member createOauthMember(OAuthAttributes oAuthAttributes, String name) {
         return Member.builder()
-                .memberName(oAuthAttributes.getName())
+                .memberName(name)
                 .email(oAuthAttributes.getEmail())
                 .socialType(oAuthAttributes.getSocialType())
                 .password(oAuthAttributes.getPassword())
