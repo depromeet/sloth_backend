@@ -13,7 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
-@ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class) // 테스트 클래스가 Mockito를 사용함을 의미
 public class NicknameServiceTest {
 
     @Mock
