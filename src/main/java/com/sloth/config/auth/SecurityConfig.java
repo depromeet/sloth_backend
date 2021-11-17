@@ -1,8 +1,6 @@
 package com.sloth.config.auth;
 
 import com.sloth.app.member.service.CustomOAuth2UserService;
-import com.sloth.domain.member.repository.MemberRepository;
-import com.sloth.domain.memberToken.repository.MemberTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

@@ -2,12 +2,12 @@ package com.sloth.creator;
 
 import com.sloth.domain.nickname.Nickname;
 
-public class TestNicknameCreator {
+public class NicknameCreator {
 
-    public Nickname createNickname() {
+    public Nickname createStubNickname(String name) {
         return Nickname.builder()
                 .nicknameId(1L)
-                .name("dragon")
+                .name(name)
                 .isUsed(false)
                 .build();
     }

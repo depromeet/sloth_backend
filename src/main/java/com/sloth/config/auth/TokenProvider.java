@@ -8,7 +8,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,7 +19,15 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class TokenProvider {
 
-    private final Environment environment;
+    @Value("${token.access-token-expiration-time}")
+    private String accessTokenExpirationTime;
+
+    @Value("${token.refresh-token-expiration-time}")
+    private String refreshTokenExpirationTime;
+
+    @Value("${token.secret}")
+    private String tokenSecret;
+
     private static final String BEARER_TYPE = "bearer";
 
     /**
@@ -49,7 +57,7 @@ public class TokenProvider {
      */
     public Date createAccessTokenExpireTime() {
         return new Date(System.currentTimeMillis() +
-                Long.parseLong(environment.getProperty("token.access-token-expiration-time")));
+                Long.parseLong(accessTokenExpirationTime));
     }
 
     /**
@@ -58,7 +66,7 @@ public class TokenProvider {
      */
     public Date createRefreshTokenExpireTime() {
         return new Date(System.currentTimeMillis() +
-                Long.parseLong(environment.getProperty("token.refresh-token-expiration-time")));
+                Long.parseLong(refreshTokenExpirationTime));
     }
 
     /**
@@ -73,7 +81,7 @@ public class TokenProvider {
                 .setAudience(email)                             //토큰 대상자
                 .setIssuedAt(new Date())                        //토큰 발급 시간
                 .setExpiration(expirationTime)
-                .signWith(SignatureAlgorithm.HS512, environment.getProperty("token.secret"))
+                .signWith(SignatureAlgorithm.HS512, tokenSecret)
                 .compact();
         return accessToken;
     }
@@ -90,7 +98,7 @@ public class TokenProvider {
                 .setAudience(email)                             //토큰 대상자
                 .setIssuedAt(new Date())                        //토큰 발급 시간
                 .setExpiration(expirationTime)
-                .signWith(SignatureAlgorithm.HS512, environment.getProperty("token.secret"))
+                .signWith(SignatureAlgorithm.HS512, tokenSecret)
                 .compact();
         return refreshToken;
     }
@@ -134,7 +142,7 @@ public class TokenProvider {
         Claims claims = null;
 
         try {
-            claims = Jwts.parser().setSigningKey(environment.getProperty("token.secret"))  //jwt 만들 때 사용했던 키
+            claims = Jwts.parser().setSigningKey(tokenSecret)  //jwt 만들 때 사용했던 키
                     .parseClaimsJws(token).getBody()
             ;
         } catch (Exception e) {
@@ -167,7 +175,7 @@ public class TokenProvider {
     public boolean validateToken(String token){
 
         try {
-            Jwts.parser().setSigningKey(environment.getProperty("token.secret"))
+            Jwts.parser().setSigningKey(tokenSecret)
                     .parseClaimsJws(token);
             return true;
         } catch(JwtException e) {  //토큰 변조
