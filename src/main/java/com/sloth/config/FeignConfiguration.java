@@ -1,6 +1,6 @@
 package com.sloth.config;
 
-import com.sloth.handler.FeignClientExceptionErrorDecoder;
+import com.sloth.exception.handler.FeignClientExceptionErrorDecoder;
 import feign.Logger.Level;
 import feign.codec.ErrorDecoder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

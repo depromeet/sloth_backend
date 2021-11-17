@@ -1,4 +1,4 @@
-package com.sloth.handler;
+package com.sloth.exception.handler;
 
 import com.sloth.exception.FeignClientException;
 import feign.Response;

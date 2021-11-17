@@ -6,6 +6,7 @@ import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.config.auth.dto.TokenDto;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.exception.BusinessException;
+import com.sloth.exception.ForbiddenException;
 import com.sloth.exception.InvalidParameterException;
 import com.sloth.util.DateTimeUtils;
 import lombok.RequiredArgsConstructor;
@@ -80,14 +81,14 @@ public class MemberService {
 
     public Member findByEmail (String email) {
         return memberRepository.findByEmail(email)
-                .orElseThrow( () -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+                .orElseThrow( () -> new UsernameNotFoundException("해당 회원이 존재하지 않습니다."));
     }
 
     public Member updateConfirmEmailCode(EmailConfirmResendRequestDto requestDto) {
         Member member = findByEmail(requestDto.getEmail());
         checkPassword(member, requestDto.getPassword());
         if (!member.canCreateEmailConfirmCode()) {
-            throw new BusinessException("이메일 발송 5분 후에 재전송을 할 수 있습니다.");
+            throw new ForbiddenException("이메일 발송 5분 후에 재전송을 할 수 있습니다.");
         }
         createEmailConfirmCode(member);
         return member;
