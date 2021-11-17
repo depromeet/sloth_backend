@@ -3,7 +3,6 @@ package com.sloth.api.lesson.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sloth.api.lesson.dto.LessonNumberDto;
 import com.sloth.api.lesson.dto.LessonUpdateDto;
-import com.sloth.config.auth.TokenProvider;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
 import com.sloth.domain.lesson.Lesson;
@@ -19,7 +18,6 @@ import com.sloth.util.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -57,18 +55,11 @@ public class LessonControllerTest  {
     protected MockMvc mockMvc;
 
     @Autowired
-    protected ModelMapper modelMapper;
-
-    @Autowired
     protected ObjectMapper objectMapper;
-
-    @Autowired
-    protected TokenProvider tokenProvider;
 
     protected String accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJhdWQiOiJlbWFpbEBlbWFpbC5jb20iLCJpYXQiOjE2MzcxNjM3NjUsImV4cCI6MTE2MzcxNjM3NjV9.9fwwJ6FC_36WwZi2AyAV1VY6SkVdyO6G7Mmr6B9MtSvy4SIwPyWl3G8qUjoZzy4g7gSpRqV-0kQBdB8t2Mm2Tw";
 
     protected final String testEmail = "email@email.com";
-
 
 
     @MockBean
