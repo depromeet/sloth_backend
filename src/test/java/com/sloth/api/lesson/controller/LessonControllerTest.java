@@ -280,7 +280,7 @@ public class LessonControllerTest  {
         result.andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0]").exists())
                 .andExpect(jsonPath("$[3]").exists())
-                .andExpect(jsonPath("$[0].remainDay").value(equalTo(lesson1.getRemainDay())))
+                .andExpect(jsonPath("$[0].remainDay").value(equalTo(lesson1.getRemainDay(LocalDate.now()))))
                 .andExpect(jsonPath("$[0].categoryName").value(equalTo(category.getCategoryName())))
                 .andExpect(jsonPath("$[0].siteName").value(equalTo(site.getSiteName())))
                 .andExpect(jsonPath("$[0].lessonName").value(equalTo(lesson1.getLessonName())))

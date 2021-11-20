@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 
 public class DoingLessonDto {
 
@@ -44,7 +46,7 @@ public class DoingLessonDto {
                     .lessonName(lesson.getLessonName())
                     .lessonId(lesson.getLessonId())
                     .weeklyFinished(false) // TODO 계산 필요
-                    .remainDay(lesson.getRemainDay())
+                    .remainDay(lesson.getRemainDay(LocalDate.now()))
                     .siteName(lesson.getSite().getSiteName())
                     .categoryName(lesson.getCategory().getCategoryName())
                     .presentNumber(lesson.getPresentNumber())
