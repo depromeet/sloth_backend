@@ -106,7 +106,7 @@ public class Lesson extends BaseEntity  {
     }
 
     public int getRemainDay() {
-        return Period.between(LocalDate.now(), this.endDate).getDays();
+        return this.endDate.compareTo(LocalDate.now());
     }
 
     public int getCurrentProgressRate() {
@@ -114,7 +114,7 @@ public class Lesson extends BaseEntity  {
     }
 
     public int getGoalProgressRate() {
-        return (int) Math.floor( (double) Period.between(this.startDate, LocalDate.now()).getDays() / (double) Period.between(this.startDate, this.endDate).getDays() * 100);
+        return (int) Math.floor( (double) LocalDate.now().compareTo(this.startDate) / (double) this.endDate.compareTo(this.startDate) * 100);
     }
 
     public int getWastePrice() {
