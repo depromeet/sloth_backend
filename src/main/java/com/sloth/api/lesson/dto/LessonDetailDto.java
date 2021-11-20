@@ -69,7 +69,7 @@ public class LessonDetailDto {
             return Response.builder()
                     .lessonId(lesson.getLessonId())
                     .isFinished(lesson.getIsFinished())
-                    .remainDay(lesson.getRemainDay())
+                    .remainDay(lesson.getRemainDay(LocalDate.now()))
                     .lessonName(lesson.getLessonName())
                     .categoryName(lesson.getCategory().getCategoryName())
                     .siteName(lesson.getSite().getSiteName())
