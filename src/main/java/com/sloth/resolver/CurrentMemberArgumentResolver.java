@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -41,7 +42,7 @@ public class CurrentMemberArgumentResolver implements HandlerMethodArgumentResol
         HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         String email = TokenProvider.getMemberEmail(token);
-        return memberRepository.findByEmail(email).orElseThrow( () -> new IllegalArgumentException("해당 정보가 없습니다. email =" + email));
+        return memberRepository.findByEmail(email).orElseThrow( () -> new UsernameNotFoundException("해당 회원 정보가 없습니다. email : " + email));
     }
 
 }

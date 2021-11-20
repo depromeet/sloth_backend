@@ -52,6 +52,8 @@ logging:
 
 server:
   servlet:
+    encoding:
+      force-response: true # 에러 메세지 한글 인코딩
     context-path: /
   error:
     include-stacktrace: never

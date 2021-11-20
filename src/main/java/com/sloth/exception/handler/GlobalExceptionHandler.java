@@ -1,4 +1,4 @@
-package com.sloth.handler;
+package com.sloth.exception.handler;
 
 import com.sloth.exception.*;
 import lombok.extern.slf4j.Slf4j;
@@ -9,10 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +17,7 @@ import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@ControllerAdvice
+@RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
 
@@ -32,13 +29,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<ErrorMessage> handleMethodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest request) {
         log.error("handleMethodArgumentNotValidException", e);
-        ErrorMessage em = ErrorMessage.builder()
-                .errorMessage(e.getMessage())
-                .code(HttpStatus.BAD_REQUEST.value())
-                .referedUrl(request.getRequestURL().toString())
-                .build()
-                ;
-        return new ResponseEntity<>(em, HttpStatus.BAD_REQUEST);
+        return exceptionResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST, request.getRequestURI());
     }
 
     /**
@@ -57,13 +48,7 @@ public class GlobalExceptionHandler {
             }
         }
 
-        ErrorMessage em = ErrorMessage.builder()
-                .errorMessage(sb.toString())
-                .code(HttpStatus.BAD_REQUEST.value())
-                .referedUrl(request.getRequestURL().toString())
-                .build()
-                ;
-        return new ResponseEntity<>(em, HttpStatus.BAD_REQUEST);
+        return exceptionResponseEntity(sb.toString(), HttpStatus.BAD_REQUEST, request.getRequestURI());
     }
 
     /**
@@ -73,13 +58,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     protected ResponseEntity<ErrorMessage> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e, HttpServletRequest request) {
         log.error("handleMethodArgumentTypeMismatchException", e);
-        ErrorMessage em = ErrorMessage.builder()
-                .errorMessage(e.getMessage())
-                .code(HttpStatus.BAD_REQUEST.value())
-                .referedUrl(request.getRequestURL().toString())
-                .build()
-                ;
-        return new ResponseEntity<>(em, HttpStatus.BAD_REQUEST);
+        return exceptionResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST, request.getRequestURI());
     }
 
     /**
@@ -88,13 +67,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     protected ResponseEntity<ErrorMessage> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e, HttpServletRequest request) {
         log.error("handleHttpRequestMethodNotSupportedException", e);
-        ErrorMessage em = ErrorMessage.builder()
-                .errorMessage(e.getMessage())
-                .code(HttpStatus.METHOD_NOT_ALLOWED.value())
-                .referedUrl(request.getRequestURL().toString())
-                .build()
-                ;
-        return new ResponseEntity<>(em, HttpStatus.METHOD_NOT_ALLOWED);
+        return exceptionResponseEntity(e.getMessage(), HttpStatus.METHOD_NOT_ALLOWED, request.getRequestURI());
     }
 
     /**
@@ -103,33 +76,19 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AccessDeniedException.class)
     protected ResponseEntity<ErrorMessage> handleAccessDeniedException(AccessDeniedException e, HttpServletRequest request) {
         log.error("handleAccessDeniedException", e);
-        ErrorMessage em = ErrorMessage.builder()
-                .errorMessage(e.getMessage())
-                .code(HttpStatus.FORBIDDEN.value())
-                .referedUrl(request.getRequestURL().toString())
-                .build()
-                ;
-        return new ResponseEntity<>(em, HttpStatus.FORBIDDEN);
+        return exceptionResponseEntity(e.getMessage(), HttpStatus.FORBIDDEN, request.getRequestURI());
     }
 
     @ExceptionHandler(value = { BusinessException.class })
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ResponseBody
     protected ResponseEntity<ErrorMessage> handleConflict(BusinessException e, HttpServletRequest request) {
         log.error("GlobalException", e);
         System.out.println(e.getMessage());
-        ErrorMessage em = ErrorMessage.builder()
-                .errorMessage(e.getMessage())
-                .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .referedUrl(request.getRequestURL().toString())
-                .build()
-                ;
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(em);
+        return exceptionResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, request.getRequestURI());
     }
 
     @ExceptionHandler({ EntityValidException.class })
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    @ResponseBody
     protected ResponseEntity<?> handleEntityValidException(EntityValidException e, HttpServletRequest request) {
         List<String> messageList = e.getEntities().stream()
                 .map((entityName) -> entityName + " is required")
@@ -141,60 +100,51 @@ public class GlobalExceptionHandler {
         }
         String messages = sb.toString();
 
-        ErrorMessage em = ErrorMessage.builder()
-                .code(HttpStatus.UNPROCESSABLE_ENTITY.value())
-                .referedUrl(request.getRequestURL().toString())
-                .errorMessage(messages)
-                .build();
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(em);
+        return exceptionResponseEntity(messages, HttpStatus.UNPROCESSABLE_ENTITY, request.getRequestURI());
     }
 
     @ExceptionHandler({ EntityNotFoundException.class })
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ResponseBody
     protected ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException e, HttpServletRequest request) {
-        ErrorMessage em = ErrorMessage.builder()
-                .code(HttpStatus.NOT_FOUND.value())
-                .referedUrl(request.getRequestURL().toString())
-                .errorMessage(e.getMessage())
-                .build();
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(em);
+        return exceptionResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND, request.getRequestURI());
     }
 
     @ExceptionHandler(MemberTokenNotFoundException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ResponseBody
     public ResponseEntity<ErrorMessage> memberNotFoundExceptionHandle(MemberTokenNotFoundException e, HttpServletRequest request) {
-        ErrorMessage em = ErrorMessage.builder()
-                .errorMessage(e.getMessage())
-                .code(HttpStatus.FORBIDDEN.value())
-                .referedUrl(request.getRequestURI())
-                .build();
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(em);
+        return exceptionResponseEntity(e.getMessage(), HttpStatus.FORBIDDEN, request.getRequestURI());
     }
 
     @ExceptionHandler(FeignClientException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     public ResponseEntity<ErrorMessage> memberNotFoundExceptionHandle(FeignClientException e, HttpServletRequest request) {
-        ErrorMessage em = ErrorMessage.builder()
-                .errorMessage(e.getMessage())
-                .code(e.getStatus())
-                .referedUrl(request.getRequestURI())
-                .build();
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(em);
+        return exceptionResponseEntity(e.getMessage(), HttpStatus.FORBIDDEN, request.getRequestURI());
     }
 
     @ExceptionHandler(InvalidParameterException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
-    public ResponseEntity<ErrorMessage> invaliParameterExceptionHandle(InvalidParameterException e, HttpServletRequest request) {
-        ErrorMessage em = ErrorMessage.builder()
-                .errorMessage(e.getMessage())
-                .code(HttpStatus.BAD_REQUEST.value())
-                .referedUrl(request.getRequestURI())
-                .build();
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(em);
+    public ResponseEntity<ErrorMessage> invalidParameterExceptionHandle(InvalidParameterException e, HttpServletRequest request) {
+        return exceptionResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST, request.getRequestURI());
     }
 
+    @ExceptionHandler(NeedEmailConfirmException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ResponseEntity<ErrorMessage> needEmailConfirmExceptionHandle(NeedEmailConfirmException e, HttpServletRequest request) {
+        return exceptionResponseEntity(e.getMessage(), HttpStatus.FORBIDDEN, request.getRequestURI());
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ResponseEntity<ErrorMessage> forbiddenExceptionHandle(ForbiddenException e, HttpServletRequest request) {
+        return exceptionResponseEntity(e.getMessage(), HttpStatus.FORBIDDEN, request.getRequestURI());
+    }
+
+    private ResponseEntity<ErrorMessage> exceptionResponseEntity(String message, HttpStatus status, String requestURI) {
+        ErrorMessage em = ErrorMessage.builder()
+                .errorMessage(message)
+                .code(status.value())
+                .referedUrl(requestURI)
+                .build();
+        return ResponseEntity.status(status).body(em);
+    }
 }
