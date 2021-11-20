@@ -15,6 +15,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +65,10 @@ public class Member extends BaseEntity {
 
     @JsonIgnore
     @Column
+    private LocalDateTime emailConfirmCodeCreatedAt;
+
+    @JsonIgnore
+    @Column
     private boolean isEmailConfirm = true;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
@@ -97,13 +102,12 @@ public class Member extends BaseEntity {
                 .build();
     }
 
-    public static Member createFormMember(FormJoinDto formRequestDto, String encodedPassword, String emailConfirmCode) {
+    public static Member createFormMember(FormJoinDto formRequestDto, String encodedPassword) {
         return Member.builder()
                 .memberName(formRequestDto.getMemberName())
                 .email(formRequestDto.getEmail())
                 .socialType(SocialType.FORM)
                 .password(encodedPassword)
-                .emailConfirmCode(emailConfirmCode)
                 .isEmailConfirm(false)
                 .lessons(new ArrayList<>())
                 .role(Role.USER)
@@ -129,5 +133,14 @@ public class Member extends BaseEntity {
 
     public void updateMemberToken(MemberToken memberToken) {
         this.memberToken = memberToken;
+    }
+
+    public void updateConfirmEmailCode(String emailConfirmCode, LocalDateTime now) {
+        this.emailConfirmCode = emailConfirmCode;
+        this.emailConfirmCodeCreatedAt = now;
+    }
+
+    public boolean canCreateEmailConfirmCode() {
+        return this.emailConfirmCodeCreatedAt.isBefore(LocalDateTime.now().minusMinutes(5));
     }
 }
