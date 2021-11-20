@@ -5,11 +5,13 @@ import com.sloth.domain.category.Category;
 import com.sloth.domain.lesson.constant.LessonStatus;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.site.Site;
+import com.sloth.exception.BusinessException;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Getter
@@ -105,8 +107,16 @@ public class Lesson extends BaseEntity  {
         return this.getStartDate().isBefore(LocalDate.now()) && this.getEndDate().isAfter(LocalDate.now());
     }
 
-    public int getRemainDay() {
-        return this.endDate.compareTo(LocalDate.now());
+    public int getRemainDay(LocalDate now) {
+        Long days;
+
+        try {
+            days = (Long) ChronoUnit.DAYS.between(now, this.endDate);
+        } catch (ArithmeticException e) {
+            throw new BusinessException("남은 일수 계산 도중 에러가 발생하였습니다.");
+        }
+
+        return days.intValue();
     }
 
     public int getCurrentProgressRate() {

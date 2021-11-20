@@ -5,7 +5,10 @@ import com.sloth.api.login.dto.FormJoinDto;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.config.auth.dto.TokenDto;
 import com.sloth.domain.memberToken.MemberToken;
-import com.sloth.exception.BusinessException;
+
+import com.sloth.domain.nickname.Nickname;
+import com.sloth.domain.nickname.service.NicknameService;
+
 import com.sloth.exception.ForbiddenException;
 import com.sloth.exception.InvalidParameterException;
 import com.sloth.util.DateTimeUtils;
@@ -29,13 +32,17 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final NicknameService nicknameService;
 
     public void saveMember(OAuthAttributes oAuthAttributes, TokenDto tokenDto) {
         Optional<Member> optionalMember = memberRepository.findByEmail(oAuthAttributes.getEmail());
 
         if(optionalMember.isEmpty()) {
-            Member member = Member.createOauthMember(oAuthAttributes);
+
+            Nickname randomNickname = nicknameService.findRandomNickname();
+            Member member = Member.createOauthMember(oAuthAttributes, randomNickname.getName());
             Member savedMember = memberRepository.save(member);
+            randomNickname.updateUsed();
 
             //리프레시 토큰 저장
             saveRefreshToken(savedMember, tokenDto);
