@@ -9,6 +9,7 @@ import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.domain.nickname.Nickname;
 import com.sloth.domain.nickname.service.NicknameService;
 
+import com.sloth.exception.ForbiddenException;
 import com.sloth.exception.InvalidParameterException;
 import com.sloth.util.DateTimeUtils;
 import lombok.RequiredArgsConstructor;
