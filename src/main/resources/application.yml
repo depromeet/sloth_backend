@@ -76,7 +76,6 @@ server:
     context-path: /
   error:
     include-stacktrace: never
-  port: 8082
 
 restemplate:
   readTimeout: 50000
