@@ -6,6 +6,9 @@ spring:
   #  password:
   #  driver-class-name: org.h2.Driver
 
+  application:
+    name: nanagong
+
   datasource:
     url: ENC(+xEBcLJcIQUu1KPlkOV3ZkZsbTbSRcswo8v2kEeebq5hxsm5sI93FdOJyEPTfynBO4y3N91npxzf/4/e/84aoQ==)
     username: ENC(Xxf0CNe4vW5dZ0Ti6Myo1c0squM74SKwZtvrO7xnE70=)
@@ -73,6 +76,7 @@ server:
     context-path: /
   error:
     include-stacktrace: never
+  port: 8082
 
 restemplate:
   readTimeout: 50000
@@ -90,4 +94,3 @@ token:
   refresh-token-expiration-time: 1210500000 # 2주
 
 my-pass: depman*
-
