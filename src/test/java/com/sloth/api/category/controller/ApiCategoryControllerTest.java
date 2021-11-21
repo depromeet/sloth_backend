@@ -5,6 +5,8 @@ import com.sloth.api.category.dto.CategoryDto;
 import com.sloth.api.category.service.ApiCategoryService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +22,7 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
+@Execution(ExecutionMode.CONCURRENT)
 @WebMvcTest(controllers = ApiCategoryController.class)
 public class ApiCategoryControllerTest extends BaseApiController {
 
