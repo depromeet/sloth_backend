@@ -64,12 +64,13 @@ public class Lesson extends BaseEntity  {
 
     @Builder
     public Lesson(Long lessonId, Member member, String lessonName, LocalDate startDate, LocalDate endDate, int totalNumber,
-                  int price, String alertDays, String message, Site site, Category category) {
+                  int presentNumber, int price, String alertDays, String message, Site site, Category category) {
         this.lessonId = lessonId;
         this.lessonName = lessonName;
         this.startDate = startDate;
         this.endDate = endDate;
         this.totalNumber = totalNumber;
+        this.presentNumber = presentNumber;
         this.price = price;
         this.alertDays = alertDays;
         this.site = site;
@@ -107,28 +108,52 @@ public class Lesson extends BaseEntity  {
         return this.getStartDate().isBefore(LocalDate.now()) && this.getEndDate().isAfter(LocalDate.now());
     }
 
+    private int getPastDays(LocalDate now) {
+        Long days;
+
+        try {
+            days = (Long) ChronoUnit.DAYS.between(this.getStartDate(), now) + 1;
+        } catch (ArithmeticException e) {
+            throw new BusinessException("남은 일 수 계산 도중 에러가 발생했습니다.");
+        }
+
+        return days.intValue();
+    }
+
+    private int getTotalDays() {
+        Long days;
+
+        try {
+            days = (Long) ChronoUnit.DAYS.between(this.getStartDate(), this.getEndDate()) + 1;
+        } catch (ArithmeticException e) {
+            throw new BusinessException("남은 일 수 계산 도중 에러가 발생했습니다.");
+        }
+
+        return days.intValue();
+    }
+
     public int getRemainDay(LocalDate now) {
         Long days;
 
         try {
             days = (Long) ChronoUnit.DAYS.between(now, this.endDate);
         } catch (ArithmeticException e) {
-            throw new BusinessException("남은 일수 계산 도중 에러가 발생하였습니다.");
+            throw new BusinessException("남은 일 수 계산 도중 에러가 발생했습니다.");
         }
 
         return days.intValue();
     }
 
     public int getCurrentProgressRate() {
-        return (int) Math.floor((double) this.presentNumber / (double) this.totalNumber * 100);
+        return (int) Math.floor((double) presentNumber / (double) totalNumber * 100);
     }
 
-    public int getGoalProgressRate() {
-        return (int) Math.floor( (double) LocalDate.now().compareTo(this.startDate) / (double) this.endDate.compareTo(this.startDate) * 100);
+    public int getGoalProgressRate(LocalDate now) {
+        return (int) Math.floor( (double) getGoalNumber(now) / (double) getTotalNumber() * 100);
     }
 
-    public int getWastePrice() {
-        int wastePrice = (int) (price * ((double) (getGoalProgressRate() - getCurrentProgressRate()) / (double) 100));
+    public int getWastePrice(LocalDate now) {
+        int wastePrice = (int) (price * ((double) (getGoalProgressRate(now) - getCurrentProgressRate()) / (double) 100));
         return wastePrice >= 0 ? wastePrice : 0;
     }
 
@@ -145,6 +170,10 @@ public class Lesson extends BaseEntity  {
         this.totalNumber = totalNumber;
         this.category = category;
         this.site = site;
+    }
+
+    public int getGoalNumber(LocalDate now) {
+        return (int) Math.ceil((((double)getPastDays(now)/(double)getTotalDays()) * (double) getTotalNumber()));
     }
 
 }

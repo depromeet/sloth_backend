@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 
 public class DoingLessonDto {
@@ -23,10 +24,10 @@ public class DoingLessonDto {
         @ApiModelProperty(value = "강의명")
         private String lessonName;
 
-        @ApiModelProperty(value = "이번주 끝남 여부")
-        private Boolean weeklyFinished;
+        @ApiModelProperty(value = "오늘까지 목표 달성 여부 (ex. 30일동안 30개 들어야 한다면 15일째에 15개 이상 들었을 때 true)")
+        private Boolean untilTodayFinished;
 
-        @ApiModelProperty(value = "강의 목표 남은일수")
+        @ApiModelProperty(value = "목표 완강 날까지 남은 일 수")
         private int remainDay;
 
         @ApiModelProperty(value = "사이트명")
@@ -38,20 +39,23 @@ public class DoingLessonDto {
         @ApiModelProperty(value = "완강한 강의 개수")
         private int presentNumber;
 
-        @ApiModelProperty(value = "남은 강의 개수")
-        private int remainNumber;
+        @ApiModelProperty(value = "시작부터 현재까지 들어야 하는 강의 누적 개수 (ex. 30일동안 60개 들어야 한다면 15일째에 30)")
+        private int untilTodayNumber;
 
-        public static DoingLessonDto.Response create (Lesson lesson) {
+        public static DoingLessonDto.Response create (Lesson lesson, LocalDate now) {
+
+            int goalNumber = lesson.getGoalNumber(now);
+
             return Response.builder()
                     .lessonName(lesson.getLessonName())
                     .lessonId(lesson.getLessonId())
-                    .weeklyFinished(false) // TODO 계산 필요
-                    .remainDay(lesson.getRemainDay(LocalDate.now()))
+                    .untilTodayFinished(lesson.getPresentNumber() >= goalNumber)
+                    .remainDay(lesson.getRemainDay(now))
                     .siteName(lesson.getSite().getSiteName())
                     .categoryName(lesson.getCategory().getCategoryName())
                     .presentNumber(lesson.getPresentNumber())
-                    .remainNumber(lesson.getTotalNumber() - lesson.getPresentNumber())
-                    .build();
+                    .untilTodayNumber(goalNumber)
+                  .build();
         }
 
     }
