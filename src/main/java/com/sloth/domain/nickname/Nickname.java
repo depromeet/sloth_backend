@@ -1,13 +1,15 @@
 package com.sloth.domain.nickname;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="nickname")
 @Getter
-@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

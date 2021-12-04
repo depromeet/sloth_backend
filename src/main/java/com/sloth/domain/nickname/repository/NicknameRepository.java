@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface NicknameRepository extends JpaRepository<Nickname, Long> {
 
-    @Query(value = "SELECT nickname_id nicknameId " +
-                   ", name  " +
-                   ", is_used isUsed " +
+    @Query(value = "SELECT nickname_id " +
+                   ", name " +
+                   ", is_used " +
             "FROM nickname " +
             "where is_used = false " +
             "ORDER BY random() " +
