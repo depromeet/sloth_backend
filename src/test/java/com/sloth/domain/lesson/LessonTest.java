@@ -57,6 +57,25 @@ class LessonTest {
     }
 
     @Test
+    @DisplayName("현재 날짜가 강의 시작일 이전일 경우 목표 진도율 테스트")
+    void getGoalProgressRateTest2() {
+        // given
+        LocalDate startDate = LocalDate.of(2021,12,12);
+        LocalDate endDate = LocalDate.of(2021, 12, 18);
+        LocalDate now = LocalDate.of(2021,12,4);
+
+        Site site = SiteCreator.create("인프런");
+        Category category = CategoryCreator.createStubCategory(1, "test", "test");
+        Lesson lesson = LessonCreator.createLesson("스프링부트 강의", startDate, endDate,category, site,0, 24);
+
+        // when
+        int goalProgressRate = lesson.getGoalProgressRate(now);
+
+        // then
+        Assertions.assertThat(goalProgressRate).isEqualTo(0);
+    }
+
+    @Test
     @DisplayName("낭비된 가격 테스트")
     void getWastePriceTest() {
         // given

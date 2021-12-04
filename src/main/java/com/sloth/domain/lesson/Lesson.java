@@ -149,6 +149,9 @@ public class Lesson extends BaseEntity  {
     }
 
     public int getGoalProgressRate(LocalDate now) {
+        if(now.isBefore(startDate)) {
+            return 0;
+        }
         return (int) Math.floor( (double) getGoalNumber(now) / (double) getTotalNumber() * 100);
     }
 
