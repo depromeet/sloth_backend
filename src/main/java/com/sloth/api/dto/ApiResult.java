@@ -1,5 +1,6 @@
 package com.sloth.api.dto;
 
+import groovy.transform.ToString;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel(value = "처리 결과 반환 객체", description = "처리 결과 반환 객체")
+@ToString
 public class ApiResult {
 
     @ApiModelProperty(value = "처리 결과 코드")
@@ -22,6 +24,13 @@ public class ApiResult {
         return ApiResult.builder()
                 .code(String.valueOf(HttpStatus.OK.value()))
                 .message("success")
+                .build();
+    }
+
+    public static ApiResult createOk(String message) {
+        return ApiResult.builder()
+                .code(String.valueOf(HttpStatus.OK.value()))
+                .message(message)
                 .build();
     }
 

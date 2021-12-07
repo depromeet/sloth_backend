@@ -58,7 +58,7 @@ public class LessonListDto {
         @ApiModelProperty(value = "강의 상태 (CURRENT OR FINISH)")
         private LessonStatus lessonStatus;
 
-        public static LessonListDto.Response create(Lesson lesson) {
+        public static LessonListDto.Response create(Lesson lesson, LocalDate now) {
             return Response.builder()
                     .lessonId(lesson.getLessonId())
                     .remainDay(lesson.getRemainDay(LocalDate.now()))
@@ -67,7 +67,7 @@ public class LessonListDto {
                     .lessonName(lesson.getLessonName())
                     .price(lesson.getPrice())
                     .currentProgressRate(lesson.getCurrentProgressRate())
-                    .goalProgressRate(lesson.getGoalProgressRate())
+                    .goalProgressRate(lesson.getGoalProgressRate(now))
                     .startDate(DateTimeUtils.convertToString(lesson.getStartDate()))
                     .endDate(DateTimeUtils.convertToString(lesson.getEndDate()))
                     .totalNumber(lesson.getTotalNumber())
