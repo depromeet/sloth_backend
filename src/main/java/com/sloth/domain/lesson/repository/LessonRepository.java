@@ -6,12 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
-public interface LessonRepository extends JpaRepository<Lesson, Long> ,CustomLessonRepository{
+public interface LessonRepository extends JpaRepository<Lesson, Long> ,CustomLessonRepository {
 
     @EntityGraph(attributePaths = {"site","category","member"})
     Optional<Lesson> findWithSiteCategoryMemberByLessonId(Long id);
