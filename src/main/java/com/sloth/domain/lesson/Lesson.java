@@ -7,13 +7,17 @@ import com.sloth.domain.member.Member;
 import com.sloth.domain.site.Site;
 import com.sloth.exception.BusinessException;
 import lombok.*;
+import org.hibernate.envers.AuditOverride;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 
 @Entity
+@AuditOverride(forClass=BaseEntity.class)
+@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 @Getter
 @AllArgsConstructor @NoArgsConstructor
 @ToString(exclude = {"category", "member"})

@@ -1,5 +1,6 @@
 drop table if exists category CASCADE;
 drop table if exists lesson CASCADE;
+drop table if exists lesson_aud CASCADE;
 drop table if exists member CASCADE;
 drop table if exists member_token CASCADE;
 drop table if exists site CASCADE;
@@ -35,6 +36,29 @@ create table lesson (
     member_id bigint,
     site_id bigint,
     primary key (lesson_id)
+);
+
+create table lesson_aud (
+    lesson_id bigint not null,
+    rev integer not null,
+    revtype tinyint,
+    reg_time timestamp,
+    update_time timestamp,
+    created_by varchar(255),
+    modified_by varchar(255),
+    alert_days varchar(255),
+    end_date date,
+    is_finished boolean,
+    lesson_name varchar(150),
+    message varchar(200),
+    present_number integer,
+    price integer,
+    start_date date,
+    total_number integer,
+    category_id bigint,
+    member_id bigint,
+    site_id bigint,
+    primary key (lesson_id, rev)
 );
 
 create table member (
