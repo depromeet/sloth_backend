@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 @Slf4j
@@ -125,4 +127,14 @@ public class LessonService {
         lessonRepository.delete(lesson);
     }
 
+    public void sortByRemainDay(List<Lesson> lessons) {
+        lessons.sort(new Comparator<Lesson>() {
+            @Override
+            public int compare(Lesson standardLesson, Lesson compareLesson) {
+                int standardLessonRemainDay = standardLesson.getRemainDay(LocalDate.now());
+                int compareLessonRemainDay = compareLesson.getRemainDay(LocalDate.now());
+                return Integer.compare(standardLessonRemainDay, compareLessonRemainDay);
+            }
+        });
+    }
 }
