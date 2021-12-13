@@ -24,6 +24,7 @@ spring:
         format_sql : true
         default_batch_fetch_size: 100
         open-in-view: false
+        dialect: org.hibernate.dialect.H2Dialect
 
   devtools:
     livereload:

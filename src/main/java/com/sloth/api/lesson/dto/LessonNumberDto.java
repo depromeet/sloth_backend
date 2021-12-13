@@ -16,7 +16,6 @@ public class LessonNumberDto {
         private Long lessonId;
         private Integer presentNumber;
         private Boolean isFinished;
-        private Boolean weeklyFinished;
 
         public static LessonNumberDto.Response create(Lesson lesson) {
             return LessonNumberDto.Response.builder()

@@ -3,6 +3,7 @@ package com.sloth.resolver;
 import com.sloth.config.auth.TokenProvider;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.repository.MemberRepository;
+import com.sloth.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
@@ -42,7 +43,7 @@ public class CurrentMemberArgumentResolver implements HandlerMethodArgumentResol
         HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         String email = TokenProvider.getMemberEmail(token);
-        return memberRepository.findByEmail(email).orElseThrow( () -> new UsernameNotFoundException("해당 회원 정보가 없습니다. email : " + email));
+        return memberRepository.findByEmail(email).orElseThrow( () -> new BusinessException("해당 회원 정보가 없습니다. email : " + email));
     }
 
 }

@@ -70,6 +70,7 @@ dependencies {
     compile group: 'com.navercorp.lucy', name: 'lucy-xss-servlet', version: '2.0.0'
 
     implementation group: 'org.postgresql', name: 'postgresql'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.27'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'

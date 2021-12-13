@@ -11,7 +11,7 @@ public interface NicknameRepository extends JpaRepository<Nickname, Long> {
                    ", is_used " +
             "FROM nickname " +
             "where is_used = false " +
-            "ORDER BY random() " +
+            "ORDER BY rand() " +
             "LIMIT 1", nativeQuery = true)
     Nickname findRandomNickname();
 
