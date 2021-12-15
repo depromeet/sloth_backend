@@ -1,10 +1,10 @@
 spring:
 
   datasource:
-    url: ENC(+xEBcLJcIQUu1KPlkOV3ZkZsbTbSRcswo8v2kEeebq5hxsm5sI93FdOJyEPTfynBO4y3N91npxzf/4/e/84aoQ==)
-    username: ENC(Xxf0CNe4vW5dZ0Ti6Myo1c0squM74SKwZtvrO7xnE70=)
-    password: ENC(FQKtU2korcZIi2hqlmGRHPBFKLTE9Zd6HFVg0LSbehg=)
-    driver-class-name: org.postgresql.Driver
+    url: ENC(hiIiaopgr7o/784ait/zMqbLOqXLiBrh/i845qu4RP830E7vrDrskpqFzZ70hCWWegpSGAMQclnIpaC3VXnXpXrcjyF8wP8lM8aMHvI6Lmg=)
+    username: ENC(gTwvW+YW4faw3KsRZFs2kZPueOYzeUNLvExmpXPcl9A=)
+    password: ENC(dRumURTXxb/MDNQL3pD4peQrhgNQplqljSglZs+PeTw=)
+    driver-class-name: com.mysql.jdbc.Driver
 
 server:
   port: 8081
