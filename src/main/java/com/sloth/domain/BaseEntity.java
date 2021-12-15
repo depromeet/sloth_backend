@@ -3,6 +3,7 @@ package com.sloth.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+import org.hibernate.envers.AuditOverride;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -14,6 +15,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+@AuditOverride(forClass=BaseTimeEntity.class)
 @EntityListeners(value = {AuditingEntityListener.class})
 @MappedSuperclass
 @Getter

@@ -65,16 +65,16 @@ public class LessonDetailDto {
         @ApiModelProperty(value = "낭비한 금액")
         private int wastePrice;
 
-        public static LessonDetailDto.Response create(Lesson lesson) {
+        public static LessonDetailDto.Response create(Lesson lesson, LocalDate now) {
             return Response.builder()
                     .lessonId(lesson.getLessonId())
                     .isFinished(lesson.getIsFinished())
-                    .remainDay(lesson.getRemainDay())
+                    .remainDay(lesson.getRemainDay(LocalDate.now()))
                     .lessonName(lesson.getLessonName())
                     .categoryName(lesson.getCategory().getCategoryName())
                     .siteName(lesson.getSite().getSiteName())
                     .currentProgressRate(lesson.getCurrentProgressRate())
-                    .goalProgressRate(lesson.getGoalProgressRate())
+                    .goalProgressRate(lesson.getGoalProgressRate(now))
                     .totalNumber(lesson.getTotalNumber())
                     .presentNumber(lesson.getPresentNumber())
                     .startDate(lesson.getStartDate())
@@ -82,7 +82,7 @@ public class LessonDetailDto {
                     .price(lesson.getPrice())
                     .alertDays(lesson.getAlertDays())
                     .message(lesson.getMessage())
-                    .wastePrice(lesson.getWastePrice())
+                    .wastePrice(lesson.getWastePrice(now))
                     .build();
         }
     }

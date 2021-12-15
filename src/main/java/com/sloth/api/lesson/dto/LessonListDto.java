@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import java.time.LocalDate;
+
 
 @ApiModel(value = "강의 목록 조회 API 반환 객체", description = "강의 목록 조회 API 반환 객체")
 public class LessonListDto {
@@ -56,16 +58,16 @@ public class LessonListDto {
         @ApiModelProperty(value = "강의 상태 (CURRENT OR FINISH)")
         private LessonStatus lessonStatus;
 
-        public static LessonListDto.Response create(Lesson lesson) {
+        public static LessonListDto.Response create(Lesson lesson, LocalDate now) {
             return Response.builder()
                     .lessonId(lesson.getLessonId())
-                    .remainDay(lesson.getRemainDay())
+                    .remainDay(lesson.getRemainDay(LocalDate.now()))
                     .categoryName(lesson.getCategory().getCategoryName())
                     .siteName(lesson.getSite().getSiteName())
                     .lessonName(lesson.getLessonName())
                     .price(lesson.getPrice())
                     .currentProgressRate(lesson.getCurrentProgressRate())
-                    .goalProgressRate(lesson.getGoalProgressRate())
+                    .goalProgressRate(lesson.getGoalProgressRate(now))
                     .startDate(DateTimeUtils.convertToString(lesson.getStartDate()))
                     .endDate(DateTimeUtils.convertToString(lesson.getEndDate()))
                     .totalNumber(lesson.getTotalNumber())

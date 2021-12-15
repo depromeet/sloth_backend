@@ -28,7 +28,7 @@ public class HealthController {
         List<String> profiles = Arrays.asList(env.getActiveProfiles());
         List<String> realProfiles = Arrays.asList("real1", "real2");
 
-        profiles = profiles.stream().filter(profile -> "real1".equals(profile) || "real2".equals(profile))
+        profiles = profiles.stream().filter(profile -> "real1".equals(profile) || "real2".equals(profile) || "prod".equals(profile))
                 .collect(Collectors.toList());
 
         String defaultProfile = profiles.isEmpty()? "default" : profiles.get(0);

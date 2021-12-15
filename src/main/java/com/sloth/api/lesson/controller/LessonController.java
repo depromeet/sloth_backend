@@ -19,7 +19,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.ok;
@@ -51,7 +54,7 @@ public class LessonController {
     })
     public ResponseEntity<LessonDetailDto.Response> getLessonDetail(@CurrentMember Member member, @Valid @PathVariable Long lessonId) {
         Lesson lesson = lessonService.findLessonWithSiteCategory(member, lessonId);
-        LessonDetailDto.Response lessonDetail = LessonDetailDto.Response.create(lesson);
+        LessonDetailDto.Response lessonDetail = LessonDetailDto.Response.create(lesson, LocalDate.now());
         return ok(lessonDetail);
     }
 
@@ -66,8 +69,9 @@ public class LessonController {
             return ResponseEntity.notFound().build();
         }
         List<DoingLessonDto.Response> doingLessonResponses = new ArrayList<>();
+        lessonService.sortByRemainDay(lessons);
         for (Lesson lesson : lessons) {
-            DoingLessonDto.Response doingLessonResponse = DoingLessonDto.Response.create(lesson);
+            DoingLessonDto.Response doingLessonResponse = DoingLessonDto.Response.create(lesson, LocalDate.now());
             doingLessonResponses.add(doingLessonResponse);
         }
         return ok(doingLessonResponses);
@@ -117,8 +121,9 @@ public class LessonController {
         if (lessons == null) {
             return ResponseEntity.noContent().build();
         }
+        lessonService.sortByRemainDay(lessons);
         for (Lesson lesson : lessons) {
-            lessonListDto.add(LessonListDto.Response.create(lesson));
+            lessonListDto.add(LessonListDto.Response.create(lesson, LocalDate.now()));
         }
 
         return ok(lessonListDto);

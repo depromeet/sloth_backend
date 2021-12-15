@@ -5,13 +5,19 @@ import com.sloth.domain.category.Category;
 import com.sloth.domain.lesson.constant.LessonStatus;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.site.Site;
+import com.sloth.exception.BusinessException;
 import lombok.*;
+import org.hibernate.envers.AuditOverride;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 @Entity
+@AuditOverride(forClass=BaseEntity.class)
+@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 @Getter
 @AllArgsConstructor @NoArgsConstructor
 @ToString(exclude = {"category", "member"})
@@ -62,12 +68,13 @@ public class Lesson extends BaseEntity  {
 
     @Builder
     public Lesson(Long lessonId, Member member, String lessonName, LocalDate startDate, LocalDate endDate, int totalNumber,
-                  int price, String alertDays, String message, Site site, Category category) {
+                  int presentNumber, int price, String alertDays, String message, Site site, Category category) {
         this.lessonId = lessonId;
         this.lessonName = lessonName;
         this.startDate = startDate;
         this.endDate = endDate;
         this.totalNumber = totalNumber;
+        this.presentNumber = presentNumber;
         this.price = price;
         this.alertDays = alertDays;
         this.site = site;
@@ -105,20 +112,55 @@ public class Lesson extends BaseEntity  {
         return this.getStartDate().isBefore(LocalDate.now()) && this.getEndDate().isAfter(LocalDate.now());
     }
 
-    public int getRemainDay() {
-        return Period.between(LocalDate.now(), this.endDate).getDays();
+    private int getPastDays(LocalDate now) {
+        Long days;
+
+        try {
+            days = (Long) ChronoUnit.DAYS.between(this.getStartDate(), now) + 1;
+        } catch (ArithmeticException e) {
+            throw new BusinessException("남은 일 수 계산 도중 에러가 발생했습니다.");
+        }
+
+        return days.intValue();
+    }
+
+    private int getTotalDays() {
+        Long days;
+
+        try {
+            days = (Long) ChronoUnit.DAYS.between(this.getStartDate(), this.getEndDate()) + 1;
+        } catch (ArithmeticException e) {
+            throw new BusinessException("남은 일 수 계산 도중 에러가 발생했습니다.");
+        }
+
+        return days.intValue();
+    }
+
+    public int getRemainDay(LocalDate now) {
+        Long days;
+
+        try {
+            days = (Long) ChronoUnit.DAYS.between(now, this.endDate);
+        } catch (ArithmeticException e) {
+            throw new BusinessException("남은 일 수 계산 도중 에러가 발생했습니다.");
+        }
+
+        return days.intValue();
     }
 
     public int getCurrentProgressRate() {
-        return (int) Math.floor((double) this.presentNumber / (double) this.totalNumber * 100);
+        return (int) Math.floor((double) presentNumber / (double) totalNumber * 100);
     }
 
-    public int getGoalProgressRate() {
-        return (int) Math.floor( (double) Period.between(this.startDate, LocalDate.now()).getDays() / (double) Period.between(this.startDate, this.endDate).getDays() * 100);
+    public int getGoalProgressRate(LocalDate now) {
+        if(now.isBefore(startDate)) {
+            return 0;
+        }
+        return (int) Math.floor( (double) getGoalNumber(now) / (double) getTotalNumber() * 100);
     }
 
-    public int getWastePrice() {
-        int wastePrice = (int) (price * ((double) (getGoalProgressRate() - getCurrentProgressRate()) / (double) 100));
+    public int getWastePrice(LocalDate now) {
+        int wastePrice = (int) (price * ((double) (getGoalProgressRate(now) - getCurrentProgressRate()) / (double) 100));
         return wastePrice >= 0 ? wastePrice : 0;
     }
 
@@ -135,6 +177,10 @@ public class Lesson extends BaseEntity  {
         this.totalNumber = totalNumber;
         this.category = category;
         this.site = site;
+    }
+
+    public int getGoalNumber(LocalDate now) {
+        return (int) Math.ceil((((double)getPastDays(now)/(double)getTotalDays()) * (double) getTotalNumber()));
     }
 
 }

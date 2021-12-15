@@ -1,11 +1,13 @@
 package com.sloth.api.category.controller;
 
 import com.sloth.api.BaseApiController;
-import com.sloth.api.lesson.service.LessonService;
-import com.sloth.domain.category.Category;
-import com.sloth.domain.category.repository.CategoryRepository;
+import com.sloth.api.category.dto.CategoryDto;
+import com.sloth.api.category.service.ApiCategoryService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -20,51 +22,35 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
+@Execution(ExecutionMode.CONCURRENT)
+@WebMvcTest(controllers = ApiCategoryController.class)
 public class ApiCategoryControllerTest extends BaseApiController {
 
     @MockBean
-    private CategoryRepository categoryRepository;
-
-    @MockBean
-    LessonService lessonService;
-
-    private List<Category> createCategorys() {
-        List<Category> categoryDtos = new ArrayList<>();
-        Category category1 = Category.builder()
-                .categoryId(1L)
-                .categoryLvl(1)
-                .rootCategoryId(1L)
-                .categoryName("개발")
-                .rootCategoryName("개발")
-                .build();
-
-        Category category2 = Category.builder()
-                .categoryId(2L)
-                .categoryLvl(1)
-                .rootCategoryId(2L)
-                .categoryName("디자인")
-                .rootCategoryName("디자인")
-                .build();
-
-
-        categoryDtos.add(category1);
-        categoryDtos.add(category2);
-
-        return categoryDtos;
-    }
-
+    private ApiCategoryService apiCategoryService;
 
     @Test
     @DisplayName("카테고리 리스트 조회 API 테스트")
     public void getCategorys() throws Exception {
 
         //given
-        List<Category> categoryDtos = createCategorys();
-        Category category1 = categoryDtos.get(0);
-        Category category2 = categoryDtos.get(1);
+        List<CategoryDto.Response> categoryResponses = new ArrayList<>();
 
-        given(categoryRepository.findAll())
-                .willReturn(categoryDtos);
+        CategoryDto.Response categoryResponse1 = CategoryDto.Response.builder()
+                .categoryId(1L)
+                .categoryName("개발")
+                .build();
+
+        CategoryDto.Response categoryResponse2 = CategoryDto.Response.builder()
+                .categoryId(2L)
+                .categoryName("디자인")
+                .build();
+
+        categoryResponses.add(categoryResponse1);
+        categoryResponses.add(categoryResponse2);
+
+        given(apiCategoryService.getCategoryDtos())
+                .willReturn(categoryResponses);
 
         //when
         ResultActions result = mockMvc.perform(get("/api/category/list")
@@ -75,9 +61,9 @@ public class ApiCategoryControllerTest extends BaseApiController {
         result.andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(jsonPath("$[0]").exists())
                 .andExpect(jsonPath("$[1]").exists())
-                .andExpect(jsonPath("$[0].categoryName").value(equalTo(category1.getCategoryName())))
+                .andExpect(jsonPath("$[0].categoryName").value(equalTo(categoryResponse1.getCategoryName())))
                 .andExpect(jsonPath("$[0].categoryId").value(equalTo(1)))
-                .andExpect(jsonPath("$[1].categoryName").value(equalTo(category2.getCategoryName())))
+                .andExpect(jsonPath("$[1].categoryName").value(equalTo(categoryResponse2.getCategoryName())))
                 .andExpect(jsonPath("$[1].categoryId").value(equalTo(2)))
         ;
     }

@@ -16,6 +16,9 @@ public class EmailConfirmRequestDto {
     @ApiModelProperty(value = "이메일")
     private String email;
 
+    @ApiModelProperty(value = "패스워드")
+    private String password;
+
     @ApiModelProperty(value = "검증 코드")
     private String emailConfirmCode;
 }

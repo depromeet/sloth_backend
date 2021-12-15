@@ -7,6 +7,7 @@ import com.sloth.domain.member.Member;
 import com.sloth.domain.member.repository.MemberRepository;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +20,7 @@ public class ApiMemberService {
     private final TokenProvider tokenProvider;
 
     public MemberInfoDto findByEmail (String email) {
-        Member member = memberRepository.findByEmail(email).orElseThrow( () -> new IllegalArgumentException("해당 정보가 없습니다. email =" + email));
+        Member member = memberRepository.findByEmail(email).orElseThrow( () -> new UsernameNotFoundException("해당 회원 정보가 없습니다. email : " + email));
 
         return new MemberInfoDto(member);
     }

@@ -1,33 +1,21 @@
 spring:
-  #아래 내용이 없어도 스프링부트에서 테스트돌릴 때 기본적으로 메모리 모드로 돌림
-  #datasource:
-  #  url: jdbc:h2:mem:test
-  #  username: sa
-  #  password:
-  #  driver-class-name: org.h2.Driver
-
-  application:
-    name: nanagong
-
-  datasource:
-    url: ENC(+xEBcLJcIQUu1KPlkOV3ZkZsbTbSRcswo8v2kEeebq5hxsm5sI93FdOJyEPTfynBO4y3N91npxzf/4/e/84aoQ==)
-    username: ENC(Xxf0CNe4vW5dZ0Ti6Myo1c0squM74SKwZtvrO7xnE70=)
-    password: ENC(FQKtU2korcZIi2hqlmGRHPBFKLTE9Zd6HFVg0LSbehg=)
-    driver-class-name: org.postgresql.Driver
 
   session:
     jdbc:
       initialize-schema: always
 
   jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     properties:
       hibernate:
+        show_sql: true
         format_sql : true
         default_batch_fetch_size: 1000
         use_sql_comments: true
         open-in-view: false
+
   devtools:
     livereload:
       enabled: true
@@ -46,10 +34,6 @@ spring:
   profiles:
     include: oauth
 
-  h2:
-    console:
-      enabled: true
-
   messages:
     basename: messages,errors
 
@@ -66,8 +50,8 @@ spring:
 
 logging:
   level:
-    org.hibernate.SQL: debug
-    #org.hibernate.type: trace
+    org.hibernate.SQL: info
+    org.hibernate.type: info
     org.springframework.security: info
   config: classpath:logback-spring.xml
 

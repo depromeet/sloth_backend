@@ -1,6 +1,6 @@
 package com.sloth.api.lesson.controller;
 
-import com.sloth.api.BaseApiController;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sloth.api.lesson.dto.LessonNumberDto;
 import com.sloth.api.lesson.dto.LessonUpdateDto;
 import com.sloth.domain.category.Category;
@@ -18,9 +18,15 @@ import com.sloth.util.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -40,7 +46,21 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class LessonControllerTest extends BaseApiController {
+@SpringBootTest
+@ActiveProfiles("test")
+@AutoConfigureMockMvc
+public class LessonControllerTest  {
+
+    @Autowired
+    protected MockMvc mockMvc;
+
+    @Autowired
+    protected ObjectMapper objectMapper;
+
+    protected String accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJhdWQiOiJlbWFpbEBlbWFpbC5jb20iLCJpYXQiOjE2MzcxNjM3NjUsImV4cCI6MTE2MzcxNjM3NjV9.9fwwJ6FC_36WwZi2AyAV1VY6SkVdyO6G7Mmr6B9MtSvy4SIwPyWl3G8qUjoZzy4g7gSpRqV-0kQBdB8t2Mm2Tw";
+
+    protected final String testEmail = "email@email.com";
+
 
     @MockBean
     LessonRepository lessonRepository;
@@ -82,6 +102,7 @@ public class LessonControllerTest extends BaseApiController {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     @DisplayName("들은 강의 수 추가 - 총 강의수보다 적게")
     void plusPresentNumber_underTotal() throws Exception {
 
@@ -259,7 +280,7 @@ public class LessonControllerTest extends BaseApiController {
         result.andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0]").exists())
                 .andExpect(jsonPath("$[3]").exists())
-                .andExpect(jsonPath("$[0].remainDay").value(equalTo(lesson1.getRemainDay())))
+                .andExpect(jsonPath("$[0].remainDay").value(equalTo(lesson1.getRemainDay(LocalDate.now()))))
                 .andExpect(jsonPath("$[0].categoryName").value(equalTo(category.getCategoryName())))
                 .andExpect(jsonPath("$[0].siteName").value(equalTo(site.getSiteName())))
                 .andExpect(jsonPath("$[0].lessonName").value(equalTo(lesson1.getLessonName())))
