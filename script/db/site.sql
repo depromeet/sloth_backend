@@ -1,23 +1,23 @@
 insert into site
-values(nextval('hibernate_sequence'), '패스트캠퍼스')
+values(1, '패스트캠퍼스')
 ;
 
 insert into site
-values(nextval('hibernate_sequence'), '인프런')
+values(2, '인프런')
 ;
 
 insert into site
-values(nextval('hibernate_sequence'), '클래스 101')
+values(3, '클래스 101')
 ;
 
 insert into site
-values(nextval('hibernate_sequence'), '탈잉')
+values(4, '탈잉')
 ;
 
 insert into site
-values(nextval('hibernate_sequence'), '해커스')
+values(5, '해커스')
 ;
 
 insert into site
-values(nextval('hibernate_sequence'), '파고다')
+values(6, '파고다')
 ;
