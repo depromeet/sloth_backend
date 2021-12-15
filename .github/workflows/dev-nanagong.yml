@@ -6,7 +6,7 @@ name: Spring Boot & Gradle CI/CD & Docker Hub
 
 on:
   push:
-    branches: [ master ]
+    branches: [ develop ]
 
 
 env:
