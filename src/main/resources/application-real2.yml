@@ -17,5 +17,5 @@ logging:
 
 token:
   secret: sloth-backend
-  access-token-expiration-time: 9999999999999
-  refresh-token-expiration-time: 9999999999999
+  access-token-expiration-time: 99999999999
+  refresh-token-expiration-time: 99999999999
