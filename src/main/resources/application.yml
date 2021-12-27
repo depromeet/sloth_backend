@@ -53,6 +53,7 @@ logging:
     org.hibernate.SQL: info
     org.hibernate.type: info
     org.springframework.security: info
+  config: classpath:logback-spring.xml
 
 server:
   servlet:
