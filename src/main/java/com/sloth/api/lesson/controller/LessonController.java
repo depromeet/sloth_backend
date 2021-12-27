@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -59,7 +60,7 @@ public class LessonController {
     }
 
     @GetMapping("/doing")
-    @Operation(summary = "멤버가 현재 진행중인 강의 조회 API", description = "멤버가 현재 진행중인 강의 조회 API")
+    @Operation(summary = "투데이 강의 목록 조회 API", description = "투데이 강의 목록 조회 API")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
@@ -68,12 +69,21 @@ public class LessonController {
         if (lessons == null) {
             return ResponseEntity.notFound().build();
         }
+
+        LocalDate now = LocalDate.now();
+        // 남은 일 수 0일 이상만 조회 되도록 필터링
+        lessons = lessons.stream()
+                .filter(lesson -> lesson.getRemainDay(now) >= 0)
+                .collect(Collectors.toList());
+
         List<DoingLessonDto.Response> doingLessonResponses = new ArrayList<>();
         lessonService.sortByRemainDay(lessons);
+
         for (Lesson lesson : lessons) {
             DoingLessonDto.Response doingLessonResponse = DoingLessonDto.Response.create(lesson, LocalDate.now());
             doingLessonResponses.add(doingLessonResponse);
         }
+
         return ok(doingLessonResponses);
     }
 
@@ -121,7 +131,7 @@ public class LessonController {
         if (lessons == null) {
             return ResponseEntity.noContent().build();
         }
-        lessonService.sortByRemainDay(lessons);
+
         for (Lesson lesson : lessons) {
             lessonListDto.add(LessonListDto.Response.create(lesson, LocalDate.now()));
         }

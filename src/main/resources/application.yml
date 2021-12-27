@@ -5,7 +5,7 @@ spring:
       initialize-schema: always
 
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    #database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: none
     properties:

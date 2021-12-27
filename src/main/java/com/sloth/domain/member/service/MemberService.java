@@ -4,17 +4,15 @@ import com.sloth.api.login.dto.EmailConfirmResendRequestDto;
 import com.sloth.api.login.dto.FormJoinDto;
 import com.sloth.config.auth.dto.OAuthAttributes;
 import com.sloth.config.auth.dto.TokenDto;
+import com.sloth.domain.member.Member;
+import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.memberToken.MemberToken;
-
 import com.sloth.domain.nickname.Nickname;
 import com.sloth.domain.nickname.service.NicknameService;
-
 import com.sloth.exception.ForbiddenException;
 import com.sloth.exception.InvalidParameterException;
 import com.sloth.util.DateTimeUtils;
 import lombok.RequiredArgsConstructor;
-import com.sloth.domain.member.Member;
-import com.sloth.domain.member.repository.MemberRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,17 +34,17 @@ public class MemberService {
 
     public void saveMember(OAuthAttributes oAuthAttributes, TokenDto tokenDto) {
         Optional<Member> optionalMember = memberRepository.findByEmail(oAuthAttributes.getEmail());
-
+        Member savedMember;
         if(optionalMember.isEmpty()) {
-
             Nickname randomNickname = nicknameService.findRandomNickname();
             Member member = Member.createOauthMember(oAuthAttributes, randomNickname.getName());
-            Member savedMember = memberRepository.save(member);
+            savedMember = memberRepository.save(member);
             randomNickname.updateUsed();
-
-            //리프레시 토큰 저장
-            saveRefreshToken(savedMember, tokenDto);
+        } else {
+            savedMember = optionalMember.get();
         }
+
+        saveRefreshToken(savedMember, tokenDto);
     }
 
     public Member saveMember(FormJoinDto formRequestDto) {

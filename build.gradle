@@ -72,7 +72,6 @@ dependencies {
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
     compile group: 'com.navercorp.lucy', name: 'lucy-xss-servlet', version: '2.0.0'
 
-    implementation group: 'org.postgresql', name: 'postgresql'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.27'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
