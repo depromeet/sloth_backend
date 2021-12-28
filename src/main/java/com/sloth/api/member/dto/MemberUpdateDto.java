@@ -1,18 +1,34 @@
 package com.sloth.api.member.dto;
 
-import lombok.*;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
 
-@Getter
-@NoArgsConstructor
-@ApiModel(value = "회원 정보(이름) 변경 객체", description = "회원 정보(이름) 변경 객체")
+import javax.validation.constraints.NotNull;
+
 public class MemberUpdateDto {
 
-    private String memberName;
+    @Getter @Setter
+    @ApiModel(value = "회원 정보(이름) 변경 객체", description = "회원 정보(이름) 변경 객체")
+    public static class Request {
+
+        @ApiModelProperty(value = "회원 이름")
+        @NotNull(message = "회원 이름을 입력해주세요")
+        private String memberName;
+
+    }
+
 
     @Builder
-    public MemberUpdateDto(String memberName) {
-        this.memberName = memberName;
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter @Setter
+    @ApiModel(value = "강의 업데이트 반환 객체", description = "강의 업데이트 반환 객체")
+    public static class Response {
+
+        @ApiModelProperty(value = "회원 이름")
+        private String memberName;
+
     }
 
 }

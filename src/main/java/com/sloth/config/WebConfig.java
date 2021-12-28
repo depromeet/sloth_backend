@@ -3,6 +3,7 @@ package com.sloth.config;
 import com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter;
 import com.sloth.config.auth.TokenProvider;
 import com.sloth.config.auth.interceptor.AuthInterceptor;
+import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;
 import com.sloth.resolver.CurrentMemberArgumentResolver;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     private final TokenProvider tokenProvider;
     private final MemberTokenRepository memberTokenRepository;
-    private final CurrentMemberArgumentResolver currentMemberArgumentResolver;
+    private final MemberRepository memberRepository;
 
     @Bean
     public FilterRegistrationBean<XssEscapeServletFilter> filterRegistrationBean() {
@@ -32,6 +33,11 @@ public class WebConfig implements WebMvcConfigurer {
         filterRegistration.setOrder(1);
         filterRegistration.addUrlPatterns("/*");
         return filterRegistration;
+    }
+
+    @Bean
+    public CurrentMemberArgumentResolver currentMemberArgumentResolver() {
+        return new CurrentMemberArgumentResolver(memberRepository);
     }
 
     @Bean
@@ -64,6 +70,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(currentMemberArgumentResolver);
+        resolvers.add(currentMemberArgumentResolver());
     }
+
 }
