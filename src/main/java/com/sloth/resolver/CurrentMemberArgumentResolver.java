@@ -5,11 +5,8 @@ import com.sloth.domain.member.Member;
 import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -19,13 +16,12 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
-@Component
 public class CurrentMemberArgumentResolver implements HandlerMethodArgumentResolver {
 
-    @Autowired
     private MemberRepository memberRepository;
 
-    public CurrentMemberArgumentResolver() {
+    public CurrentMemberArgumentResolver(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     @Override
