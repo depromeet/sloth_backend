@@ -3,8 +3,8 @@ package com.sloth.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sloth.app.member.service.CustomOAuth2UserService;
 import com.sloth.config.auth.TokenProvider;
+import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;
-import com.sloth.resolver.CurrentMemberArgumentResolver;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -19,10 +19,10 @@ public class TestApiConfiguration {
     private MemberTokenRepository memberTokenRepository;
 
     @MockBean
-    private CurrentMemberArgumentResolver currentMemberArgumentResolver;
+    private CustomOAuth2UserService customOAuth2UserService;
 
     @MockBean
-    private CustomOAuth2UserService customOAuth2UserService;
+    private MemberRepository memberRepository;
 
     @Bean
     public TokenProvider tokenProvider() {
@@ -38,6 +38,5 @@ public class TestApiConfiguration {
     public ObjectMapper objectMapper() {
         return new ObjectMapper();
     }
-
 
 }

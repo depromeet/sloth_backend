@@ -119,7 +119,7 @@ public class Member extends BaseEntity {
         return this.role.getKey();
     }
 
-    public void update(String name) {
+    public void updateMemberName(String name) {
         this.memberName = name;
     }
 
