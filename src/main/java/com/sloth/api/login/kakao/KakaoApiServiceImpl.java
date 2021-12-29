@@ -28,11 +28,12 @@ public class KakaoApiServiceImpl implements SocialApiSerivce {
         String contentType = "application/x-www-form-urlencoded;charset=utf-8";
         KakaoUserInfo kakaoUserInfo = kakaoFeignClient.kakaoLogin(contentType, "Bearer " + accessToken);
         log.info("kakao email: " + kakaoUserInfo.getKakaoAccount().getEmail());
+        log.info("kakaoUserInfo id : " + kakaoUserInfo.getId());
         log.info("kakao nickname: " + kakaoUserInfo.getKakaoAccount().getProfile().getNickname());
 
         return OAuthAttributes.builder()
                 .email(StringUtils.isBlank(kakaoUserInfo.getKakaoAccount().getEmail()) ? kakaoUserInfo.getId() : kakaoUserInfo.getKakaoAccount().getEmail())
-                .name(kakaoUserInfo.getKakaoAccount().getProfile().getNickname()) // TODO 이름 랜덤 생성
+                .name(kakaoUserInfo.getKakaoAccount().getProfile().getNickname())
                 .socialType(SocialType.KAKAO)
                 .password(passwordEncoder.encode(pass))
                 .build();
