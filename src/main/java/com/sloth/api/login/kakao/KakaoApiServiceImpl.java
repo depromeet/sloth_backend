@@ -27,9 +27,9 @@ public class KakaoApiServiceImpl implements SocialApiSerivce {
     public OAuthAttributes getUserInfo(String accessToken) {
         String contentType = "application/x-www-form-urlencoded;charset=utf-8";
         KakaoUserInfo kakaoUserInfo = kakaoFeignClient.kakaoLogin(contentType, "Bearer " + accessToken);
-        log.info("kakao email: " + kakaoUserInfo.getKakaoAccount().getEmail());
-        log.info("kakaoUserInfo id : " + kakaoUserInfo.getId());
-        log.info("kakao nickname: " + kakaoUserInfo.getKakaoAccount().getProfile().getNickname());
+        log.info("kakao email: {}", kakaoUserInfo.getKakaoAccount().getEmail());
+        log.info("kakao UserInfo id : {}", kakaoUserInfo.getId());
+        log.info("kakao nickname: {}", kakaoUserInfo.getKakaoAccount().getProfile().getNickname());
 
         return OAuthAttributes.builder()
                 .email(StringUtils.isBlank(kakaoUserInfo.getKakaoAccount().getEmail()) ? kakaoUserInfo.getId() : kakaoUserInfo.getKakaoAccount().getEmail())

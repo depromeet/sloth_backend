@@ -26,11 +26,11 @@ public class GoogleApiServiceImpl implements SocialApiSerivce {
     @Override
     public OAuthAttributes getUserInfo(String accessToken) {
         accessToken = "Bearer " + accessToken.replace("Bearer", "").trim();
-        log.info("accessToken : " + accessToken);
+        log.info("accessToken : {}", accessToken);
 
         GoogleUserInfo googleUserInfo = googleFeignClient.googleLogin(accessToken);
-        log.info("email : " + googleUserInfo.getEmail());
-        log.info("name : " + googleUserInfo.getName());
+        log.info("email : {}", googleUserInfo.getEmail());
+        log.info("name : {}", googleUserInfo.getName());
 
         return OAuthAttributes.builder()
                 .email(StringUtils.isBlank(googleUserInfo.getEmail()) ? googleUserInfo.getId() : googleUserInfo.getEmail())
