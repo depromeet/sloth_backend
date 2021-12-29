@@ -42,6 +42,8 @@ public class LoginController {
     //@ApiImplicitParam(name = "socialType", dataType = "body", required = true, dataTypeClass = com.sloth.api.oauth.dto.OauthRequestDto.class)
     public ResponseEntity<ResponseJwtTokenDto> login(@RequestBody OauthRequestDto oauthRequestDto, HttpServletRequest httpServletRequest) {
 
+        log.info("oauth login start");
+
         String accessToken = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION);
 
         if(StringUtils.isBlank(accessToken)) {
@@ -54,6 +56,8 @@ public class LoginController {
 
         SocialType socialType = SocialType.from(oauthRequestDto.getSocialType());
         ResponseJwtTokenDto responseJwtTokenDto = loginService.login(accessToken, socialType);
+
+        log.info("oauth login end");
 
         return ResponseEntity.ok(responseJwtTokenDto);
     }
