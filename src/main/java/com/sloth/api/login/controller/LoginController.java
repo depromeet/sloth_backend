@@ -53,7 +53,7 @@ public class LoginController {
         }
 
         SocialType socialType = SocialType.from(oauthRequestDto.getSocialType());
-        ResponseJwtTokenDto responseJwtTokenDto = loginService.login(accessToken, socialType);
+        ResponseJwtTokenDto responseJwtTokenDto = loginService.loginOauth(accessToken, socialType);
 
         return ResponseEntity.ok(responseJwtTokenDto);
     }
@@ -83,7 +83,7 @@ public class LoginController {
         if(errors.hasErrors()) {
             InvalidParameterException.throwErrorMessage(errors);
         }
-        ResponseJwtTokenDto responseJwtTokenDto = loginService.login(formRequestDto);
+        ResponseJwtTokenDto responseJwtTokenDto = loginService.loginForm(formRequestDto);
 
         return ResponseEntity.ok(responseJwtTokenDto);
     }
