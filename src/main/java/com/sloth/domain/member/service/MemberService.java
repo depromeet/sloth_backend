@@ -32,19 +32,22 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final NicknameService nicknameService;
 
-    public void saveMember(OAuthAttributes oAuthAttributes, TokenDto tokenDto) {
+    public Boolean saveMember(OAuthAttributes oAuthAttributes, TokenDto tokenDto) {
         Optional<Member> optionalMember = memberRepository.findByEmail(oAuthAttributes.getEmail());
         Member savedMember;
+        Boolean isNewMember = false;
         if(optionalMember.isEmpty()) {
             Nickname randomNickname = nicknameService.findRandomNickname();
             Member member = Member.createOauthMember(oAuthAttributes, randomNickname.getName());
             savedMember = memberRepository.save(member);
             randomNickname.updateUsed();
+            isNewMember = true;
         } else {
             savedMember = optionalMember.get();
         }
 
         saveRefreshToken(savedMember, tokenDto);
+        return isNewMember;
     }
 
     public Member saveMember(FormJoinDto formRequestDto) {

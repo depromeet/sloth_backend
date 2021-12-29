@@ -9,7 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -83,7 +85,6 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected ResponseEntity<ErrorMessage> handleConflict(BusinessException e, HttpServletRequest request) {
         log.error("GlobalException", e);
-        System.out.println(e.getMessage());
         return exceptionResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, request.getRequestURI());
     }
 
@@ -143,7 +144,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ForbiddenException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ResponseEntity<ErrorMessage> forbiddenExceptionHandle(ForbiddenException e, HttpServletRequest request) {
-        log.error("ForbiddenException", e);
         return exceptionResponseEntity(e.getMessage(), HttpStatus.FORBIDDEN, request.getRequestURI());
     }
 

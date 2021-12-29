@@ -8,7 +8,6 @@ import com.sloth.domain.member.Member;
 import com.sloth.domain.member.constant.SocialType;
 import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.memberToken.MemberToken;
-import com.sloth.exception.ForbiddenException;
 import com.sloth.exception.InvalidParameterException;
 import com.sloth.exception.NeedEmailConfirmException;
 import com.sloth.util.MailService;
@@ -29,10 +28,10 @@ import java.time.LocalDateTime;
 public class LoginService {
 
     private final TokenProvider tokenProvider;
-    private final ModelMapper modelMapper;
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
     private final MailService mailService;
+    private final ModelMapper modelMapper;
 
     /**
      * OAuth 로그인
@@ -40,7 +39,7 @@ public class LoginService {
      * @param socialType
      * @return
      */
-    public ResponseJwtTokenDto login(String accessToken, SocialType socialType) {
+    public ResponseJwtTokenDto loginOauth(String accessToken, SocialType socialType) {
 
         // 소셜 회원 정보 조회
         OAuthAttributes oAuthAttributes = getSocialUserInfo(accessToken, socialType);
@@ -51,9 +50,12 @@ public class LoginService {
         log.info("tokenDto : ", tokenDto.toString());
 
         // 회원가입
-        memberService.saveMember(oAuthAttributes, tokenDto);
+        Boolean isNewMember = memberService.saveMember(oAuthAttributes, tokenDto);
 
-        return modelMapper.map(tokenDto, ResponseJwtTokenDto.class);
+        ResponseJwtTokenDto responseJwtTokenDto = modelMapper.map(tokenDto, ResponseJwtTokenDto.class);
+        responseJwtTokenDto.setIsNewMember(isNewMember);
+
+        return responseJwtTokenDto;
     }
 
     private OAuthAttributes getSocialUserInfo(String accessToken, SocialType socialType) {
@@ -75,7 +77,7 @@ public class LoginService {
      * @param formLoginRequestDto
      * @return
      */
-    public ResponseJwtTokenDto login(FormLoginRequestDto formLoginRequestDto) {
+    public ResponseJwtTokenDto loginForm(FormLoginRequestDto formLoginRequestDto) {
         Member member = memberService.findByEmail(formLoginRequestDto.getEmail());
 
         if(!passwordEncoder.matches(formLoginRequestDto.getPassword(), member.getPassword())) {
