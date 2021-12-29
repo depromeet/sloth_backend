@@ -43,9 +43,11 @@ public class LoginService {
 
         // 소셜 회원 정보 조회
         OAuthAttributes oAuthAttributes = getSocialUserInfo(accessToken, socialType);
+        log.info("oAuthAttributes : ", oAuthAttributes.toString());
 
         // 토큰 생성
         TokenDto tokenDto = tokenProvider.createTokenDto(oAuthAttributes.getEmail());
+        log.info("tokenDto : ", tokenDto.toString());
 
         // 회원가입
         Boolean isNewMember = memberService.saveMember(oAuthAttributes, tokenDto);

@@ -5,10 +5,12 @@ import lombok.Builder;
 import lombok.Getter;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.constant.Role;
+import lombok.ToString;
 
 import java.util.Map;
 
 @Getter
+@ToString
 public class OAuthAttributes {
 
     private Map<String, Object> attributes;

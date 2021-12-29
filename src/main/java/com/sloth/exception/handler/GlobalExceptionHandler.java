@@ -85,7 +85,6 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected ResponseEntity<ErrorMessage> handleConflict(BusinessException e, HttpServletRequest request) {
         log.error("GlobalException", e);
-        System.out.println(e.getMessage());
         return exceptionResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, request.getRequestURI());
     }
 
@@ -102,36 +101,43 @@ public class GlobalExceptionHandler {
         }
         String messages = sb.toString();
 
+        log.error("EntityValidException", e);
+
         return exceptionResponseEntity(messages, HttpStatus.UNPROCESSABLE_ENTITY, request.getRequestURI());
     }
 
     @ExceptionHandler({ EntityNotFoundException.class })
     @ResponseStatus(HttpStatus.NOT_FOUND)
     protected ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException e, HttpServletRequest request) {
+        log.error("EntityNotFoundException", e);
         return exceptionResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND, request.getRequestURI());
     }
 
     @ExceptionHandler(MemberTokenNotFoundException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ResponseEntity<ErrorMessage> memberNotFoundExceptionHandle(MemberTokenNotFoundException e, HttpServletRequest request) {
+        log.error("MemberTokenNotFoundException", e);
         return exceptionResponseEntity(e.getMessage(), HttpStatus.FORBIDDEN, request.getRequestURI());
     }
 
     @ExceptionHandler(FeignClientException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ResponseEntity<ErrorMessage> memberNotFoundExceptionHandle(FeignClientException e, HttpServletRequest request) {
+        log.error("FeignClientException", e);
         return exceptionResponseEntity(e.getMessage(), HttpStatus.FORBIDDEN, request.getRequestURI());
     }
 
     @ExceptionHandler(InvalidParameterException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorMessage> invalidParameterExceptionHandle(InvalidParameterException e, HttpServletRequest request) {
+        log.error("InvalidParameterException", e);
         return exceptionResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST, request.getRequestURI());
     }
 
     @ExceptionHandler(NeedEmailConfirmException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ResponseEntity<ErrorMessage> needEmailConfirmExceptionHandle(NeedEmailConfirmException e, HttpServletRequest request) {
+        log.error("NeedEmailConfirmException", e);
         return exceptionResponseEntity(e.getMessage(), HttpStatus.FORBIDDEN, request.getRequestURI());
     }
 
@@ -143,6 +149,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ErrorMessage> handleException(Exception e, HttpServletRequest request) {
+        log.error("Exception", e);
         return exceptionResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, request.getRequestURI());
     }
 
