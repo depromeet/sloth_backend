@@ -77,3 +77,12 @@ token:
   refresh-token-expiration-time: 1210500000 # 2주
 
 my-pass: depman*
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: caches,beans,env,health,heapdump,info,metrics,threaddump
+  endpoint:
+    health:
+      show-details: always
