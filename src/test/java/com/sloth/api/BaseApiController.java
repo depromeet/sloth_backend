@@ -35,5 +35,8 @@ public class BaseApiController {
 
     protected final String testEmail = "email@email.com";
 
+    protected String clientIdAccessToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJhdWQiOiIxMjMxMjMxMjMiLCJpYXQiOjE2NDA4ODYyNjUsImV4cCI6MTc0MDg4NjI2NX0.R4L_GnNJAm7mziOyCdSJ35yGBhjsXEhPpGaXnkXfND3MI7lhwKAsDJjLrWNUB_L67B_p8blXkfFaLWueGoQp1g";
+
+    protected final String testClientId = "123123123";
 
 }

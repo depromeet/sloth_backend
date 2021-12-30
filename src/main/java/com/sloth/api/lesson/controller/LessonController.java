@@ -124,7 +124,7 @@ public class LessonController {
 
         log.info("lesson list api start");
 
-        log.info("member id : {}", member);
+        log.info("member id : {}", member.getMemberId());
 
         List<LessonListDto.Response> lessonListDto = new ArrayList<>();
 
