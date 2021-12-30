@@ -34,7 +34,7 @@ public class GoogleApiServiceImpl implements SocialApiSerivce {
 
         return OAuthAttributes.builder()
                 .email(StringUtils.isBlank(googleUserInfo.getEmail()) ? googleUserInfo.getId() : googleUserInfo.getEmail())
-                .name(googleUserInfo.getName()) // TODO 이름 랜덤 생성
+                .name(googleUserInfo.getName())
                 .socialType(SocialType.GOOGLE)
                 .password(passwordEncoder.encode(pass))
                 .build();

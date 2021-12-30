@@ -18,6 +18,7 @@ public class LessonListDto {
     @AllArgsConstructor
     @Getter @Setter
     @Builder
+    @ToString
     public static class Response {
         @ApiModelProperty(value = "강의 아이디")
         private Long lessonId;

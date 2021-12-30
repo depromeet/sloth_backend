@@ -122,6 +122,8 @@ public class LessonController {
     })
     public ResponseEntity<List<LessonListDto.Response>> getLessonList(@CurrentMember Member member) {
 
+        log.info("lesson list api start");
+
         List<LessonListDto.Response> lessonListDto = new ArrayList<>();
 
         List<Lesson> lessons = lessonService.getLessons(member);
@@ -133,6 +135,11 @@ public class LessonController {
         for (Lesson lesson : lessons) {
             lessonListDto.add(LessonListDto.Response.create(lesson, LocalDate.now()));
         }
+
+        lessonListDto.stream().forEach(lesson -> log.info("lessonDto : {}", lesson));
+
+
+        log.info("lesson list api end");
 
         return ok(lessonListDto);
     }
