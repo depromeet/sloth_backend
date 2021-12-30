@@ -73,7 +73,7 @@ public class LessonListDto {
                     .endDate(DateTimeUtils.convertToString(lesson.getEndDate()))
                     .totalNumber(lesson.getTotalNumber())
                     .isFinished(lesson.getIsFinished())
-                    .lessonStatus(lesson.getLessonStatus())
+                    .lessonStatus(lesson.getLessonStatus(LocalDate.now()))
                     .build();
         }
     }

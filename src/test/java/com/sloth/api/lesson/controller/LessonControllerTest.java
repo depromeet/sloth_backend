@@ -292,7 +292,7 @@ public class LessonControllerTest  {
                 .andExpect(jsonPath("$[0].endDate").value(equalTo(DateTimeUtils.convertToString(lesson1.getEndDate()))))
                 .andExpect(jsonPath("$[0].totalNumber").value(equalTo(lesson1.getTotalNumber())))
                 .andExpect(jsonPath("$[0].isFinished").value(equalTo(lesson1.getIsFinished())))
-                .andExpect(jsonPath("$[0].lessonStatus").value(equalTo(lesson1.getLessonStatus().name())))
+                .andExpect(jsonPath("$[0].lessonStatus").value(equalTo(lesson1.getLessonStatus(LocalDate.now()).name())))
                 ;
     }
 

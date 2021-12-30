@@ -4,6 +4,7 @@ import com.sloth.creator.CategoryCreator;
 import com.sloth.creator.LessonCreator;
 import com.sloth.creator.SiteCreator;
 import com.sloth.domain.category.Category;
+import com.sloth.domain.lesson.constant.LessonStatus;
 import com.sloth.domain.site.Site;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -92,6 +93,66 @@ class LessonTest {
 
         // then
         Assertions.assertThat(lesson.getWastePrice(now)).isEqualTo(17000);
+    }
+
+    @Test
+    @DisplayName("Lesson 상태 조회 테스트 (현재)")
+    void getLessonStatus1() {
+
+        // given
+        LocalDate startDate = LocalDate.of(2021,10,1);
+        LocalDate endDate = LocalDate.of(2021, 10, 31);
+        LocalDate now = LocalDate.of(2021,10,31);
+
+        Site site = SiteCreator.create("인프런");
+        Category category = CategoryCreator.createStubCategory(1, "test", "test");
+        Lesson lesson = LessonCreator.createLesson("스프링부트 강의", startDate, endDate,category, site, 5, 30);
+
+        // when
+        LessonStatus lessonStatus = lesson.getLessonStatus(now);
+
+        // then
+        Assertions.assertThat(lessonStatus).isEqualTo(LessonStatus.CURRENT);
+    }
+
+    @Test
+    @DisplayName("Lesson 상태 조회 테스트 (현재)")
+    void getLessonStatus2() {
+
+        // given
+        LocalDate startDate = LocalDate.of(2021,10,1);
+        LocalDate endDate = LocalDate.of(2021, 10, 31);
+        LocalDate now = LocalDate.of(2021,10,15);
+
+        Site site = SiteCreator.create("인프런");
+        Category category = CategoryCreator.createStubCategory(1, "test", "test");
+        Lesson lesson = LessonCreator.createLesson("스프링부트 강의", startDate, endDate,category, site, 5, 30);
+
+        // when
+        LessonStatus lessonStatus = lesson.getLessonStatus(now);
+
+        // then
+        Assertions.assertThat(lessonStatus).isEqualTo(LessonStatus.CURRENT);
+    }
+
+    @Test
+    @DisplayName("Lesson 상태 조회 테스트 (과거)")
+    void getLessonStatus3() {
+
+        // given
+        LocalDate startDate = LocalDate.of(2021,10,1);
+        LocalDate endDate = LocalDate.of(2021, 10, 31);
+        LocalDate now = LocalDate.of(2021,11,20);
+
+        Site site = SiteCreator.create("인프런");
+        Category category = CategoryCreator.createStubCategory(1, "test", "test");
+        Lesson lesson = LessonCreator.createLesson("스프링부트 강의", startDate, endDate,category, site, 5, 30);
+
+        // when
+        LessonStatus lessonStatus = lesson.getLessonStatus(now);
+
+        // then
+        Assertions.assertThat(lessonStatus).isEqualTo(LessonStatus.PAST);
     }
 
 }

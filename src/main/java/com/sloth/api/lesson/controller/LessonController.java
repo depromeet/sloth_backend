@@ -124,6 +124,8 @@ public class LessonController {
 
         log.info("lesson list api start");
 
+        log.info("member id : {}", member);
+
         List<LessonListDto.Response> lessonListDto = new ArrayList<>();
 
         List<Lesson> lessons = lessonService.getLessons(member);

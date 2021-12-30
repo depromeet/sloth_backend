@@ -164,8 +164,8 @@ public class Lesson extends BaseEntity  {
         return wastePrice >= 0 ? wastePrice : 0;
     }
 
-    public LessonStatus getLessonStatus() {
-        if(LocalDate.now().isBefore(endDate)){
+    public LessonStatus getLessonStatus(LocalDate now) {
+        if(now.isBefore(endDate) || now.isEqual(endDate)){
             return LessonStatus.CURRENT;
         }
 
