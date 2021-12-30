@@ -24,7 +24,7 @@ public class ApiMemberServiceTest {
         MemberUpdateDto.Request request = new MemberUpdateDto.Request();
         request.setMemberName("회원 정보 수정");
 
-        Member member = MemberCreator.createStubMember();
+        Member member = MemberCreator.createStubMember("email@email.com");
 
         // when
         apiMemberService.updateMemberInfo(member, request);
