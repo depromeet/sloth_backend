@@ -21,3 +21,15 @@ values(5, '해커스')
 insert into site
 values(6, '파고다')
 ;
+
+insert into site
+values(6, '파고다')
+;
+
+insert into site
+values(7, '콜로소')
+;
+
+insert into site
+values(8, '기타')
+;
