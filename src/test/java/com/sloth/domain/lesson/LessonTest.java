@@ -52,9 +52,6 @@ class LessonTest {
 
         // then
         Assertions.assertThat(goalProgressRate).isEqualTo(50);
-        System.out.println(lesson.getGoalProgressRate(now));
-        System.out.println(lesson.getCurrentProgressRate());
-        System.out.println(lesson.getWastePrice(now));
     }
 
     @Test
@@ -74,6 +71,25 @@ class LessonTest {
 
         // then
         Assertions.assertThat(goalProgressRate).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("현재 날짜가 수강 기간이 지났을 경우 목표 진도율 테스트")
+    void getGoalProgressRateTest3() {
+        // given
+        LocalDate startDate = LocalDate.of(2021,12,30);
+        LocalDate endDate = LocalDate.of(2021, 12, 31);
+        LocalDate now = LocalDate.of(2022,1,1);
+
+        Site site = SiteCreator.create("인프런");
+        Category category = CategoryCreator.createStubCategory(1, "test", "test");
+        Lesson lesson = LessonCreator.createLesson("스프링부트 강의", startDate, endDate,category, site,15, 30);
+
+        // when
+        int goalProgressRate = lesson.getGoalProgressRate(now);
+
+        // then
+        Assertions.assertThat(goalProgressRate).isEqualTo(100);
     }
 
     @Test
