@@ -41,8 +41,16 @@ public class LessonController {
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
     public ResponseEntity<LessonNumberDto.Response> plusPresentNumber(@CurrentMember Member member, @Valid @RequestBody LessonNumberDto.Request request) {
+
+        log.info("lesson number update api start");
+        log.info("request {}", request.toString());
+
         Lesson lesson = lessonService.updatePresentNumber(member, request.getLessonId(), request.getCount());
         LessonNumberDto.Response response = LessonNumberDto.Response.create(lesson);
+
+        log.info("response {}", response.toString());
+        log.info("lesson number update api end");
+
         return ok(response);
     }
 
@@ -96,6 +104,9 @@ public class LessonController {
                                                                  @Valid @RequestBody LessonUpdateDto.Request lessonUpdateDto,
                                                                  BindingResult bindingResult) {
 
+        log.info("lesson update api start");
+        log.info("request : {}", lessonUpdateDto.toString());
+
         if(bindingResult.hasErrors()) {
             InvalidParameterException.throwErrorMessage(bindingResult);
         }
@@ -111,6 +122,10 @@ public class LessonController {
                 .siteId(updatedLesson.getSite().getSiteId())
                 .categoryId(updatedLesson.getCategory().getCategoryId())
                 .build();
+
+
+        log.info("response : {}", responseLessonUpdateDto.toString());
+        log.info("lesson update api end");
 
         return ok(responseLessonUpdateDto);
     }
