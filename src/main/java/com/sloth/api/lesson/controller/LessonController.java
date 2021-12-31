@@ -43,12 +43,14 @@ public class LessonController {
     public ResponseEntity<LessonNumberDto.Response> plusPresentNumber(@CurrentMember Member member, @Valid @RequestBody LessonNumberDto.Request request) {
 
         log.info("lesson number update api start");
-        log.info("request {}", request.toString());
+        log.info("request : {}", request.toString());
 
         Lesson lesson = lessonService.updatePresentNumber(member, request.getLessonId(), request.getCount());
+        log.info("lesson : {}", lesson.toString());
+
         LessonNumberDto.Response response = LessonNumberDto.Response.create(lesson);
 
-        log.info("response {}", response.toString());
+        log.info("response : {}", response.toString());
         log.info("lesson number update api end");
 
         return ok(response);

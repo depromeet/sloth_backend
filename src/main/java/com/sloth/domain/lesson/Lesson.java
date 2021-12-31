@@ -20,7 +20,7 @@ import java.time.temporal.ChronoUnit;
 @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 @Getter
 @AllArgsConstructor @NoArgsConstructor
-@ToString(exclude = {"category", "member"})
+@ToString(exclude = {"category", "member", "site"})
 @EqualsAndHashCode(of = "lessonId", callSuper = false)
 @Table(name = "lesson")
 public class Lesson extends BaseEntity  {
