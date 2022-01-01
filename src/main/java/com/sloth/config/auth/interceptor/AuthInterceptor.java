@@ -41,7 +41,6 @@ public class AuthInterceptor implements HandlerInterceptor {
         }
 
         String token = authorizationHeader.replace("Bearer", "").trim();
-        log.info("token : {}", token);
 
         if(!tokenProvider.validateToken(token)) {
             response.sendError(HttpStatus.FORBIDDEN.value(), "잘못된 토큰 정보 입니다.");
@@ -60,7 +59,6 @@ public class AuthInterceptor implements HandlerInterceptor {
 
             //access token 만료
             if(tokenProvider.isTokenExpired(expiration)) {
-                log.info("Access Token이 만료되었습니다.");
                 response.sendError(HttpStatus.UNAUTHORIZED.value(), "Access Token이 만료되었습니다.");
                 return false;
             }
@@ -81,9 +79,7 @@ public class AuthInterceptor implements HandlerInterceptor {
                 memberToken.updateRefreshTokenExpireTime(token);
 
             } else if(tokenProvider.isTokenExpired(refreshTokenExpirationTime)) {   //refresh token이 만료 됐을 경우
-                log.info("Refresh Token이 만료되었습니다.");
                 response.sendError(HttpStatus.UNAUTHORIZED.value(), "Refresh Token이 만료되었습니다.");
-                return false;
             }
 
         }

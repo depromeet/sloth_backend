@@ -32,23 +32,23 @@ public class LessonService {
     private final SiteRepository siteRepository;
     private final CategoryRepository categoryRepository;
 
-    public Lesson findLessonWithSiteCategory(Member member, Long lessonId) {
-        Lesson lesson = lessonRepository.findWithSiteCategoryMemberByLessonId(lessonId).orElseThrow(() -> {
+    public Lesson findLessonWithSiteCategory(Member member, Long id) {
+        Lesson lesson = lessonRepository.findWithSiteCategoryMemberByLessonId(id).orElseThrow(() -> {
             throw new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다.");
         });
         checkAuthority(member, lesson);
         return lesson;
     }
 
-    public Lesson updatePresentNumber(Member member, Long lessonId, int count) {
-        Lesson lesson = findLessonWithMember(lessonId);
+    public Lesson updatePresentNumber(Member member, Long id, int count) {
+        Lesson lesson = findLessonWithMember(id);
         checkAuthority(member, lesson);
         lesson.updatePresentNumber(count);
         return lesson;
     }
 
-    private Lesson findLessonWithMember(Long lessonId) {
-        return lessonRepository.findWithMemberByLessonId(lessonId).orElseThrow(() -> new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다."));
+    private Lesson findLessonWithMember(Long id) {
+        return lessonRepository.findWithMemberByLessonId(id).orElseThrow(() -> new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다."));
     }
 
     public Long saveLesson(Member member, LessonCreateDto.Request requestDto) {
@@ -85,9 +85,10 @@ public class LessonService {
 
     /**
      * 강의 업데이트
-     * @param member
-     * @param request
-     * @param lessonId
+     * @param memberId
+     * @param siteId
+     * @param categoryId
+     * @param lesson
      * @return
      */
     public Lesson updateLesson(Member member, LessonUpdateDto.Request request, Long lessonId) {
