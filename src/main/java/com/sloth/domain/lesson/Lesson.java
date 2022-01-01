@@ -156,10 +156,7 @@ public class Lesson extends BaseEntity  {
         if(now.isBefore(startDate)) {
             return 0;
         }
-
-        int goalProgressRate = (int) Math.floor( (double) getGoalNumber(now) / (double) getTotalNumber() * 100);
-
-        return goalProgressRate <= 100 ? goalProgressRate : 100; // 수강 기간 지났을 경우에는 목표진도율 100%로 반환
+        return (int) Math.floor( (double) getGoalNumber(now) / (double) getTotalNumber() * 100);
     }
 
     public int getWastePrice(LocalDate now) {
