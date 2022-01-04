@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 public class LessonUpdateDto {
 
     @Getter @Setter
+    @ToString
     @ApiModel(value = "강의 업데이트 요청 객체", description = "강의 업데이트 요청 객체")
     public static class Request {
 
@@ -35,6 +36,7 @@ public class LessonUpdateDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter @Setter
+    @ToString
     @ApiModel(value = "강의 업데이트 반환 객체", description = "강의 업데이트 반환 객체")
     public static class Response {
 
