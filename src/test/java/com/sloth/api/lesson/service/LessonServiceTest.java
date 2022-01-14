@@ -3,9 +3,7 @@ package com.sloth.api.lesson.service;
 import com.sloth.creator.LessonCreator;
 import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.member.repository.MemberRepository;
-import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.nickname.service.NicknameService;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,8 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
 class LessonServiceTest {
