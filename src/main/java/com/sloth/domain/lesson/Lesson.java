@@ -159,15 +159,16 @@ public class Lesson extends BaseEntity  {
             return 0;
         }
 
-        int goalProgress = (int) Math.floor( (double) getGoalNumber(now) / (double) getTotalNumber() * 100);
-        if (goalProgress > 100) {
-            return 100;
-        }
+       int goalProgress = (int) Math.floor( (double) getGoalNumber(now) / (double) getTotalNumber() * 100);
+        goalProgress = goalProgress <= 100 ? goalProgress : 100;
+
+        log.info("goalProgress : {}", goalProgress);
 
         return goalProgress;
     }
 
     public int getWastePrice(LocalDate now) {
+        int x = getGoalProgressRate(now);
         int wastePrice = (int) (price * ((double) (getGoalProgressRate(now) - getCurrentProgressRate()) / (double) 100));
         return wastePrice >= 0 ? wastePrice : 0;
     }
