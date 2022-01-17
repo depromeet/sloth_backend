@@ -158,11 +158,7 @@ public class Lesson extends BaseEntity  {
         if(now.isBefore(startDate)) {
             return 0;
         }
-
-        int goalRate = (int) Math.floor( getGoalNumber(now) / (double) getTotalNumber() * 100);
-        goalRate = goalRate <= 100 ? goalRate : 100;
-
-        return goalRate;
+        return (int) Math.floor( (double) getGoalNumber(now) / (double) getTotalNumber() * 100);
     }
 
     public int getWastePrice(LocalDate now) {
