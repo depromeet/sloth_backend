@@ -7,7 +7,6 @@ import com.sloth.domain.member.Member;
 import com.sloth.domain.site.Site;
 import com.sloth.exception.BusinessException;
 import lombok.*;
-import lombok.extern.slf4j.Slf4j;
 import org.hibernate.envers.AuditOverride;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.RelationTargetAuditMode;
@@ -23,7 +22,6 @@ import java.time.temporal.ChronoUnit;
 @AllArgsConstructor @NoArgsConstructor
 @ToString(exclude = {"category", "member", "site"})
 @EqualsAndHashCode(of = "lessonId", callSuper = false)
-@Slf4j
 @Table(name = "lesson")
 public class Lesson extends BaseEntity  {
 
