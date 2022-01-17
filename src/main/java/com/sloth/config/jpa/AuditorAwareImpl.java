@@ -24,7 +24,7 @@ public class AuditorAwareImpl implements AuditorAware<String> {
 
         String modifiedBy;
 
-        if(authentication != null) {
+        if(authentication != null && !"anonymousUser".equals(authentication.getPrincipal())) {
             modifiedBy = authentication.getName();
         } else {
             modifiedBy = httpServletRequest.getRequestURI();
