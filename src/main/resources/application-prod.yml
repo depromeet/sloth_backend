@@ -8,9 +8,3 @@ spring:
     password: ENC(zs6q1rEeD0VIHQeoIL/OHaHLJ+xNe9fRQ6ZhOSbfmlM=)
     driver-class-name: com.mysql.jdbc.Driver
     url: ENC(yfM/+fb90pQau5XXMbULVXzoUXv849044o+z4VgHDN0Tmc1DDilWLxO61RoL95KL0/RbMS7SSxqC/62OhHDW24yWpGv2wlxFn6iMxQGz997TOmh9Wqa8fHicZQ/105o5uZZLWPTTDJBkYhsILZoK3P6lXuN557KRl0WGByDdBm5yPlh6dtCQHXhVKZIXD6R3)
-
-logging:
-  level:
-    org.hibernate.SQL: debug
-    org.hibernate.type: trace
-    org.springframework.security: info
