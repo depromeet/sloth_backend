@@ -88,26 +88,12 @@ class LessonTest {
         Category category = CategoryCreator.createStubCategory(1, "test", "test");
         Lesson lesson = LessonCreator.createLesson("스프링부트 강의", startDate, endDate,category, site, 5, 30);
 
+        // when
+        int goalProgressRate = lesson.getGoalProgressRate(now);
+
         // then
         Assertions.assertThat(lesson.getWastePrice(now)).isEqualTo(17000);
     }
-
-    @Test
-    @DisplayName("낭비된 가격 테스트 - 강의 수강 완료 후")
-    void getWastePriceTest2() {
-        // given
-        LocalDate startDate = LocalDate.of(2021,10,1);
-        LocalDate endDate = LocalDate.of(2021, 10, 31);
-        LocalDate now = LocalDate.of(2021,11,15);
-
-        Site site = SiteCreator.create("인프런");
-        Category category = CategoryCreator.createStubCategory(1, "test", "test");
-        Lesson lesson = LessonCreator.createLesson("스프링부트 강의", startDate, endDate,category, site, 30, 30);
-
-        // then
-        Assertions.assertThat(lesson.getWastePrice(now)).isEqualTo(0);
-    }
-
 
     @Test
     @DisplayName("Lesson 상태 조회 테스트 (현재)")
