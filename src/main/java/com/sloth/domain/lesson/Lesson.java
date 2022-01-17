@@ -159,10 +159,12 @@ public class Lesson extends BaseEntity  {
             return 0;
         }
 
-        int goalRate = (int) Math.floor( getGoalNumber(now) / (double) getTotalNumber() * 100);
-        goalRate = goalRate <= 100 ? goalRate : 100;
+        int goalProgress = (int) Math.floor( (double) getGoalNumber(now) / (double) getTotalNumber() * 100);
+        if (goalProgress > 100) {
+            return 100;
+        }
 
-        return goalRate;
+        return goalProgress;
     }
 
     public int getWastePrice(LocalDate now) {
