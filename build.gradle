@@ -87,6 +87,9 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    implementation 'com.google.firebase:firebase-admin:8.1.0'
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.2.2'
 }
 
 test {
