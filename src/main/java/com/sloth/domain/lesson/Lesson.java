@@ -6,6 +6,7 @@ import com.sloth.domain.lesson.constant.LessonStatus;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.site.Site;
 import com.sloth.exception.BusinessException;
+import com.sloth.exception.InvalidParameterException;
 import lombok.*;
 import org.hibernate.envers.AuditOverride;
 import org.hibernate.envers.Audited;
@@ -185,4 +186,12 @@ public class Lesson extends BaseEntity  {
         return (int) Math.ceil((((double)getPastDays(now)/(double)getTotalDays()) * (double) getTotalNumber()));
     }
 
+    public void updateDate(LocalDate startDate, LocalDate endDate) {
+        if (endDate.isBefore(startDate) || endDate.isEqual(startDate)) {
+            throw new InvalidParameterException("종료 일자는 시작 일자 이후여야 합니다.");
+        }
+        //TODO 내부적인 정책 필요
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 }

@@ -15,6 +15,8 @@ import com.sloth.domain.site.Site;
 import com.sloth.domain.site.repository.SiteRepository;
 import com.sloth.util.DateTimeUtils;
 import com.sloth.util.TestUtil;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,10 +35,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
@@ -278,7 +277,7 @@ public class LessonControllerTest  {
         //then
         Lesson lesson1 = lessons.get(0);
         result.andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0]").exists())
+                .andExpect(jsonPath("$[0]").exists())
                 .andExpect(jsonPath("$[3]").exists())
                 .andExpect(jsonPath("$[0].remainDay").value(equalTo(lesson1.getRemainDay(LocalDate.now()))))
                 .andExpect(jsonPath("$[0].categoryName").value(equalTo(category.getCategoryName())))
@@ -294,6 +293,41 @@ public class LessonControllerTest  {
                 .andExpect(jsonPath("$[0].isFinished").value(equalTo(lesson1.getIsFinished())))
                 .andExpect(jsonPath("$[0].lessonStatus").value(equalTo(lesson1.getLessonStatus(LocalDate.now()).name())))
                 ;
+    }
+
+    @Test
+    @DisplayName("투데이 강의 목록 조회 API 테스트")
+    void getDoingLesson() throws Exception {
+        //given
+        Optional<Member> optionalMember = Optional.of(member);
+
+        List<Lesson> lessons = new ArrayList<>();
+
+        for(long i = 4; i < 6; i++) {
+            Lesson lesson = createLesson(i, member, site, category);
+            lesson.updateDate(LocalDate.now().plusDays(i - 5), LocalDate.now().plusMonths(6 - i));
+            lessons.add(lesson);
+            System.out.println("id: "+i + ", remain: "+lesson.getRemainDay(LocalDate.now()));
+        }
+        Lesson lesson1 = lessons.get(0);
+        Lesson lesson2 = lessons.get(1);
+
+        given(lessonRepository.getDoingLessonsDetail(member.getMemberId()))
+                .willReturn(lessons);
+
+        //when
+        ResultActions result = mockMvc.perform(get("/api/lesson/doing")
+                .header(HttpHeaders.AUTHORIZATION, accessToken)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON));
+
+        //then
+        result.andExpect(status().isOk())
+                .andExpect(jsonPath("$[0]").exists())
+                .andExpect(jsonPath("$[1]").exists())
+                // remainDay 기준 정렬 검증
+                .andExpect(jsonPath("$[0].remainDay").value(equalTo(lesson2.getRemainDay(LocalDate.now()))))
+                .andExpect(jsonPath("$[1].remainDay").value(equalTo(lesson1.getRemainDay(LocalDate.now()))));
     }
 
     @Test
