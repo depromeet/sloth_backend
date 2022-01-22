@@ -77,10 +77,6 @@ public class LessonController {
         }
 
         LocalDate now = LocalDate.now();
-        // 남은 일 수 0일 이상만 조회 되도록 필터링
-        lessons = lessons.stream()
-                .filter(lesson -> lesson.getRemainDay(now) >= 0)
-                .collect(Collectors.toList());
 
         List<DoingLessonDto.Response> doingLessonResponses = new ArrayList<>();
         lessonService.sortByRemainDay(lessons);
