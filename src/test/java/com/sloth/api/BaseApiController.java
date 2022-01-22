@@ -1,8 +1,8 @@
 package com.sloth.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sloth.config.TestApiConfiguration;
-import com.sloth.config.auth.TokenProvider;
+import com.sloth.global.config.TestApiConfiguration;
+import com.sloth.global.config.auth.TokenProvider;
 import com.sloth.domain.member.repository.MemberRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

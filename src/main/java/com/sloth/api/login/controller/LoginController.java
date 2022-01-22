@@ -1,13 +1,13 @@
 package com.sloth.api.login.controller;
 
-import com.sloth.api.dto.ApiResult;
+import com.sloth.global.dto.ApiResult;
 import com.sloth.api.login.dto.*;
 import com.sloth.api.login.validator.FormLoginValidator;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.constant.SocialType;
 import com.sloth.api.login.service.LoginService;
 import com.sloth.api.login.validator.FormRegisterValidator;
-import com.sloth.exception.InvalidParameterException;
+import com.sloth.global.exception.InvalidParameterException;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;

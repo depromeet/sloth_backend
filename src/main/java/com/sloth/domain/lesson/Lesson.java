@@ -1,12 +1,12 @@
 package com.sloth.domain.lesson;
 
-import com.sloth.domain.BaseEntity;
+import com.sloth.domain.common.BaseEntity;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.lesson.constant.LessonStatus;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.site.Site;
-import com.sloth.exception.BusinessException;
-import com.sloth.exception.InvalidParameterException;
+import com.sloth.global.exception.BusinessException;
+import com.sloth.global.exception.InvalidParameterException;
 import lombok.*;
 import org.hibernate.envers.AuditOverride;
 import org.hibernate.envers.Audited;

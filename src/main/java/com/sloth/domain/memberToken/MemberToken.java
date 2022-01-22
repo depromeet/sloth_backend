@@ -1,6 +1,6 @@
 package com.sloth.domain.memberToken;
 
-import com.sloth.domain.BaseEntity;
+import com.sloth.domain.common.BaseEntity;
 import com.sloth.domain.member.Member;
 import lombok.*;
 

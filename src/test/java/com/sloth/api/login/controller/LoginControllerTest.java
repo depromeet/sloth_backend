@@ -1,19 +1,15 @@
 package com.sloth.api.login.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sloth.api.BaseApiController;
 import com.sloth.api.login.dto.*;
 import com.sloth.domain.member.Member;
-import com.sloth.domain.member.constant.SocialType;
 import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.memberToken.MemberToken;
-import com.sloth.exception.ForbiddenException;
-import com.sloth.util.MailService;
-import com.sloth.util.TestUtil;
+import com.sloth.global.util.MailService;
+import com.sloth.global.util.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,14 +20,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import javax.annotation.meta.When;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;

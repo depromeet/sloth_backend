@@ -1,7 +1,7 @@
 package com.sloth.api.login.service;
 
 import com.sloth.domain.member.constant.SocialType;
-import com.sloth.exception.InvalidParameterException;
+import com.sloth.global.exception.InvalidParameterException;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;

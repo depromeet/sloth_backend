@@ -2,7 +2,7 @@ package com.sloth.api.login.kakao;
 
 import com.sloth.domain.member.constant.SocialType;
 import com.sloth.api.login.service.SocialApiSerivce;
-import com.sloth.config.auth.dto.OAuthAttributes;
+import com.sloth.global.config.auth.dto.OAuthAttributes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

@@ -1,16 +1,16 @@
 package com.sloth.api.login.service;
 
 import com.sloth.api.login.dto.*;
-import com.sloth.config.auth.TokenProvider;
-import com.sloth.config.auth.dto.OAuthAttributes;
-import com.sloth.config.auth.dto.TokenDto;
+import com.sloth.global.config.auth.TokenProvider;
+import com.sloth.global.config.auth.dto.OAuthAttributes;
+import com.sloth.global.config.auth.dto.TokenDto;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.constant.SocialType;
 import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.memberToken.MemberToken;
-import com.sloth.exception.InvalidParameterException;
-import com.sloth.exception.NeedEmailConfirmException;
-import com.sloth.util.MailService;
+import com.sloth.global.exception.InvalidParameterException;
+import com.sloth.global.exception.NeedEmailConfirmException;
+import com.sloth.global.util.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;

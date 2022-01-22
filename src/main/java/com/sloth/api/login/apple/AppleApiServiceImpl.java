@@ -2,9 +2,9 @@ package com.sloth.api.login.apple;
 
 import com.google.gson.*;
 import com.sloth.api.login.service.SocialApiSerivce;
-import com.sloth.config.auth.dto.OAuthAttributes;
+import com.sloth.global.config.auth.dto.OAuthAttributes;
 import com.sloth.domain.member.constant.SocialType;
-import com.sloth.exception.BusinessException;
+import com.sloth.global.exception.BusinessException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;

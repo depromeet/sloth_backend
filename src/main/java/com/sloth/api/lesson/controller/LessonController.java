@@ -1,12 +1,12 @@
 package com.sloth.api.lesson.controller;
 
-import com.sloth.api.dto.ApiResult;
+import com.sloth.global.dto.ApiResult;
 import com.sloth.api.lesson.dto.*;
 import com.sloth.api.lesson.service.LessonService;
 import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.member.Member;
-import com.sloth.exception.InvalidParameterException;
-import com.sloth.resolver.CurrentMember;
+import com.sloth.global.exception.InvalidParameterException;
+import com.sloth.global.resolver.CurrentMember;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,7 +22,6 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.springframework.http.ResponseEntity.ok;
 

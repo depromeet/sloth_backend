@@ -1,12 +1,10 @@
 package com.sloth.app.entitymanager.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.sloth.exception.BusinessException;
-import com.sloth.exception.EntityNotFoundException;
-import com.sloth.exception.EntityValidException;
+import com.sloth.global.exception.BusinessException;
+import com.sloth.global.exception.EntityNotFoundException;
+import com.sloth.global.exception.EntityValidException;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.mapping.ToOne;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +20,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
