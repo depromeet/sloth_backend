@@ -3,11 +3,10 @@ package com.sloth;
 import org.assertj.core.api.Assertions;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
-import org.junit.jupiter.api.Test;
 
 public class EncryptTest {
 
-    @Test
+    //@Test
     public void checkEncrypt(){
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         encryptor.setProvider(new BouncyCastleProvider());
