@@ -37,10 +37,9 @@ public class MemberService {
         Member savedMember;
         Boolean isNewMember = false;
         if(optionalMember.isEmpty()) {
-            Nickname randomNickname = nicknameService.findRandomNickname();
-            Member member = Member.createOauthMember(oAuthAttributes, randomNickname.getName());
+            Member member = createOauthMember(oAuthAttributes);
+
             savedMember = memberRepository.save(member);
-            randomNickname.updateUsed();
             isNewMember = true;
         } else {
             savedMember = optionalMember.get();
@@ -48,6 +47,13 @@ public class MemberService {
 
         saveRefreshToken(savedMember, tokenDto);
         return isNewMember;
+    }
+
+    private Member createOauthMember(OAuthAttributes oAuthAttributes) {
+        Nickname randomNickname = nicknameService.findRandomNickname();
+        Member member = Member.createOauthMember(oAuthAttributes, randomNickname.getName());
+        randomNickname.updateUsed();
+        return member;
     }
 
     public Member saveMember(FormJoinDto formRequestDto) {
