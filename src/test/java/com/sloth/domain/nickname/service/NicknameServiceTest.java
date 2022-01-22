@@ -23,12 +23,10 @@ public class NicknameServiceTest {
     NicknameRepository nicknameRepository;
 
     private NicknameService nicknameService;
-    private NicknameCreator nicknameCreator;
 
     @BeforeEach
     public void init() {
         nicknameService = new NicknameService(nicknameRepository);
-        nicknameCreator = new NicknameCreator();
     }
 
 
@@ -36,7 +34,7 @@ public class NicknameServiceTest {
     @DisplayName("랜덤 닉네임 조회 테스트")
     public void findRandomNickname() {
         //given
-        Nickname nickname = nicknameCreator.createStubNickname("dragon");
+        Nickname nickname = NicknameCreator.createStubNickname("dragon");
 
         given(nicknameService.findRandomNickname())
                 .willReturn(nickname);

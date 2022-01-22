@@ -15,21 +15,21 @@ import org.springframework.http.HttpStatus;
 public class ApiResult {
 
     @ApiModelProperty(value = "처리 결과 코드")
-    private String code;
+    private int code;
 
     @ApiModelProperty(value = "처리 결과 메세지")
     private String message;
 
     public static ApiResult createOk() {
         return ApiResult.builder()
-                .code(String.valueOf(HttpStatus.OK.value()))
+                .code(HttpStatus.OK.value())
                 .message("success")
                 .build();
     }
 
     public static ApiResult createOk(String message) {
         return ApiResult.builder()
-                .code(String.valueOf(HttpStatus.OK.value()))
+                .code(HttpStatus.OK.value())
                 .message(message)
                 .build();
     }

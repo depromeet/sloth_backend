@@ -8,8 +8,6 @@ import com.sloth.domain.member.Member;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +24,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -73,8 +72,8 @@ public class ApiMemberControllerTest extends BaseApiController {
     }
 
     @Test
-    @DisplayName("회원 정보 없을 경우 테스트")
-    public void updateMemberInfoNotExists() throws Exception {
+    @DisplayName("회원 정보 수정 API 테스트 - 잘못된 데이터 요청할 경우")
+    public void updateMemberInfoFailTest() throws Exception {
 
         // given
         MemberUpdateDto.Request request = new MemberUpdateDto.Request();
@@ -84,6 +83,25 @@ public class ApiMemberControllerTest extends BaseApiController {
 
         given(memberService.updateMemberInfo(eq(member), any(MemberUpdateDto.Request.class)))
                 .willReturn(updateMember);
+
+        // when
+        ResultActions result = mockMvc.perform(patch("/api/member")
+                .header(HttpHeaders.AUTHORIZATION, accessToken)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)));
+
+        // then
+        result.andExpect(MockMvcResultMatchers.status().is4xxClientError())
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("회원 정보 없을 경우 테스트")
+    public void updateMemberInfoNotExists() throws Exception {
+
+        // given
+        MemberUpdateDto.Request request = new MemberUpdateDto.Request();
 
         // when
         ResultActions result = mockMvc.perform(patch("/api/member")

@@ -1,4 +1,4 @@
-package com.sloth.global.exception;
+package com.sloth.domain.lesson.exception;
 
 public class LessonNotFoundException extends RuntimeException {
 

@@ -1,5 +1,6 @@
 package com.sloth.global.exception.handler;
 
+import com.sloth.domain.memberToken.exception.MemberTokenNotFoundException;
 import com.sloth.global.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

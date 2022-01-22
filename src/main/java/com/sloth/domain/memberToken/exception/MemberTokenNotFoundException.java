@@ -1,4 +1,4 @@
-package com.sloth.global.exception;
+package com.sloth.domain.memberToken.exception;
 
 public class MemberTokenNotFoundException extends RuntimeException {
 

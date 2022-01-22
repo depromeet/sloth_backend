@@ -18,13 +18,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Execution(ExecutionMode.CONCURRENT)
 @WebMvcTest(controllers = HealthController.class)
-public class HealthControllerTest extends BaseApiController {
+public class HealthControllerDefaultTest extends BaseApiController {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("profile api 테스트")
+    @DisplayName("profile default api 테스트")
     public void profile()  throws Exception {
 
         //when

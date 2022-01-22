@@ -11,7 +11,7 @@ import com.sloth.domain.site.Site;
 import com.sloth.domain.site.repository.SiteRepository;
 import com.sloth.global.exception.BusinessException;
 import com.sloth.global.exception.ForbiddenException;
-import com.sloth.global.exception.LessonNotFoundException;
+import com.sloth.domain.lesson.exception.LessonNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

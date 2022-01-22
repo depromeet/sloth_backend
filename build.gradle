@@ -146,7 +146,9 @@ jacocoTestReport {
                         "**/EntityParams*",
                         "**/BaseTimeEntity*",
                         "**/BaseEntity*",
-                        "**/domain/common/**"
+                        "**/domain/common/**",
+                        "**/app/**",
+                        "**/resolver/**"
                 ] + Qdomains)
             }))
         }
@@ -199,7 +201,9 @@ tasks.jacocoTestCoverageVerification {
                     "**.EntityParams*",
                     "**.BaseTimeEntity*",
                     "**.BaseEntity*",
-                    "**.domain.common.**"
+                    "**.domain.common.**",
+                    "**.app.**",
+                    "**.resolver.**"
             ] + Qdomains
 
         }

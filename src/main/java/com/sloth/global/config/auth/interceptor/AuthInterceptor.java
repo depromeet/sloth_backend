@@ -4,7 +4,7 @@ import com.sloth.global.config.auth.TokenProvider;
 import com.sloth.global.config.auth.constant.TokenType;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;
-import com.sloth.global.exception.MemberTokenNotFoundException;
+import com.sloth.domain.memberToken.exception.MemberTokenNotFoundException;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
