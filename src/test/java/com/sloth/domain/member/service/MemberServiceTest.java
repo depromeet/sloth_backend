@@ -136,24 +136,4 @@ class MemberServiceTest {
         //then
         assertEquals("회원 정보가 옳지 않습니다.", exception.getMessage());
     }
-
-   /* @Test
-    @DisplayName("OAuth 회원가입 - 성공")
-    void oauth_join() {
-        //given
-        OAuthAttributes oAuthAttributes =
-                new OAuthAttributes(null, null, "test", "email@email.com", SocialType.GOOGLE, "password");
-        Nickname nickname = new Nickname(1L, "name", false);
-        Member oauthMember = Member.createOauthMember(oAuthAttributes, nickname.getName());
-        TokenDto tokenDto = new TokenDto("grantType", "accessToken", null, "refreshToken", null);
-        given(nicknameService.findRandomNickname()).willReturn(nickname);
-        given(memberRepository.save(oauthMember)).willReturn(oauthMember);
-
-        //when
-        Boolean result = memberService.saveMember(oAuthAttributes, tokenDto);
-
-        //then
-        assertTrue(result);
-        assertTrue(nickname.isUsed());
-    }*/
 }

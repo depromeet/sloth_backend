@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -50,7 +51,13 @@ public class LoginService {
         log.info("tokenDto : {}", tokenDto.toString());
 
         // 회원가입
-        Boolean isNewMember = memberService.saveMember(oAuthAttributes, tokenDto);
+        Boolean isNewMember = false;
+        Optional<Member> optionalMember = memberService.getOptionalMember(oAuthAttributes.getEmail());
+        if (optionalMember.isEmpty()) { // 기존 회원이 아닐 때
+            Member oauthMember = memberService.createOauthMember(oAuthAttributes);
+            memberService.saveMember(oauthMember, tokenDto);
+            isNewMember = true;
+        } else memberService.saveRefreshToken(optionalMember.get(), tokenDto); // 기존 회원일 때
 
         ResponseJwtTokenDto responseJwtTokenDto = modelMapper.map(tokenDto, ResponseJwtTokenDto.class);
         responseJwtTokenDto.setIsNewMember(isNewMember);
