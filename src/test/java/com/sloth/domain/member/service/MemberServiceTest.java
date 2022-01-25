@@ -8,6 +8,7 @@ import com.sloth.domain.member.constant.SocialType;
 import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.nickname.Nickname;
 import com.sloth.domain.nickname.service.NicknameService;
+import com.sloth.global.config.auth.TokenProvider;
 import com.sloth.global.config.auth.dto.OAuthAttributes;
 import com.sloth.global.config.auth.dto.TokenDto;
 import com.sloth.global.exception.InvalidParameterException;
@@ -23,6 +24,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -70,7 +73,7 @@ class MemberServiceTest {
         // given
         Long memberId = 1L;
         given(memberRepository.findById(memberId))
-                .willThrow(new UsernameNotFoundException("해당 회원을 찾을 수 없습니다."));
+                .willReturn(Optional.empty());
 
         // when & then
         Exception exception = assertThrows(UsernameNotFoundException.class, () -> {
@@ -81,7 +84,7 @@ class MemberServiceTest {
     }
 
     @Test
-    @DisplayName("이메일 회원 조회 테스트")
+    @DisplayName("이메일 회원 조회 테스트 - 성공")
     void findByEmail() {
 
         // given
@@ -95,6 +98,22 @@ class MemberServiceTest {
 
         // then
         Assertions.assertThat(savedMember.getEmail()).isEqualTo(member.getEmail());
+    }
+
+    @Test
+    @DisplayName("이메일 회원 조회 테스트 - 실패")
+    void findByEmail_fail() {
+        // given
+        String email = "email@email.com";
+        given(memberRepository.findByEmail(email))
+                .willReturn(Optional.empty());
+
+        // when & then
+        Exception exception = assertThrows(UsernameNotFoundException.class, () -> {
+            memberService.findByEmail(email);
+        });
+
+        assertEquals("해당 회원이 존재하지 않습니다.", exception.getMessage());
     }
 
     @Test
@@ -135,5 +154,66 @@ class MemberServiceTest {
 
         //then
         assertEquals("회원 정보가 옳지 않습니다.", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("소셜 멤버 생성 테스트")
+    void createOauthMemberTest() {
+        //given
+        Nickname nickname = Nickname.builder()
+                .nicknameId(1L)
+                .name("테스트용 닉네임")
+                .isUsed(false)
+                .build();
+        given(nicknameService.findRandomNickname()).willReturn(nickname);
+
+        String email = "test@test.com";
+        SocialType socialType = SocialType.KAKAO;
+        String password = "password";
+        OAuthAttributes oAuthAttributes = new OAuthAttributes(new HashMap<>(), "test", "test", email, socialType, password);
+
+        //when
+        Member oauthMember = memberService.createOauthMember(oAuthAttributes);
+
+        //then
+        assertEquals(email, oauthMember.getEmail());
+        assertEquals(password, oauthMember.getPassword());
+        assertEquals(socialType, oauthMember.getSocialType());
+        assertEquals(nickname.getName(), oauthMember.getMemberName());
+        assertTrue(nickname.isUsed());
+    }
+
+    @Test
+    @DisplayName("email로 Optional 멤버 조회 테스트")
+    void getOptionalMemberTest() {
+        //given
+        String email = "email@email.com";
+        Member stubMember = MemberCreator.createStubMember(email);
+        given(memberRepository.findByEmail(email)).willReturn(Optional.of(stubMember));
+
+        //when
+        Optional<Member> optionalMember = memberService.getOptionalMember(email);
+
+        //then
+        assertEquals(Optional.class, optionalMember.getClass());
+        assertEquals(Optional.of(stubMember), optionalMember);
+        assertEquals(email, optionalMember.get().getEmail());
+    }
+
+    @Test
+    @DisplayName("멤버 저장 테스트") // TODO memberService.saveRefreshToken mocking..??
+    void saveMemberTest() {
+        //given
+        String email = "email@email.com";
+        Member stubMember = MemberCreator.createStubMember(email);
+        Date expireTime = new Date(Long.parseLong("99999999999"));
+        TokenDto tokenDto = new TokenDto("grantType", "access", expireTime, "refresh", expireTime);
+        given(memberRepository.save(stubMember)).willReturn(stubMember);
+
+        //when
+        Member member = memberService.saveMember(stubMember, tokenDto);
+
+        //then
+        assertEquals(email, member.getEmail());
     }
 }
