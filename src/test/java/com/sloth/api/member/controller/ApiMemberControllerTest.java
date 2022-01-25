@@ -1,6 +1,6 @@
 package com.sloth.api.member.controller;
 
-import com.sloth.api.BaseApiController;
+import com.sloth.test.base.BaseApiController;
 import com.sloth.api.member.dto.MemberUpdateDto;
 import com.sloth.api.member.service.ApiMemberService;
 import com.sloth.creator.MemberCreator;

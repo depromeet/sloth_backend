@@ -3,8 +3,9 @@ package com.sloth.api.login.kakao;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.Setter;
 
-@Getter
+@Getter @Setter
 @JsonIgnoreProperties({"properties", "connected_at"})
 public class KakaoUserInfo {
     @JsonProperty("id")
@@ -13,7 +14,7 @@ public class KakaoUserInfo {
     @JsonProperty("kakao_account")
     private KakaoAccount kakaoAccount;
 
-    @Getter
+    @Getter @Setter
     @JsonIgnoreProperties({"profile_nickname_needs_agreement","gender_needs_agreement","has_gender","is_email_verified", "has_email", "email_needs_agreement", "is_email_valid"})
     public static class KakaoAccount {
 
@@ -26,7 +27,7 @@ public class KakaoUserInfo {
         @JsonProperty("profile")
         private Profile profile;
 
-        @Getter
+        @Getter @Setter
         public static class Profile {
             @JsonProperty("nickname")
             private String nickname;

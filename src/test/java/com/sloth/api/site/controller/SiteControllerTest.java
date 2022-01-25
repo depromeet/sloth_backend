@@ -1,6 +1,6 @@
 package com.sloth.api.site.controller;
 
-import com.sloth.api.BaseApiController;
+import com.sloth.test.base.BaseApiController;
 import com.sloth.creator.SiteCreator;
 import com.sloth.domain.site.Site;
 import com.sloth.domain.site.repository.SiteRepository;

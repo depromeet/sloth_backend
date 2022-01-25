@@ -14,7 +14,7 @@ import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.site.Site;
 import com.sloth.domain.site.repository.SiteRepository;
 import com.sloth.global.util.DateTimeUtils;
-import com.sloth.global.util.TestUtil;
+import com.sloth.test.util.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

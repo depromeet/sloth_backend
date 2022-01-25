@@ -1,7 +1,7 @@
-package com.sloth.api;
+package com.sloth.test.base;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sloth.global.config.TestApiConfiguration;
+import com.sloth.test.config.TestApiConfiguration;
 import com.sloth.global.config.auth.TokenProvider;
 import com.sloth.domain.member.repository.MemberRepository;
 import org.modelmapper.ModelMapper;

@@ -100,6 +100,7 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    finalizedBy 'jacocoTestReport'
 }
 
 def querydslDir = "$buildDir/generated/querydsl"
@@ -172,7 +173,7 @@ tasks.jacocoTestCoverageVerification {
         rule {
             element = "CLASS"   // 커버리지 체크 기준
 
-            // 브랜치 커버리지를 최소한 90% 만족시켜야 한다.
+            // 브랜치 커버리지를 최소한 80% 만족시켜야 한다.
             limit {
                 counter = 'BRANCH'      // 커버리지 측정의 최소 단위
                 value = 'COVEREDRATIO'  // 측정한 커버리지를 커버된 비율, 0부터1사이의 숫자로 보여줌. 1이 100%이다.

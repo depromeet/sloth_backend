@@ -1,10 +1,11 @@
 package com.sloth.global.config.auth.interceptor;
 
+import com.sloth.domain.memberToken.MemberToken;
+import com.sloth.domain.memberToken.constant.TokenRefreshCritnTime;
+import com.sloth.domain.memberToken.exception.MemberTokenNotFoundException;
+import com.sloth.domain.memberToken.repository.MemberTokenRepository;
 import com.sloth.global.config.auth.TokenProvider;
 import com.sloth.global.config.auth.constant.TokenType;
-import com.sloth.domain.memberToken.MemberToken;
-import com.sloth.domain.memberToken.repository.MemberTokenRepository;
-import com.sloth.domain.memberToken.exception.MemberTokenNotFoundException;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -78,7 +79,7 @@ public class AuthInterceptor implements HandlerInterceptor {
                 response.setHeader(HttpHeaders.AUTHORIZATION, accessToken);
 
                 // 리프레시 토큰 만료 시간 갱신
-                memberToken.updateRefreshTokenExpireTime(token);
+                memberToken.updateRefreshTokenExpireTime(LocalDateTime.now(), TokenRefreshCritnTime.HOURS_72);
 
             } else if(tokenProvider.isTokenExpired(refreshTokenExpirationTime)) {   //refresh token이 만료 됐을 경우
                 log.info("Refresh Token이 만료되었습니다.");

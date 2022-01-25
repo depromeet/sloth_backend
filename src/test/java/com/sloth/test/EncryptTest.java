@@ -1,4 +1,4 @@
-package com.sloth;
+package com.sloth.test;
 
 import org.assertj.core.api.Assertions;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;

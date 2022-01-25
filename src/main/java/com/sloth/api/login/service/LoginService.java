@@ -1,13 +1,14 @@
 package com.sloth.api.login.service;
 
 import com.sloth.api.login.dto.*;
-import com.sloth.global.config.auth.TokenProvider;
-import com.sloth.global.config.auth.dto.OAuthAttributes;
-import com.sloth.global.config.auth.dto.TokenDto;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.constant.SocialType;
 import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.memberToken.MemberToken;
+import com.sloth.domain.memberToken.constant.TokenRefreshCritnTime;
+import com.sloth.global.config.auth.TokenProvider;
+import com.sloth.global.config.auth.dto.OAuthAttributes;
+import com.sloth.global.config.auth.dto.TokenDto;
 import com.sloth.global.exception.InvalidParameterException;
 import com.sloth.global.exception.NeedEmailConfirmException;
 import com.sloth.global.util.MailService;
@@ -97,7 +98,7 @@ public class LoginService {
             LocalDateTime refreshTokenExpirationTime = memberToken.getTokenExpirationTime();
             if(!tokenProvider.isTokenExpired(refreshTokenExpirationTime)) {
                 // 리프레시 토큰 만료 시간 갱신
-                memberToken.updateRefreshTokenExpireTime(memberToken.getRefreshToken());
+                memberToken.updateRefreshTokenExpireTime(LocalDateTime.now(), TokenRefreshCritnTime.HOURS_72);
                 tokenDto.setRefreshToken(memberToken.getRefreshToken());
             } else if(tokenProvider.isTokenExpired(refreshTokenExpirationTime)) {   //refresh token이 만료 됐을 경우
                 memberService.saveRefreshToken(member, tokenDto);

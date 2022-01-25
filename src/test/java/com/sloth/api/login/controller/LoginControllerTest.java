@@ -6,7 +6,7 @@ import com.sloth.domain.member.Member;
 import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.global.util.MailService;
-import com.sloth.global.util.TestUtil;
+import com.sloth.test.util.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

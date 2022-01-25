@@ -1,4 +1,4 @@
-package com.sloth.global.util;
+package com.sloth.test.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

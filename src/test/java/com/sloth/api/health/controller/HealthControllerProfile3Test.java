@@ -1,6 +1,6 @@
 package com.sloth.api.health.controller;
 
-import com.sloth.api.BaseApiController;
+import com.sloth.test.base.BaseApiController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;

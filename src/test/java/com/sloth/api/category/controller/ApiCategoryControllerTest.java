@@ -1,6 +1,6 @@
 package com.sloth.api.category.controller;
 
-import com.sloth.api.BaseApiController;
+import com.sloth.test.base.BaseApiController;
 import com.sloth.api.category.dto.CategoryDto;
 import com.sloth.api.category.service.ApiCategoryService;
 import org.junit.jupiter.api.DisplayName;

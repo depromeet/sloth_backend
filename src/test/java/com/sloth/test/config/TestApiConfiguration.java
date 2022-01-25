@@ -1,10 +1,11 @@
-package com.sloth.global.config;
+package com.sloth.test.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sloth.app.member.service.CustomOAuth2UserService;
-import com.sloth.global.config.auth.TokenProvider;
 import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;
+import com.sloth.global.config.WebConfig;
+import com.sloth.global.config.auth.TokenProvider;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
