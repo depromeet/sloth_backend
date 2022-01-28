@@ -1,6 +1,7 @@
 package com.sloth.creator;
 
 import com.sloth.domain.member.Member;
+import com.sloth.domain.member.constant.Role;
 
 public class MemberCreator {
 
@@ -8,6 +9,7 @@ public class MemberCreator {
         return Member.builder()
                 .memberName("홍길동")
                 .email(email)
+                .role(Role.USER)
                 .build();
     }
 

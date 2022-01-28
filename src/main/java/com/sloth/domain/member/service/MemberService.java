@@ -92,7 +92,7 @@ public class MemberService {
     public Member updateConfirmEmailCode(EmailConfirmResendRequestDto requestDto) {
         Member member = findByEmail(requestDto.getEmail());
         checkPassword(member, requestDto.getPassword());
-        if (!member.canCreateEmailConfirmCode()) {
+        if (!member.canCreateEmailConfirmCode(LocalDateTime.now())) {
             throw new ForbiddenException("이메일 발송 5분 후에 재전송을 할 수 있습니다.");
         }
         createEmailConfirmCode(member);

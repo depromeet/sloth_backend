@@ -138,7 +138,8 @@ public class Member extends BaseEntity {
         this.emailConfirmCodeCreatedAt = now;
     }
 
-    public boolean canCreateEmailConfirmCode() {
-        return this.emailConfirmCodeCreatedAt.isBefore(LocalDateTime.now().minusMinutes(5));
+    public boolean canCreateEmailConfirmCode(LocalDateTime now) {
+        return this.emailConfirmCodeCreatedAt.isBefore(now.minusMinutes(5)) ||
+                this.emailConfirmCodeCreatedAt.isEqual(now.minusMinutes(5));
     }
 }
