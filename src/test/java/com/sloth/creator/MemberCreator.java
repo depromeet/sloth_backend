@@ -18,4 +18,11 @@ public class MemberCreator {
                 .build();
     }
 
+    public static Member createEmailPasswordMember(String email, String password) {
+        return Member.builder()
+                .memberName("홍길동")
+                .email(email)
+                .password(password)
+                .build();
+    }
 }
