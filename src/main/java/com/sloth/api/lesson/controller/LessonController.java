@@ -161,7 +161,8 @@ public class LessonController {
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
     public ResponseEntity<LessonCreateDto.Response> saveLesson(@CurrentMember Member member, @RequestBody LessonCreateDto.Request requestDto) {
-        Long lessonId = lessonService.saveLesson(member, requestDto);
+        Lesson lesson = requestDto.toEntity(member);
+        Long lessonId = lessonService.saveLesson(lesson, requestDto.getSiteId(), requestDto.getCategoryId());
         LessonCreateDto.Response response= LessonCreateDto.Response.builder()
                 .lessonId(lessonId)
                 .build();

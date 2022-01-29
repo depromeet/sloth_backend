@@ -3,6 +3,8 @@ package com.sloth.creator;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.constant.Role;
 
+import java.util.ArrayList;
+
 public class MemberCreator {
 
     public static Member createStubMember(String email) {
@@ -17,6 +19,16 @@ public class MemberCreator {
         return Member.builder()
                 .memberName("홍길동")
                 .email(clientId)
+                .build();
+    }
+
+    public static Member createMember(Long memberId, String email) {
+        return Member.builder()
+                .memberId(memberId)
+                .memberName("홍길동")
+                .email(email)
+                .lessons(new ArrayList<>())
+                .role(Role.USER)
                 .build();
     }
 

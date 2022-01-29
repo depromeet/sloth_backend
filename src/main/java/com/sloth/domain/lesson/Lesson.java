@@ -1,11 +1,10 @@
 package com.sloth.domain.lesson;
 
-import com.sloth.domain.common.BaseEntity;
 import com.sloth.domain.category.Category;
+import com.sloth.domain.common.BaseEntity;
 import com.sloth.domain.lesson.constant.LessonStatus;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.site.Site;
-import com.sloth.global.exception.BusinessException;
 import com.sloth.global.exception.InvalidParameterException;
 import lombok.*;
 import org.hibernate.envers.AuditOverride;
@@ -109,43 +108,22 @@ public class Lesson extends BaseEntity  {
         }
     }
 
-    public boolean isDoingLesson() {
-        return this.getStartDate().isBefore(LocalDate.now()) && this.getEndDate().isAfter(LocalDate.now());
+    public boolean isDoingLesson(LocalDate now) {
+        return this.getStartDate().isBefore(now) && this.getEndDate().isAfter(now);
     }
 
     private int getPastDays(LocalDate now) {
-        Long days;
-
-        try {
-            days = (Long) ChronoUnit.DAYS.between(this.getStartDate(), now) + 1;
-        } catch (ArithmeticException e) {
-            throw new BusinessException("남은 일 수 계산 도중 에러가 발생했습니다.");
-        }
-
+        Long days = (Long) ChronoUnit.DAYS.between(this.getStartDate(), now) + 1;
         return days.intValue();
     }
 
     private int getTotalDays() {
-        Long days;
-
-        try {
-            days = (Long) ChronoUnit.DAYS.between(this.getStartDate(), this.getEndDate()) + 1;
-        } catch (ArithmeticException e) {
-            throw new BusinessException("남은 일 수 계산 도중 에러가 발생했습니다.");
-        }
-
+        Long days = (Long) ChronoUnit.DAYS.between(this.getStartDate(), this.getEndDate()) + 1;
         return days.intValue();
     }
 
     public int getRemainDay(LocalDate now) {
-        Long days;
-
-        try {
-            days = (Long) ChronoUnit.DAYS.between(now, this.endDate);
-        } catch (ArithmeticException e) {
-            throw new BusinessException("남은 일 수 계산 도중 에러가 발생했습니다.");
-        }
-
+        Long days = (Long) ChronoUnit.DAYS.between(now, this.endDate);
         return days.intValue();
     }
 
@@ -194,4 +172,12 @@ public class Lesson extends BaseEntity  {
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
+     public void updateCategory(Category category) {
+        this.category = category;
+     }
+
+     public void updateSite(Site site) {
+        this.site = site;
+     }
 }
