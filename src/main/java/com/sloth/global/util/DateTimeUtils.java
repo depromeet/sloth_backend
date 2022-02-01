@@ -1,9 +1,11 @@
 package com.sloth.global.util;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateTimeUtils {
@@ -12,6 +14,11 @@ public class DateTimeUtils {
         return dateToConvert.toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime();
+    }
+
+    public static String convertToString(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return format.format(date);
     }
 
     public static Date convertToDate(LocalDate dateToConvert) {
@@ -24,6 +31,12 @@ public class DateTimeUtils {
 
     public static LocalDate convertToDate(String dateString) {
         return LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE);
+    }
+
+    public static Date createDate(int year, int month, int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        return calendar.getTime();
     }
 
 }

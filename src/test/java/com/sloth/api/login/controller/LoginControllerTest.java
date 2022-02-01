@@ -1,210 +1,173 @@
 package com.sloth.api.login.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sloth.api.login.dto.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.gson.Gson;
+import com.sloth.api.login.dto.FormJoinDto;
+import com.sloth.api.login.dto.FormLoginRequestDto;
+import com.sloth.api.login.dto.ResponseJwtTokenDto;
+import com.sloth.api.login.service.LoginService;
+import com.sloth.creator.MemberCreator;
 import com.sloth.domain.member.Member;
-import com.sloth.domain.member.repository.MemberRepository;
-import com.sloth.domain.memberToken.MemberToken;
-import com.sloth.global.util.MailService;
-import com.sloth.test.util.TestUtil;
+import com.sloth.global.config.auth.TokenProvider;
+import com.sloth.global.config.auth.dto.TokenDto;
+import com.sloth.global.exception.InvalidParameterException;
+import com.sloth.global.exception.NeedEmailConfirmException;
+import com.sloth.global.exception.handler.GlobalExceptionHandler;
+import com.sloth.global.util.DateTimeUtils;
+import com.sloth.test.base.BaseApiController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-import java.util.Optional;
+import java.security.interfaces.RSAKey;
+import java.util.Calendar;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@ActiveProfiles("test")
-@Transactional
-class LoginControllerTest {
+@ExtendWith(MockitoExtension.class)
+class LoginControllerTest extends BaseApiController {
 
-    @Autowired private MockMvc mockMvc;
-    @Autowired private ObjectMapper objectMapper;
-    @Autowired private MemberRepository memberRepository;
-    @Autowired private EntityManager em;
+    @InjectMocks
+    private LoginController loginController;
 
-    @MockBean private PasswordEncoder passwordEncoder;
-    @MockBean private MailService mailService;
+    @Mock
+    private TokenProvider tokenProvider;
+
+    @Mock
+    private LoginService loginService;
+
+    private MockMvc mockMvc;
 
     private String testPassword = "testPassword";
 
     @BeforeEach
-    void beforeEach() {
-        when(passwordEncoder.matches(testPassword, testPassword)).thenReturn(true);
-        when(passwordEncoder.encode(testPassword)).thenReturn(testPassword);
+    public void init() {
+        mockMvc = MockMvcBuilders.standaloneSetup(loginController)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
     }
-
-    /*@Test
-    @DisplayName("OAuth 로그인")
-    void oauth_login() throws Exception {
-        OauthRequestDto request = new OauthRequestDto();
-        request.setSocialType(SocialType.GOOGLE.name());
-    }*/
 
     @Test
     @DisplayName("폼 회원가입")
     void form_register() throws Exception {
-        //given
-        FormJoinDto request = new FormJoinDto("test","testformemail@email.com",testPassword, testPassword);
+        // given
+        String name = "name";
+        String email = "email@email.com";
+        FormJoinDto request = new FormJoinDto(name, email, testPassword, testPassword);
+        Member member = MemberCreator.createStubMember(email);
 
-        //when
-        mockMvc.perform(post("/api/form/register")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk());
+        doReturn(member).when(loginService).register(any(FormJoinDto.class));
 
-        //then
-        Optional<Member> optionalMember = memberRepository.findByEmail("testformemail@email.com");
-        assertTrue(optionalMember.isPresent());
-        assertNotNull(optionalMember.get().getEmailConfirmCode());
-        assertTrue(optionalMember.get().getEmailConfirmCodeCreatedAt().isBefore(LocalDateTime.now()));
-        assertTrue(optionalMember.get().getEmailConfirmCodeCreatedAt().isAfter(LocalDateTime.now().minusMinutes(1)));
-        assertFalse(optionalMember.get().isEmailConfirm());
+        // when
+        ResultActions result = mockMvc.perform(post("/api/form/register")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new Gson().toJson(request)));
+
+        // then
+        result.andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(HttpStatus.OK.value()))
+                .andExpect(jsonPath("$.message").value("success"));
     }
 
     @Test
     @DisplayName("폼 로그인 - 이메일 인증 안함")
     void form_login_notEmailConfirm() throws Exception {
+        //given
+        String password = "password";
+        String email = "email@email.com";
+        FormLoginRequestDto requestDto = new FormLoginRequestDto(email, password);
+        String errorMessage = "이메일 인증을 하지 않은 사용자입니다. 이메일로 보낸 코드를 확인하세요.";
+        doThrow(new NeedEmailConfirmException(errorMessage))
+                .when(loginService).loginForm(any(FormLoginRequestDto.class));
         //when
-        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", testPassword, testPassword);
-        Member member = Member.createFormMember(formJoinDto, testPassword);
-        memberRepository.save(member);
+        ResultActions result = mockMvc.perform(post("/api/form/login")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new Gson().toJson(requestDto)));
 
-        FormLoginRequestDto request = new FormLoginRequestDto("testformemail@email.com", testPassword);
-
-        mockMvc.perform(post("/api/form/login")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isForbidden())
-                .andExpect(jsonPath("$.errorMessage").value("이메일 인증을 하지 않은 사용자입니다. 이메일로 보낸 코드를 확인하세요."));
+        //then
+        result.andExpect(status().isForbidden())
+                .andExpect(jsonPath("$.code").value(HttpStatus.FORBIDDEN.value()))
+                .andExpect(jsonPath("$.errorMessage").value(errorMessage))
+                .andExpect(jsonPath("$.referedUrl").value("/api/form/login"));
     }
 
     @Test
-    @DisplayName("폼 로그인 - 이메일 인증 완료")
-    void form_login_EmailConfirm() throws Exception {
+    @DisplayName("폼 로그인 - 비밀번호 불일치")
+    void form_login_wrong_password() throws Exception {
+        //given
+        String password = "wrongPassword";
+        String email = "email@email.com";
+        FormLoginRequestDto requestDto = new FormLoginRequestDto(email, password);
+        String errorMessage = "비밀번호를 확인해주세요.";
+        doThrow(new InvalidParameterException(errorMessage))
+                .when(loginService).loginForm(any(FormLoginRequestDto.class));
         //when
-        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", testPassword, testPassword);
-        Member member = Member.createFormMember(formJoinDto, testPassword);
-        member.setEmailConfirm(true);
-        memberRepository.save(member);
+        ResultActions result = mockMvc.perform(post("/api/form/login")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new Gson().toJson(requestDto)));
 
-        FormLoginRequestDto request = new FormLoginRequestDto("testformemail@email.com", testPassword);
-
-        MvcResult mvcResult = mockMvc.perform(post("/api/form/login")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        MemberToken memberToken = member.getMemberToken();
-        ResponseJwtTokenDto response = TestUtil.convert(mvcResult, ResponseJwtTokenDto.class);
-
-        em.flush();
-        em.clear();
-
-        assertNotNull(memberToken);
-        assertEquals(memberToken.getRefreshToken(), response.getRefreshToken()); // TODO 테스트 수정 및 고도화
+        //then
+        result.andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value(HttpStatus.BAD_REQUEST.value()))
+                .andExpect(jsonPath("$.errorMessage").value(errorMessage))
+                .andExpect(jsonPath("$.referedUrl").value("/api/form/login"));
     }
 
     @Test
-    @DisplayName("이메일 검증 - 실패")
-    void confirm_email_fail() throws Exception {
-        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", testPassword, testPassword);
-        Member member = Member.createFormMember(formJoinDto, testPassword);
-        member.updateConfirmEmailCode("111111", LocalDateTime.now());
-        memberRepository.save(member);
+    @DisplayName("폼 로그인")
+    void form_login() throws Exception {
+        //given
+        FormLoginRequestDto requestDto = new FormLoginRequestDto("email@email.com", "password");
+        final Date time = DateTimeUtils.createDate(2020, 1, 1);
 
-        EmailConfirmRequestDto requestDto = new EmailConfirmRequestDto("testformemail@email.com", testPassword, "aaaaaa");
+        ResponseJwtTokenDto response = ResponseJwtTokenDto.builder()
+                .accessToken(accessToken)
+                .accessTokenExpireTime(time)
+                .refreshToken(accessToken)
+                .refreshTokenExpireTime(time)
+                .isNewMember(false)
+                .build();
 
-        mockMvc.perform(post("/api/email-confirm")
-                    .accept(MediaType.APPLICATION_JSON)
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(requestDto)))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.errorMessage").value("인증에 실패했습니다."));
+        when(loginService.loginForm(any(FormLoginRequestDto.class))).thenReturn(response);
 
-        assertFalse(member.isEmailConfirm());
-    }
+        //when
+        ResultActions result = mockMvc.perform(post("/api/form/login")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new Gson().toJson(requestDto)));
 
-    @Test
-    @DisplayName("이메일 검증 - 성공")
-    void confirm_email_success() throws Exception {
-        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", testPassword, testPassword);
-        Member member = Member.createFormMember(formJoinDto, testPassword);
-        member.updateConfirmEmailCode("111111", LocalDateTime.now());
-        memberRepository.save(member);
-
-        EmailConfirmRequestDto requestDto = new EmailConfirmRequestDto("testformemail@email.com",testPassword, member.getEmailConfirmCode());
-
-        mockMvc.perform(post("/api/email-confirm")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(requestDto)))
-                .andExpect(status().isOk());
-
-        assertTrue(member.isEmailConfirm());
-    }
-
-    @Test
-    @DisplayName("이메일 검증 재전송 - 연속적인 요청으로 인한 실패")
-    void confirm_email_resend_fail() throws Exception {
-        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", testPassword, testPassword);
-        Member member = Member.createFormMember(formJoinDto, testPassword);
-        member.updateConfirmEmailCode("111111", LocalDateTime.now());
-        memberRepository.save(member);
-
-        EmailConfirmResendRequestDto requestDto = new EmailConfirmResendRequestDto("testformemail@email.com", testPassword);
-
-        mockMvc.perform(post("/api/email-confirm-resend")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(requestDto)))
-                .andExpect(status().isForbidden())
-                .andExpect(jsonPath("$.errorMessage").value("이메일 발송 5분 후에 재전송을 할 수 있습니다."));
-
-        assertEquals("111111", member.getEmailConfirmCode());
-    }
-
-    @Test
-    @DisplayName("이메일 검증 재전송 - 성공")
-    void confirm_email_resend_success() throws Exception {
-        FormJoinDto formJoinDto = new FormJoinDto("name", "testformemail@email.com", testPassword, testPassword);
-        Member member = Member.createFormMember(formJoinDto, testPassword);
-        LocalDateTime overLimitDateTime = LocalDateTime.now().minusMinutes(6);
-        member.updateConfirmEmailCode("111111", overLimitDateTime); // 5분안에 다시 보내기 안됨
-        memberRepository.save(member);
-
-        EmailConfirmResendRequestDto requestDto = new EmailConfirmResendRequestDto("testformemail@email.com", testPassword);
-
-        mockMvc.perform(post("/api/email-confirm-resend")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(requestDto)))
-                .andExpect(status().isOk());
-
-        assertNotEquals("111111", member.getEmailConfirmCode()); // code refresh
-        assertNotEquals(overLimitDateTime, member.getEmailConfirmCodeCreatedAt()); // 생성한 시간 refresh
+        //then
+        final String timeString = DateTimeUtils.convertToString(time);
+        result.andExpect(status().isOk())
+                .andExpect(jsonPath("$.accessToken").value(accessToken))
+                .andExpect(jsonPath("$.accessTokenExpireTime").value(timeString))
+                .andExpect(jsonPath("$.refreshToken").value(accessToken))
+                .andExpect(jsonPath("$.refreshTokenExpireTime").value(timeString))
+                .andExpect(jsonPath("$.isNewMember").value(false));
     }
 }
