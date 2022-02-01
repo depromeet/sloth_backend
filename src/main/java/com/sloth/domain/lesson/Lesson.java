@@ -109,7 +109,8 @@ public class Lesson extends BaseEntity  {
     }
 
     public boolean isDoingLesson(LocalDate now) {
-        return this.getStartDate().isBefore(now) && this.getEndDate().isAfter(now);
+        return ((this.getStartDate().isBefore(now) && this.getEndDate().isAfter(now)) ||
+                (this.getStartDate().isEqual(now) || this.getEndDate().isEqual(now)));
     }
 
     private int getPastDays(LocalDate now) {
@@ -142,7 +143,7 @@ public class Lesson extends BaseEntity  {
 
     public int getWastePrice(LocalDate now) {
         int wastePrice = (int) (price * ((double) (getGoalProgressRate(now) - getCurrentProgressRate()) / (double) 100));
-        return wastePrice >= 0 ? wastePrice : 0;
+        return wastePrice > 0 ? wastePrice : 0;
     }
 
     public LessonStatus getLessonStatus(LocalDate now) {
@@ -165,7 +166,7 @@ public class Lesson extends BaseEntity  {
     }
 
     public void updateDate(LocalDate startDate, LocalDate endDate) {
-        if (endDate.isBefore(startDate) || endDate.isEqual(startDate)) {
+        if (endDate.isBefore(startDate)) {
             throw new InvalidParameterException("종료 일자는 시작 일자 이후여야 합니다.");
         }
         //TODO 내부적인 정책 필요

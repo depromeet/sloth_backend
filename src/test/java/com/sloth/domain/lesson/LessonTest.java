@@ -273,6 +273,63 @@ class LessonTest {
     }
 
     @Test
+    @DisplayName("현재 시작 전 강의인지 테스트")
+    void isDoingLessonTest3() {
+        //given
+        LocalDate startDate = LocalDate.of(2021,11,20);
+        LocalDate endDate = LocalDate.of(2022, 1, 25);
+        LocalDate now = LocalDate.of(2021,10,4);
+
+        Site site = SiteCreator.create("인프런");
+        Category category = CategoryCreator.createStubCategory(1, "test", "test");
+        Lesson lesson = LessonCreator.createLesson("스프링부트 강의", startDate, endDate,category, site,5, 30);
+
+        // when
+        boolean doingLesson = lesson.isDoingLesson(now);
+
+        // then
+        Assertions.assertThat(doingLesson).isEqualTo(false);
+    }
+
+    @Test
+    @DisplayName("현재 진행중인 강의인지 테스트 - 시작일")
+    void isDoingLessonTest4() {
+        //given
+        LocalDate startDate = LocalDate.of(2021,11,20);
+        LocalDate endDate = LocalDate.of(2022, 1, 25);
+        LocalDate now = LocalDate.of(2021,11,20);
+
+        Site site = SiteCreator.create("인프런");
+        Category category = CategoryCreator.createStubCategory(1, "test", "test");
+        Lesson lesson = LessonCreator.createLesson("스프링부트 강의", startDate, endDate,category, site,5, 30);
+
+        // when
+        boolean doingLesson = lesson.isDoingLesson(now);
+
+        // then
+        Assertions.assertThat(doingLesson).isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("현재 진행중인 강의인지 테스트 - 종료일")
+    void isDoingLessonTest5() {
+        //given
+        LocalDate startDate = LocalDate.of(2021,11,20);
+        LocalDate endDate = LocalDate.of(2022, 1, 25);
+        LocalDate now = LocalDate.of(2022,1,25);
+
+        Site site = SiteCreator.create("인프런");
+        Category category = CategoryCreator.createStubCategory(1, "test", "test");
+        Lesson lesson = LessonCreator.createLesson("스프링부트 강의", startDate, endDate,category, site,5, 30);
+
+        // when
+        boolean doingLesson = lesson.isDoingLesson(now);
+
+        // then
+        Assertions.assertThat(doingLesson).isEqualTo(true);
+    }
+
+    @Test
     @DisplayName("시작일,종료일 수정 - 정상 케이스")
     void updateDateTest1() {
 
@@ -296,7 +353,7 @@ class LessonTest {
 
     @Test
     @DisplayName("시작일,종료일 수정 - 시작일이 종료일보다 큰 경우")
-    void updateDateTest() {
+    void updateDateTest2() {
 
         //given
         LocalDate startDate = LocalDate.of(2021,11,20);

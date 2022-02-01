@@ -4,21 +4,19 @@ import com.sloth.api.category.dto.CategoryDto;
 import com.sloth.creator.CategoryCreator;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
+import com.sloth.test.base.BaseServiceTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.BDDMockito.when;
 
-@ExtendWith(MockitoExtension.class)
-public class ApiCategoryServiceTest {
+public class ApiCategoryServiceTest extends BaseServiceTest {
 
     @InjectMocks
     private ApiCategoryService apiCategoryService;

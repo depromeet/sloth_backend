@@ -25,6 +25,7 @@ public class MemberCreator {
     public static Member createMember(Long memberId, String email) {
         return Member.builder()
                 .memberId(memberId)
+                .password("password")
                 .memberName("홍길동")
                 .email(email)
                 .lessons(new ArrayList<>())
