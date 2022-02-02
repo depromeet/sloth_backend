@@ -48,7 +48,7 @@ public class OauthLoginController {
         }
 
         if(!SocialType.isSocialType(oauthRequestDto.getSocialType()) || oauthRequestDto.getSocialType().equals(SocialType.FORM.name())) {
-            throw new InvalidParameterException("잘못된 소셜 타입입니다. 'GOOGLE', 'KAKAO', 'APPLE' 중에 입력해주세요");
+            throw new InvalidParameterException("잘못된 소셜 타입입니다. 'GOOGLE', 'KAKAO' 중에 입력해주세요");
         }
 
         SocialType socialType = SocialType.from(oauthRequestDto.getSocialType());
