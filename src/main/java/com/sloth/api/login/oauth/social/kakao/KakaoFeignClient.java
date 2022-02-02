@@ -1,4 +1,4 @@
-package com.sloth.api.login.kakao;
+package com.sloth.api.login.oauth.social.kakao;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;

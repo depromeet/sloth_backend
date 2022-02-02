@@ -1,14 +1,13 @@
 package com.sloth.domain.member.service;
 
-import com.sloth.api.login.dto.EmailConfirmResendRequestDto;
-import com.sloth.api.login.dto.FormJoinDto;
+import com.sloth.api.login.form.dto.EmailConfirmResendRequestDto;
+import com.sloth.api.login.form.dto.FormJoinDto;
 import com.sloth.creator.MemberCreator;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.constant.SocialType;
 import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.nickname.Nickname;
 import com.sloth.domain.nickname.service.NicknameService;
-import com.sloth.global.config.auth.TokenProvider;
 import com.sloth.global.config.auth.dto.OAuthAttributes;
 import com.sloth.global.config.auth.dto.TokenDto;
 import com.sloth.global.exception.InvalidParameterException;
@@ -16,20 +15,17 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.*;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)

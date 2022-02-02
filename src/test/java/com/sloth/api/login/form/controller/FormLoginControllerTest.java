@@ -1,15 +1,13 @@
-package com.sloth.api.login.controller;
+package com.sloth.api.login.form.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
-import com.sloth.api.login.dto.FormJoinDto;
-import com.sloth.api.login.dto.FormLoginRequestDto;
 import com.sloth.api.login.dto.ResponseJwtTokenDto;
-import com.sloth.api.login.service.LoginService;
+import com.sloth.api.login.form.dto.FormJoinDto;
+import com.sloth.api.login.form.dto.FormLoginRequestDto;
+import com.sloth.api.login.form.service.FormLoginService;
 import com.sloth.creator.MemberCreator;
 import com.sloth.domain.member.Member;
 import com.sloth.global.config.auth.TokenProvider;
-import com.sloth.global.config.auth.dto.TokenDto;
 import com.sloth.global.exception.InvalidParameterException;
 import com.sloth.global.exception.NeedEmailConfirmException;
 import com.sloth.global.exception.handler.GlobalExceptionHandler;
@@ -19,44 +17,35 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.security.interfaces.RSAKey;
-import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
-class LoginControllerTest extends BaseApiController {
+class FormLoginControllerTest extends BaseApiController {
 
     @InjectMocks
-    private LoginController loginController;
+    private FormLoginController formLoginController;
 
     @Mock
     private TokenProvider tokenProvider;
 
     @Mock
-    private LoginService loginService;
+    private FormLoginService formLoginService;
 
     private MockMvc mockMvc;
 
@@ -64,11 +53,10 @@ class LoginControllerTest extends BaseApiController {
 
     @BeforeEach
     public void init() {
-        mockMvc = MockMvcBuilders.standaloneSetup(loginController)
+        mockMvc = MockMvcBuilders.standaloneSetup(formLoginController)
                 .setControllerAdvice(new GlobalExceptionHandler())
                 .build();
     }
-
     @Test
     @DisplayName("폼 회원가입")
     void form_register() throws Exception {
@@ -78,7 +66,7 @@ class LoginControllerTest extends BaseApiController {
         FormJoinDto request = new FormJoinDto(name, email, testPassword, testPassword);
         Member member = MemberCreator.createStubMember(email);
 
-        doReturn(member).when(loginService).register(any(FormJoinDto.class));
+        doReturn(member).when(formLoginService).register(any(FormJoinDto.class));
 
         // when
         ResultActions result = mockMvc.perform(post("/api/form/register")
@@ -101,7 +89,7 @@ class LoginControllerTest extends BaseApiController {
         FormLoginRequestDto requestDto = new FormLoginRequestDto(email, password);
         String errorMessage = "이메일 인증을 하지 않은 사용자입니다. 이메일로 보낸 코드를 확인하세요.";
         doThrow(new NeedEmailConfirmException(errorMessage))
-                .when(loginService).loginForm(any(FormLoginRequestDto.class));
+                .when(formLoginService).loginForm(any(FormLoginRequestDto.class));
         //when
         ResultActions result = mockMvc.perform(post("/api/form/login")
                 .accept(MediaType.APPLICATION_JSON)
@@ -124,7 +112,7 @@ class LoginControllerTest extends BaseApiController {
         FormLoginRequestDto requestDto = new FormLoginRequestDto(email, password);
         String errorMessage = "비밀번호를 확인해주세요.";
         doThrow(new InvalidParameterException(errorMessage))
-                .when(loginService).loginForm(any(FormLoginRequestDto.class));
+                .when(formLoginService).loginForm(any(FormLoginRequestDto.class));
         //when
         ResultActions result = mockMvc.perform(post("/api/form/login")
                 .accept(MediaType.APPLICATION_JSON)
@@ -153,7 +141,7 @@ class LoginControllerTest extends BaseApiController {
                 .isNewMember(false)
                 .build();
 
-        when(loginService.loginForm(any(FormLoginRequestDto.class))).thenReturn(response);
+        when(formLoginService.loginForm(any(FormLoginRequestDto.class))).thenReturn(response);
 
         //when
         ResultActions result = mockMvc.perform(post("/api/form/login")

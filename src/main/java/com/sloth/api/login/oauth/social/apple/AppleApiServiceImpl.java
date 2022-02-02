@@ -1,7 +1,7 @@
-package com.sloth.api.login.apple;
+package com.sloth.api.login.oauth.social.apple;
 
 import com.google.gson.*;
-import com.sloth.api.login.service.SocialApiSerivce;
+import com.sloth.api.login.oauth.social.service.SocialApiSerivce;
 import com.sloth.global.config.auth.dto.OAuthAttributes;
 import com.sloth.domain.member.constant.SocialType;
 import com.sloth.global.exception.BusinessException;

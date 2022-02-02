@@ -1,13 +1,12 @@
 package com.sloth.domain.member;
 
-import com.sloth.api.login.dto.FormJoinDto;
+import com.sloth.api.login.form.dto.FormJoinDto;
 import com.sloth.creator.MemberCreator;
 import com.sloth.domain.member.constant.Role;
 import com.sloth.domain.member.constant.SocialType;
 import com.sloth.domain.member.dto.MemberFormDto;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.global.config.auth.dto.OAuthAttributes;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

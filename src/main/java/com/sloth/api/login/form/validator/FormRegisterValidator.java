@@ -1,6 +1,6 @@
-package com.sloth.api.login.validator;
+package com.sloth.api.login.form.validator;
 
-import com.sloth.api.login.dto.FormJoinDto;
+import com.sloth.api.login.form.dto.FormJoinDto;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;

@@ -1,4 +1,4 @@
-package com.sloth.api.login.service;
+package com.sloth.api.login.oauth.social.service;
 
 import com.sloth.domain.member.constant.SocialType;
 import com.sloth.global.exception.InvalidParameterException;

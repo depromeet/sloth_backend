@@ -1,4 +1,4 @@
-package com.sloth.api.login.dto;
+package com.sloth.api.login.form.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
