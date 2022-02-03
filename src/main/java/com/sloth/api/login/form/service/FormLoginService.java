@@ -53,7 +53,7 @@ public class FormLoginService {
         Member member = memberService.findByEmail(formLoginRequestDto.getEmail());
 
         if(!passwordEncoder.matches(formLoginRequestDto.getPassword(), member.getPassword())) {
-            throw new InvalidParameterException("비밀번호를 확인해주세요");
+            throw new InvalidParameterException("비밀번호를 확인해주세요.");
         }
 
         if (!member.isEmailConfirm()) {
