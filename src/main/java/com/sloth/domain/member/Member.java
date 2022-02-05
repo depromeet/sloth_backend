@@ -1,7 +1,7 @@
 package com.sloth.domain.member;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sloth.api.login.dto.FormJoinDto;
+import com.sloth.api.login.form.dto.FormJoinDto;
 import com.sloth.domain.member.constant.SocialType;
 import com.sloth.global.config.auth.dto.OAuthAttributes;
 import com.sloth.domain.common.BaseEntity;

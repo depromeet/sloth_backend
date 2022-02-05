@@ -1,7 +1,7 @@
 package com.sloth.domain.member.service;
 
-import com.sloth.api.login.dto.EmailConfirmResendRequestDto;
-import com.sloth.api.login.dto.FormJoinDto;
+import com.sloth.api.login.form.dto.EmailConfirmResendRequestDto;
+import com.sloth.api.login.form.dto.FormJoinDto;
 import com.sloth.global.config.auth.dto.OAuthAttributes;
 import com.sloth.global.config.auth.dto.TokenDto;
 import com.sloth.domain.member.Member;

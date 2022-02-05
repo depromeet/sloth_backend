@@ -4,6 +4,7 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+/mylog.txt
 
 ### STS ###
 .apt_generated
@@ -36,3 +37,7 @@ out/
 ### VS Code ###
 .vscode/
 src/main/java/com/sloth/api/oauth/controller/OAuthController.java
+
+### fcm json ###
+/src/main/resources/firebase/nanagong_key.json
+
