@@ -1,4 +1,4 @@
-package com.sloth.domain.fcm;
+package com.sloth.api.fcm.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

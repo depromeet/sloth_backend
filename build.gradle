@@ -152,7 +152,10 @@ jacocoTestReport {
                         "**/BaseEntity*",
                         "**/domain/common/**",
                         "**/app/**",
-                        "**/resolver/**"
+                        "**/resolver/**",
+                        "**/login/apple/**",
+                        "**/login/google/**",
+                        "**/login/kakao/**"
                 ] + Qdomains)
             }))
         }
@@ -207,7 +210,10 @@ tasks.jacocoTestCoverageVerification {
                     "**.BaseEntity*",
                     "**.domain.common.**",
                     "**.app.**",
-                    "**.resolver.**"
+                    "**.resolver.**",
+                    "**.login.apple.**",
+                    "**.login.google.**",
+                    "**.login.kakao.**"
             ] + Qdomains
 
         }
