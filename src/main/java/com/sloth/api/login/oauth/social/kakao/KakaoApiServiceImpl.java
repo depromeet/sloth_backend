@@ -20,8 +20,8 @@ public class KakaoApiServiceImpl implements SocialApiSerivce {
     private final PasswordEncoder passwordEncoder;
     private final KakaoFeignClient kakaoFeignClient;
 
-    @Value("${my-pass}")
-    private String pass;
+    @Value("${nanagong.enc.password}")
+    private String encPassword;
 
     @Override
     public OAuthAttributes getUserInfo(String accessToken) {
@@ -35,7 +35,7 @@ public class KakaoApiServiceImpl implements SocialApiSerivce {
                 .email(StringUtils.isBlank(kakaoUserInfo.getKakaoAccount().getEmail()) ? kakaoUserInfo.getId() : kakaoUserInfo.getKakaoAccount().getEmail())
                 .name(kakaoUserInfo.getKakaoAccount().getProfile().getNickname())
                 .socialType(SocialType.KAKAO)
-                .password(passwordEncoder.encode(pass))
+                .password(passwordEncoder.encode(encPassword))
                 .build();
     }
 

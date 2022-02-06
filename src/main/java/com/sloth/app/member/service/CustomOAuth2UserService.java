@@ -29,8 +29,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     private final MemberRepository memberRepository;
     private final HttpSession httpSession;
 
-    @Value("${my-pass}")
-    private String pass;
+    @Value("${nanagong.enc.password}")
+    private String encPassword;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -42,7 +42,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 .getUserInfoEndpoint().getUserNameAttributeName();  //로그인 진행 시 키가 되는 필드값. 구글의 기본 코드는 sub임.
 
         // OAuth2UserService를 통해 가져 온 OAuth2User의 attribute를 담을 클래스이다.
-        OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes(), pass);
+        OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes(), encPassword);
 
         Member member = save(attributes);
         httpSession.setAttribute("user", new SessionUser(member));    //세션에 user 등록

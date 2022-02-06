@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     hikari.maximum-pool-size: 4
-    username: ENC(D94aU0+NSCVGkr5Bde93ghH0JJO4M1TgDLimpYG89y8=)
-    password: ENC(zs6q1rEeD0VIHQeoIL/OHaHLJ+xNe9fRQ6ZhOSbfmlM=)
+    username: ENC(YR5xEpjJNYqdPu1GyFdMpMCjtsvnDqn1/V8XevqpjK4=)
+    password: ENC(FUiwj17xVnSL/Vf1IFq0UOy3iJBpgX+neQa2/Fo1Pac=)
     driver-class-name: com.mysql.jdbc.Driver
-    url: ENC(yfM/+fb90pQau5XXMbULVXzoUXv849044o+z4VgHDN0Tmc1DDilWLxO61RoL95KL0/RbMS7SSxqC/62OhHDW24yWpGv2wlxFn6iMxQGz997TOmh9Wqa8fHicZQ/105o5uZZLWPTTDJBkYhsILZoK3P6lXuN557KRl0WGByDdBm5yPlh6dtCQHXhVKZIXD6R3)
+    url: ENC(5XoESZelGV1xjw1nrUhxlGug+qaVgVxP8//f/Zvz07r2FTfewelCkP85Gyc2i4MOXvm21GkFQY/Xy/0DRkKM4I7y3d1MHKfppujFinAFmQ6VaKSjBwGi6T2MzXGOJFBitPbv0N01Wxa6+KBRj804JWZO3ILhY4J7KnZCVzJw2nqpe6e2NU0jeghNw/tsYkzS)

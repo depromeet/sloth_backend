@@ -20,8 +20,8 @@ public class GoogleApiServiceImpl implements SocialApiSerivce {
     private final GoogleFeignClient googleFeignClient;
     private final PasswordEncoder passwordEncoder;
 
-    @Value("${my-pass}")
-    private String pass;
+    @Value("${nanagong.enc.password}")
+    private String encPassword;
 
     @Override
     public OAuthAttributes getUserInfo(String accessToken) {
@@ -36,7 +36,7 @@ public class GoogleApiServiceImpl implements SocialApiSerivce {
                 .email(StringUtils.isBlank(googleUserInfo.getEmail()) ? googleUserInfo.getId() : googleUserInfo.getEmail())
                 .name(googleUserInfo.getName())
                 .socialType(SocialType.GOOGLE)
-                .password(passwordEncoder.encode(pass))
+                .password(passwordEncoder.encode(encPassword))
                 .build();
     }
 }
