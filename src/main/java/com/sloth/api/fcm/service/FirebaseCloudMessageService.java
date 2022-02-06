@@ -3,41 +3,29 @@ package com.sloth.api.fcm.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.common.net.HttpHeaders;
 import com.google.gson.JsonParseException;
 import com.sloth.domain.fcm.FcmMessage;
 import lombok.RequiredArgsConstructor;
-import okhttp3.*;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Component;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
 
-@Component
+@Slf4j
+@Service
 @RequiredArgsConstructor
 public class FirebaseCloudMessageService {
 
     private final String API_URL = "https://fcm.googleapis.com/v1/projects/test-454ab/messages:send";
     private final ObjectMapper objectMapper;
     private final S3Service s3Service;
+    private final FcmLessonPushFeignClient fcmLessonPushFeignClient;
 
     public void sendMessageTo(String targetToken, String title, String body) throws IOException {
         String message = makeMessage(targetToken, title, body);
-
-        OkHttpClient client = new OkHttpClient();
-        RequestBody requestBody = RequestBody.create(message,
-                MediaType.get("application/json; charset=utf-8"));
-        Request request = new Request.Builder()
-                .url(API_URL)
-                .post(requestBody)
-                .addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + getAccessToken())
-                .addHeader(HttpHeaders.CONTENT_TYPE, "application/json; UTF-8")
-                .build();
-
-        Response response = client.newCall(request).execute();
-
-        System.out.println(response.body().string());
+        String result = fcmLessonPushFeignClient.lessonPushAlarm("application/json; UTF-8", "Bearer " + getAccessToken(), message);
+        log.info("response : {}", result);
     }
 
     private String makeMessage(String targetToken, String title, String body) throws JsonParseException, JsonProcessingException {
@@ -57,7 +45,7 @@ public class FirebaseCloudMessageService {
     private String getAccessToken() throws IOException {
 
         GoogleCredentials googleCredentials = GoogleCredentials
-                .fromStream(s3Service.getThumbnailPath("sloth_test_key.json").getObjectContent())
+                .fromStream(s3Service.getThumbnailPath("nanagong_key.json").getObjectContent())
                 .createScoped(List.of("https://www.googleapis.com/auth/cloud-platform"));
 
         googleCredentials.refreshIfExpired();
