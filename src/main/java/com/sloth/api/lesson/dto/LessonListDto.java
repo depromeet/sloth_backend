@@ -3,7 +3,7 @@ package com.sloth.api.lesson.dto;
 
 import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.lesson.constant.LessonStatus;
-import com.sloth.util.DateTimeUtils;
+import com.sloth.global.util.DateTimeUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;

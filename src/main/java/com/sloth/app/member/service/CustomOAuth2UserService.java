@@ -3,8 +3,8 @@ package com.sloth.app.member.service;
 import lombok.RequiredArgsConstructor;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.repository.MemberRepository;
-import com.sloth.config.auth.dto.OAuthAttributes;
-import com.sloth.config.auth.dto.SessionUser;
+import com.sloth.global.config.auth.dto.OAuthAttributes;
+import com.sloth.global.config.auth.dto.SessionUser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -16,7 +16,6 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import javax.swing.text.html.Option;
 import java.util.Collections;
 import java.util.Optional;
 

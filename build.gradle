@@ -3,6 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'java'
+    id 'jacoco'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -16,6 +17,11 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+}
+
+jacoco {
+    // JaCoCo 버전
+    toolVersion = "0.8.7"
 }
 
 bootJar{
@@ -91,10 +97,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-admin:8.1.0'
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.2.2'
     implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE'
+
 }
 
 test {
     useJUnitPlatform()
+    finalizedBy 'jacocoTestReport'
 }
 
 def querydslDir = "$buildDir/generated/querydsl"
@@ -115,4 +123,101 @@ compileQuerydsl{
 }
 configurations {
     querydsl.extendsFrom compileClasspath
+}
+
+
+jacocoTestReport {
+    reports {
+        // 원하는 리포트를 켜고 끌 수 있다.
+        html.enabled true
+        xml.enabled false
+        csv.enabled false
+
+        // QDomain 테스트 결과 레포트 제외 처리
+        def Qdomains = []
+        for(qPattern in "**/QA" .. "**/QZ"){
+            Qdomains.add(qPattern+"*")
+        }
+
+        afterEvaluate {
+
+            classDirectories.setFrom(files(classDirectories.files.collect {
+                fileTree(dir: it, exclude: [
+                        "**/*Application*",
+                        "**/config/**",
+                        "**/*Dto*",
+                        "**/interceptor/**",
+                        "**/exception/**",
+                        "**/handler/**",
+                        "**/EntityParams*",
+                        "**/BaseTimeEntity*",
+                        "**/BaseEntity*",
+                        "**/domain/common/**",
+                        "**/app/**",
+                        "**/resolver/**",
+                        "**/login/apple/**",
+                        "**/login/google/**",
+                        "**/login/kakao/**"
+                ] + Qdomains)
+            }))
+        }
+
+    }
+
+    finalizedBy 'jacocoTestCoverageVerification'
+}
+
+tasks.jacocoTestCoverageVerification {
+
+    def Qdomains = []
+    for (qPattern in "*.QA".."*.QZ") {  // qPattern = "*.QA","*.QB","*.QC", ... "*.QZ"
+        Qdomains.add(qPattern + "*")
+    }
+
+    violationRules {
+        rule {
+            element = "CLASS"   // 커버리지 체크 기준
+
+            // 브랜치 커버리지를 최소한 80% 만족시켜야 한다.
+            limit {
+                counter = 'BRANCH'      // 커버리지 측정의 최소 단위
+                value = 'COVEREDRATIO'  // 측정한 커버리지를 커버된 비율, 0부터1사이의 숫자로 보여줌. 1이 100%이다.
+                minimum = 0.0           //테스트 커버리지 성공 결정
+            }
+
+            // 라인 커버리지를 최소한 80% 만족시켜야 한다.
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.0
+            }
+
+            // 빈 줄을 제외한 코드의 라인수 최대 500라인
+            limit {
+                counter = 'LINE'
+                value = 'TOTALCOUNT'
+                maximum = 500
+            }
+
+            // 제외할 클래스 지정
+            excludes = [
+                    "**.*Application*",
+                    "**.config.**",
+                    "**.*Dto*",
+                    "**.interceptor.**",
+                    "**.exception.**",
+                    "**.handler.**",
+                    "**.EntityParams*",
+                    "**.BaseTimeEntity*",
+                    "**.BaseEntity*",
+                    "**.domain.common.**",
+                    "**.app.**",
+                    "**.resolver.**",
+                    "**.login.apple.**",
+                    "**.login.google.**",
+                    "**.login.kakao.**"
+            ] + Qdomains
+
+        }
+    }
 }

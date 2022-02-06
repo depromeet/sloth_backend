@@ -1,12 +1,12 @@
 package com.sloth.api.lesson.controller;
 
-import com.sloth.api.dto.ApiResult;
+import com.sloth.global.dto.ApiResult;
 import com.sloth.api.lesson.dto.*;
 import com.sloth.api.lesson.service.LessonService;
 import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.member.Member;
-import com.sloth.exception.InvalidParameterException;
-import com.sloth.resolver.CurrentMember;
+import com.sloth.global.exception.InvalidParameterException;
+import com.sloth.global.resolver.CurrentMember;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,7 +22,6 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -40,9 +39,17 @@ public class LessonController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<LessonNumberDto.Response> plusPresentNumber(@CurrentMember Member member, @Valid @RequestBody LessonNumberDto.Request request) {
+    public ResponseEntity<LessonNumberDto.Response> updateLessonmPresentNumber(@CurrentMember Member member, @Valid @RequestBody LessonNumberDto.Request request) {
+
+        log.info("lesson number update api start");
+        log.info("request : {}", request.toString());
+
         Lesson lesson = lessonService.updatePresentNumber(member, request.getLessonId(), request.getCount());
         LessonNumberDto.Response response = LessonNumberDto.Response.create(lesson);
+
+        log.info("response : {}", response.toString());
+        log.info("lesson number update api end");
+
         return ok(response);
     }
 
@@ -69,10 +76,6 @@ public class LessonController {
         }
 
         LocalDate now = LocalDate.now();
-        // 남은 일 수 0일 이상만 조회 되도록 필터링
-        lessons = lessons.stream()
-                .filter(lesson -> lesson.getRemainDay(now) >= 0)
-                .collect(Collectors.toList());
 
         List<DoingLessonDto.Response> doingLessonResponses = new ArrayList<>();
         lessonService.sortByRemainDay(lessons);
@@ -96,6 +99,9 @@ public class LessonController {
                                                                  @Valid @RequestBody LessonUpdateDto.Request lessonUpdateDto,
                                                                  BindingResult bindingResult) {
 
+        log.info("lesson update api start");
+        log.info("request : {}", lessonUpdateDto.toString());
+
         if(bindingResult.hasErrors()) {
             InvalidParameterException.throwErrorMessage(bindingResult);
         }
@@ -111,6 +117,9 @@ public class LessonController {
                 .siteId(updatedLesson.getSite().getSiteId())
                 .categoryId(updatedLesson.getCategory().getCategoryId())
                 .build();
+
+        log.info("response : {}", responseLessonUpdateDto.toString());
+        log.info("lesson update api end");
 
         return ok(responseLessonUpdateDto);
     }
@@ -152,7 +161,8 @@ public class LessonController {
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
     public ResponseEntity<LessonCreateDto.Response> saveLesson(@CurrentMember Member member, @RequestBody LessonCreateDto.Request requestDto) {
-        Long lessonId = lessonService.saveLesson(member, requestDto);
+        Lesson lesson = requestDto.toEntity(member);
+        Long lessonId = lessonService.saveLesson(lesson, requestDto.getSiteId(), requestDto.getCategoryId());
         LessonCreateDto.Response response= LessonCreateDto.Response.builder()
                 .lessonId(lessonId)
                 .build();

@@ -1,15 +1,12 @@
 package com.sloth.domain.nickname.repository;
 
 import com.sloth.domain.nickname.Nickname;
+import com.sloth.test.base.BaseRepositoryTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
-@ActiveProfiles("test")
-@SpringBootTest
-class NicknameRepositoryTest {
+public class NicknameRepositoryTest extends BaseRepositoryTest {
 
     @Autowired
     private NicknameRepository nicknameRepository;

@@ -1,10 +1,10 @@
 package com.sloth.domain.member;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sloth.api.login.dto.FormJoinDto;
+import com.sloth.api.login.form.dto.FormJoinDto;
 import com.sloth.domain.member.constant.SocialType;
-import com.sloth.config.auth.dto.OAuthAttributes;
-import com.sloth.domain.BaseEntity;
+import com.sloth.global.config.auth.dto.OAuthAttributes;
+import com.sloth.domain.common.BaseEntity;
 import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.member.constant.Role;
 import com.sloth.domain.member.dto.MemberFormDto;
@@ -14,7 +14,6 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -139,7 +138,8 @@ public class Member extends BaseEntity {
         this.emailConfirmCodeCreatedAt = now;
     }
 
-    public boolean canCreateEmailConfirmCode() {
-        return this.emailConfirmCodeCreatedAt.isBefore(LocalDateTime.now().minusMinutes(5));
+    public boolean canCreateEmailConfirmCode(LocalDateTime now) {
+        return this.emailConfirmCodeCreatedAt.isBefore(now.minusMinutes(5)) ||
+                this.emailConfirmCodeCreatedAt.isEqual(now.minusMinutes(5));
     }
 }

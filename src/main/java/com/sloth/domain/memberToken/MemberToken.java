@@ -1,7 +1,8 @@
 package com.sloth.domain.memberToken;
 
-import com.sloth.domain.BaseEntity;
+import com.sloth.domain.common.BaseEntity;
 import com.sloth.domain.member.Member;
+import com.sloth.domain.memberToken.constant.TokenRefreshCritnTime;
 import lombok.*;
 
 import javax.persistence.*;
@@ -52,12 +53,13 @@ public class MemberToken extends BaseEntity {
 
     /**
      * 리프레시 토큰이 만료 갱신 기준 시간 이하일 경우 만료 시간 갱신
-     * @param token
+     * @param now
+     * @param tokenRefreshCritnTime 해당 시간 이하일 경우 토큰 만료 시간 갱신
      */
-    public void updateRefreshTokenExpireTime(String token) {
-        long hours = ChronoUnit.HOURS.between(LocalDateTime.now(), tokenExpirationTime);
-        if(hours <= 72) {   //토큰 만료 시간이 72시간 이하일 경우 토큰 만료 시간 갱신
-            updateTokenExpirationTime(LocalDateTime.now().plusWeeks(2));
+    public void updateRefreshTokenExpireTime(LocalDateTime now, TokenRefreshCritnTime tokenRefreshCritnTime) {
+        long hours = ChronoUnit.HOURS.between(now, tokenExpirationTime);
+        if(hours <= tokenRefreshCritnTime.getRefreshCritnTime()) {
+            updateTokenExpirationTime(now.plusWeeks(2));
         }
     }
 

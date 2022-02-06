@@ -1,11 +1,11 @@
 package com.sloth.domain.lesson;
 
-import com.sloth.domain.BaseEntity;
 import com.sloth.domain.category.Category;
+import com.sloth.domain.common.BaseEntity;
 import com.sloth.domain.lesson.constant.LessonStatus;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.site.Site;
-import com.sloth.exception.BusinessException;
+import com.sloth.global.exception.InvalidParameterException;
 import lombok.*;
 import org.hibernate.envers.AuditOverride;
 import org.hibernate.envers.Audited;
@@ -20,7 +20,7 @@ import java.time.temporal.ChronoUnit;
 @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 @Getter
 @AllArgsConstructor @NoArgsConstructor
-@ToString(exclude = {"category", "member"})
+@ToString(exclude = {"category", "member", "site"})
 @EqualsAndHashCode(of = "lessonId", callSuper = false)
 @Table(name = "lesson")
 public class Lesson extends BaseEntity  {
@@ -108,43 +108,23 @@ public class Lesson extends BaseEntity  {
         }
     }
 
-    public boolean isDoingLesson() {
-        return this.getStartDate().isBefore(LocalDate.now()) && this.getEndDate().isAfter(LocalDate.now());
+    public boolean isDoingLesson(LocalDate now) {
+        return ((this.getStartDate().isBefore(now) && this.getEndDate().isAfter(now)) ||
+                (this.getStartDate().isEqual(now) || this.getEndDate().isEqual(now)));
     }
 
     private int getPastDays(LocalDate now) {
-        Long days;
-
-        try {
-            days = (Long) ChronoUnit.DAYS.between(this.getStartDate(), now) + 1;
-        } catch (ArithmeticException e) {
-            throw new BusinessException("남은 일 수 계산 도중 에러가 발생했습니다.");
-        }
-
+        Long days = (Long) ChronoUnit.DAYS.between(this.getStartDate(), now) + 1;
         return days.intValue();
     }
 
     private int getTotalDays() {
-        Long days;
-
-        try {
-            days = (Long) ChronoUnit.DAYS.between(this.getStartDate(), this.getEndDate()) + 1;
-        } catch (ArithmeticException e) {
-            throw new BusinessException("남은 일 수 계산 도중 에러가 발생했습니다.");
-        }
-
+        Long days = (Long) ChronoUnit.DAYS.between(this.getStartDate(), this.getEndDate()) + 1;
         return days.intValue();
     }
 
     public int getRemainDay(LocalDate now) {
-        Long days;
-
-        try {
-            days = (Long) ChronoUnit.DAYS.between(now, this.endDate);
-        } catch (ArithmeticException e) {
-            throw new BusinessException("남은 일 수 계산 도중 에러가 발생했습니다.");
-        }
-
+        Long days = (Long) ChronoUnit.DAYS.between(now, this.endDate);
         return days.intValue();
     }
 
@@ -156,12 +136,14 @@ public class Lesson extends BaseEntity  {
         if(now.isBefore(startDate)) {
             return 0;
         }
-        return (int) Math.floor( (double) getGoalNumber(now) / (double) getTotalNumber() * 100);
+
+        int goalProgressRate = (int) Math.floor( (double) getGoalNumber(now) / (double) getTotalNumber() * 100);
+        return goalProgressRate <= 100 ? goalProgressRate : 100;
     }
 
     public int getWastePrice(LocalDate now) {
         int wastePrice = (int) (price * ((double) (getGoalProgressRate(now) - getCurrentProgressRate()) / (double) 100));
-        return wastePrice >= 0 ? wastePrice : 0;
+        return wastePrice > 0 ? wastePrice : 0;
     }
 
     public LessonStatus getLessonStatus(LocalDate now) {
@@ -183,4 +165,20 @@ public class Lesson extends BaseEntity  {
         return (int) Math.ceil((((double)getPastDays(now)/(double)getTotalDays()) * (double) getTotalNumber()));
     }
 
+    public void updateDate(LocalDate startDate, LocalDate endDate) {
+        if (endDate.isBefore(startDate)) {
+            throw new InvalidParameterException("종료 일자는 시작 일자 이후여야 합니다.");
+        }
+        //TODO 내부적인 정책 필요
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+     public void updateCategory(Category category) {
+        this.category = category;
+     }
+
+     public void updateSite(Site site) {
+        this.site = site;
+     }
 }

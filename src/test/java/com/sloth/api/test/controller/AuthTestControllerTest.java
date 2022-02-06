@@ -1,6 +1,6 @@
 package com.sloth.api.test.controller;
 
-import com.sloth.api.BaseApiController;
+import com.sloth.test.base.BaseApiController;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;

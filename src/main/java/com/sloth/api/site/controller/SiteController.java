@@ -1,6 +1,6 @@
 package com.sloth.api.site.controller;
 
-import com.sloth.api.dto.ApiResult;
+import com.sloth.global.dto.ApiResult;
 import com.sloth.api.site.dto.SiteNameDto;
 import com.sloth.domain.site.Site;
 import com.sloth.domain.site.repository.SiteRepository;
