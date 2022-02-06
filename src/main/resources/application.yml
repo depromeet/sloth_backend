@@ -86,3 +86,17 @@ management:
   endpoint:
     health:
       show-details: always
+
+
+cloud:
+  aws:
+    credentials:
+      accessKey: ENC(+El041BpCTh735W+ojFgPSSHMAmeNGZkHst4xflC8pA=)
+      secretKey: ENC(W4qzI9OVUXkGVNIcX1Vt4tCjVkHdaM7sdti4EXlNt7ltGF/5wSJxITiW9u4cJC2BM8izlm0U9g0=)
+    s3:
+      bucket: ENC(qVZ1X37r0VjzaCUPTLpSbO86d+2BvLKA)
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+
