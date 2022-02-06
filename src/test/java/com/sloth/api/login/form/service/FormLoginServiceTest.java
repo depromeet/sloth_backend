@@ -9,12 +9,14 @@ import com.sloth.creator.MemberCreator;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.memberToken.MemberToken;
+import com.sloth.domain.memberToken.constant.TokenRefreshCritnTime;
 import com.sloth.global.config.auth.TokenProvider;
 import com.sloth.global.config.auth.dto.TokenDto;
 import com.sloth.global.exception.InvalidParameterException;
 import com.sloth.global.exception.NeedEmailConfirmException;
 import com.sloth.global.util.DateTimeUtils;
 import com.sloth.global.util.MailService;
+import org.joda.time.field.FieldUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,6 +29,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.mail.MessagingException;
 import java.time.LocalDateTime;
@@ -46,8 +49,8 @@ class FormLoginServiceTest {
     @Mock private PasswordEncoder passwordEncoder;
     @Mock private MailService mailService;
 
-    @Autowired private TokenProvider tokenProvider;
-    @Autowired private ModelMapper modelMapper;
+    @Mock private TokenProvider tokenProvider;
+    @Spy private ModelMapper modelMapper;
 
     @Test
     @DisplayName("회원 가입")
@@ -103,6 +106,92 @@ class FormLoginServiceTest {
         //then
         assertEquals("이메일 인증을 하지 않은 사용자입니다. 이메일로 보낸 코드를 확인하세요.",
                 needEmailConfirmException.getMessage());
+    }
+
+    @Test
+    @DisplayName("폼 로그인 - 첫 로그인 (토큰 없음)") //TODO 불필요한 mock 처리 체크 필요
+    void login_form_first() {
+        //given
+        FormLoginRequestDto requestDto = new FormLoginRequestDto("email@email.com", "password");
+        final Member stubMember = Mockito.spy(MemberCreator.createEmailPasswordMember(requestDto.getEmail(), "password"));
+        final TokenDto tokenDto = createTokenDto();
+
+        given(memberService.findByEmail(requestDto.getEmail())).willReturn(stubMember);
+        given(passwordEncoder.matches(requestDto.getPassword(), stubMember.getPassword())).willReturn(true);
+        given(stubMember.isEmailConfirm()).willReturn(true);
+        given(stubMember.getMemberToken()).willReturn(null);
+        given(tokenProvider.createTokenDto(stubMember.getEmail())).willReturn(tokenDto);
+
+        //when
+        final ResponseJwtTokenDto response = formLoginService.loginForm(requestDto);
+
+        //then
+        verify(memberService, times(1)).saveRefreshToken(stubMember, tokenDto);
+        assertEquals(modelMapper.map(tokenDto, ResponseJwtTokenDto.class), response);
+    }
+
+    @Test
+    @DisplayName("폼 로그인 - 로그인 (토큰 만료 전)")
+    void login_form_is_not_token_expired() { //TODO 불필요한 mock 처리 체크 필요
+        //given
+        FormLoginRequestDto requestDto = new FormLoginRequestDto("email@email.com", "password");
+        final Member stubMember = Mockito.spy(MemberCreator.createEmailPasswordMember(requestDto.getEmail(), "password"));
+        final TokenDto tokenDto = createTokenDto();
+        final LocalDateTime tokenExpirationTime = DateTimeUtils.convertToLocalDateTime(
+                DateTimeUtils.createDate(2020, 1, 1));
+        final MemberToken memberToken = Mockito.spy(MemberToken.createMemberToken(stubMember, "abcabcabc", tokenExpirationTime));
+
+        given(memberService.findByEmail(requestDto.getEmail())).willReturn(stubMember);
+        given(passwordEncoder.matches(requestDto.getPassword(), stubMember.getPassword())).willReturn(true);
+        given(stubMember.isEmailConfirm()).willReturn(true);
+        given(stubMember.getMemberToken()).willReturn(memberToken);
+        given(tokenProvider.createTokenDto(stubMember.getEmail())).willReturn(tokenDto);
+        given(tokenProvider.isTokenExpired(memberToken.getTokenExpirationTime())).willReturn(false);
+
+        //when
+        final ResponseJwtTokenDto response = formLoginService.loginForm(requestDto);
+
+        //then
+        verify(memberToken, times(1)).updateRefreshTokenExpireTime(any(), eq(TokenRefreshCritnTime.HOURS_72));
+        assertEquals(modelMapper.map(tokenDto, ResponseJwtTokenDto.class), response);
+        assertEquals(memberToken.getRefreshToken(), response.getRefreshToken());
+    }
+
+    @Test
+    @DisplayName("폼 로그인 - 로그인 (토큰 만료)")
+    void login_form_is_token_expired() { //TODO 불필요한 mock 처리 체크 필요
+        //given
+        FormLoginRequestDto requestDto = new FormLoginRequestDto("email@email.com", "password");
+        final Member stubMember = Mockito.spy(MemberCreator.createEmailPasswordMember(requestDto.getEmail(), "password"));
+        final TokenDto tokenDto = createTokenDto();
+        final LocalDateTime tokenExpirationTime = DateTimeUtils.convertToLocalDateTime(
+                DateTimeUtils.createDate(2020, 1, 1));
+        final MemberToken memberToken = Mockito.spy(MemberToken.createMemberToken(stubMember, "abcabcabc", tokenExpirationTime));
+
+        given(memberService.findByEmail(requestDto.getEmail())).willReturn(stubMember);
+        given(passwordEncoder.matches(requestDto.getPassword(), stubMember.getPassword())).willReturn(true);
+        given(stubMember.isEmailConfirm()).willReturn(true);
+        given(stubMember.getMemberToken()).willReturn(memberToken);
+        given(tokenProvider.createTokenDto(stubMember.getEmail())).willReturn(tokenDto);
+        given(tokenProvider.isTokenExpired(memberToken.getTokenExpirationTime())).willReturn(true);
+
+        //when
+        final ResponseJwtTokenDto response = formLoginService.loginForm(requestDto);
+
+        //then
+        verify(memberService, times(1)).saveRefreshToken(stubMember, tokenDto);
+        assertEquals(modelMapper.map(tokenDto, ResponseJwtTokenDto.class), response);
+        assertEquals(memberToken.getRefreshToken(), response.getRefreshToken());
+    }
+
+    private TokenDto createTokenDto() {
+        return TokenDto.builder()
+                .grantType("bearer")
+                .accessToken("abcabc")
+                .accessTokenExpireTime(DateTimeUtils.createDate(2020,1,1))
+                .refreshToken("abcabcabc")
+                .refreshTokenExpireTime(DateTimeUtils.createDate(2020,1,1))
+                .build();
     }
 
     @Test
