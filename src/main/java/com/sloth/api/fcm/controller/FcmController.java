@@ -30,7 +30,7 @@ public class FcmController {
                 requestDTO.getTargetToken(),
                 requestDTO.getTitle(),
                 requestDTO.getBody());
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("success");
     }
 
 }

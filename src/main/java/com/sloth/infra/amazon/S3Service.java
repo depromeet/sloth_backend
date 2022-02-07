@@ -1,4 +1,4 @@
-package com.sloth.api.fcm.service;
+package com.sloth.infra.amazon;
 
 
 import com.amazonaws.services.s3.AmazonS3Client;
