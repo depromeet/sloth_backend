@@ -233,6 +233,7 @@ public class LessonControllerTest  {
         request.setCategoryId(category.getCategoryId());
         request.setSiteId(site.getSiteId());
         request.setTotalNumber(20);
+        request.setPrice(100000);
 
         //when
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.patch("/api/lesson/" + lesson.getLessonId())
@@ -245,6 +246,7 @@ public class LessonControllerTest  {
 
         //then
         HashMap resultMap = TestUtil.convert(mvcResult);
+        assertEquals(request.getPrice(), resultMap.get("price"));
         assertEquals(request.getLessonName(), resultMap.get("lessonName"));
     }
 

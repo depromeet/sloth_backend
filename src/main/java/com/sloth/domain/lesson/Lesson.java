@@ -12,6 +12,7 @@ import org.hibernate.envers.Audited;
 import org.hibernate.envers.RelationTargetAuditMode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -154,10 +155,11 @@ public class Lesson extends BaseEntity  {
         return LessonStatus.PAST;
     }
 
-    public void updateLesson(String lessonName, Integer totalNumber, Category category, Site site) {
+    public void updateLesson(String lessonName, Integer totalNumber, int price, Category category, Site site) {
         this.lessonName = lessonName;
         this.totalNumber = totalNumber;
         this.category = category;
+        this.price = price;
         this.site = site;
     }
 

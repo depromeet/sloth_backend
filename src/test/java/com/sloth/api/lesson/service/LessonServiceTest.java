@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 class LessonServiceTest extends BaseServiceTest {
 
@@ -76,7 +77,7 @@ class LessonServiceTest extends BaseServiceTest {
 
         // given
         Optional<Lesson> optionalLesson = Optional.of(lesson);
-        BDDMockito.when(lessonRepository.findWithSiteCategoryMemberByLessonId(lesson.getLessonId())).thenReturn(optionalLesson);
+        when(lessonRepository.findWithSiteCategoryMemberByLessonId(lesson.getLessonId())).thenReturn(optionalLesson);
 
         // when
         Lesson result = lessonService.findLessonWithSiteCategory(member, lesson.getLessonId());
@@ -92,7 +93,7 @@ class LessonServiceTest extends BaseServiceTest {
     void findLessonWithSiteCategoryTest2() {
 
         // given
-        BDDMockito.when(lessonRepository.findWithSiteCategoryMemberByLessonId(lesson.getLessonId()))
+        when(lessonRepository.findWithSiteCategoryMemberByLessonId(lesson.getLessonId()))
                 .thenReturn(Optional.<Lesson>empty());
 
         // when && then
@@ -109,7 +110,7 @@ class LessonServiceTest extends BaseServiceTest {
         // given
         Member member2 = MemberCreator.createMember(3L, "test2@test.com");
         Optional<Lesson> optionalLesson = Optional.of(lesson);
-        BDDMockito.when(lessonRepository.findWithSiteCategoryMemberByLessonId(lesson.getLessonId())).thenReturn(optionalLesson);
+        when(lessonRepository.findWithSiteCategoryMemberByLessonId(lesson.getLessonId())).thenReturn(optionalLesson);
 
 
         // when && then
@@ -148,15 +149,15 @@ class LessonServiceTest extends BaseServiceTest {
         request.setCategoryId(category.getCategoryId());
 
         Optional<Lesson> optionalLesson = Optional.of(this.lesson);
-        BDDMockito.when(lessonRepository.findWithMemberByLessonId(this.lesson.getLessonId()))
+        when(lessonRepository.findWithMemberByLessonId(this.lesson.getLessonId()))
                 .thenReturn(optionalLesson);
 
         Optional<Site> optionalSite = Optional.of(this.site);
-        BDDMockito.when(siteRepository.findById(request.getSiteId()))
+        when(siteRepository.findById(request.getSiteId()))
                 .thenReturn(optionalSite);
 
         Optional<Category> optionalCategory = Optional.of(this.category);
-        BDDMockito.when( categoryRepository.findById(request.getCategoryId()))
+        when( categoryRepository.findById(request.getCategoryId()))
                 .thenReturn(optionalCategory);
 
         // when
@@ -185,15 +186,15 @@ class LessonServiceTest extends BaseServiceTest {
         requestDto.setEndDate(endDate);
 
         Optional<Site> optionalSite = Optional.of(this.site);
-        BDDMockito.when(siteRepository.findById(requestDto.getSiteId()))
+        when(siteRepository.findById(requestDto.getSiteId()))
                 .thenReturn(optionalSite);
 
         Optional<Category> optionalCategory = Optional.of(this.category);
-        BDDMockito.when(categoryRepository.findById(requestDto.getCategoryId()))
+        when(categoryRepository.findById(requestDto.getCategoryId()))
                 .thenReturn(optionalCategory);
 
         Lesson requestLesson = requestDto.toEntity(member);
-        BDDMockito.when(lessonRepository.save(requestLesson)).thenReturn(lesson);
+        when(lessonRepository.save(requestLesson)).thenReturn(lesson);
 
         // when
         Long lessonId = lessonService.saveLesson(requestLesson, requestDto.getSiteId(), requestDto.getCategoryId());

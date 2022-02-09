@@ -116,6 +116,7 @@ public class LessonController {
                 .totalNumber(updatedLesson.getTotalNumber())
                 .siteId(updatedLesson.getSite().getSiteId())
                 .categoryId(updatedLesson.getCategory().getCategoryId())
+                .price(updatedLesson.getPrice())
                 .build();
 
         log.info("response : {}", responseLessonUpdateDto.toString());

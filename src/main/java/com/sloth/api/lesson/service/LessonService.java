@@ -11,6 +11,7 @@ import com.sloth.domain.site.Site;
 import com.sloth.domain.site.repository.SiteRepository;
 import com.sloth.global.exception.BusinessException;
 import com.sloth.global.exception.ForbiddenException;
+import com.sloth.global.exception.InvalidParameterException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -92,7 +93,11 @@ public class LessonService {
         Category category = categoryRepository.findById(request.getCategoryId())
                 .orElseThrow( () -> new BusinessException("카테고리가 존재하지 않습니다."));
 
-        lesson.updateLesson(request.getLessonName(), request.getTotalNumber(), category, site);
+        if (request.getPrice() < 0) {
+            throw new InvalidParameterException("강의 금액은 0원보다 적을 수 없습니다.");
+        }
+
+        lesson.updateLesson(request.getLessonName(), request.getTotalNumber(),request.getPrice(), category, site);
 
         return lesson;
     }
