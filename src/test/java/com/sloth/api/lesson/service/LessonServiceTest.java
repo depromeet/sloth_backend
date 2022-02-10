@@ -2,6 +2,7 @@ package com.sloth.api.lesson.service;
 
 import com.sloth.api.lesson.dto.LessonCreateDto;
 import com.sloth.api.lesson.dto.LessonUpdateDto;
+import com.sloth.api.login.form.dto.FormLoginRequestDto;
 import com.sloth.creator.CategoryCreator;
 import com.sloth.creator.LessonCreator;
 import com.sloth.creator.MemberCreator;
@@ -16,7 +17,11 @@ import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.nickname.service.NicknameService;
 import com.sloth.domain.site.Site;
 import com.sloth.domain.site.repository.SiteRepository;
+import com.sloth.global.exception.BusinessException;
 import com.sloth.global.exception.ForbiddenException;
+import com.sloth.global.exception.NeedEmailConfirmException;
+import com.sloth.global.exception.handler.GlobalExceptionHandler;
+import com.sloth.global.util.DateTimeUtils;
 import com.sloth.test.base.BaseServiceTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,15 +32,22 @@ import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import org.mockito.Mockito;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 class LessonServiceTest extends BaseServiceTest {
 
@@ -67,8 +79,8 @@ class LessonServiceTest extends BaseServiceTest {
         member = MemberCreator.createMember(2L, "test@test.com");
         site = SiteCreator.create(3L, "인프런");
         category = CategoryCreator.createStubCategory(1, "test", "test");
-        lesson = LessonCreator.createLesson(1L, "스프링부트 강의", startDate, endDate, category
-                , site, 15, 30, member);
+        lesson = Mockito.spy(LessonCreator.createLesson(1L, "스프링부트 강의", startDate, endDate, category
+                , site, 15, 30, member));
     }
 
     @Test
@@ -83,9 +95,9 @@ class LessonServiceTest extends BaseServiceTest {
         Lesson result = lessonService.findLessonWithSiteCategory(member, lesson.getLessonId());
 
         // then
+        verify(optionalLesson.get(), times(1)).verifyOwner(member);
         Assertions.assertThat(result).isNotNull();
         Assertions.assertThat(result.getLessonId()).isEqualTo(lesson.getLessonId());
-
     }
 
     @Test
@@ -100,23 +112,6 @@ class LessonServiceTest extends BaseServiceTest {
         Assertions.assertThatThrownBy(() -> {
             lessonService.findLessonWithSiteCategory(member, lesson.getLessonId());
         }).isInstanceOf(LessonNotFoundException.class).hasMessageContaining("해당하는 강의를 찾을 수 없습니다.");
-
-    }
-
-    @Test
-    @DisplayName("강의 조회 테스트 - 해당 강의 소유주아닐 경우 테스트")
-    void findLessonWithSiteCategoryTest3() {
-
-        // given
-        Member member2 = MemberCreator.createMember(3L, "test2@test.com");
-        Optional<Lesson> optionalLesson = Optional.of(lesson);
-        when(lessonRepository.findWithSiteCategoryMemberByLessonId(lesson.getLessonId())).thenReturn(optionalLesson);
-
-
-        // when && then
-        Assertions.assertThatThrownBy(() -> {
-            lessonService.findLessonWithSiteCategory(member2, lesson.getLessonId());
-        }).isInstanceOf(ForbiddenException.class).hasMessageContaining("해당 강의에 대한 권한이 없습니다.");
 
     }
 
@@ -167,40 +162,138 @@ class LessonServiceTest extends BaseServiceTest {
         Assertions.assertThat(result.getTotalNumber()).isEqualTo(request.getTotalNumber());
     }
 
+   @Test
+   @DisplayName("강의 등록_없는_사이트")
+   void save_lesson_unavailable_site() {
+        //given
+        Long requestSiteId = 1L;
+       given(siteRepository.findById(requestSiteId)).willReturn(Optional.empty());
+
+        //when
+       final BusinessException businessException = assertThrows(BusinessException.class, () -> {
+           lessonService.saveLesson(lesson, requestSiteId, 2L);
+       });
+
+       assertEquals("사이트가 존재하지 않습니다.", businessException.getMessage());
+   }
+
     @Test
-    @DisplayName("강의 생성 테스트")
-    void saveLessonTest() {
+    @DisplayName("강의 등록_없는_카테고리")
+    void save_lesson_unavailable_category() {
+        //given
+        Long requestSiteId = 1L;
+        Long requestCategoryId = 2L;
+        given(siteRepository.findById(requestSiteId)).willReturn(Optional.of(site));
+        given(categoryRepository.findById(requestCategoryId)).willReturn(Optional.empty());
 
-        // given
-        LocalDate startDate = LocalDate.of(2021,10,1);
-        LocalDate endDate = LocalDate.of(2021, 10, 31);
-        LessonCreateDto.Request requestDto = new LessonCreateDto.Request();
-        requestDto.setLessonName("스프링부트 강의");
-        requestDto.setCategoryId(site.getSiteId());
-        requestDto.setSiteId(category.getCategoryId());
-        requestDto.setTotalNumber(100);
-        requestDto.setMessage("");
-        requestDto.setPrice(10000);
-        requestDto.setAlertDays("");
-        requestDto.setStartDate(startDate);
-        requestDto.setEndDate(endDate);
+        //when
+        final BusinessException businessException = assertThrows(BusinessException.class, () -> {
+            lessonService.saveLesson(lesson, requestSiteId, requestCategoryId);
+        });
 
-        Optional<Site> optionalSite = Optional.of(this.site);
-        when(siteRepository.findById(requestDto.getSiteId()))
-                .thenReturn(optionalSite);
+        assertEquals("카테고리가 존재하지 않습니다.", businessException.getMessage());
+    }
 
-        Optional<Category> optionalCategory = Optional.of(this.category);
-        when(categoryRepository.findById(requestDto.getCategoryId()))
-                .thenReturn(optionalCategory);
+    @Test
+    @DisplayName("강의 등록")
+    void save_lesson() {
+        //given
+        Long requestSiteId = 1L;
+        Long requestCategoryId = 2L;
+        given(siteRepository.findById(requestSiteId)).willReturn(Optional.of(site));
+        given(categoryRepository.findById(requestCategoryId)).willReturn(Optional.of(category));
+        given(lessonRepository.save(lesson)).willReturn(lesson);
+        doNothing().when(lesson).updateSite(site);
+        doNothing().when(lesson).updateCategory(category);
 
-        Lesson requestLesson = requestDto.toEntity(member);
-        when(lessonRepository.save(requestLesson)).thenReturn(lesson);
+        //when
+        final Long savedLessonId = lessonService.saveLesson(lesson, requestSiteId, requestCategoryId);
 
-        // when
-        Long lessonId = lessonService.saveLesson(requestLesson, requestDto.getSiteId(), requestDto.getCategoryId());
+        //then
+        verify(lesson, times(1)).updateSite(site);
+        verify(lesson).updateCategory(category);
+        assertEquals(lesson.getLessonId(), savedLessonId);
+    }
 
-        // then
-        Assertions.assertThat(lessonId).isEqualTo(lesson.getLessonId());
+    @Test
+    @DisplayName("수강한 강의 수 업데이트 - 없는 강의 id")
+    void update_present_number_not_found_lesson() {
+        //given
+        Long requestLessonId = 1L;
+        final String message = "해당하는 강의를 찾을 수 없습니다.";
+        given(lessonRepository.findWithMemberByLessonId(requestLessonId)).willReturn(Optional.empty());
+
+        //when
+        final LessonNotFoundException lessonNotFoundException = assertThrows(LessonNotFoundException.class, () -> {
+            lessonService.updatePresentNumber(member, requestLessonId, 10);
+        });
+
+        assertEquals(message, lessonNotFoundException.getMessage());
+    }
+
+    @Test
+    @DisplayName("수강한 강의 수 업데이트")
+    void update_present_number() {
+        //given
+        Long requestLessonId = 1L;
+        final int count = 10;
+        given(lessonRepository.findWithMemberByLessonId(requestLessonId)).willReturn(Optional.of(lesson));
+        doNothing().when(lesson).verifyOwner(member);
+        doNothing().when(lesson).updatePresentNumber(count);
+
+        //when
+        final Lesson updatedLesson = lessonService.updatePresentNumber(member, requestLessonId, count);
+
+        //then
+        verify(lesson, times(1)).verifyOwner(member);
+        verify(lesson, times(1)).updatePresentNumber(count);
+        assertEquals(lesson.getLessonId(), updatedLesson.getLessonId());
+    }
+
+    @Test
+    @DisplayName("현재 진행중인 강의 리스트 조회")
+    void get_doing_lessons() {
+        //given
+        List<Lesson> lessons = new ArrayList<>();
+        given(lessonRepository.getDoingLessonsDetail(member.getMemberId())).willReturn(lessons);
+
+        //when
+        final List<Lesson> doingLessons = lessonService.getDoingLessons(member);
+
+        //then
+        assertEquals(lessons, doingLessons);
+        verify(lessonRepository).getDoingLessonsDetail(member.getMemberId());
+    }
+
+    @Test
+    @DisplayName("모든 강의 리스트 조회")
+    void get_lessons() {
+        //given
+        List<Lesson> lessons = new ArrayList<>();
+        given(lessonRepository.getLessons(member.getMemberId())).willReturn(lessons);
+
+        //when
+        final List<Lesson> doingLessons = lessonService.getLessons(member);
+
+        //then
+        assertEquals(lessons, doingLessons);
+        verify(lessonRepository).getLessons(member.getMemberId());
+    }
+
+    @Test
+    @DisplayName("강의 삭제")
+    void delete_lesson() {
+        //given
+        Long requestLessonId = 1L;
+        given(lessonRepository.findById(requestLessonId)).willReturn(Optional.of(lesson));
+        doNothing().when(lessonRepository).delete(lesson);
+
+        //when
+        lessonService.deleteLesson(member, requestLessonId);
+
+        //then
+        verify(lesson).verifyOwner(member);
+        verify(lessonRepository).delete(lesson);
     }
 
 }

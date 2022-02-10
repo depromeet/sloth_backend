@@ -36,19 +36,15 @@ public class LessonService {
         Lesson lesson = lessonRepository.findWithSiteCategoryMemberByLessonId(lessonId).orElseThrow(() -> {
             throw new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다.");
         });
-        checkAuthority(member, lesson);
+        lesson.verifyOwner(member);
         return lesson;
     }
 
     public Lesson updatePresentNumber(Member member, Long lessonId, int count) {
-        Lesson lesson = findLessonWithMember(lessonId);
-        checkAuthority(member, lesson);
+        Lesson lesson = lessonRepository.findWithMemberByLessonId(lessonId).orElseThrow(() -> new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다."));;
+        lesson.verifyOwner(member);
         lesson.updatePresentNumber(count);
         return lesson;
-    }
-
-    private Lesson findLessonWithMember(Long lessonId) {
-        return lessonRepository.findWithMemberByLessonId(lessonId).orElseThrow(() -> new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다."));
     }
 
     public Long saveLesson(Lesson lesson, Long siteId, Long categoryId) {
@@ -85,7 +81,7 @@ public class LessonService {
         Lesson lesson = lessonRepository.findWithMemberByLessonId(lessonId)
                 .orElseThrow(() -> new BusinessException("해당 강의가 존재하지 않습니다."));
 
-        checkAuthority(member, lesson);
+        lesson.verifyOwner(member);
 
         Site site = siteRepository.findById(request.getSiteId())
                 .orElseThrow( () -> new BusinessException("사이트가 존재하지 않습니다."));
@@ -102,20 +98,11 @@ public class LessonService {
         return lesson;
     }
 
-
-    private void checkAuthority(Member member, Lesson lesson) {
-        if (!StringUtils.equals(lesson.getMember().getMemberId(), member.getMemberId())) {
-            throw new ForbiddenException("해당 강의에 대한 권한이 없습니다.");
-        }
-    }
-
     public void deleteLesson(Member member, Long lessonId) {
         Lesson lesson = lessonRepository.findById(lessonId)
                 .orElseThrow(() -> new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다."));
 
-        if(lesson.getMember().getMemberId() != member.getMemberId()) {
-            throw new BusinessException("회원 아이디와 강의 소유주가 다릅니다.");
-        }
+        lesson.verifyOwner(member);
 
         lessonRepository.delete(lesson);
     }

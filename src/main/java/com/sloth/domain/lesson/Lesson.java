@@ -5,11 +5,13 @@ import com.sloth.domain.common.BaseEntity;
 import com.sloth.domain.lesson.constant.LessonStatus;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.site.Site;
+import com.sloth.global.exception.ForbiddenException;
 import com.sloth.global.exception.InvalidParameterException;
 import lombok.*;
 import org.hibernate.envers.AuditOverride;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.RelationTargetAuditMode;
+import org.thymeleaf.util.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -86,6 +88,11 @@ public class Lesson extends BaseEntity  {
         connectMember(member);
     }
 
+    public void verifyOwner(Member member) {
+        if (!StringUtils.equals(this.getMember().getMemberId(), member.getMemberId())) {
+            throw new ForbiddenException("이 강의에 대한 권한이 없습니다.");
+        }
+    }
     private void connectMember(Member member) {
         this.member = member;
         if(member != null) {
