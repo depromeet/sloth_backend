@@ -52,13 +52,7 @@ public class FormLoginService {
     public ResponseJwtTokenDto loginForm(FormLoginRequestDto formLoginRequestDto) {
         Member member = memberService.findByEmail(formLoginRequestDto.getEmail());
 
-        if(!passwordEncoder.matches(formLoginRequestDto.getPassword(), member.getPassword())) {
-            throw new InvalidParameterException("비밀번호를 확인해주세요.");
-        }
-
-        if (!member.isEmailConfirm()) {
-            throw new NeedEmailConfirmException("이메일 인증을 하지 않은 사용자입니다. 이메일로 보낸 코드를 확인하세요.");
-        }
+        verifyMember(formLoginRequestDto, member);
 
         MemberToken memberToken = member.getMemberToken();
         TokenDto tokenDto = tokenProvider.createTokenDto(formLoginRequestDto.getEmail());
@@ -77,6 +71,16 @@ public class FormLoginService {
         }
 
         return modelMapper.map(tokenDto, ResponseJwtTokenDto.class);
+    }
+
+    public void verifyMember(FormLoginRequestDto formLoginRequestDto, Member member) {
+        if(!passwordEncoder.matches(formLoginRequestDto.getPassword(), member.getPassword())) {
+            throw new InvalidParameterException("비밀번호를 확인해주세요.");
+        }
+
+        if (!member.isEmailConfirm()) {
+            throw new NeedEmailConfirmException("이메일 인증을 하지 않은 사용자입니다. 이메일로 보낸 코드를 확인하세요.");
+        }
     }
 
     public void sendConfirmEmail(Member member) throws MessagingException {

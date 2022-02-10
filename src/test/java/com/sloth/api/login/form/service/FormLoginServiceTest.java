@@ -42,6 +42,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class FormLoginServiceTest {
 
+    @Spy
     @InjectMocks
     FormLoginService formLoginService;
 
@@ -69,18 +70,17 @@ class FormLoginServiceTest {
     }
 
     @Test
-    @DisplayName("폼 로그인 - 비밀번호 불일치")
-    void login_form_not_match_password() {
+    @DisplayName("멤버 인증 - 비밀번호 불일치")
+    void verify_member_not_match_password() {
         //given
         FormLoginRequestDto requestDto = new FormLoginRequestDto("email@email.com", "wrongPassword");
         final Member stubMember = MemberCreator.createEmailPasswordMember(requestDto.getEmail(), "password");
 
-        given(memberService.findByEmail(requestDto.getEmail())).willReturn(stubMember);
         given(passwordEncoder.matches(requestDto.getPassword(), stubMember.getPassword())).willReturn(false);
 
         //when
         final InvalidParameterException invalidParameterException = assertThrows(InvalidParameterException.class, () -> {
-            formLoginService.loginForm(requestDto);
+            formLoginService.verifyMember(requestDto, stubMember);
         });
 
         //then
@@ -88,19 +88,18 @@ class FormLoginServiceTest {
     }
 
     @Test
-    @DisplayName("폼 로그인 - 이메일 인증 미완료")
-    void login_form_need_email_confirm() {
+    @DisplayName("멤버 인증 - 이메일 인증 미완료")
+    void verify_member_need_email_confirm() {
         //given
         FormLoginRequestDto requestDto = new FormLoginRequestDto("email@email.com", "password");
         final Member stubMember = Mockito.spy(MemberCreator.createEmailPasswordMember(requestDto.getEmail(), "password"));
 
-        given(memberService.findByEmail(requestDto.getEmail())).willReturn(stubMember);
         given(passwordEncoder.matches(requestDto.getPassword(), stubMember.getPassword())).willReturn(true);
         given(stubMember.isEmailConfirm()).willReturn(false);
 
         //when
         final NeedEmailConfirmException needEmailConfirmException = assertThrows(NeedEmailConfirmException.class, () -> {
-            formLoginService.loginForm(requestDto);
+            formLoginService.verifyMember(requestDto, stubMember);
         });
 
         //then
@@ -117,16 +116,16 @@ class FormLoginServiceTest {
         final TokenDto tokenDto = createTokenDto();
 
         given(memberService.findByEmail(requestDto.getEmail())).willReturn(stubMember);
-        given(passwordEncoder.matches(requestDto.getPassword(), stubMember.getPassword())).willReturn(true);
-        given(stubMember.isEmailConfirm()).willReturn(true);
         given(stubMember.getMemberToken()).willReturn(null);
         given(tokenProvider.createTokenDto(stubMember.getEmail())).willReturn(tokenDto);
+        doNothing().when(formLoginService).verifyMember(requestDto, stubMember);
 
         //when
         final ResponseJwtTokenDto response = formLoginService.loginForm(requestDto);
 
         //then
         verify(memberService, times(1)).saveRefreshToken(stubMember, tokenDto);
+        verify(formLoginService, times(1)).verifyMember(requestDto, stubMember);
         assertEquals(modelMapper.map(tokenDto, ResponseJwtTokenDto.class), response);
     }
 

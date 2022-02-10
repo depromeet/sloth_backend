@@ -94,8 +94,8 @@ management:
 cloud:
   aws:
     credentials:
-      accessKey: ENC(XHZ23sY+IHsITc+pQym2tCrULlV75a/XGHEk4cyBFAB1OHQZGlyLZWE/XSo5bp7z)
-      secretKey: ENC(H9f2a1oBaE4dM2c9ftsSCo6vM9xWlCE/nXqJNAnw6odsepl1fQvpkCgoJ2IbZvMxhI5B2XB9pRechMplc1dNEQ==)
+      access-key: ENC(XHZ23sY+IHsITc+pQym2tCrULlV75a/XGHEk4cyBFAB1OHQZGlyLZWE/XSo5bp7z)
+      secret-key: ENC(H9f2a1oBaE4dM2c9ftsSCo6vM9xWlCE/nXqJNAnw6odsepl1fQvpkCgoJ2IbZvMxhI5B2XB9pRechMplc1dNEQ==)
     s3:
       bucket: ENC(Tebv8rycP1iyS5ZNEl+yaJBRIozrHTjfMiegdv40bmk=)
     region:
