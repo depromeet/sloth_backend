@@ -64,9 +64,11 @@ public class ApiMemberControllerTest extends NewBaseApiController {
         // given
         MemberUpdateDto.Request request = new MemberUpdateDto.Request();
         request.setMemberName("회원 정보 수정");
+        request.setAlarmState(false);
 
         Member updateMember = MemberCreator.createStubMember(testEmail);
         updateMember.updateMemberName(request.getMemberName());
+        updateMember.updateAlarmState(request.getAlarmState());
 
         given(apiMemberService.updateMemberInfo(member.getEmail(), request)).willReturn(updateMember);
 
@@ -80,6 +82,8 @@ public class ApiMemberControllerTest extends NewBaseApiController {
         // then
         result.andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(jsonPath("$.memberName", is(request.getMemberName())));
+        result.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$.alarmState", is(request.getAlarmState())));
     }
 
     @Test
