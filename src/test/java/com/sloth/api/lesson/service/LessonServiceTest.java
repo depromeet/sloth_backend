@@ -14,6 +14,7 @@ import com.sloth.domain.lesson.exception.LessonNotFoundException;
 import com.sloth.domain.lesson.repository.LessonRepository;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.repository.MemberRepository;
+import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.nickname.service.NicknameService;
 import com.sloth.domain.site.Site;
 import com.sloth.domain.site.repository.SiteRepository;
@@ -66,6 +67,9 @@ class LessonServiceTest extends BaseServiceTest {
     @Mock
     CategoryRepository categoryRepository;
 
+    @Mock
+    MemberService memberService;
+
     Lesson lesson;
     Member member;
     Site site;
@@ -90,9 +94,10 @@ class LessonServiceTest extends BaseServiceTest {
         // given
         Optional<Lesson> optionalLesson = Optional.of(lesson);
         when(lessonRepository.findWithSiteCategoryMemberByLessonId(lesson.getLessonId())).thenReturn(optionalLesson);
+        when(memberService.findByEmail(member.getEmail())).thenReturn(member);
 
         // when
-        Lesson result = lessonService.findLessonWithSiteCategory(member, lesson.getLessonId());
+        Lesson result = lessonService.findLessonWithSiteCategory(member.getEmail(), lesson.getLessonId());
 
         // then
         verify(optionalLesson.get(), times(1)).verifyOwner(member);
@@ -109,8 +114,9 @@ class LessonServiceTest extends BaseServiceTest {
                 .thenReturn(Optional.<Lesson>empty());
 
         // when && then
+        when(memberService.findByEmail(member.getEmail())).thenReturn(member);
         Assertions.assertThatThrownBy(() -> {
-            lessonService.findLessonWithSiteCategory(member, lesson.getLessonId());
+            lessonService.findLessonWithSiteCategory(member.getEmail(), lesson.getLessonId());
         }).isInstanceOf(LessonNotFoundException.class).hasMessageContaining("해당하는 강의를 찾을 수 없습니다.");
 
     }
@@ -155,8 +161,10 @@ class LessonServiceTest extends BaseServiceTest {
         when( categoryRepository.findById(request.getCategoryId()))
                 .thenReturn(optionalCategory);
 
+        when(memberService.findByEmail(member.getEmail())).thenReturn(member);
+
         // when
-        Lesson result = lessonService.updateLesson(member, request, this.lesson.getLessonId());
+        Lesson result = lessonService.updateLesson(member.getEmail(), request, this.lesson.getLessonId());
 
         // then
         Assertions.assertThat(result.getTotalNumber()).isEqualTo(request.getTotalNumber());
@@ -225,7 +233,7 @@ class LessonServiceTest extends BaseServiceTest {
 
         //when
         final LessonNotFoundException lessonNotFoundException = assertThrows(LessonNotFoundException.class, () -> {
-            lessonService.updatePresentNumber(member, requestLessonId, 10);
+            lessonService.updatePresentNumber(member.getEmail(), requestLessonId, 10);
         });
 
         assertEquals(message, lessonNotFoundException.getMessage());
@@ -238,11 +246,13 @@ class LessonServiceTest extends BaseServiceTest {
         Long requestLessonId = 1L;
         final int count = 10;
         given(lessonRepository.findWithMemberByLessonId(requestLessonId)).willReturn(Optional.of(lesson));
+        given(memberService.findByEmail(member.getEmail())).willReturn(member);
+
         doNothing().when(lesson).verifyOwner(member);
         doNothing().when(lesson).updatePresentNumber(count);
 
         //when
-        final Lesson updatedLesson = lessonService.updatePresentNumber(member, requestLessonId, count);
+        final Lesson updatedLesson = lessonService.updatePresentNumber(member.getEmail(), requestLessonId, count);
 
         //then
         verify(lesson, times(1)).verifyOwner(member);
@@ -256,9 +266,10 @@ class LessonServiceTest extends BaseServiceTest {
         //given
         List<Lesson> lessons = new ArrayList<>();
         given(lessonRepository.getDoingLessonsDetail(member.getMemberId())).willReturn(lessons);
+        given(memberService.findByEmail(member.getEmail())).willReturn(member);
 
         //when
-        final List<Lesson> doingLessons = lessonService.getDoingLessons(member);
+        final List<Lesson> doingLessons = lessonService.getDoingLessons(member.getEmail());
 
         //then
         assertEquals(lessons, doingLessons);
@@ -271,9 +282,10 @@ class LessonServiceTest extends BaseServiceTest {
         //given
         List<Lesson> lessons = new ArrayList<>();
         given(lessonRepository.getLessons(member.getMemberId())).willReturn(lessons);
+        given(memberService.findByEmail(member.getEmail())).willReturn(member);
 
         //when
-        final List<Lesson> doingLessons = lessonService.getLessons(member);
+        final List<Lesson> doingLessons = lessonService.getLessons(member.getEmail());
 
         //then
         assertEquals(lessons, doingLessons);

@@ -3,10 +3,8 @@ package com.sloth.api.lesson.dto;
 import com.sloth.domain.lesson.Lesson;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 

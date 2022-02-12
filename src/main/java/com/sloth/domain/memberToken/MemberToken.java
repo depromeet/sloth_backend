@@ -63,4 +63,10 @@ public class MemberToken extends BaseEntity {
         }
     }
 
+    public void expireToken(LocalDateTime now) {
+        if(tokenExpirationTime.isAfter(now)) {
+            this.tokenExpirationTime = now;
+        }
+    }
+
 }
