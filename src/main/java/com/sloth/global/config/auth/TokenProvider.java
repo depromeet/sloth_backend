@@ -152,6 +152,25 @@ public class TokenProvider {
         return claims;
     }
 
+    /**
+     * 토큰 파싱 후 email 반환
+     * @param token
+     * @return
+     */
+    public String getEmail(String token) {
+        Claims claims = null;
+
+        try {
+            claims = Jwts.parser().setSigningKey(tokenSecret)  //jwt 만들 때 사용했던 키
+                    .parseClaimsJws(token).getBody()
+            ;
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return claims.getAudience();
+    }
+
     public static String getMemberEmail(String token) {
         String email;
         try {

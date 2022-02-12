@@ -4,9 +4,13 @@ import com.sloth.test.base.BaseApiController;
 import com.sloth.creator.SiteCreator;
 import com.sloth.domain.site.Site;
 import com.sloth.domain.site.repository.SiteRepository;
+import com.sloth.test.base.NewBaseApiController;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
@@ -15,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +29,19 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 
-@WebMvcTest(controllers = SiteController.class)
-public class SiteControllerTest extends BaseApiController {
+public class SiteControllerTest extends NewBaseApiController {
 
-    @MockBean
+    @InjectMocks
+    private SiteController siteController;
+
+    @Mock
     private SiteRepository siteRepository;
+
+    @BeforeEach
+    void beforeEach() {
+        mockMvc = MockMvcBuilders.standaloneSetup(siteController)
+                .build();
+    }
 
     @Test
     @DisplayName("모든 사이트 조회 API 테스트")

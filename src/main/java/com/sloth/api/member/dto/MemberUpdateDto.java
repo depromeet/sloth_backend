@@ -10,6 +10,7 @@ public class MemberUpdateDto {
 
     @Getter @Setter
     @ApiModel(value = "회원 정보(이름) 변경 객체", description = "회원 정보(이름) 변경 객체")
+    @EqualsAndHashCode
     public static class Request {
 
         @ApiModelProperty(value = "회원 이름")
