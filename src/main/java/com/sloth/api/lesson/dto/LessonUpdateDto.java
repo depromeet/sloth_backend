@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 public class LessonUpdateDto {
 
     @Getter @Setter
+    @EqualsAndHashCode
     @ToString
     @ApiModel(value = "강의 업데이트 요청 객체", description = "강의 업데이트 요청 객체")
     public static class Request {

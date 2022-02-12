@@ -63,4 +63,19 @@ public class MemberTokenTest {
 
     }
 
+    @Test
+    @DisplayName("토큰 만료 테스트")
+    public void expireTokenTest() {
+
+        // given
+        LocalDateTime now = LocalDateTime.of(2022,1,1,2,5,0);
+
+        // when
+        memberToken.expireToken(now);
+
+        // then
+        Assertions.assertThat(memberToken.getTokenExpirationTime()).isEqualTo(now);
+
+    }
+
 }
