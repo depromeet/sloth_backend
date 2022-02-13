@@ -93,7 +93,7 @@ create table member_token (
     token varchar(255),
     token_expiration_time timestamp,
     member_id bigint,
-    member_token_type varchar(20),
+    member_token_type varchar(20) not null,
     primary key (member_token_id)
 );
 
@@ -140,6 +140,4 @@ add constraint FKt02uutgl1v2am5mshqqdk1cvd
 foreign key (member_id)
 references member
 ;
-
-
 
