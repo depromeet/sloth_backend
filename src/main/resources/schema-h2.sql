@@ -90,7 +90,7 @@ create table member_token (
     update_time timestamp,
     created_by varchar(255),
     modified_by varchar(255),
-    refresh_token varchar(255),
+    token varchar(255),
     token_expiration_time timestamp,
     member_id bigint,
     member_token_type varchar(20),
