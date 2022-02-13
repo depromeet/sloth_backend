@@ -25,7 +25,7 @@ import java.util.List;
 @Entity
 @Table(name="member")
 @Getter @Setter
-@ToString(exclude = {"memberToken","lessons"})
+@ToString(exclude = {"memberTokens","lessons"})
 @Builder
 @AllArgsConstructor @NoArgsConstructor
 @SQLDelete(sql = "UPDATE member SET is_delete = true WHERE member_id=?")
