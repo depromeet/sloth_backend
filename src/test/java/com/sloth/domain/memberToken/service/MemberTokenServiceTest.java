@@ -3,6 +3,7 @@ package com.sloth.domain.memberToken.service;
 import com.sloth.creator.MemberCreator;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.memberToken.MemberToken;
+import com.sloth.domain.memberToken.constant.MemberTokenType;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;
 import com.sloth.test.base.BaseServiceTest;
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +31,7 @@ class MemberTokenServiceTest extends BaseServiceTest {
         // given
         LocalDateTime tokenExpirationTime = LocalDateTime.of(2022,1,1,3,5,0);
         Member member = MemberCreator.createMember(1L, "test@test.com");
-        MemberToken memberToken = MemberToken.createMemberToken(member, "abcabcabc", tokenExpirationTime);
+        MemberToken memberToken = MemberToken.createMemberToken(member, "abcabcabc", tokenExpirationTime, MemberTokenType.LOGIN_REFRESH);
         BDDMockito.when(memberTokenRepository.findByMemberId(1L)).thenReturn(memberToken);
 
         // when
@@ -38,7 +39,7 @@ class MemberTokenServiceTest extends BaseServiceTest {
 
         // then
         assertThat(resultMemberToken.getMemberTokenId()).isEqualTo(memberToken.getMemberTokenId());
-        assertThat(resultMemberToken.getRefreshToken()).isEqualTo(resultMemberToken.getRefreshToken());
+        assertThat(resultMemberToken.getToken()).isEqualTo(resultMemberToken.getToken());
         assertThat(resultMemberToken.getTokenExpirationTime()).isEqualTo(resultMemberToken.getTokenExpirationTime());
     }
 

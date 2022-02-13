@@ -24,7 +24,7 @@ public class MemberToken extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long memberTokenId;
 
-    private String refreshToken;
+    private String token;
 
     private LocalDateTime tokenExpirationTime;
 
@@ -35,11 +35,12 @@ public class MemberToken extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MemberTokenType memberTokenType;
 
-    public static MemberToken createMemberToken(Member member, String refreshToken, LocalDateTime tokenExpirationTime){
+    public static MemberToken createMemberToken(Member member, String token, LocalDateTime tokenExpirationTime, MemberTokenType memberTokenType){
         MemberToken memberToken = MemberToken.builder()
                 .member(member)
-                .refreshToken(refreshToken)
+                .token(token)
                 .tokenExpirationTime(tokenExpirationTime)
+                .memberTokenType(memberTokenType)
                 .build();
 
         member.updateLoginRefreshToken(memberToken);
@@ -74,6 +75,6 @@ public class MemberToken extends BaseEntity {
     }
 
     public void updateLoginRefreshToken(MemberToken updateRefreshMemberToken) {
-        this.refreshToken = updateRefreshMemberToken.getRefreshToken();
+        this.token = updateRefreshMemberToken.getToken();
     }
 }

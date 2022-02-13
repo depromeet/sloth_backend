@@ -1,9 +1,11 @@
 package com.sloth.api.test.controller;
 
-import com.sloth.test.base.BaseApiController;
+import com.sloth.creator.MemberCreator;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.memberToken.MemberToken;
+import com.sloth.domain.memberToken.constant.MemberTokenType;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;
+import com.sloth.test.base.BaseApiController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,8 +106,8 @@ public class AuthTestControllerTest extends BaseApiController {
         Date refreshTokenExpireTime = tokenProvider.createRefreshTokenExpireTime();
         String refreshToken = tokenProvider.createRefreshToken(email, refreshTokenExpireTime);
 
-        Member member = new Member();
-        MemberToken memberToken = MemberToken.createMemberToken(member, refreshToken, LocalDateTime.now().plusWeeks(2));
+        Member member = MemberCreator.createMember(2L, "test@test.com");
+        MemberToken memberToken = MemberToken.createMemberToken(member, refreshToken, LocalDateTime.now().plusWeeks(2), MemberTokenType.LOGIN_REFRESH);
 
         given(memberTokenRepository.findByRefreshToken(refreshToken))
                 .willReturn(Optional.ofNullable(memberToken));

@@ -170,7 +170,7 @@ class MemberTest {
 
         // then
         MemberToken refreshMemberTokens = testMember.getLoginRefreshToken();
-        assertEquals(updateRefreshMemberToken.getRefreshToken(), refreshMemberTokens.getRefreshToken());
+        assertEquals(updateRefreshMemberToken.getToken(), refreshMemberTokens.getToken());
     }
 
     @Test

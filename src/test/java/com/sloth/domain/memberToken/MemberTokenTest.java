@@ -2,6 +2,7 @@ package com.sloth.domain.memberToken;
 
 import com.sloth.creator.MemberCreator;
 import com.sloth.domain.member.Member;
+import com.sloth.domain.memberToken.constant.MemberTokenType;
 import com.sloth.domain.memberToken.constant.TokenRefreshCritnTime;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,9 +19,9 @@ public class MemberTokenTest {
 
     @BeforeEach
     public void init() {
-        member = MemberCreator.createStubMember("test@test.com");
+        member = MemberCreator.createMember(1L, "test@test.com");
         now = LocalDateTime.of(2022,01,28,0,0);
-        memberToken = MemberToken.createMemberToken(member, "refreshToken", now);
+        memberToken = MemberToken.createMemberToken(member, "refreshToken", now, MemberTokenType.LOGIN_REFRESH);
     }
 
     @Test

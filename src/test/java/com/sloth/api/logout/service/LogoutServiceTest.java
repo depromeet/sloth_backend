@@ -1,10 +1,10 @@
 package com.sloth.api.logout.service;
 
-import com.sloth.api.logout.service.LogoutService;
 import com.sloth.creator.MemberCreator;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.memberToken.MemberToken;
+import com.sloth.domain.memberToken.constant.MemberTokenType;
 import com.sloth.domain.memberToken.service.MemberTokenService;
 import com.sloth.test.base.BaseServiceTest;
 import org.assertj.core.api.Assertions;
@@ -15,7 +15,7 @@ import org.mockito.Mock;
 
 import java.time.LocalDateTime;
 
-import static org.mockito.BDDMockito.*;
+import static org.mockito.BDDMockito.when;
 
 class LogoutServiceTest extends BaseServiceTest {
 
@@ -36,7 +36,7 @@ class LogoutServiceTest extends BaseServiceTest {
         String email = "test@test.com";
         LocalDateTime tokenExpirationTime = LocalDateTime.of(2022,1,1,3,5,0);
         Member member = MemberCreator.createMember(1L, email);
-        MemberToken memberToken = MemberToken.createMemberToken(member, "abcabcabc", tokenExpirationTime);
+        MemberToken memberToken = MemberToken.createMemberToken(member, "abcabcabc", tokenExpirationTime, MemberTokenType.LOGIN_REFRESH);
         when(memberService.findByEmail(email)).thenReturn(member);
         when(memberTokenService.findMemberTokenByMemberId(member.getMemberId())).thenReturn(memberToken);
 

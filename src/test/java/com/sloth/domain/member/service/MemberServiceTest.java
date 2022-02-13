@@ -15,7 +15,6 @@ import com.sloth.test.base.BaseServiceTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -200,7 +199,7 @@ class MemberServiceTest extends BaseServiceTest {
     void saveMemberTest() {
         //given
         String email = "email@email.com";
-        Member stubMember = MemberCreator.createStubMember(email);
+        Member stubMember = MemberCreator.createMember(1L, email);
         Date expireTime = new Date(Long.parseLong("99999999999"));
         TokenDto tokenDto = new TokenDto("grantType", "access", expireTime, "refresh", expireTime);
         given(memberRepository.save(stubMember)).willReturn(stubMember);
