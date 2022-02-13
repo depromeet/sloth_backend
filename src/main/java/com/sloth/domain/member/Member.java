@@ -10,6 +10,7 @@ import com.sloth.domain.member.constant.Role;
 import com.sloth.domain.member.dto.MemberFormDto;
 import com.sloth.domain.memberToken.MemberToken;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -74,6 +75,10 @@ public class Member extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private MemberToken memberToken;
+
+    @ColumnDefault("true")
+    @Column
+    private Boolean alarmState = true;
 
 
     public static Member createAdmin(MemberFormDto formRequestDto) {
@@ -141,5 +146,9 @@ public class Member extends BaseEntity {
     public boolean canCreateEmailConfirmCode(LocalDateTime now) {
         return this.emailConfirmCodeCreatedAt.isBefore(now.minusMinutes(5)) ||
                 this.emailConfirmCodeCreatedAt.isEqual(now.minusMinutes(5));
+    }
+
+    public void updateAlarmState(Boolean alarmState) {
+        this.alarmState = alarmState;
     }
 }

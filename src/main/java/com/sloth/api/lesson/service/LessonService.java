@@ -7,6 +7,7 @@ import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.lesson.exception.LessonNotFoundException;
 import com.sloth.domain.lesson.repository.LessonRepository;
 import com.sloth.domain.member.Member;
+import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.site.Site;
 import com.sloth.domain.site.repository.SiteRepository;
 import com.sloth.global.exception.BusinessException;
@@ -31,8 +32,10 @@ public class LessonService {
     private final LessonRepository lessonRepository;
     private final SiteRepository siteRepository;
     private final CategoryRepository categoryRepository;
+    private final MemberService memberService;
 
-    public Lesson findLessonWithSiteCategory(Member member, Long lessonId) {
+    public Lesson findLessonWithSiteCategory(String email, Long lessonId) {
+        Member member = memberService.findByEmail(email);
         Lesson lesson = lessonRepository.findWithSiteCategoryMemberByLessonId(lessonId).orElseThrow(() -> {
             throw new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다.");
         });
@@ -40,8 +43,9 @@ public class LessonService {
         return lesson;
     }
 
-    public Lesson updatePresentNumber(Member member, Long lessonId, int count) {
-        Lesson lesson = lessonRepository.findWithMemberByLessonId(lessonId).orElseThrow(() -> new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다."));;
+    public Lesson updatePresentNumber(String email, Long lessonId, int count) {
+        Member member = memberService.findByEmail(email);
+        Lesson lesson = lessonRepository.findWithMemberByLessonId(lessonId).orElseThrow(() -> new LessonNotFoundException("해당하는 강의를 찾을 수 없습니다."));
         lesson.verifyOwner(member);
         lesson.updatePresentNumber(count);
         return lesson;
@@ -61,22 +65,26 @@ public class LessonService {
         return lessonRepository.save(lesson).getLessonId();
     }
 
-    public List<Lesson> getDoingLessons(Member member) {
+    public List<Lesson> getDoingLessons(String email) {
+        Member member = memberService.findByEmail(email);
         return lessonRepository.getDoingLessonsDetail(member.getMemberId());
     }
 
-    public List<Lesson> getLessons(Member member) {
+    public List<Lesson> getLessons(String email) {
+        Member member = memberService.findByEmail(email);
         return lessonRepository.getLessons(member.getMemberId());
     }
 
     /**
      * 강의 업데이트
-     * @param member
+     * @param email
      * @param request
      * @param lessonId
      * @return
      */
-    public Lesson updateLesson(Member member, LessonUpdateDto.Request request, Long lessonId) {
+    public Lesson updateLesson(String email, LessonUpdateDto.Request request, Long lessonId) {
+
+        Member member = memberService.findByEmail(email);
 
         Lesson lesson = lessonRepository.findWithMemberByLessonId(lessonId)
                 .orElseThrow(() -> new BusinessException("해당 강의가 존재하지 않습니다."));

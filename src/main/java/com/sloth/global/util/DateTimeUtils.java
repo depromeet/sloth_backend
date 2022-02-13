@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class DateTimeUtils {
 
@@ -18,6 +19,7 @@ public class DateTimeUtils {
 
     public static String convertToString(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        format.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
         return format.format(date);
     }
 

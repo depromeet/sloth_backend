@@ -1,26 +1,37 @@
 package com.sloth.api.fcm.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sloth.api.fcm.dto.FcmDto;
 import com.sloth.api.fcm.service.FirebaseCloudMessageService;
-import com.sloth.test.base.BaseApiController;
+import com.sloth.test.base.NewBaseApiController;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-@WebMvcTest(controllers = FcmController.class)
-class FcmControllerTest extends BaseApiController {
+class FcmControllerTest extends NewBaseApiController {
 
-    @MockBean
-    private FirebaseCloudMessageService firebaseCloudMessageService;
+    @InjectMocks
+    FcmController fcmController;
+
+    @Mock
+    FirebaseCloudMessageService firebaseCloudMessageService;
+
+    @BeforeEach
+    void beforeEach() {
+        mockMvc = MockMvcBuilders.standaloneSetup(fcmController)
+                .build();
+    }
 
     @Test
     @DisplayName("fcm 푸시 메세지 테스트")
@@ -35,8 +46,6 @@ class FcmControllerTest extends BaseApiController {
                 .body("푸시 메세지")
                 .build();
 
-        doNothing().when(firebaseCloudMessageService).sendMessageTo(requestDTO.getTargetToken(), requestDTO.getTitle(), requestDTO.getBody());
-
         // when
         ResultActions result = mockMvc.perform(post("/api/fcm")
                 .header(HttpHeaders.AUTHORIZATION, accessToken)
@@ -46,8 +55,7 @@ class FcmControllerTest extends BaseApiController {
                 ;
 
         // then
-        result.andExpect(MockMvcResultMatchers.status().isOk())
-        ;
+        result.andExpect(MockMvcResultMatchers.status().isOk());
     }
 
 }

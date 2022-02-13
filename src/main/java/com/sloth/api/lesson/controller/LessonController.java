@@ -1,12 +1,13 @@
 package com.sloth.api.lesson.controller;
 
+import com.sloth.domain.member.service.MemberService;
 import com.sloth.global.dto.ApiResult;
 import com.sloth.api.lesson.dto.*;
 import com.sloth.api.lesson.service.LessonService;
 import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.member.Member;
 import com.sloth.global.exception.InvalidParameterException;
-import com.sloth.global.resolver.CurrentMember;
+import com.sloth.global.resolver.CurrentEmail;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,18 +34,20 @@ import static org.springframework.http.ResponseEntity.ok;
 public class LessonController {
 
     private final LessonService lessonService;
+    private final MemberService memberService;
 
     @PatchMapping(value = "/number", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "들은 강의 수 수정 API", description = "들은 강의 수 수정 api")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<LessonNumberDto.Response> updateLessonmPresentNumber(@CurrentMember Member member, @Valid @RequestBody LessonNumberDto.Request request) {
+    public ResponseEntity<LessonNumberDto.Response> updateLessonmPresentNumber(@CurrentEmail String email, @Valid @RequestBody LessonNumberDto.Request request) {
 
         log.info("lesson number update api start");
         log.info("request : {}", request.toString());
-
-        Lesson lesson = lessonService.updatePresentNumber(member, request.getLessonId(), request.getCount());
+        System.out.println(request.hashCode());
+        System.out.println(email);
+        Lesson lesson = lessonService.updatePresentNumber(email, request.getLessonId(), request.getCount());
         LessonNumberDto.Response response = LessonNumberDto.Response.create(lesson);
 
         log.info("response : {}", response.toString());
@@ -58,8 +61,8 @@ public class LessonController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<LessonDetailDto.Response> getLessonDetail(@CurrentMember Member member, @Valid @PathVariable Long lessonId) {
-        Lesson lesson = lessonService.findLessonWithSiteCategory(member, lessonId);
+    public ResponseEntity<LessonDetailDto.Response> getLessonDetail(@CurrentEmail String email, @Valid @PathVariable Long lessonId) {
+        Lesson lesson = lessonService.findLessonWithSiteCategory(email, lessonId);
         LessonDetailDto.Response lessonDetail = LessonDetailDto.Response.create(lesson, LocalDate.now());
         return ok(lessonDetail);
     }
@@ -69,13 +72,12 @@ public class LessonController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<List<DoingLessonDto.Response>> getDoingLesson(@CurrentMember Member member) {
-        List<Lesson> lessons = lessonService.getDoingLessons(member);
+    public ResponseEntity<List<DoingLessonDto.Response>> getDoingLesson(@CurrentEmail String email) {
+
+        List<Lesson> lessons = lessonService.getDoingLessons(email);
         if (lessons == null) {
             return ResponseEntity.notFound().build();
         }
-
-        LocalDate now = LocalDate.now();
 
         List<DoingLessonDto.Response> doingLessonResponses = new ArrayList<>();
         lessonService.sortByRemainDay(lessons);
@@ -95,7 +97,7 @@ public class LessonController {
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
     public ResponseEntity<LessonUpdateDto.Response> updateLesson(@PathVariable("lessonId") Long lessonId,
-                                                                 @CurrentMember Member member,
+                                                                 @CurrentEmail String email,
                                                                  @Valid @RequestBody LessonUpdateDto.Request lessonUpdateDto,
                                                                  BindingResult bindingResult) {
 
@@ -107,7 +109,7 @@ public class LessonController {
         }
 
         // 강의 업데이트
-        Lesson updatedLesson = lessonService.updateLesson(member, lessonUpdateDto, lessonId);
+        Lesson updatedLesson = lessonService.updateLesson(email, lessonUpdateDto, lessonId);
 
         // 반환 객체 생성
         LessonUpdateDto.Response responseLessonUpdateDto = LessonUpdateDto.Response.builder()
@@ -130,15 +132,15 @@ public class LessonController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<List<LessonListDto.Response>> getLessonList(@CurrentMember Member member) {
+    public ResponseEntity<List<LessonListDto.Response>> getLessonList(@CurrentEmail String email) {
 
         log.info("lesson list api start");
 
-        log.info("member id : {}", member.getMemberId());
+        log.info("email : {}", email);
 
         List<LessonListDto.Response> lessonListDto = new ArrayList<>();
 
-        List<Lesson> lessons = lessonService.getLessons(member);
+        List<Lesson> lessons = lessonService.getLessons(email);
 
         if (lessons == null) {
             return ResponseEntity.noContent().build();
@@ -161,7 +163,8 @@ public class LessonController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<LessonCreateDto.Response> saveLesson(@CurrentMember Member member, @RequestBody LessonCreateDto.Request requestDto) {
+    public ResponseEntity<LessonCreateDto.Response> saveLesson(@CurrentEmail String email, @RequestBody LessonCreateDto.Request requestDto) {
+        Member member = memberService.findByEmail(email);
         Lesson lesson = requestDto.toEntity(member);
         Long lessonId = lessonService.saveLesson(lesson, requestDto.getSiteId(), requestDto.getCategoryId());
         LessonCreateDto.Response response= LessonCreateDto.Response.builder()
@@ -176,13 +179,15 @@ public class LessonController {
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
     public ResponseEntity<ApiResult> deleteLesson(@PathVariable("lessonId") Long lessonId,
-                                                                 @CurrentMember Member member) {
+                                                                 @CurrentEmail String email) {
 
         log.info("lesson delete start");
-        log.info("member id : {}", member.getMemberId());
+        log.info("email : {}", email);
         log.info("delete lesson id : {}", lessonId);
 
-        // 강의 업데이트
+        Member member = memberService.findByEmail(email);
+
+        // 강의 삭제
         lessonService.deleteLesson(member, lessonId);
 
         ApiResult result = ApiResult.createOk();

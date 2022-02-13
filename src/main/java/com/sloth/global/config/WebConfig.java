@@ -5,7 +5,7 @@ import com.sloth.global.config.auth.TokenProvider;
 import com.sloth.global.config.auth.interceptor.AuthInterceptor;
 import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;
-import com.sloth.global.resolver.CurrentMemberArgumentResolver;
+import com.sloth.global.resolver.CurrentEmailArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -36,8 +36,8 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public CurrentMemberArgumentResolver currentMemberArgumentResolver() {
-        return new CurrentMemberArgumentResolver(memberRepository);
+    CurrentEmailArgumentResolver currentEmailArgumentResolver() {
+        return new CurrentEmailArgumentResolver();
     }
 
     @Bean
@@ -70,7 +70,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(currentMemberArgumentResolver());
+        resolvers.add(currentEmailArgumentResolver());
     }
 
 }
