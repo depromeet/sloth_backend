@@ -6,6 +6,7 @@ import com.sloth.domain.member.constant.Role;
 import com.sloth.domain.member.constant.SocialType;
 import com.sloth.domain.member.dto.MemberFormDto;
 import com.sloth.domain.memberToken.MemberToken;
+import com.sloth.domain.memberToken.constant.MemberTokenType;
 import com.sloth.global.config.auth.dto.OAuthAttributes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -157,16 +158,19 @@ class MemberTest {
 
     @Test
     @DisplayName("멤버 토큰 업데이트")
-    void updateMemberToken() {
+    void updateLoginRefreshTokenTest() {
         // given
         LocalDateTime tokenExpireTime = LocalDateTime.of(2022, 1, 1, 12, 0);
-        MemberToken memberToken = new MemberToken(1L, "refresh", tokenExpireTime, testMember);
+        MemberToken updateRefreshMemberToken = new MemberToken(1L, "refresh", tokenExpireTime, testMember, MemberTokenType.LOGIN_REFRESH);
+        MemberToken loginRefreshToken = new MemberToken(1L, "previous-refresh", tokenExpireTime, testMember, MemberTokenType.LOGIN_REFRESH);
+        testMember.getMemberTokens().add(loginRefreshToken);
 
         // when
-        testMember.updateMemberToken(memberToken);
+        testMember.updateLoginRefreshToken(updateRefreshMemberToken);
 
         // then
-        assertEquals(memberToken, testMember.getMemberToken());
+        MemberToken refreshMemberTokens = testMember.getLoginRefreshToken();
+        assertEquals(updateRefreshMemberToken.getRefreshToken(), refreshMemberTokens.getRefreshToken());
     }
 
     @Test

@@ -3,6 +3,7 @@ package com.sloth.domain.memberToken;
 import com.sloth.domain.common.BaseEntity;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.memberToken.constant.TokenRefreshCritnTime;
+import com.sloth.domain.memberToken.constant.MemberTokenType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,9 +28,12 @@ public class MemberToken extends BaseEntity {
 
     private LocalDateTime tokenExpirationTime;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @Enumerated(EnumType.STRING)
+    private MemberTokenType memberTokenType;
 
     public static MemberToken createMemberToken(Member member, String refreshToken, LocalDateTime tokenExpirationTime){
         MemberToken memberToken = MemberToken.builder()
@@ -38,7 +42,7 @@ public class MemberToken extends BaseEntity {
                 .tokenExpirationTime(tokenExpirationTime)
                 .build();
 
-        member.updateMemberToken(memberToken);
+        member.updateLoginRefreshToken(memberToken);
 
         return memberToken;
     }
@@ -69,4 +73,7 @@ public class MemberToken extends BaseEntity {
         }
     }
 
+    public void updateLoginRefreshToken(MemberToken updateRefreshMemberToken) {
+        this.refreshToken = updateRefreshMemberToken.getRefreshToken();
+    }
 }

@@ -54,7 +54,7 @@ public class FormLoginService {
 
         verifyMember(formLoginRequestDto, member);
 
-        MemberToken memberToken = member.getMemberToken();
+        MemberToken memberToken = member.getLoginRefreshToken();
         TokenDto tokenDto = tokenProvider.createTokenDto(formLoginRequestDto.getEmail());
 
         if (memberToken == null) {

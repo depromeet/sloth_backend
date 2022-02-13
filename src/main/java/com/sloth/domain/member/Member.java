@@ -2,13 +2,16 @@ package com.sloth.domain.member;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sloth.api.login.form.dto.FormJoinDto;
-import com.sloth.domain.member.constant.SocialType;
-import com.sloth.global.config.auth.dto.OAuthAttributes;
 import com.sloth.domain.common.BaseEntity;
 import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.member.constant.Role;
+import com.sloth.domain.member.constant.SocialType;
 import com.sloth.domain.member.dto.MemberFormDto;
 import com.sloth.domain.memberToken.MemberToken;
+import com.sloth.domain.memberToken.constant.MemberTokenType;
+import com.sloth.domain.memberToken.exception.MemberTokenNotFoundException;
+import com.sloth.global.config.auth.dto.OAuthAttributes;
+import com.sloth.global.exception.ErrorMessage;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
@@ -73,8 +76,8 @@ public class Member extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     private List<Lesson> lessons = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private MemberToken memberToken;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MemberToken> memberTokens = new ArrayList<>();
 
     @ColumnDefault("true")
     @Column
@@ -134,8 +137,17 @@ public class Member extends BaseEntity {
         this.isEmailConfirm = true;
     }
 
-    public void updateMemberToken(MemberToken memberToken) {
-        this.memberToken = memberToken;
+    public void updateLoginRefreshToken(MemberToken updateRefreshMemberToken) {
+        MemberToken memberToken = getLoginRefreshToken();
+        memberToken.updateLoginRefreshToken(updateRefreshMemberToken);
+    }
+
+    public MemberToken getLoginRefreshToken() {
+        MemberToken refreshMemberToken = this.memberTokens.stream()
+                .filter(memberToken -> MemberTokenType.LOGIN_REFRESH == memberToken.getMemberTokenType())
+                .findFirst()
+                .orElseThrow(() -> {throw new MemberTokenNotFoundException(ErrorMessage.REFRESH_TOKEN_NOT_FOUND.getMessage());});
+        return refreshMemberToken;
     }
 
     public void updateConfirmEmailCode(String emailConfirmCode, LocalDateTime now) {

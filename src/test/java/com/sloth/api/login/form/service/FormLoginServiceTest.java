@@ -10,14 +10,14 @@ import com.sloth.domain.member.Member;
 import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.domain.memberToken.constant.TokenRefreshCritnTime;
+import com.sloth.domain.memberToken.exception.MemberTokenNotFoundException;
 import com.sloth.global.config.auth.TokenProvider;
 import com.sloth.global.config.auth.dto.TokenDto;
+import com.sloth.global.exception.ErrorMessage;
 import com.sloth.global.exception.InvalidParameterException;
 import com.sloth.global.exception.NeedEmailConfirmException;
 import com.sloth.global.util.DateTimeUtils;
 import com.sloth.global.util.MailService;
-import org.joda.time.field.FieldUtils;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,15 +27,13 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.mail.MessagingException;
 import java.time.LocalDateTime;
-import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
@@ -116,7 +114,7 @@ class FormLoginServiceTest {
         final TokenDto tokenDto = createTokenDto();
 
         given(memberService.findByEmail(requestDto.getEmail())).willReturn(stubMember);
-        given(stubMember.getMemberToken()).willReturn(null);
+        given(stubMember.getLoginRefreshToken()).willThrow(new MemberTokenNotFoundException(ErrorMessage.REFRESH_TOKEN_NOT_FOUND.getMessage()));
         given(tokenProvider.createTokenDto(stubMember.getEmail())).willReturn(tokenDto);
         doNothing().when(formLoginService).verifyMember(requestDto, stubMember);
 
@@ -143,7 +141,7 @@ class FormLoginServiceTest {
         given(memberService.findByEmail(requestDto.getEmail())).willReturn(stubMember);
         given(passwordEncoder.matches(requestDto.getPassword(), stubMember.getPassword())).willReturn(true);
         given(stubMember.isEmailConfirm()).willReturn(true);
-        given(stubMember.getMemberToken()).willReturn(memberToken);
+        given(stubMember.getLoginRefreshToken()).willReturn(memberToken);
         given(tokenProvider.createTokenDto(stubMember.getEmail())).willReturn(tokenDto);
         given(tokenProvider.isTokenExpired(memberToken.getTokenExpirationTime())).willReturn(false);
 
@@ -170,7 +168,7 @@ class FormLoginServiceTest {
         given(memberService.findByEmail(requestDto.getEmail())).willReturn(stubMember);
         given(passwordEncoder.matches(requestDto.getPassword(), stubMember.getPassword())).willReturn(true);
         given(stubMember.isEmailConfirm()).willReturn(true);
-        given(stubMember.getMemberToken()).willReturn(memberToken);
+        given(stubMember.getLoginRefreshToken()).willReturn(memberToken);
         given(tokenProvider.createTokenDto(stubMember.getEmail())).willReturn(tokenDto);
         given(tokenProvider.isTokenExpired(memberToken.getTokenExpirationTime())).willReturn(true);
 
