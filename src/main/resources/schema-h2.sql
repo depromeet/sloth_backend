@@ -92,6 +92,7 @@ create table member_token (
     refresh_token varchar(255),
     token_expiration_time timestamp,
     member_id bigint,
+    member_token_type varchar(20),
     primary key (member_token_id)
 );
 
