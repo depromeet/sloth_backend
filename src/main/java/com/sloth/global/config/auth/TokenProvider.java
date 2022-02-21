@@ -1,6 +1,6 @@
 package com.sloth.global.config.auth;
 
-import com.sloth.global.config.auth.constant.TokenType;
+import com.sloth.global.config.auth.constant.JwtTokenType;
 import com.sloth.global.config.auth.dto.TokenDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -77,7 +77,7 @@ public class TokenProvider {
      */
     public String createAccessToken(String email, Date expirationTime) {
         String accessToken = Jwts.builder()
-                .setSubject(TokenType.ACCESS.name())            //토큰 제목
+                .setSubject(JwtTokenType.ACCESS.name())            //토큰 제목
                 .setAudience(email)                             //토큰 대상자
                 .setIssuedAt(new Date())                        //토큰 발급 시간
                 .setExpiration(expirationTime)
@@ -94,7 +94,7 @@ public class TokenProvider {
      */
     public String createRefreshToken(String email, Date expirationTime) {
         String refreshToken = Jwts.builder()
-                .setSubject(TokenType.REFRESH.name())           //토큰 제목
+                .setSubject(JwtTokenType.REFRESH.name())           //토큰 제목
                 .setAudience(email)                             //토큰 대상자
                 .setIssuedAt(new Date())                        //토큰 발급 시간
                 .setExpiration(expirationTime)

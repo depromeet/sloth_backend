@@ -1,6 +1,6 @@
 package com.sloth.global.config.auth.constant;
 
-public enum TokenType {
+public enum JwtTokenType {
 
     ACCESS, REFRESH;
 
