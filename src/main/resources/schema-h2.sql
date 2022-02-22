@@ -139,3 +139,14 @@ foreign key (member_id)
 references member
 ;
 
+create table fcm_token (
+    fcm_token_id bigint not null,
+    reg_time timestamp,
+    update_time timestamp,
+    created_by varchar(255),
+    modified_by varchar(255),
+    fcm_token varchar(255),
+    is_use boolean default true,
+    member_id bigint,
+    primary key (fcm_token_id)
+);
