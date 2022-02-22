@@ -80,7 +80,6 @@ create table member (
     email_confirm_code varchar(255),
     is_email_confirm   boolean default true,
     email_confirm_code_created_at timestamp,
-    alarm_state boolean default true,
     primary key (member_id)
 );
 
@@ -90,10 +89,9 @@ create table member_token (
     update_time timestamp,
     created_by varchar(255),
     modified_by varchar(255),
-    token varchar(255),
+    refresh_token varchar(255),
     token_expiration_time timestamp,
     member_id bigint,
-    member_token_type varchar(20) not null,
     primary key (member_token_id)
 );
 

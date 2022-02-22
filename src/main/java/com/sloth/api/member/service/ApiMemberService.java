@@ -17,7 +17,6 @@ public class ApiMemberService {
     public Member updateMemberInfo(String email, MemberUpdateDto.Request requestDto) {
         Member member = memberService.findByEmail(email);
         member.updateMemberName(requestDto.getMemberName());
-        member.updateAlarmState(requestDto.getAlarmState());
         return member;
     }
 

@@ -52,7 +52,6 @@ public class ApiMemberController {
 
         MemberUpdateDto.Response responseMemberUpdateDto = MemberUpdateDto.Response.builder()
                 .memberName(member.getMemberName())
-                .alarmState(member.getAlarmState())
                 .build();
 
         return ResponseEntity.ok(responseMemberUpdateDto);
