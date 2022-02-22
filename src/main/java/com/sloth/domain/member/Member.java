@@ -144,7 +144,4 @@ public class Member extends BaseEntity {
                 this.emailConfirmCodeCreatedAt.isEqual(now.minusMinutes(5));
     }
 
-    public void updateAlarmState(Boolean alarmState) {
-        this.alarmState = alarmState;
-    }
 }
