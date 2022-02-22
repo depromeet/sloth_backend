@@ -80,7 +80,6 @@ create table member (
     email_confirm_code varchar(255),
     is_email_confirm   boolean default true,
     email_confirm_code_created_at timestamp,
-    alarm_state boolean default true,
     primary key (member_id)
 );
 

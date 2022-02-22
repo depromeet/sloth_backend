@@ -76,10 +76,6 @@ public class Member extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private MemberToken memberToken;
 
-    @ColumnDefault("true")
-    @Column
-    private Boolean alarmState = true;
-
 
     public static Member createAdmin(MemberFormDto formRequestDto) {
         return Member.builder()
