@@ -22,7 +22,7 @@ public class LogoutController {
 
     @PostMapping(value = "/logout")
     @Operation(summary = "로그아웃", description = "로그아웃 처리 시 db에 저장된 refresh token 만료 처리")
-    public ResponseEntity logout(@RequestHeader(value="Authorization") String accessToken) {
+    public ResponseEntity<String> logout(@RequestHeader(value="Authorization") String accessToken) {
         String email  = tokenProvider.getEmail(accessToken);
         logoutService.logout(email, LocalDateTime.now());
         return ResponseEntity.ok().body("logout success");
