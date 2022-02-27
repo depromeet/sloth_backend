@@ -122,10 +122,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(FeignClientException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
     public ResponseEntity<ErrorResponseDto> memberNotFoundExceptionHandle(FeignClientException e, HttpServletRequest request) {
         log.error("FeignClientException", e);
-        return exceptionResponseEntity(e.getMessage(), HttpStatus.FORBIDDEN, request.getRequestURI());
+        HttpStatus httpStatus = HttpStatus.resolve(e.getStatus());
+        return exceptionResponseEntity(e.getMessage(), httpStatus, request.getRequestURI());
     }
 
     @ExceptionHandler(InvalidParameterException.class)
