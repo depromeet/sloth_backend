@@ -26,7 +26,7 @@ public class FcmController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity pushMessage(@RequestBody FcmDto.Request requestDTO) throws IOException {
+    public ResponseEntity<String> pushMessage(@RequestBody FcmDto.Request requestDTO) throws IOException {
         System.out.println(requestDTO.getTargetToken() + " "
                 +requestDTO.getTitle() + " " + requestDTO.getBody());
 
