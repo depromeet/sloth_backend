@@ -5,7 +5,7 @@ import com.sloth.domain.memberToken.constant.TokenRefreshCritnTime;
 import com.sloth.domain.memberToken.exception.MemberTokenNotFoundException;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;
 import com.sloth.global.config.auth.TokenProvider;
-import com.sloth.global.config.auth.constant.TokenType;
+import com.sloth.global.config.auth.constant.JwtTokenType;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +55,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         String email = tokenClaims.getAudience();
 
 
-        if(TokenType.ACCESS.name().equals(tokenType)) {
+        if(JwtTokenType.ACCESS.name().equals(tokenType)) {
 
             Date expiration = tokenClaims.getExpiration();
 
@@ -66,7 +66,7 @@ public class AuthInterceptor implements HandlerInterceptor {
                 return false;
             }
 
-        } else if(TokenType.REFRESH.name().equals(tokenType)) {
+        } else if(JwtTokenType.REFRESH.name().equals(tokenType)) {
 
             MemberToken memberToken = memberTokenRepository.findByRefreshToken(token)
                     .orElseThrow(() -> new MemberTokenNotFoundException("해당 리프레시 토큰이 존재하지 않습니다."));
