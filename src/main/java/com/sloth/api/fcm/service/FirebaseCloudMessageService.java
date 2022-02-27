@@ -66,7 +66,7 @@ public class FirebaseCloudMessageService {
     public void saveFcmToken(String email, String fcmToken) {
         Member member = memberService.findByEmail(email);
 
-        FcmToken savedFcmToken = fcmTokenService.findByMemberIdAndFcmToken(member.getMemberId(), fcmToken);
+        FcmToken savedFcmToken = fcmTokenService.findByMemberAndFcmToken(member, fcmToken);
         if(savedFcmToken == null) {
             FcmToken newFcmToken = FcmToken.createFcmToken(member, fcmToken);
             fcmTokenService.saveFcmToken(newFcmToken);
@@ -76,7 +76,7 @@ public class FirebaseCloudMessageService {
 
     public FcmTokenUpdateDto.Response updateFcmTokenUse(String email, FcmTokenUpdateDto.Request request) {
         Member member = memberService.findByEmail(email);
-        FcmToken savedFcmToken = fcmTokenService.findByMemberIdAndFcmToken(member.getMemberId(), request.getFcmToken());
+        FcmToken savedFcmToken = fcmTokenService.findByMemberAndFcmToken(member, request.getFcmToken());
         if(savedFcmToken == null) {
             throw new BusinessException("해당 fcm token이 존재하지 않습니다.");
         } else {
