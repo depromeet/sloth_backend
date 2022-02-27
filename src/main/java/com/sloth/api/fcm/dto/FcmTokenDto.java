@@ -7,10 +7,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@ApiModel(value = "fcm 토큰 등록 API", description = "fcm 토큰 등록 API")
 public class FcmTokenDto {
 
     @Setter @Getter
+    @ApiModel(value = "fcm 토큰 등록 API 요청 객체", description = "fcm 토큰 등록 API 요청 객체")
     public static class Request {
 
         @ApiModelProperty(value = "fcm token")

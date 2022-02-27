@@ -35,12 +35,18 @@ public class FcmController {
     }
 
     @PostMapping("/api/fcmtoken")
-    public ResponseEntity<String> saveFcmToken(@CurrentEmail String email, @RequestBody FcmTokenDto.Request request) {
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
+    })
+    public ResponseEntity<String> saveFcmToken(@RequestBody FcmTokenDto.Request request, @CurrentEmail String email) {
         firebaseCloudMessageService.saveFcmToken(email, request.getFcmToken());
         return ResponseEntity.ok("success");
     }
 
     @PatchMapping("/api/fcmtoken/use")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
+    })
     public ResponseEntity<FcmTokenUpdateDto.Response> updateFcmTokenUse(@CurrentEmail String email, @RequestBody FcmTokenUpdateDto.Request request) {
         FcmTokenUpdateDto.Response response = firebaseCloudMessageService.updateFcmTokenUse(email, request);
         return ResponseEntity.ok(response);
