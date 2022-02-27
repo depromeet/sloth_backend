@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 @Component
-@FeignClient(url = "https://fcm.googleapis.com/v1/projects/test-454ab/messages:send", name = "FcmLessonPushFeignClient")
+@FeignClient(url = "https://fcm.googleapis.com/v1/projects/nanagong-336615/messages:send", name = "FcmLessonPushFeignClient")
 public interface FcmLessonPushFeignClient {
 
     @PostMapping(value = "", produces = "application/json", consumes = "application/json")

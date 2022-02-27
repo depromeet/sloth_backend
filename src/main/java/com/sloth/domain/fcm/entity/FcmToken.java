@@ -1,5 +1,6 @@
 package com.sloth.domain.fcm.entity;
 
+import com.sloth.domain.common.BaseEntity;
 import com.sloth.domain.member.Member;
 import lombok.Getter;
 
@@ -8,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "fcm_token")
-public class FcmToken {
+public class FcmToken extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +27,7 @@ public class FcmToken {
         FcmToken fcmToken = new FcmToken();
         fcmToken.member = member;
         fcmToken.fcmToken = token;
+        fcmToken.isUse = true;
         return fcmToken;
     }
 
