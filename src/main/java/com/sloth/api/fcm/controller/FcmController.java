@@ -27,9 +27,6 @@ public class FcmController {
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
     public ResponseEntity<String> pushMessage(@RequestBody FcmDto.Request requestDTO) throws IOException {
-        System.out.println(requestDTO.getTargetToken() + " "
-                +requestDTO.getTitle() + " " + requestDTO.getBody());
-
         firebaseCloudMessageService.sendMessageTo(
                 requestDTO.getTargetToken(),
                 requestDTO.getTitle(),
