@@ -27,7 +27,8 @@ public class CustomLessonRepositoryImpl implements CustomLessonRepository{
                 .leftJoin(lesson.category, category).fetchJoin()
                 .where(lesson.member.memberId.eq(memberId)
                                 .and(lesson.isFinished.isFalse())
-                                .and(lesson.startDate.loe(LocalDate.now())))
+                                .and(lesson.startDate.loe(LocalDate.now()))
+                                .and(lesson.endDate.goe(LocalDate.now())))
                 .fetch();
     }
 

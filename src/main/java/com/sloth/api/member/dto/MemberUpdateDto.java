@@ -10,6 +10,7 @@ public class MemberUpdateDto {
 
     @Getter @Setter
     @ApiModel(value = "회원 정보(이름) 변경 객체", description = "회원 정보(이름) 변경 객체")
+    @EqualsAndHashCode
     public static class Request {
 
         @ApiModelProperty(value = "회원 이름")
@@ -23,7 +24,7 @@ public class MemberUpdateDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Getter @Setter
-    @ApiModel(value = "강의 업데이트 반환 객체", description = "강의 업데이트 반환 객체")
+    @ApiModel(value = "회원 정보(이름) 변경 반환 객체", description = "회원 정보(이름) 변경 반환 객체")
     public static class Response {
 
         @ApiModelProperty(value = "회원 이름")

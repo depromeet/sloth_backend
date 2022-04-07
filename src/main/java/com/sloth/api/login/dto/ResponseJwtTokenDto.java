@@ -2,12 +2,14 @@ package com.sloth.api.login.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @Getter @Setter
+@Builder
+@EqualsAndHashCode
+@AllArgsConstructor @NoArgsConstructor
 public class ResponseJwtTokenDto {
 
     @ApiModelProperty(value = "access token")

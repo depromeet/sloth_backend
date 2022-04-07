@@ -41,8 +41,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ENC(Gxd8z03E8a5yIICXKgPPIhLi5tNML8rUtat5MSe5IMXZQ1NSTOGXM/P+SfxDMsLT)
-    password: ENC(g7UUsdfAr19S3p5FjQilNiW/UBYV4hegZ+8F9LnvG77MLCRhQrv73qveUtFMs7XG)
+    username: ENC(cgeXjHOUAmf2LXjWc9nPBORZlnLANNcu7Xe9aPqgNBt/XsumSTpuuyE5gKIldvqt)
+    password: ENC(qIezXA3iP6vPbAezSE7Ac2HmWRedxtJ8HEfAe7RxooQnI3hT/O+qlSsGAoWKRoMG)
     properties.mail.smtp:
       auth: true
       starttls:
@@ -76,7 +76,10 @@ token:
   access-token-expiration-time: 900000  # 15분
   refresh-token-expiration-time: 1210500000 # 2주
 
-my-pass: depman*
+nanagong:
+  enc:
+    password: ${ENC_PASSWORD}
+
 
 management:
   endpoints:
@@ -86,3 +89,17 @@ management:
   endpoint:
     health:
       show-details: always
+
+
+cloud:
+  aws:
+    credentials:
+      access-key: ENC(XHZ23sY+IHsITc+pQym2tCrULlV75a/XGHEk4cyBFAB1OHQZGlyLZWE/XSo5bp7z)
+      secret-key: ENC(H9f2a1oBaE4dM2c9ftsSCo6vM9xWlCE/nXqJNAnw6odsepl1fQvpkCgoJ2IbZvMxhI5B2XB9pRechMplc1dNEQ==)
+    s3:
+      bucket: ENC(Tebv8rycP1iyS5ZNEl+yaJBRIozrHTjfMiegdv40bmk=)
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+

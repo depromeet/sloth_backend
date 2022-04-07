@@ -2,7 +2,7 @@ package com.sloth.api.category.controller;
 
 import com.sloth.api.category.dto.CategoryDto;
 import com.sloth.api.category.service.ApiCategoryService;
-import com.sloth.api.dto.ApiResult;
+import com.sloth.global.dto.ApiResult;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;

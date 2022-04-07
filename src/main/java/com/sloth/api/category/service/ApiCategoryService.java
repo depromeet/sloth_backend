@@ -19,7 +19,7 @@ public class ApiCategoryService {
 
     @Transactional(readOnly = true)
     public List<CategoryDto.Response> getCategoryDtos() {
-        List<Category> categorys= categoryRepository.findAll();
+        List<Category> categorys = categoryRepository.findAll();
 
         List<CategoryDto.Response> categoryDtos = categorys.stream().map(category -> CategoryDto.Response.builder()
                 .categoryId(category.getCategoryId())

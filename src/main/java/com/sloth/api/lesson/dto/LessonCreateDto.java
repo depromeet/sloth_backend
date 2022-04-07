@@ -1,5 +1,7 @@
 package com.sloth.api.lesson.dto;
 
+import com.sloth.domain.lesson.Lesson;
+import com.sloth.domain.member.Member;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -17,7 +19,7 @@ public class LessonCreateDto {
         private Long lessonId;
     }
 
-    @Getter
+    @Getter @Setter
     @NoArgsConstructor
     @ApiModel(value = "강의 생성 요청 객체", description = "강의 생성 요청 객체")
     public static class Request {
@@ -48,6 +50,19 @@ public class LessonCreateDto {
 
         @ApiModelProperty(value = "카테고리 아이디")
         private Long categoryId;
+
+        public Lesson toEntity(Member member) {
+            return Lesson.builder()
+                    .lessonName(lessonName)
+                    .member(member)
+                    .alertDays(alertDays)
+                    .totalNumber(totalNumber)
+                    .price(price)
+                    .startDate(startDate)
+                    .endDate(endDate)
+                    .message(message)
+                    .build();
+        }
 
     }
 }

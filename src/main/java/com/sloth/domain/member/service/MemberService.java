@@ -1,17 +1,17 @@
 package com.sloth.domain.member.service;
 
-import com.sloth.api.login.dto.EmailConfirmResendRequestDto;
-import com.sloth.api.login.dto.FormJoinDto;
-import com.sloth.config.auth.dto.OAuthAttributes;
-import com.sloth.config.auth.dto.TokenDto;
+import com.sloth.api.login.form.dto.EmailConfirmResendRequestDto;
+import com.sloth.api.login.form.dto.FormJoinDto;
+import com.sloth.global.config.auth.dto.OAuthAttributes;
+import com.sloth.global.config.auth.dto.TokenDto;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.repository.MemberRepository;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.domain.nickname.Nickname;
 import com.sloth.domain.nickname.service.NicknameService;
-import com.sloth.exception.ForbiddenException;
-import com.sloth.exception.InvalidParameterException;
-import com.sloth.util.DateTimeUtils;
+import com.sloth.global.exception.ForbiddenException;
+import com.sloth.global.exception.InvalidParameterException;
+import com.sloth.global.util.DateTimeUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,22 +32,19 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final NicknameService nicknameService;
 
-    public Boolean saveMember(OAuthAttributes oAuthAttributes, TokenDto tokenDto) {
-        Optional<Member> optionalMember = memberRepository.findByEmail(oAuthAttributes.getEmail());
-        Member savedMember;
-        Boolean isNewMember = false;
-        if(optionalMember.isEmpty()) {
-            Nickname randomNickname = nicknameService.findRandomNickname();
-            Member member = Member.createOauthMember(oAuthAttributes, randomNickname.getName());
-            savedMember = memberRepository.save(member);
-            randomNickname.updateUsed();
-            isNewMember = true;
-        } else {
-            savedMember = optionalMember.get();
-        }
+    public Optional<Member> getOptionalMember(String email) {return memberRepository.findByEmail(email);}
 
+    public Member saveMember(Member member, TokenDto tokenDto) {
+        Member savedMember = memberRepository.save(member);
         saveRefreshToken(savedMember, tokenDto);
-        return isNewMember;
+        return savedMember;
+    }
+
+    public Member createOauthMember(OAuthAttributes oAuthAttributes) {
+        Nickname randomNickname = nicknameService.findRandomNickname();
+        Member member = Member.createOauthMember(oAuthAttributes, randomNickname.getName());
+        randomNickname.updateUsed();
+        return member;
     }
 
     public Member saveMember(FormJoinDto formRequestDto) {
@@ -95,7 +92,7 @@ public class MemberService {
     public Member updateConfirmEmailCode(EmailConfirmResendRequestDto requestDto) {
         Member member = findByEmail(requestDto.getEmail());
         checkPassword(member, requestDto.getPassword());
-        if (!member.canCreateEmailConfirmCode()) {
+        if (!member.canCreateEmailConfirmCode(LocalDateTime.now())) {
             throw new ForbiddenException("이메일 발송 5분 후에 재전송을 할 수 있습니다.");
         }
         createEmailConfirmCode(member);

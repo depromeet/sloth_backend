@@ -13,15 +13,15 @@ RUNNING_RESULT=$(sudo docker ps | grep ${IDLE_PORT})
 
 if [ -z ${RUNNING_RESULT} ]
 then
-  echo "> 현재 구동중인 애플리케이션이 없으므로 종료하지 않습니다."
+      echo "> No applications are currently running"
 else
 
   if [ ${IDLE_PORT} -eq 8081 ]
   then
-        echo "8081 포트 애플리케이션 중단"
+        echo "8081 application stop"
         $(sudo docker stop "spring-template-real1")
   else
-        echo "8082 포트 애플리케이션 중단"
+        echo "8082 application stop"
         $(sudo docker stop "spring-template-real2")
   fi
 

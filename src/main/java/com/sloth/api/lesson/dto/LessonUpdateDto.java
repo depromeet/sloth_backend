@@ -5,12 +5,14 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class LessonUpdateDto {
 
     @Getter @Setter
+    @EqualsAndHashCode
     @ToString
     @ApiModel(value = "강의 업데이트 요청 객체", description = "강의 업데이트 요청 객체")
     public static class Request {
@@ -30,6 +32,11 @@ public class LessonUpdateDto {
         @ApiModelProperty(value = "사이트 아이디")
         @NotNull(message = "사이트 아이디를 입력해 주세요")
         private Long siteId;
+
+        @ApiModelProperty(value = "강의 금액")
+        @Min(0)
+        @NotNull(message = "강의 금액을 입력해 주세요.")
+        private int price;
     }
 
     @Builder
@@ -54,6 +61,9 @@ public class LessonUpdateDto {
 
         @ApiModelProperty(value = "사이트 아이디")
         private Long siteId;
+
+        @ApiModelProperty(value = "강의 금액")
+        private int price;
     }
 
 }

@@ -1,6 +1,6 @@
 package com.sloth.api.test.controller;
 
-import com.sloth.api.BaseApiController;
+import com.sloth.test.base.BaseApiController;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.memberToken.MemberToken;
 import com.sloth.domain.memberToken.repository.MemberTokenRepository;
@@ -106,9 +106,9 @@ public class AuthTestControllerTest extends BaseApiController {
 
         Member member = new Member();
         MemberToken memberToken = MemberToken.createMemberToken(member, refreshToken, LocalDateTime.now().plusWeeks(2));
-
+        Optional<MemberToken> optionalMemberToken = Optional.ofNullable(memberToken);
         given(memberTokenRepository.findByRefreshToken(refreshToken))
-                .willReturn(Optional.ofNullable(memberToken));
+                .willReturn(optionalMemberToken);
 
         //when
         ResultActions result = mockMvc.perform(get("/api2/test")
