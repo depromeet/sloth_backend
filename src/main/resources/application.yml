@@ -78,7 +78,7 @@ token:
 
 nanagong:
   enc:
-    password: nanagong-backend!@#
+    password: ${ENC_PASSWORD}
 
 
 management:
