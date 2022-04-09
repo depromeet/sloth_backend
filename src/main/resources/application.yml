@@ -78,7 +78,7 @@ token:
 
 nanagong:
   enc:
-    password: ${ENC_PASSWORD}
+    password: ENC(7XcEqcuQGnhV8uhwtKzlgcfVMxl50oWn1FRoJq61kybPe1CfY8b92h6S1zd8YFSU)
 
 
 management:
