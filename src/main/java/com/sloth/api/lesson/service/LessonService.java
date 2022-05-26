@@ -1,5 +1,6 @@
 package com.sloth.api.lesson.service;
 
+import com.sloth.api.lesson.dto.FinishedLessonDto;
 import com.sloth.api.lesson.dto.LessonUpdateDto;
 import com.sloth.domain.category.Category;
 import com.sloth.domain.category.repository.CategoryRepository;
@@ -124,5 +125,18 @@ public class LessonService {
                 return Integer.compare(standardLessonRemainDay, compareLessonRemainDay);
             }
         });
+    }
+
+    public boolean checkFinishedLesson(String email, FinishedLessonDto.Request request, Long lessonId) {
+        Member member = memberService.findByEmail(email);
+
+        Lesson lesson = lessonRepository.findWithMemberByLessonId(lessonId)
+                .orElseThrow(() -> new BusinessException("해당 강의가 존재하지 않습니다."));
+
+        lesson.verifyOwner(member);
+
+        lesson.checkFinishedLesson(request.getIsFinished());
+
+        return lesson.getIsFinished();
     }
 }
