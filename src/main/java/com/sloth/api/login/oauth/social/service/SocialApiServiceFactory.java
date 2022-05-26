@@ -24,6 +24,8 @@ public class SocialApiServiceFactory {
             socialApiServiceBeanName = "googleApiServiceImpl";
         } else if(SocialType.KAKAO.equals(socialType)) {
             socialApiServiceBeanName = "kakaoApiServiceImpl";
+        } else if(SocialType.APPLE.equals(socialType)) {
+            socialApiServiceBeanName = "appleApiServiceImpl";
         }
 
         SocialApiSerivce socialApiSerivce = socialApiServices.get(socialApiServiceBeanName);
