@@ -1,5 +1,6 @@
 package com.sloth.api.lesson.controller;
 
+import com.sloth.api.lesson.dto.FinishedLessonDto;
 import com.sloth.api.lesson.dto.LessonNumberDto;
 import com.sloth.api.lesson.dto.LessonUpdateDto;
 import com.sloth.api.lesson.service.LessonService;
@@ -30,6 +31,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
