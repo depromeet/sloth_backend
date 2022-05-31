@@ -201,18 +201,16 @@ public class LessonController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<FinishedLessonDto.Response> checkFinishedLesson(@PathVariable("lessonId") Long lessonId,
-                                                                 @CurrentEmail String email,
-                                                                 @Valid @RequestBody FinishedLessonDto.Request finishedLessonDto) {
+    public ResponseEntity<FinishedLessonDto> finishLesson(@PathVariable("lessonId") Long lessonId,
+                                                                 @CurrentEmail String email) {
 
-        log.info("finished lesson check api start");
-        log.info("request : {}", finishedLessonDto.toString());
+        log.info("finished lesson api start");
 
         // 강의 완료 확인
-        Boolean isFinished = lessonService.checkFinishedLesson(email, finishedLessonDto, lessonId);
+        Lesson lesson = lessonService.finishLesson(email, lessonId);
 
-        FinishedLessonDto.Response responseFinishedLessonDto = FinishedLessonDto.Response.builder()
-                .isFinished(isFinished)
+        FinishedLessonDto responseFinishedLessonDto = FinishedLessonDto.builder()
+                .isFinished(lesson.getIsFinished())
                 .build();
 
         log.info("response : {}", responseFinishedLessonDto.toString());

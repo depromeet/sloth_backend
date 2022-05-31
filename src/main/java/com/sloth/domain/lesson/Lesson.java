@@ -109,10 +109,8 @@ public class Lesson extends BaseEntity  {
 
         if (this.presentNumber >= totalNumber) {
             this.presentNumber = totalNumber;
-            this.isFinished = true;
         } else if (this.presentNumber <= 0) {
             this.presentNumber = 0;
-            this.isFinished = false;
         }
     }
 
@@ -191,8 +189,7 @@ public class Lesson extends BaseEntity  {
         this.site = site;
      }
 
-     public void checkFinishedLesson(Boolean isFinished) {
-        this.isFinished = isFinished;
-
+     public void finishLesson() {
+        this.isFinished = true;
      }
 }

@@ -115,7 +115,6 @@ class LessonControllerTest  extends NewBaseApiController {
 
         //then
         result.andExpect(status().isOk())
-                .andExpect(jsonPath("$.isFinished", is(true)))
                 .andExpect(jsonPath("$.presentNumber", is(lesson.getTotalNumber())))
                 ;
     }
