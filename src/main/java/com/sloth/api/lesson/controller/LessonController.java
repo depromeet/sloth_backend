@@ -196,8 +196,8 @@ public class LessonController {
         return ok(result);
     }
 
-    @PatchMapping("/check/{lessonId}")
-    @Operation(summary = "강의 완료 확인 API", description = "강의 수를 다 채웠을 때 마지막으로 확인하는 API")
+    @PatchMapping("/{lessonId}/finish")
+    @Operation(summary = "강의 완료 처리 API", description = "강의 수를 다 채웠을 때 마지막으로 완료하는 API")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
