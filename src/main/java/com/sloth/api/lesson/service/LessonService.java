@@ -127,16 +127,14 @@ public class LessonService {
         });
     }
 
-    public boolean checkFinishedLesson(String email, FinishedLessonDto.Request request, Long lessonId) {
+    public Lesson finishLesson(String email, Long lessonId) {
         Member member = memberService.findByEmail(email);
-
         Lesson lesson = lessonRepository.findWithMemberByLessonId(lessonId)
                 .orElseThrow(() -> new BusinessException("해당 강의가 존재하지 않습니다."));
-
         lesson.verifyOwner(member);
+        lesson.finishLesson();
 
-        lesson.checkFinishedLesson(request.getIsFinished());
-
-        return lesson.getIsFinished();
+        return lesson;
     }
+
 }
