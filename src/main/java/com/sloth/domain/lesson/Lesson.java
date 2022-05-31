@@ -109,7 +109,7 @@ public class Lesson extends BaseEntity  {
 
         if (this.presentNumber >= totalNumber) {
             this.presentNumber = totalNumber;
-            //this.isFinished = true;
+            this.isFinished = true;
         } else if (this.presentNumber <= 0) {
             this.presentNumber = 0;
             this.isFinished = false;
