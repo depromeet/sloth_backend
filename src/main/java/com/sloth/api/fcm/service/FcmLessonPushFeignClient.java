@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 @Component
-@FeignClient(url = "https://fcm.googleapis.com/v1/projects/nanagong-336615/messages:send", name = "FcmLessonPushFeignClient")
+@FeignClient(url = "https://fcm.googleapis.com", name = "FcmLessonPushFeignClient")
 public interface FcmLessonPushFeignClient {
 
-    @PostMapping(value = "", produces = "application/json", consumes = "application/json")
+    @PostMapping(value = "/v1/projects/nanagong-336615/messages:send", produces = "application/json", consumes = "application/json")
     String lessonPushAlarm(
             @RequestHeader("Content-type") String contentType,
             @RequestHeader("Authorization") String accessToken,
