@@ -153,11 +153,15 @@ public class Lesson extends BaseEntity  {
     }
 
     public LessonStatus getLessonStatus(LocalDate now) {
-        if(now.isBefore(endDate) || now.isEqual(endDate)){
-            return LessonStatus.CURRENT;
+        LessonStatus lessonStatus;
+        if( now.isAfter(endDate) ){
+            lessonStatus = LessonStatus.PAST;
+        } else if(now.isBefore(startDate)) {
+            lessonStatus = LessonStatus.PLAN;
+        } else {
+            lessonStatus = LessonStatus.CURRENT;
         }
-
-        return LessonStatus.PAST;
+        return lessonStatus;
     }
 
     public void updateLesson(String lessonName, Integer totalNumber, int price, Category category, Site site) {
