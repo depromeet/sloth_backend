@@ -48,6 +48,10 @@ spring:
       starttls:
         enable: true
 
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
 logging:
   level:
     org.hibernate.SQL: info

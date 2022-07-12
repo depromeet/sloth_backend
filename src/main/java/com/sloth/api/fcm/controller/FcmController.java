@@ -47,7 +47,7 @@ public class FcmController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<FcmTokenUpdateDto.Response> updateFcmTokenUse(@CurrentEmail String email, @RequestBody FcmTokenUpdateDto.Request request) {
+    public ResponseEntity<FcmTokenUpdateDto.Response> updateFcmTokenUse(@RequestBody FcmTokenUpdateDto.Request request, @CurrentEmail String email) {
         FcmTokenUpdateDto.Response response = firebaseCloudMessageService.updateFcmTokenUse(email, request);
         return ResponseEntity.ok(response);
     }
