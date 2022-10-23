@@ -39,6 +39,7 @@ public class CustomLessonRepositoryImpl implements CustomLessonRepository{
                 .join(lesson.site, site).fetchJoin()
                 .join(lesson.category, category).fetchJoin()
                 .where(lesson.member.memberId.eq(memberId))
+                .orderBy(lesson.regTime.desc())
                 .fetch();
 
     }
