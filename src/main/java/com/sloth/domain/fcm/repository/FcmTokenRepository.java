@@ -8,4 +8,6 @@ public interface FcmTokenRepository extends JpaRepository<FcmToken, Long> {
 
     FcmToken findByMemberAndFcmToken(Member member, String fcmToken);
 
+    FcmToken findByMemberAndDeviceId(Member member, String deviceId);
+
 }

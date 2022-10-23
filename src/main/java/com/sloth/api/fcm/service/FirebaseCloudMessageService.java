@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.gson.JsonParseException;
+import com.sloth.api.fcm.dto.FcmTokenDto;
 import com.sloth.api.fcm.dto.FcmTokenUpdateDto;
+import com.sloth.api.fcm.dto.FindFcmTokenResponseDto;
 import com.sloth.domain.fcm.FcmMessage;
 import com.sloth.domain.fcm.entity.FcmToken;
 import com.sloth.domain.fcm.service.FcmTokenService;
@@ -62,12 +64,12 @@ public class FirebaseCloudMessageService {
         return googleCredentials.getAccessToken().getTokenValue();
     }
 
-    public void saveFcmToken(String email, String fcmToken) {
+    public void saveFcmToken(String email, FcmTokenDto.Request request) {
         Member member = memberService.findByEmail(email);
 
-        FcmToken savedFcmToken = fcmTokenService.findByMemberAndFcmToken(member, fcmToken);
+        FcmToken savedFcmToken = fcmTokenService.findByMemberAndDeviceId(member, request.getDeviceId());
         if(savedFcmToken == null) {
-            FcmToken newFcmToken = FcmToken.createFcmToken(member, fcmToken);
+            FcmToken newFcmToken = FcmToken.createFcmToken(member, request.getFcmToken(), request.getDeviceId());
             fcmTokenService.saveFcmToken(newFcmToken);
         }
 
@@ -88,4 +90,12 @@ public class FirebaseCloudMessageService {
                 .build();
     }
 
+    public FindFcmTokenResponseDto findDeviceFcmToken(String deviceId, String email) {
+        Member member = memberService.findByEmail(email);
+        FcmToken fcmToken = fcmTokenService.findByMemberAndDeviceId(member, deviceId);
+        if(fcmToken == null) {
+            return null;
+        }
+        return FindFcmTokenResponseDto.of(fcmToken);
+    }
 }

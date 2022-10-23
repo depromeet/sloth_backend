@@ -16,6 +16,9 @@ public class FcmTokenDto {
         @ApiModelProperty(value = "fcm token")
         private String fcmToken;
 
+        @ApiModelProperty(value = "기기 device id")
+        private String deviceId;
+
     }
 
 }
