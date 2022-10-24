@@ -94,7 +94,9 @@ public class FirebaseCloudMessageService {
         Member member = memberService.findByEmail(email);
         FcmToken fcmToken = fcmTokenService.findByMemberAndDeviceId(member, deviceId);
         if(fcmToken == null) {
-            return null;
+            return FindFcmTokenResponseDto.builder()
+                    .deviceId(deviceId)
+                    .build();
         }
         return FindFcmTokenResponseDto.of(fcmToken);
     }
