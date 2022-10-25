@@ -6,6 +6,8 @@ import com.sloth.domain.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class FcmTokenService {
@@ -22,5 +24,9 @@ public class FcmTokenService {
 
     public FcmToken saveFcmToken(FcmToken fcmToken) {
         return fcmTokenRepository.save(fcmToken);
+    }
+
+    public List<FcmToken> findByMember(Member member) {
+        return fcmTokenRepository.findByMember(member);
     }
 }

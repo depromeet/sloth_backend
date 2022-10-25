@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -75,19 +76,15 @@ public class FirebaseCloudMessageService {
 
     }
 
-    public FcmTokenUpdateDto.Response updateFcmTokenUse(String email, FcmTokenUpdateDto.Request request) {
+    public void updateFcmTokenUse(String email, FcmTokenUpdateDto.Request request) {
         Member member = memberService.findByEmail(email);
-        FcmToken savedFcmToken = fcmTokenService.findByMemberAndFcmToken(member, request.getFcmToken());
-        if(savedFcmToken == null) {
-            throw new BusinessException("해당 fcm token이 존재하지 않습니다.");
-        } else {
-            savedFcmToken.updateIsUse(request.getIsUse());
-        }
+        List<FcmToken> savedFcmTokens = fcmTokenService.findByMember(member);
 
-        return FcmTokenUpdateDto.Response.builder()
-                .fcmToken(savedFcmToken.getFcmToken())
-                .isUse(savedFcmToken.getIsUse())
-                .build();
+        if(savedFcmTokens != null && savedFcmTokens.size() != 0) {
+            for (FcmToken savedFcmToken : savedFcmTokens) {
+                savedFcmToken.updateIsUse(request.getIsUse());
+            }
+        }
     }
 
     public FindFcmTokenResponseDto findDeviceFcmToken(String deviceId, String email) {

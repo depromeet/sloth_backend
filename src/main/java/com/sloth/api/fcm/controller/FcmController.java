@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -46,9 +47,9 @@ public class FcmController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity<FcmTokenUpdateDto.Response> updateFcmTokenUse(@RequestBody FcmTokenUpdateDto.Request request, @CurrentEmail String email) {
-        FcmTokenUpdateDto.Response response = firebaseCloudMessageService.updateFcmTokenUse(email, request);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<String> updateFcmTokenUse(@RequestBody FcmTokenUpdateDto.Request request, @CurrentEmail String email) {
+        firebaseCloudMessageService.updateFcmTokenUse(email, request);
+        return ResponseEntity.ok("success");
     }
 
     @GetMapping("/api/fcmtoken/device/{deviceId}")
