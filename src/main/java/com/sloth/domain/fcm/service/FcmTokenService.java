@@ -29,4 +29,5 @@ public class FcmTokenService {
     public List<FcmToken> findByMember(Member member) {
         return fcmTokenRepository.findByMember(member);
     }
+
 }
