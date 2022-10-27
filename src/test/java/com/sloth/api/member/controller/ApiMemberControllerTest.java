@@ -1,5 +1,6 @@
 package com.sloth.api.member.controller;
 
+import com.sloth.api.member.dto.MemberInfoDto;
 import com.sloth.api.member.dto.MemberUpdateDto;
 import com.sloth.api.member.service.ApiMemberService;
 import com.sloth.creator.MemberCreator;
@@ -150,7 +151,8 @@ public class ApiMemberControllerTest extends NewBaseApiController {
     public void getMemberInfo_agree_email() throws Exception{
 
         // given
-        given(memberService.findByEmail(member.getEmail())).willReturn(member);
+        MemberInfoDto memberInfoDto = new MemberInfoDto(member, true);
+        given(apiMemberService.findMemberInfoDto(member.getEmail())).willReturn(memberInfoDto);
 
         //when
         ResultActions result = mockMvc.perform(get("/api/member")
@@ -162,7 +164,8 @@ public class ApiMemberControllerTest extends NewBaseApiController {
                 .andExpect(jsonPath("memberId").value(equalTo(member.getMemberId())))
                 .andExpect(jsonPath("memberName").value(equalTo(member.getMemberName())))
                 .andExpect(jsonPath("email").value(equalTo(member.getEmail())))
-                .andExpect(jsonPath("isEmailProvided").value(equalTo(true)));
+                .andExpect(jsonPath("isEmailProvided").value(equalTo(true)))
+                .andExpect(jsonPath("isPushAlarmUse").value(equalTo(true)));
 
     }
 }
