@@ -24,7 +24,6 @@ import javax.validation.Valid;
 public class ApiMemberController {
 
     private final ApiMemberService apiMemberService;
-    private final MemberService memberService;
 
     @GetMapping
     @Operation(summary = "회원 정보 조회 API", description = "회원 정보 조회 API")
