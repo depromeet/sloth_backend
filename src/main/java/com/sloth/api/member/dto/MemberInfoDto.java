@@ -16,23 +16,25 @@ public class MemberInfoDto {
 
     @ApiModelProperty(value = "회원 아이디", example = "1")
     private Long memberId;
+
     @ApiModelProperty(value = "회원 이름", example = "홍길동")
     private String memberName;
+
     @ApiModelProperty(value = "이메일", example = "test@test.com")
     private String email;
+
     @ApiModelProperty(value = "이메일 인증 여부", example = "true")
     private Boolean isEmailProvided;
 
-    // todo 주석 해제
-    //@ApiModelProperty(value = "푸시 알람 사용 여부", example = "true")
-    //private Boolean isPushAlarmUse;
+    @ApiModelProperty(value = "푸시 알람 사용 여부", example = "true")
+    private Boolean isPushAlarmUse;
 
     public MemberInfoDto(Member entity, Boolean isPushAlarmUse) {
         this.memberId = entity.getMemberId();
         this.memberName = entity.getMemberName();
         this.email = entity.getEmail();
         this.isEmailProvided = checkEmailProvided(entity.getEmail());
-        //this.isPushAlarmUse = isPushAlarmUse;
+        this.isPushAlarmUse = isPushAlarmUse;
     }
 
     private Boolean checkEmailProvided(String email) {
