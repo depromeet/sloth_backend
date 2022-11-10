@@ -196,4 +196,27 @@ public class LessonController {
         return ok(result);
     }
 
+    @PatchMapping("/{lessonId}/finish")
+    @Operation(summary = "강의 완료 처리 API", description = "강의 수를 다 채웠을 때 마지막으로 완료하는 API")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
+    })
+    public ResponseEntity<FinishedLessonDto> finishLesson(@PathVariable("lessonId") Long lessonId,
+                                                                 @CurrentEmail String email) {
+
+        log.info("finished lesson api start");
+
+        // 강의 완료 확인
+        Lesson lesson = lessonService.finishLesson(email, lessonId);
+
+        FinishedLessonDto responseFinishedLessonDto = FinishedLessonDto.builder()
+                .isFinished(lesson.getIsFinished())
+                .build();
+
+        log.info("response : {}", responseFinishedLessonDto.toString());
+        log.info("finished lesson check api end");
+
+        return ok(responseFinishedLessonDto);
+    }
+
 }

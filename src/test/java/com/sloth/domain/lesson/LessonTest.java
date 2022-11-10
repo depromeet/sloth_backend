@@ -34,7 +34,6 @@ class LessonTest {
         lesson.updatePresentNumber(updatePresentNumber);
 
         // then
-        Assertions.assertThat(lesson.getIsFinished()).isEqualTo(true);
         Assertions.assertThat(lesson.getPresentNumber()).isEqualTo(30);
     }
 
@@ -76,7 +75,6 @@ class LessonTest {
         lesson.updatePresentNumber(3);
 
         // then
-        Assertions.assertThat(lesson.getIsFinished()).isEqualTo(true);
         Assertions.assertThat(lesson.getPresentNumber()).isEqualTo(30);
     }
 

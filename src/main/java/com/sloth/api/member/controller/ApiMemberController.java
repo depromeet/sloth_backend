@@ -24,16 +24,15 @@ import javax.validation.Valid;
 public class ApiMemberController {
 
     private final ApiMemberService apiMemberService;
-    private final MemberService memberService;
 
-    @GetMapping("")
+    @GetMapping
     @Operation(summary = "회원 정보 조회 API", description = "회원 정보 조회 API")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
     public ResponseEntity<MemberInfoDto> getMemberInfo(@CurrentEmail String email) {
-        Member member = memberService.findByEmail(email);
-        return ResponseEntity.ok(new MemberInfoDto(member));
+        MemberInfoDto memberInfoDto = apiMemberService.findMemberInfoDto(email);
+        return ResponseEntity.ok(memberInfoDto);
     }
 
     @PatchMapping("")

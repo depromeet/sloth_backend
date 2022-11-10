@@ -23,11 +23,14 @@ public class FcmToken extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public static FcmToken createFcmToken(Member member, String token) {
+    private String deviceId;
+
+    public static FcmToken createFcmToken(Member member, String token, String deviceId) {
         FcmToken fcmToken = new FcmToken();
         fcmToken.member = member;
         fcmToken.fcmToken = token;
         fcmToken.isUse = true;
+        fcmToken.deviceId = deviceId;
         return fcmToken;
     }
 

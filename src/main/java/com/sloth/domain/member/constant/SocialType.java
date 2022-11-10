@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Getter
 public enum SocialType {
 
-    GOOGLE, KAKAO, FORM;
+    GOOGLE, KAKAO, APPLE, FORM;
 
     @JsonCreator
     public static SocialType from(String type) {
