@@ -146,7 +146,7 @@ public class ApiMemberControllerTest extends NewBaseApiController {
 //
 //    }
 
-    @Test
+    //@Test
     @DisplayName("이메일 제공 동의 회원 정보 조회")
     public void getMemberInfo_agree_email() throws Exception{
 
