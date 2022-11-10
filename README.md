@@ -5,6 +5,7 @@
 - Querydsl
 - OAuth
 - JWT
+- Spring Batch
 - Postgresql
 - Docker
 - Github action

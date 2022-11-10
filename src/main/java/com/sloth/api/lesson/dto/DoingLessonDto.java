@@ -42,7 +42,7 @@ public class DoingLessonDto {
         @ApiModelProperty(value = "시작부터 현재까지 들어야 하는 강의 누적 개수 (ex. 30일동안 60개 들어야 한다면 15일째에 30)")
         private int untilTodayNumber;
 
-        @ApiModelProperty(value = "총 강의의 수")
+        @ApiModelProperty(value = "총 강의 수")
         private int totalNumber;
 
         public static DoingLessonDto.Response create (Lesson lesson, LocalDate now) {
