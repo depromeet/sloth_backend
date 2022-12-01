@@ -36,7 +36,7 @@ public class LessonController {
     private final LessonService lessonService;
     private final MemberService memberService;
 
-    @PatchMapping(value = "/number", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/number", method = {RequestMethod.PATCH, RequestMethod.PATCH}, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "들은 강의 수 수정 API", description = "들은 강의 수 수정 api")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
