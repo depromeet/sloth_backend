@@ -58,6 +58,7 @@ public class DoingLessonDto {
                     .categoryName(lesson.getCategory().getCategoryName())
                     .presentNumber(lesson.getPresentNumber())
                     .untilTodayNumber(goalNumber)
+                    .totalNumber(lesson.getTotalNumber())
                   .build();
         }
 
