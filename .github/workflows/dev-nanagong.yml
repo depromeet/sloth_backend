@@ -4,6 +4,11 @@
 # Repo Action 페이지에 나타날 이름 
 name: dev-nanagong
 
+# 맨 마지막 workflow 만 남기고 모두 취소
+concurrency: 
+  group: production
+  cancel-in-progress: true
+
 on:
   push:
     branches: [ develop ]
