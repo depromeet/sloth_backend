@@ -4,6 +4,11 @@
 # Repo Action 페이지에 나타날 이름 
 name: dev-nanagong
 
+# 맨 마지막 workflow 만 남기고 모두 취소
+concurrency: 
+  group: production
+  cancel-in-progress: true
+
 on:
   push:
     branches: [ develop ]
@@ -47,8 +52,6 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
-
-
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
       
@@ -74,17 +77,17 @@ jobs:
 #        token: ${{ secrets.TELEGRAM_TOKEN }}
 #        args: ${{ github.actor }} 님의 소스 코드가 반영 됐습니다. ${{ github.event.head_commit.message }}  
 
-    - name: action-slack
-      uses: 8398a7/action-slack@v3
-      with:
-        status: ${{ job.status }}
-        author_name: Sloth Backend - dev
-        fields: repo,commit,message,author # action,eventName,ref,workflow,job,took 추가할 수 있음
-        mention: here
-        if_mention: failure,cancelled
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_DEPLOY }} # required
-      if: always() # Pick up events even if the job fails or is canceled.
+#     - name: action-slack
+#       uses: 8398a7/action-slack@v3
+#       with:
+#         status: ${{ job.status }}
+#         author_name: Sloth Backend - dev
+#         fields: repo,commit,message,author # action,eventName,ref,workflow,job,took 추가할 수 있음
+#         mention: here
+#         if_mention: failure,cancelled
+#       env:
+#         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_DEPLOY }} # required
+#       if: always() # Pick up events even if the job fails or is canceled.
 
   deploy:
     needs: build
@@ -93,6 +96,7 @@ jobs:
     steps:
       - name: deploy run
         run: |
-              sh /home/ec2-user/sh/stop.sh
-              sh /home/ec2-user/sh/start.sh
-              sh /home/ec2-user/sh/health.sh
+              #sh /home/ec2-user/sh/stop.sh
+              #sh /home/ec2-user/sh/start.sh
+              #sh /home/ec2-user/sh/health.sh
+              sh /home/ec2-user/nanagong_run.sh
