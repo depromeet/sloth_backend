@@ -78,6 +78,8 @@ public class AuthInterceptor implements HandlerInterceptor {
                 String accessToken = tokenProvider.createAccessToken(email, accessTokenExpireTime);
                 response.setHeader(HttpHeaders.AUTHORIZATION, accessToken);
 
+                log.info("access token :  access Token");
+
                 // 리프레시 토큰 만료 시간 갱신
                 memberToken.updateRefreshTokenExpireTime(LocalDateTime.now(), TokenRefreshCritnTime.HOURS_72);
 
@@ -89,6 +91,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
         }
 
+        log.info("auth interceptor success");
         return true;
     }
 
