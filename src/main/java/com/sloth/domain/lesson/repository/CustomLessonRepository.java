@@ -10,4 +10,9 @@ public interface CustomLessonRepository {
     List<Lesson> getDoingLessonsDetail(Long memberId);
 
     List<Lesson> getLessons(Long memberId);
+
+    List<Lesson> getExpiredLessons(Long memberId);
+
+    List<Lesson> getFinishedLessons(Long memberId);
+
 }
