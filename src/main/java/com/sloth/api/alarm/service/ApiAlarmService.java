@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,6 +36,13 @@ public class ApiAlarmService {
                     .collect(Collectors.toList());
         }
         return null;
+    }
+
+    @Transactional
+    public void updateAlarmReadTime(String email, Long alarmId) {
+        Member member = memberService.findByEmail(email);
+        Alarm alarm = alarmService.getAlarmByMemberAndAlarmId(member, alarmId);
+        alarm.updateReadTime(LocalDateTime.now());
     }
 
 }

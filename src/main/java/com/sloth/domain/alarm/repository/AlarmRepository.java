@@ -12,4 +12,6 @@ public interface AlarmRepository extends JpaRepository<Alarm, Long> {
 
     Page<Alarm> findByMember(Member member, Pageable pageable);
 
+    Alarm findByMemberAndAlarmId(Member member, Long alarmId);
+
 }

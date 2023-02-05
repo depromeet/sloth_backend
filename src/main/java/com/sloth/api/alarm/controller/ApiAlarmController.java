@@ -10,9 +10,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,5 +33,16 @@ public class ApiAlarmController {
         List<AlarmSearchDto.Response> alarmSearchResponses = apiAlarmService.getAlarmList(email, requestDto);
         return ResponseEntity.ok(alarmSearchResponses);
     }
+
+    @PatchMapping("/{alarmId}/read-time")
+    @Operation(summary = "알람 읽은 시간 업데이트 API", description = "알람 읽은 시간 업데이트 API")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
+    })
+    public ResponseEntity updateAlarmReadTime(@CurrentEmail String email, @PathVariable Long alarmId) {
+        apiAlarmService.updateAlarmReadTime(email, alarmId);
+        return ResponseEntity.ok("success");
+    }
+
 
 }
