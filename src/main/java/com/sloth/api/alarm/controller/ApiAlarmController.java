@@ -27,9 +27,12 @@ public class ApiAlarmController {
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
     public ResponseEntity<List<AlarmSearchDto.Response>> getAlarmList(@CurrentEmail String email, AlarmSearchDto.Request requestDto) {
+        /*
+        todo 추후 페이징 기능 구현되면 주석해제
         if(requestDto.getSize() > 30) {
             throw new BusinessException(ErrorCode.EXCEED_PAGING_SIZE.getMessage() + " : 최대 30개까지 가능합니다.");
         }
+         */
         List<AlarmSearchDto.Response> alarmSearchResponses = apiAlarmService.getAlarmList(email, requestDto);
         return ResponseEntity.ok(alarmSearchResponses);
     }
