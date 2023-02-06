@@ -26,7 +26,7 @@ public class ApiAlarmController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity getAlarmList(@CurrentEmail String email, AlarmSearchDto.Request requestDto) {
+    public ResponseEntity<List<AlarmSearchDto.Response>> getAlarmList(@CurrentEmail String email, AlarmSearchDto.Request requestDto) {
         if(requestDto.getSize() > 30) {
             throw new BusinessException(ErrorCode.EXCEED_PAGING_SIZE.getMessage() + " : 최대 30개까지 가능합니다.");
         }
@@ -39,7 +39,7 @@ public class ApiAlarmController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity updateAlarmReadTime(@CurrentEmail String email, @PathVariable Long alarmId) {
+    public ResponseEntity<String> updateAlarmReadTime(@CurrentEmail String email, @PathVariable Long alarmId) {
         apiAlarmService.updateAlarmReadTime(email, alarmId);
         return ResponseEntity.ok("success");
     }
