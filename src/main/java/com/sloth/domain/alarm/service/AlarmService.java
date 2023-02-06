@@ -3,6 +3,7 @@ package com.sloth.domain.alarm.service;
 import com.sloth.domain.alarm.entity.Alarm;
 import com.sloth.domain.alarm.repository.AlarmRepository;
 import com.sloth.domain.member.Member;
+import com.sloth.global.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,8 @@ public class AlarmService {
     }
 
     public Alarm getAlarmByMemberAndAlarmId(Member member, Long alarmId) {
-        return alarmRepository.findByMemberAndAlarmId(member, alarmId);
+        return alarmRepository.findByMemberAndAlarmId(member, alarmId)
+                .orElseThrow(() -> new BusinessException("해당 회원의 알람 데이터가 존재하지 않습니다."))
+                ;
     }
 }
