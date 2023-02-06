@@ -22,6 +22,7 @@ public class AlarmSearchDto {
 
     }
 
+    @ApiModel(value = "알람 조회 반환 객체",description = "알람 조회 반환 객체")
     @Getter @NoArgsConstructor @AllArgsConstructor @Builder
     public static class Response {
         @ApiModelProperty(value = "알람 아이디")

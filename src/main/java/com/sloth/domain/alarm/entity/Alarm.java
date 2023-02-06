@@ -41,4 +41,8 @@ public class Alarm extends BaseEntity {
 
     private LocalDateTime readTime; // 알림 확인 일시
 
+    public void updateReadTime(LocalDateTime readTime) {
+        this.readTime = readTime;
+    }
+
 }

@@ -10,9 +10,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,12 +26,26 @@ public class ApiAlarmController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity getAlarmList(@CurrentEmail String email, AlarmSearchDto.Request requestDto) {
+    public ResponseEntity<List<AlarmSearchDto.Response>> getAlarmList(@CurrentEmail String email, AlarmSearchDto.Request requestDto) {
+        /*
+        todo 추후 페이징 기능 구현되면 주석해제
         if(requestDto.getSize() > 30) {
             throw new BusinessException(ErrorCode.EXCEED_PAGING_SIZE.getMessage() + " : 최대 30개까지 가능합니다.");
         }
+         */
         List<AlarmSearchDto.Response> alarmSearchResponses = apiAlarmService.getAlarmList(email, requestDto);
         return ResponseEntity.ok(alarmSearchResponses);
     }
+
+    @PatchMapping("/{alarmId}/read-time")
+    @Operation(summary = "알람 읽은 시간 업데이트 API", description = "알람 읽은 시간 업데이트 API")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
+    })
+    public ResponseEntity<String> updateAlarmReadTime(@CurrentEmail String email, @PathVariable Long alarmId) {
+        apiAlarmService.updateAlarmReadTime(email, alarmId);
+        return ResponseEntity.ok("success");
+    }
+
 
 }
