@@ -1,8 +1,13 @@
 name: Deploy to Amazon ECS - sloth dev
 
+# 맨 마지막 workflow 만 남기고 모두 취소
+concurrency: 
+  group: production
+  cancel-in-progress: true
+  
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ develop ]
 
 env:
   AWS_REGION: ap-northeast-2                   # set this to your preferred AWS region, e.g. us-west-1
