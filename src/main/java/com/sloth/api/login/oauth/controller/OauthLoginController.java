@@ -14,12 +14,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Slf4j
 @RestController
@@ -37,7 +39,7 @@ public class OauthLoginController {
     // TODO param 정보 입력
     //@ApiImplicitParam(name = "acceessToken", dataType = "body", required = true, dataTypeClass = com.sloth.api.oauth.dto.OauthRequestDto.class),
     //@ApiImplicitParam(name = "socialType", dataType = "body", required = true, dataTypeClass = com.sloth.api.oauth.dto.OauthRequestDto.class)
-    public ResponseEntity<ResponseJwtTokenDto> login(@RequestBody OauthRequestDto oauthRequestDto, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<ResponseJwtTokenDto> login(@Valid @RequestBody OauthRequestDto oauthRequestDto, HttpServletRequest httpServletRequest) {
 
         log.info("oauth login start");
 
@@ -48,11 +50,10 @@ public class OauthLoginController {
         }
 
         if(!SocialType.isSocialType(oauthRequestDto.getSocialType()) || oauthRequestDto.getSocialType().equals(SocialType.FORM.name())) {
-            throw new InvalidParameterException("잘못된 소셜 타입입니다. 'GOOGLE', 'KAKAO', 'APPLE' 중에 입력해주세요");
+            throw new InvalidParameterException("잘못된 소셜 타입입니다. 'GOOGLE', 'KAKAO' 중에 입력해주세요");
         }
 
-        SocialType socialType = SocialType.from(oauthRequestDto.getSocialType());
-        ResponseJwtTokenDto responseJwtTokenDto = oauthLoginService.loginOauth(accessToken, socialType);
+        ResponseJwtTokenDto responseJwtTokenDto = oauthLoginService.loginOauth(accessToken, oauthRequestDto);
 
         log.info("oauth login end");
 

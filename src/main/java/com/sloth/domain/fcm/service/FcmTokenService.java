@@ -30,4 +30,8 @@ public class FcmTokenService {
         return fcmTokenRepository.findByMember(member);
     }
 
+    public void deleteFcmToken(String fcmToken) {
+        fcmTokenRepository.deleteByFcmToken(fcmToken);
+    }
+
 }

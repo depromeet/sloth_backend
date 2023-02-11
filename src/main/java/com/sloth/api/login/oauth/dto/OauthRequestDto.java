@@ -12,4 +12,7 @@ public class OauthRequestDto {
     @ApiModelProperty(value = "소셜 로그인 타입(GOOGLE, KAKAO, APPLE)")
     private String socialType;
 
+    @ApiModelProperty(value = "fcm token")
+    private String fcmToken;
+
 }
