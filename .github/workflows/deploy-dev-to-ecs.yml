@@ -14,8 +14,8 @@ env:
   ECR_REPOSITORY: sloth-ecr         # set this to your Amazon ECR repository name
   ECS_SERVICE: sloth-dev-svc                 # set this to your Amazon ECS service name
   ECS_CLUSTER: sloth-dev                 # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: task-definition.json # set this to the path to your Amazon ECS task definition
-  # file, e.g. .aws/task-definition.json
+  ECS_TASK_DEFINITION: task-definition-dev.json # set this to the path to your Amazon ECS task definition
+  # file, e.g. .aws/task-definition-dev.json
   CONTAINER_NAME: sloth-dev           # set this to the name of the container in the
   # containerDefinitions section of your task definition
 
