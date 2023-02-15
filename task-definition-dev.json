@@ -1,48 +1,81 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:678547374742:task-definition/sloth-dev-task-definition:1",
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:678547374742:task-definition/sloth-dev-task-definition:14",
   "containerDefinitions": [
     {
       "name": "sloth-dev",
-      "image": "public.ecr.aws/f5c5c9x2/sloth-ecr/sloth:dev",
+      "image": "678547374742.dkr.ecr.ap-northeast-2.amazonaws.com/sloth-ecr:dev",
       "cpu": 0,
       "portMappings": [
         {
           "name": "sloth-dev-80-tcp",
           "containerPort": 80,
-          "hostPort": 80,
+          "hostPort": 0,
           "protocol": "tcp",
           "appProtocol": "http"
         }
       ],
       "essential": true,
-      "environment": [],
+      "environment": [
+        {
+          "name": "nanagong.enc.password",
+          "value": "nanagong-backend!@#"
+        },
+        {
+          "name": "SPRING_PROFILES_ACTIVE",
+          "value": "real1"
+        },
+        {
+          "name": "ECS_ENABLE_EXECUTE_COMMAND",
+          "value": "true"
+        }
+      ],
       "environmentFiles": [],
       "mountPoints": [],
-      "volumesFrom": []
+      "volumesFrom": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-create-group": "true",
+          "awslogs-group": "/ecs/sloth-dev-task-definition",
+          "awslogs-region": "ap-northeast-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
     }
   ],
   "family": "sloth-dev-task-definition",
-  "taskRoleArn": "arn:aws:iam::678547374742:role/ecsTaskExecutionRole",
-  "executionRoleArn": "arn:aws:iam::678547374742:role/sloth-ecs-task-role",
-  "networkMode": "awsvpc",
-  "revision": 1,
+  "taskRoleArn": "arn:aws:iam::678547374742:role/sloth-ecs-task-role",
+  "executionRoleArn": "arn:aws:iam::678547374742:role/ecsTaskExecutionRole",
+  "networkMode": "bridge",
+  "revision": 14,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
     {
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
       "name": "com.amazonaws.ecs.capability.task-iam-role"
     },
     {
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+      "name": "ecs.capability.execution-role-ecr-pull"
     },
     {
-      "name": "ecs.capability.task-eni"
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
     }
   ],
   "placementConstraints": [],
   "compatibilities": [
-    "EC2",
-    "FARGATE"
+    "EC2"
   ],
   "requiresCompatibilities": [
     "EC2"
@@ -53,12 +86,16 @@
     "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2023-02-08T07:02:55.848Z",
-  "registeredBy": "arn:aws:iam::678547374742:user/sloth-dongbin",
+  "registeredAt": "2023-02-15T06:46:30.806Z",
+  "registeredBy": "arn:aws:iam::678547374742:root",
   "tags": [
     {
+      "key": "env",
+      "value": "dev"
+    },
+    {
       "key": "sloth",
-      "value": "true"
+      "value": ""
     }
   ]
 }
