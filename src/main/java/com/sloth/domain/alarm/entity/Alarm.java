@@ -33,6 +33,9 @@ public class Alarm extends BaseEntity {
 
     private Long alarmContentId; // 알림을 발생시킨 글의 pk
 
+    @Column(length = 200)
+    private String title; // 알림 제목
+
     @Column(length = 500)
     private String message; // 알림 메세지
 
