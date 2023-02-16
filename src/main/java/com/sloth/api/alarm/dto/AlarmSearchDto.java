@@ -37,6 +37,9 @@ public class AlarmSearchDto {
         @ApiModelProperty(value = "알림을 발생시킨 글의 pk")
         private Long alarmContentId;
 
+        @ApiModelProperty(value = "알림 제목")
+        private String title;
+
         @ApiModelProperty(value = "알림 메세지")
         private String message;
 
@@ -54,6 +57,7 @@ public class AlarmSearchDto {
                     .alarmType(alarm.getAlarmType().name())
                     .url(alarm.getUrl())
                     .alarmContentId(alarm.getAlarmContentId())
+                    .title(alarm.getTitle())
                     .message(alarm.getMessage())
                     .occurrenceTime(alarm.getOccurrenceTime())
                     .readTime(alarm.getReadTime())
