@@ -57,15 +57,16 @@ public class OauthLoginService {
         // 회원가입
         Boolean isNewMember = false;
         Optional<Member> optionalMember = memberService.getOptionalMember(oAuthAttributes.getEmail());
+        Member loginMember;
         if (optionalMember.isEmpty()) { // 기존 회원이 아닐 때
             Member oauthMember = memberService.createOauthMember(oAuthAttributes);
-            oauthMember = memberService.saveMember(oauthMember, tokenDto);
+            loginMember = memberService.saveMember(oauthMember, tokenDto);
             isNewMember = true;
-            deleteFcmTokenAndSaveNewFcmToken(oauthRequestDto, oauthMember);
         } else {
             memberService.saveRefreshToken(optionalMember.get(), tokenDto); // 기존 회원일 때
-            deleteFcmTokenAndSaveNewFcmToken(oauthRequestDto, optionalMember.get());
+            loginMember = optionalMember.get();
         }
+        deleteFcmTokenAndSaveNewFcmToken(oauthRequestDto, loginMember);
 
         ResponseJwtTokenDto responseJwtTokenDto = modelMapper.map(tokenDto, ResponseJwtTokenDto.class);
         responseJwtTokenDto.setIsNewMember(isNewMember);
