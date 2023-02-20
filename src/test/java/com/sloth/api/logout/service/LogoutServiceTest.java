@@ -2,6 +2,7 @@ package com.sloth.api.logout.service;
 
 import com.sloth.api.logout.service.LogoutService;
 import com.sloth.creator.MemberCreator;
+import com.sloth.domain.fcm.service.FcmTokenService;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.memberToken.MemberToken;
@@ -28,21 +29,26 @@ class LogoutServiceTest extends BaseServiceTest {
     @Mock
     private MemberTokenService memberTokenService;
 
+    @Mock
+    private FcmTokenService fcmTokenService;
+
     @Test
     @DisplayName("로그아웃 테스트")
     void logoutTest() {
 
         // given
         String email = "test@test.com";
+        String fcmToken = "fcmTokenTest";
         LocalDateTime tokenExpirationTime = LocalDateTime.of(2022,1,1,3,5,0);
         Member member = MemberCreator.createMember(1L, email);
         MemberToken memberToken = MemberToken.createMemberToken(member, "abcabcabc", tokenExpirationTime);
         when(memberService.findByEmail(email)).thenReturn(member);
         when(memberTokenService.findMemberTokenByMemberId(member.getMemberId())).thenReturn(memberToken);
+        doNothing().when(fcmTokenService).deleteFcmToken(fcmToken);
 
         // when
         LocalDateTime now = LocalDateTime.of(2021,12,20,3,5,0);
-        logoutService.logout(email, now);
+        logoutService.logout(email, now, fcmToken);
 
         // then
         Assertions.assertThat(memberToken.getTokenExpirationTime()).isEqualTo(now);
