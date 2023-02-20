@@ -15,7 +15,7 @@ public class KakaoUserInfo {
     private KakaoAccount kakaoAccount;
 
     @Getter @Setter
-    @JsonIgnoreProperties({"profile_nickname_needs_agreement","gender_needs_agreement","has_gender","is_email_verified", "has_email", "email_needs_agreement", "is_email_valid"})
+    @JsonIgnoreProperties({"profile_image_needs_agreement","profile_needs_agreement","profile_nickname_needs_agreement","gender_needs_agreement","has_gender","is_email_verified", "has_email", "email_needs_agreement", "is_email_valid"})
     public static class KakaoAccount {
 
         @JsonProperty("email")
@@ -31,6 +31,15 @@ public class KakaoUserInfo {
         public static class Profile {
             @JsonProperty("nickname")
             private String nickname;
+
+            @JsonProperty("thumbnail_image_url")
+            private String thumbnailImageUrl;
+
+            @JsonProperty("profile_image_url")
+            private String profileImageUrl;
+
+            @JsonProperty("is_default_image")
+            private Boolean isDefaultImage;
         }
 
     }
