@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:678547374742:task-definition/sloth-dev-task-definition:27",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:678547374742:task-definition/sloth-dev-task-definition:30",
     "containerDefinitions": [
         {
             "name": "sloth-dev",
@@ -46,7 +46,7 @@
     "taskRoleArn": "arn:aws:iam::678547374742:role/sloth-ecs-task-role",
     "executionRoleArn": "arn:aws:iam::678547374742:role/ecsTaskExecutionRole",
     "networkMode": "bridge",
-    "revision": 27,
+    "revision": 30,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -85,7 +85,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2023-02-20T04:51:11.716Z",
+    "registeredAt": "2023-02-20T13:40:26.155Z",
     "registeredBy": "arn:aws:iam::678547374742:user/sloth-dongbin",
     "tags": [
         {
