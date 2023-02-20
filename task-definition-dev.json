@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:678547374742:task-definition/sloth-dev-task-definition:23",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:678547374742:task-definition/sloth-dev-task-definition:25",
     "containerDefinitions": [
         {
             "name": "sloth-dev",
@@ -7,9 +7,9 @@
             "cpu": 0,
             "portMappings": [
                 {
-                    "name": "sloth-dev-8080-tcp",
-                    "containerPort": 8080,
-                    "hostPort": 8080,
+                    "name": "sloth-dev-8081-tcp",
+                    "containerPort": 8081,
+                    "hostPort": 8081,
                     "protocol": "tcp",
                     "appProtocol": "http"
                 }
@@ -46,7 +46,7 @@
     "taskRoleArn": "arn:aws:iam::678547374742:role/sloth-ecs-task-role",
     "executionRoleArn": "arn:aws:iam::678547374742:role/ecsTaskExecutionRole",
     "networkMode": "bridge",
-    "revision": 23,
+    "revision": 25,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -85,8 +85,8 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2023-02-20T04:35:33.344Z",
-    "registeredBy": "arn:aws:iam::678547374742:user/sloth-dongbin",
+    "registeredAt": "2023-02-20T04:39:24.890Z",
+    "registeredBy": "arn:aws:iam::678547374742:root",
     "tags": [
         {
             "key": "env",
