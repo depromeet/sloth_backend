@@ -1,6 +1,7 @@
 package com.sloth.api.health.controller;
 
 import com.sloth.api.health.dto.ResponseHealthCheckDto;
+import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/")
+@Api(tags = {"Health Check"})
 public class HealthController {
 
     private final Environment env;
