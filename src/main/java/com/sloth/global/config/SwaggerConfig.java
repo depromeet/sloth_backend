@@ -25,8 +25,8 @@ public class SwaggerConfig {
 
     @Bean
     public Docket commonApi() {
-        Server serverLocal = new Server("local", "http://localhost:8080", "for local usages", Collections.emptyList(), Collections.emptyList());
-        Server testServer = new Server("test", "https://slothbackend.hopto.org", "for testing", Collections.emptyList(), Collections.emptyList());
+        Server devServer = new Server("Dev Server", "http://dev.nanagong.net", "for dev server", Collections.emptyList(), Collections.emptyList());
+        Server localServer = new Server("Local", "http://localhost:8080", "for local usages", Collections.emptyList(), Collections.emptyList());
         return new Docket(DocumentationType.OAS_30)
                 .ignoredParameterTypes(Member.class)
                 .ignoredParameterTypes(Errors.class)
@@ -34,7 +34,7 @@ public class SwaggerConfig {
                 .ignoredParameterTypes(Errors.class)
                 .ignoredParameterTypes(BindingResult.class)
                 .ignoredParameterTypes(CurrentEmail.class)
-                .servers(serverLocal, testServer)
+                .servers(devServer, localServer)
                 .securityContexts(Arrays.asList(securityContext()))
                 .securitySchemes(Arrays.asList(apiKey()))
                 .groupName("sloth")
