@@ -51,7 +51,7 @@ class LogoutControllerTest extends NewBaseApiController {
         // given
         String email = "test@test.com";
         final String accessToken = "accessToken";
-        doNothing().when(logoutService).logout(eq(email), any());
+        doNothing().when(logoutService).logout(eq(email), any(), any());
         when(tokenProvider.getEmail(accessToken)).thenReturn(email);
 
         // when
