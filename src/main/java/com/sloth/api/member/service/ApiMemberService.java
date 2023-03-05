@@ -6,9 +6,12 @@ import com.sloth.domain.fcm.entity.FcmToken;
 import com.sloth.domain.fcm.service.FcmTokenService;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.service.MemberService;
+import com.sloth.infra.google.GoogleCloudStorageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,11 +23,31 @@ public class ApiMemberService {
 
     private final MemberService memberService;
     private final FcmTokenService fcmTokenService;
+    private final GoogleCloudStorageService googleCloudStorageService;
 
-    public Member updateMemberInfo(String email, MemberUpdateDto.Request requestDto) {
+    @Value("${google-cloud.profile-storage-url}")
+    private String profileStorageUrl;
+
+    @Value("${google-cloud.profile-bucket-name}")
+    private String profileBucketName;
+
+    public MemberUpdateDto.Response updateMemberInfo(String email, MultipartFile profileImage, MemberUpdateDto.Request requestDto) {
+
+        // 회원 이름 수정
         Member member = memberService.findByEmail(email);
         member.updateMemberName(requestDto.getMemberName());
-        return member;
+
+        // 프로필 이미지 업데이트
+        if(profileImage != null && !profileImage.isEmpty()) {
+            String uploadImageFileName = googleCloudStorageService.uploadImageFileToGCS(profileImage, profileBucketName);
+            member.updateProfileImage(uploadImageFileName);
+        }
+
+        String profileImageUrl = profileStorageUrl + member.getPicture();
+        return MemberUpdateDto.Response.builder()
+                .memberName(member.getMemberName())
+                .profileImageUrl(profileImageUrl)
+                .build();
     }
 
     @Transactional(readOnly = true)
@@ -40,10 +63,10 @@ public class ApiMemberService {
             } else {
                 isPushAlarmUse = false;
             }
-            return new MemberInfoDto(member, isPushAlarmUse);
+            return new MemberInfoDto(member, profileStorageUrl, isPushAlarmUse);
         }
 
-        return new MemberInfoDto(member, isPushAlarmUse);
+        return new MemberInfoDto(member, profileStorageUrl, isPushAlarmUse);
     }
 
 }

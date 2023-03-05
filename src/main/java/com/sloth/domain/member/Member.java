@@ -121,6 +121,10 @@ public class Member extends BaseEntity {
         this.memberName = name;
     }
 
+    public void updateProfileImage(String profileImageUrl) {
+        this.picture = profileImageUrl;
+    }
+
     public boolean confirmEmail(String confirmCode) {
         return confirmCode.equals(this.getEmailConfirmCode());
     }
