@@ -13,7 +13,6 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
-import java.util.Locale;
 import java.util.UUID;
 
 @Slf4j
@@ -31,7 +30,7 @@ public class GoogleCloudStorageService {
     private final String[] IMAGE_EXTENTIONS = {"jpeg", "png", "jpg"};
 
     @PostConstruct
-    public void GcsServiceInialize() throws IOException {
+    public void GcsServiceInitialize() throws IOException {
         InputStream keyFile = ResourceUtils.getURL(credentialsLocation).openStream();
         storage = StorageOptions.newBuilder().setProjectId(project)
                 // Key 파일 수동 등록
