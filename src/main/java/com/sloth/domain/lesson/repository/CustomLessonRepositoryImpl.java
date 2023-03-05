@@ -43,4 +43,24 @@ public class CustomLessonRepositoryImpl implements CustomLessonRepository{
                 .fetch();
 
     }
+
+    @Override
+    public List<Lesson> getExpiredLessons(Long memberId) {
+        return jpaQueryFactory
+                .selectFrom(lesson)
+                .where(lesson.member.memberId.eq(memberId)
+                    .and(lesson.endDate.loe(LocalDate.now())))
+                .fetch();
+
+    }
+
+    @Override
+    public List<Lesson> getFinishedLessons(Long memberId) {
+        return jpaQueryFactory
+                .selectFrom(lesson)
+                .where(lesson.member.memberId.eq(memberId)
+                        .and(lesson.endDate.loe(LocalDate.now()))
+                        .and(lesson.isFinished.eq(true)))
+                .fetch();
+    }
 }

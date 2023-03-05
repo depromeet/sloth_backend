@@ -23,6 +23,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -137,4 +138,33 @@ public class LessonService {
         return lesson;
     }
 
+    public int getExpiredLessons(String email) {
+        Member member = memberService.findByEmail(email);
+        int lessonCnt = lessonRepository.getExpiredLessons(member.getMemberId()).size();
+
+        return lessonCnt;
+    }
+
+    public long getTotalPriceExpiredLessons(String email) {
+        Member member = memberService.findByEmail(email);
+        long totalPrice = lessonRepository.getExpiredLessons(member.getMemberId())
+                .stream().mapToLong(lesson -> Long.valueOf(lesson.getPrice()))
+                .sum();
+
+        return totalPrice;
+    }
+
+    public int getFinishedLessons(String email) {
+        Member member = memberService.findByEmail(email);
+        return lessonRepository.getFinishedLessons(member.getMemberId()).size();
+    }
+
+    public long getTotalPriceFinishedLessons(String email) {
+        Member member = memberService.findByEmail(email);
+        long totalPrice = lessonRepository.getFinishedLessons(member.getMemberId())
+                .stream().mapToLong(lesson -> Long.valueOf(lesson.getPrice()))
+                .sum();
+
+        return totalPrice;
+    }
 }

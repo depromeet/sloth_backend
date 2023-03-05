@@ -57,6 +57,10 @@ logging:
     org.hibernate.SQL: info
     org.hibernate.type: info
     org.springframework.security: info
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
   config: classpath:logback-spring.xml
 
 server:

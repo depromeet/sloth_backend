@@ -219,4 +219,39 @@ public class LessonController {
         return ok(responseFinishedLessonDto);
     }
 
+    @GetMapping("/stats")
+    @Operation(summary = "강의 현황 통계 API", description = "강의 현황 통계 API")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
+    })
+    public ResponseEntity<LessonStatsResponseDto> getFinishedLesson(@CurrentEmail String email) {
+
+        log.info("lesson stats api start");
+
+        log.info("email : {}", email);
+
+        int expiredLessonsCnt = lessonService.getExpiredLessons(email);
+        long expiredLessonsPrice = lessonService.getTotalPriceExpiredLessons(email);
+
+        int finishedLessonsCnt = lessonService.getFinishedLessons(email);
+        long finishedLessonsPrice = lessonService.getTotalPriceFinishedLessons(email);
+
+        int notFinishedLessonsCnt = expiredLessonsCnt - finishedLessonsCnt;
+        long notFinishedLessonsPrice = expiredLessonsPrice - finishedLessonsPrice;
+
+        LessonStatsResponseDto response = LessonStatsResponseDto.builder()
+                .expiredLessonsCnt(expiredLessonsCnt)
+                .expiredLessonsPrice(expiredLessonsPrice)
+                .finishedLessonsCnt(finishedLessonsCnt)
+                .finishedLessonsPrice(finishedLessonsPrice)
+                .notFinishedLessonsCnt(notFinishedLessonsCnt)
+                .notFinishedLessonsPrice(notFinishedLessonsPrice)
+                .build();
+
+        log.info("response : {}", response.toString());
+        log.info("lesson stats api end");
+
+        return ok(response);
+    }
+
 }
