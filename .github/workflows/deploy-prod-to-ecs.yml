@@ -1,4 +1,4 @@
-name: Deploy to Amazon ECS - sloth dev
+name: Deploy to Amazon ECS - sloth prod
 
 # 맨 마지막 workflow 만 남기고 모두 취소
 concurrency: 
@@ -7,16 +7,16 @@ concurrency:
   
 on:
   push:
-    branches: [ develop ]
+    branches: [ master, develop ]
 
 env:
   AWS_REGION: ap-northeast-2                   # set this to your preferred AWS region, e.g. us-west-1
   ECR_REPOSITORY: sloth-ecr         # set this to your Amazon ECR repository name
-  ECS_SERVICE: sloth-dev-svc                 # set this to your Amazon ECS service name
-  ECS_CLUSTER: sloth-dev                 # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: task-definition-dev.json # set this to the path to your Amazon ECS task definition
+  ECS_SERVICE: sloth-prod-svc                 # set this to your Amazon ECS service name
+  ECS_CLUSTER: sloth-prod                 # set this to your Amazon ECS cluster name
+  ECS_TASK_DEFINITION: task-definition-prod.json # set this to the path to your Amazon ECS task definition
   # file, e.g. .aws/task-definition-dev.json
-  CONTAINER_NAME: sloth-dev           # set this to the name of the container in the
+  CONTAINER_NAME: sloth-prod           # set this to the name of the container in the
   # containerDefinitions section of your task definition
 
 permissions:
@@ -80,7 +80,7 @@ jobs:
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: dev
+          IMAGE_TAG: prod
         run: |
           # Build a docker container and
           # push it to ECR so that it can
@@ -88,8 +88,8 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           # docker build -t sloth-ecr .
-          # docker tag sloth-ecr/sloth public.ecr.aws/f5c5c9x2/sloth-ecr/sloth:dev
-          # docker push public.ecr.aws/f5c5c9x2/sloth-ecr/sloth:dev
+          # docker tag sloth-ecr/sloth public.ecr.aws/f5c5c9x2/sloth-ecr/sloth:prod
+          # docker push public.ecr.aws/f5c5c9x2/sloth-ecr/sloth:prod
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
       - name: Fill in the new image ID in the Amazon ECS task definition
