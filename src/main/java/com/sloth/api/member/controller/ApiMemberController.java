@@ -56,7 +56,7 @@ public class ApiMemberController {
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
     public ResponseEntity<MemberUpdateDto.Response> updateMemberInfoV2(@CurrentEmail String email,
-                                             @RequestPart("profileImage") MultipartFile profileImage,
+                                             @RequestPart(value = "profileImage", required = false) MultipartFile profileImage,
                                              @Valid @RequestPart("requestDto") MemberUpdateDto.Request requestDto,
                                            BindingResult bindingResult) {
 
