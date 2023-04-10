@@ -52,6 +52,13 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+
+  cloud:
+    gcp:
+      storage:
+        credentials:
+          location: /home/ec2-user/nanagong/nanagong-storage-e6525987fc74.json
+
 logging:
   level:
     org.hibernate.SQL: info
@@ -111,3 +118,7 @@ cloud:
     stack:
       auto: false
 
+google-cloud:
+  project: nanagong-storage
+  profile-storage-url: https://storage.googleapis.com/nanagong-profile/
+  profile-bucket-name: nanagong-profile

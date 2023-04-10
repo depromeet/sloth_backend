@@ -30,6 +30,10 @@ public class MemberUpdateDto {
         @ApiModelProperty(value = "회원 이름")
         private String memberName;
 
+        @ApiModelProperty(value = "회원 프로필 이미지 경로")
+        @NotNull(message = "회원 프로필 이미지 경로")
+        private String profileImageUrl;
+
     }
 
 }

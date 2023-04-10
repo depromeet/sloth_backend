@@ -41,3 +41,5 @@ src/main/java/com/sloth/api/oauth/controller/OAuthController.java
 ### fcm json ###
 /src/main/resources/firebase/nanagong_key.json
 
+# gcp 인증 파일
+/src/main/resources/nanagong-storage-e6525987fc74.json

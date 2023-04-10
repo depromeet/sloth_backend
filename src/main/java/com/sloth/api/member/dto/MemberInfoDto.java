@@ -3,9 +3,10 @@ package com.sloth.api.member.dto;
 import com.sloth.domain.member.Member;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Builder;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.util.StringUtils;
 
 import java.util.regex.Pattern;
 
@@ -29,12 +30,18 @@ public class MemberInfoDto {
     @ApiModelProperty(value = "푸시 알람 사용 여부", example = "true")
     private Boolean isPushAlarmUse;
 
-    public MemberInfoDto(Member entity, Boolean isPushAlarmUse) {
-        this.memberId = entity.getMemberId();
-        this.memberName = entity.getMemberName();
-        this.email = entity.getEmail();
-        this.isEmailProvided = checkEmailProvided(entity.getEmail());
+    @ApiModelProperty(value = "회원 프로필 이미지", example = "")
+    private String picture;
+
+    public MemberInfoDto(Member member, String profileStorageUrl, Boolean isPushAlarmUse) {
+        this.memberId = member.getMemberId();
+        this.memberName = member.getMemberName();
+        this.email = member.getEmail();
+        this.isEmailProvided = checkEmailProvided(member.getEmail());
         this.isPushAlarmUse = isPushAlarmUse;
+        if(StringUtils.hasText(member.getPicture())) {
+            this.picture = profileStorageUrl + member.getPicture();
+        }
     }
 
     private Boolean checkEmailProvided(String email) {
