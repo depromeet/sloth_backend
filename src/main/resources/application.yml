@@ -57,7 +57,7 @@ spring:
     gcp:
       storage:
         credentials:
-          location: /home/ec2-user/nanagong/nanagong-storage-e6525987fc74.json
+          location: file:/home/ec2-user/nanagong/nanagong-storage-e6525987fc74.json
 
 logging:
   level:
