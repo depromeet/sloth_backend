@@ -19,4 +19,5 @@ public interface LessonRepository extends JpaRepository<Lesson, Long> ,CustomLes
 
     @EntityGraph(attributePaths = {"member"})
     Optional<Lesson> findWithMemberByLessonId(Long id);
+
 }

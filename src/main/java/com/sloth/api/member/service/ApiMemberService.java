@@ -6,6 +6,7 @@ import com.sloth.domain.fcm.entity.FcmToken;
 import com.sloth.domain.fcm.service.FcmTokenService;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.service.MemberService;
+import com.sloth.domain.memberToken.service.MemberTokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ public class ApiMemberService {
 
     private final MemberService memberService;
     private final FcmTokenService fcmTokenService;
+    private final MemberTokenService memberTokenService;
 
     public Member updateMemberInfo(String email, MemberUpdateDto.Request requestDto) {
         Member member = memberService.findByEmail(email);
@@ -46,4 +48,13 @@ public class ApiMemberService {
         return new MemberInfoDto(member, isPushAlarmUse);
     }
 
+    public void deleteMember(String email, String password) {
+        Member member = memberService.findByEmail(email);
+        //리프레시토큰 fcm 토큰 삭제
+        List<FcmToken> fcmTokens = fcmTokenService.findByMember(member);
+        fcmTokens.stream().forEach(fcmToken -> fcmTokenService.deleteFcmToken(fcmToken.getFcmToken()));
+        memberTokenService.deleteMemberToken(member.getMemberId());
+
+        memberService.deleteMember(member, password);
+    }
 }

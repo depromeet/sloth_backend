@@ -68,6 +68,7 @@ class FormLoginControllerTest extends BaseApiController {
 
         doReturn(member).when(formLoginService).register(any(FormJoinDto.class));
 
+
         // when
         ResultActions result = mockMvc.perform(post("/api/form/register")
                 .accept(MediaType.APPLICATION_JSON)
