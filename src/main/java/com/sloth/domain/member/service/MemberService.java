@@ -108,4 +108,8 @@ public class MemberService {
     public void deleteMember(Member member) {
         memberRepository.delete(member);
     }
+
+    public void updateIsDelete(Member member) {
+        member.updateIsDelete(false);
+    }
 }

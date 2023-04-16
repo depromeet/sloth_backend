@@ -62,6 +62,10 @@ public class OauthLoginService {
             Member oauthMember = memberService.createOauthMember(oAuthAttributes);
             loginMember = memberService.saveMember(oauthMember, tokenDto);
             isNewMember = true;
+        } else if (optionalMember.get().isDelete()) {
+            memberService.updateIsDelete(optionalMember.get()); // 탈퇴한 회원일 때
+            memberService.saveRefreshToken(optionalMember.get(), tokenDto);
+            loginMember = optionalMember.get();
         } else {
             memberService.saveRefreshToken(optionalMember.get(), tokenDto); // 기존 회원일 때
             loginMember = optionalMember.get();
