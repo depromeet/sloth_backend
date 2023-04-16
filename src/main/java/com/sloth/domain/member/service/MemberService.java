@@ -104,4 +104,10 @@ public class MemberService {
             throw new InvalidParameterException("회원 정보가 옳지 않습니다.");
         }
     }
+
+    public void deleteMember(Member member, String password) {
+
+        checkPassword(member, password);
+        memberRepository.delete(member);
+    }
 }

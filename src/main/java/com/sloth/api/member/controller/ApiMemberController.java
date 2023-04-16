@@ -3,12 +3,16 @@ package com.sloth.api.member.controller;
 import com.sloth.api.member.dto.MemberInfoDto;
 import com.sloth.api.member.dto.MemberUpdateDto;
 import com.sloth.api.member.service.ApiMemberService;
+import com.sloth.domain.member.Member;
+import com.sloth.domain.member.service.MemberService;
+import com.sloth.global.dto.ApiResult;
 import com.sloth.global.exception.InvalidParameterException;
 import com.sloth.global.resolver.CurrentEmail;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/member")
@@ -69,4 +74,21 @@ public class ApiMemberController {
         return ResponseEntity.ok(memberUpdateResponseDto);
     }
 
+    @PatchMapping("/delete")
+    @Operation(summary = "회원 탈퇴 API", description = "회원 탈퇴 API")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
+    })
+    public ResponseEntity deleteMember(@CurrentEmail String email, @Valid @RequestBody String password) {
+
+        log.info("member delete start");
+        log.info("email : {}", email);
+
+        apiMemberService.deleteMember(email, password);
+
+        ApiResult result = ApiResult.createOk();
+        log.info("member delete end");
+
+        return ResponseEntity.ok(result);
+    }
 }

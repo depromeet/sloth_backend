@@ -154,7 +154,7 @@ public class Lesson extends BaseEntity  {
 
     public LessonStatus getLessonStatus(LocalDate now) {
         LessonStatus lessonStatus;
-        if( now.isAfter(endDate) || this.isFinished ){
+        if( now.isAfter(endDate) || this.isFinished == true ){
             lessonStatus = LessonStatus.PAST;
         } else if(now.isBefore(startDate)) {
             lessonStatus = LessonStatus.PLAN;
