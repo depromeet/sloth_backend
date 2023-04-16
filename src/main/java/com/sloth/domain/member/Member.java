@@ -147,4 +147,5 @@ public class Member extends BaseEntity {
                 this.emailConfirmCodeCreatedAt.isEqual(now.minusMinutes(5));
     }
 
+    public void updateIsDelete(boolean isDelete) {this.isDelete = isDelete;}
 }
