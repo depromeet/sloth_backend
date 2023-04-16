@@ -72,6 +72,8 @@ dependencies {
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '3.1.0'
 
+    implementation 'com.google.cloud:google-cloud-storage:2.19.0'
+
     compile("org.springframework.boot:spring-boot-starter-mail")
     compile('org.springframework.cloud:spring-cloud-starter-openfeign')
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4')

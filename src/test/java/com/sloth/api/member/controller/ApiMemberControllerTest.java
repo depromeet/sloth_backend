@@ -69,7 +69,10 @@ public class ApiMemberControllerTest extends NewBaseApiController {
         Member updateMember = MemberCreator.createStubMember(testEmail);
         updateMember.updateMemberName(request.getMemberName());
 
-        given(apiMemberService.updateMemberInfo(member.getEmail(), request)).willReturn(updateMember);
+        MemberUpdateDto.Response memberUpdateResponseDto = new MemberUpdateDto.Response();
+        memberUpdateResponseDto.setMemberName(request.getMemberName());
+
+        given(apiMemberService.updateMemberInfo(member.getEmail(), null, request)).willReturn(memberUpdateResponseDto);
 
         // when
         ResultActions result = mockMvc.perform(patch("/api/member")
@@ -151,7 +154,7 @@ public class ApiMemberControllerTest extends NewBaseApiController {
     public void getMemberInfo_agree_email() throws Exception{
 
         // given
-        MemberInfoDto memberInfoDto = new MemberInfoDto(member, true);
+        MemberInfoDto memberInfoDto = new MemberInfoDto(member, null, true);
         given(apiMemberService.findMemberInfoDto(member.getEmail())).willReturn(memberInfoDto);
 
         //when

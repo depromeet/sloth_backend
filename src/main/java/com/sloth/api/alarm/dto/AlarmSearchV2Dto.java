@@ -4,17 +4,20 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sloth.domain.alarm.entity.Alarm;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class AlarmSearchDto {
+public class AlarmSearchV2Dto {
 
-    @Getter @Setter
+    @Getter
     @ApiModel(value = "회원 알람 리스트 조회 객체",description = "회원 알람 리스트 조회 객체")
     public static class Request {
-        private int page = 1;
+        private int page = 0;
     }
 
     @ApiModel(value = "알람 조회 반환 객체",description = "알람 조회 반환 객체")
@@ -46,7 +49,7 @@ public class AlarmSearchDto {
         @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
         private LocalDateTime readTime;
 
-        public static AlarmSearchDto.Response of(Alarm alarm) {
+        public static AlarmSearchV2Dto.Response of(Alarm alarm) {
             return Response.builder()
                     .alarmId(alarm.getAlarmId())
                     .alarmType(alarm.getAlarmType().name())

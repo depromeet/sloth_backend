@@ -1,0 +1,101 @@
+{
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:678547374742:task-definition/sloth-dev-task-definition:14",
+  "containerDefinitions": [
+    {
+      "name": "sloth-dev",
+      "image": "678547374742.dkr.ecr.ap-northeast-2.amazonaws.com/sloth-ecr:dev",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "name": "sloth-dev-80-tcp",
+          "containerPort": 80,
+          "hostPort": 0,
+          "protocol": "tcp",
+          "appProtocol": "http"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "nanagong.enc.password",
+          "value": "nanagong-backend!@#"
+        },
+        {
+          "name": "SPRING_PROFILES_ACTIVE",
+          "value": "real1"
+        },
+        {
+          "name": "ECS_ENABLE_EXECUTE_COMMAND",
+          "value": "true"
+        }
+      ],
+      "environmentFiles": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-create-group": "true",
+          "awslogs-group": "/ecs/sloth-dev-task-definition",
+          "awslogs-region": "ap-northeast-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ],
+  "family": "sloth-dev-task-definition",
+  "taskRoleArn": "arn:aws:iam::678547374742:role/sloth-ecs-task-role",
+  "executionRoleArn": "arn:aws:iam::678547374742:role/ecsTaskExecutionRole",
+  "networkMode": "bridge",
+  "revision": 14,
+  "volumes": [],
+  "status": "ACTIVE",
+  "requiresAttributes": [
+    {
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
+    },
+    {
+      "name": "ecs.capability.execution-role-ecr-pull"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+    }
+  ],
+  "placementConstraints": [],
+  "compatibilities": [
+    "EC2"
+  ],
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "cpu": "1024",
+  "memory": "3072",
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "registeredAt": "2023-02-15T06:46:30.806Z",
+  "registeredBy": "arn:aws:iam::678547374742:root",
+  "tags": [
+    {
+      "key": "env",
+      "value": "dev"
+    },
+    {
+      "key": "sloth",
+      "value": ""
+    }
+  ]
+}

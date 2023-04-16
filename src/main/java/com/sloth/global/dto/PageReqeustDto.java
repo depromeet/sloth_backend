@@ -7,7 +7,7 @@ import lombok.Setter;
  * 페이지 조회용 공통 dto
  */
 @Getter @Setter
-public class PageDto {
+public class PageReqeustDto {
 
     private int page = 0;
     private int size = 10;
