@@ -33,7 +33,7 @@ public class ApiMemberServiceTest extends BaseServiceTest {
 
         // when
         given(memberService.findByEmail(member.getEmail())).willReturn(member);
-        apiMemberService.updateMemberInfo(member.getEmail(), request);
+        apiMemberService.updateMemberInfo(member.getEmail(), null, request);
 
         // then
         Assertions.assertThat(member.getMemberName()).isEqualTo(request.getMemberName());

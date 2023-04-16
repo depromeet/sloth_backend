@@ -1,0 +1,27 @@
+spring:
+
+  datasource:
+    url: ENC(LkTu/qC94HasSZ9J1/BszMLB9VRGo4T6AUhY5FXeONX5N2TCm1FlmJmoJonWstBcPn2JKMd0M3lhyAaP4nc4QpKx4DXo4DW5Yb3vTZAZP+CsHOO6ZRSAZDLSpnOeJaFAaYt+k2k7AEJeTD3jVc7OGxqzUH0XAtdfyhMVrFOyrN8ldeT3dQeNS/Clr//72S9I)
+    username: ENC(FLPxttXjM9uKWmZli2o1yc3Pt1Htq9atlL0K8C5+ku8=)
+    password: ENC(rkU0XyuFZBaxBHzgJX/Z2limjiKdcsoNsXV0nymgvSA=)
+    driver-class-name: com.mysql.jdbc.Driver
+
+  cloud:
+    gcp:
+      storage:
+        credentials:
+          location: classpath:nanagong-storage-e6525987fc74.json
+
+server:
+  port: 8081
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+    org.springframework.security: info
+
+token:
+  secret: sloth-backend
+  access-token-expiration-time: 99999999999
+  refresh-token-expiration-time: 99999999999
