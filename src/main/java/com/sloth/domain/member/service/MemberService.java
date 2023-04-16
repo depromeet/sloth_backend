@@ -105,9 +105,7 @@ public class MemberService {
         }
     }
 
-    public void deleteMember(Member member, String password) {
-
-        checkPassword(member, password);
+    public void deleteMember(Member member) {
         memberRepository.delete(member);
     }
 }

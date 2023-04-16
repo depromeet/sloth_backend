@@ -48,13 +48,13 @@ public class ApiMemberService {
         return new MemberInfoDto(member, isPushAlarmUse);
     }
 
-    public void deleteMember(String email, String password) {
+    public void deleteMember(String email) {
         Member member = memberService.findByEmail(email);
         //리프레시토큰 fcm 토큰 삭제
         List<FcmToken> fcmTokens = fcmTokenService.findByMember(member);
         fcmTokens.stream().forEach(fcmToken -> fcmTokenService.deleteFcmToken(fcmToken.getFcmToken()));
         memberTokenService.deleteMemberToken(member.getMemberId());
 
-        memberService.deleteMember(member, password);
+        memberService.deleteMember(member);
     }
 }

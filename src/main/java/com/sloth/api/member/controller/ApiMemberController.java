@@ -64,12 +64,12 @@ public class ApiMemberController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", defaultValue ="jwt access token", dataType = "string", value = "jwt access token", required = true, paramType = "header")
     })
-    public ResponseEntity deleteMember(@CurrentEmail String email, @Valid @RequestBody String password) {
+    public ResponseEntity deleteMember(@CurrentEmail String email) {
 
         log.info("member delete start");
         log.info("email : {}", email);
 
-        apiMemberService.deleteMember(email, password);
+        apiMemberService.deleteMember(email);
 
         ApiResult result = ApiResult.createOk();
         log.info("member delete end");
