@@ -25,7 +25,6 @@ import java.util.List;
 @ToString(exclude = {"memberToken","lessons"})
 @Builder
 @AllArgsConstructor @NoArgsConstructor
-@SQLDelete(sql = "UPDATE member SET is_delete = true WHERE member_id=?")
 @Where(clause = "is_delete=false")
 public class Member extends BaseEntity {
 
@@ -147,5 +146,4 @@ public class Member extends BaseEntity {
                 this.emailConfirmCodeCreatedAt.isEqual(now.minusMinutes(5));
     }
 
-    public void updateIsDelete(boolean isDelete) {this.isDelete = isDelete;}
 }

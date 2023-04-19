@@ -1,9 +1,11 @@
 package com.sloth.api.member.service;
 
+import com.sloth.api.lesson.service.LessonService;
 import com.sloth.api.member.dto.MemberInfoDto;
 import com.sloth.api.member.dto.MemberUpdateDto;
 import com.sloth.domain.fcm.entity.FcmToken;
 import com.sloth.domain.fcm.service.FcmTokenService;
+import com.sloth.domain.lesson.Lesson;
 import com.sloth.domain.member.Member;
 import com.sloth.domain.member.service.MemberService;
 import com.sloth.domain.memberToken.service.MemberTokenService;
@@ -26,6 +28,7 @@ public class ApiMemberService {
     private final FcmTokenService fcmTokenService;
     private final MemberTokenService memberTokenService;
     private final GoogleCloudStorageService googleCloudStorageService;
+    private final LessonService lessonService;
 
     @Value("${google-cloud.profile-storage-url}")
     private String profileStorageUrl;
@@ -73,10 +76,14 @@ public class ApiMemberService {
 
     public void deleteMember(String email) {
         Member member = memberService.findByEmail(email);
+
         //리프레시토큰 fcm 토큰 삭제
         List<FcmToken> fcmTokens = fcmTokenService.findByMember(member);
         fcmTokens.stream().forEach(fcmToken -> fcmTokenService.deleteFcmToken(fcmToken.getFcmToken()));
         memberTokenService.deleteMemberToken(member.getMemberId());
+
+        List<Lesson> lessons = lessonService.getLessons(email);
+        lessons.stream().forEach(lesson -> lessonService.deleteLesson(member,lesson.getLessonId()));
 
         memberService.deleteMember(member);
     }
