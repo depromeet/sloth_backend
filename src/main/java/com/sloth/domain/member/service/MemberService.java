@@ -109,7 +109,4 @@ public class MemberService {
         memberRepository.delete(member);
     }
 
-    public void updateIsDelete(Member member) {
-        member.updateIsDelete(false);
-    }
 }
