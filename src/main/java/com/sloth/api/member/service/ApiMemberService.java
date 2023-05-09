@@ -3,6 +3,7 @@ package com.sloth.api.member.service;
 import com.sloth.api.lesson.service.LessonService;
 import com.sloth.api.member.dto.MemberInfoDto;
 import com.sloth.api.member.dto.MemberUpdateDto;
+import com.sloth.domain.alarm.service.AlarmService;
 import com.sloth.domain.fcm.entity.FcmToken;
 import com.sloth.domain.fcm.service.FcmTokenService;
 import com.sloth.domain.lesson.Lesson;
@@ -29,6 +30,7 @@ public class ApiMemberService {
     private final MemberTokenService memberTokenService;
     private final GoogleCloudStorageService googleCloudStorageService;
     private final LessonService lessonService;
+    private final AlarmService alarmService;
 
     @Value("${google-cloud.profile-storage-url}")
     private String profileStorageUrl;
@@ -84,6 +86,8 @@ public class ApiMemberService {
 
         List<Lesson> lessons = lessonService.getLessons(email);
         lessons.stream().forEach(lesson -> lessonService.deleteLesson(member,lesson.getLessonId()));
+
+        alarmService.deleteAllAlarm(member);
 
         memberService.deleteMember(member);
     }
