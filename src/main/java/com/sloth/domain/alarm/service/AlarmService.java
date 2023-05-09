@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -25,5 +27,10 @@ public class AlarmService {
         return alarmRepository.findByMemberAndAlarmId(member, alarmId)
                 .orElseThrow(() -> new BusinessException("해당 회원의 알람 데이터가 존재하지 않습니다."))
                 ;
+    }
+
+    public void deleteAllAlarm(Member member) {
+        List<Alarm> alarmList = alarmRepository.findByMember(member);
+        alarmList.stream().forEach(alarm -> alarmRepository.deleteById(alarm.getAlarmId()));
     }
 }
