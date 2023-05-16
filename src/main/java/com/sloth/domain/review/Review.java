@@ -1,6 +1,7 @@
 package com.sloth.domain.review;
 
 import com.sloth.domain.common.BaseEntity;
+import com.sloth.domain.member.Member;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,4 +26,11 @@ public class Review extends BaseEntity {
     @Column(nullable = false, length = 1000)
     private String reviewContent;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    public void updateReviewContent(String reviewContent) {
+        this.reviewContent = reviewContent;
+    }
 }

@@ -1,5 +1,6 @@
-package com.sloth.api.review;
+package com.sloth.api.review.dto;
 
+import com.sloth.domain.member.Member;
 import com.sloth.domain.review.Review;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -10,27 +11,17 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
-public class ReviewSaveDto {
+public class ReviewUpdateDto {
 
-    @ApiModel(value = "리뷰 저장 요청 객체")
+    @ApiModel(value = "리뷰 수정 요청 객체")
     @Getter @Setter
     public static class Request {
 
-        @NotNull(message = "리뷰 날짜를 입력해주세요")
-        @ApiModelProperty(value = "리뷰 날짜")
-        private LocalDate reviewDate;
-
         @NotBlank(message = "리뷰 내용을 입력해주세요")
         @Size(max = 1000, message = "리뷰 내용은 최대 1000자까지 입력 가능합니다.")
-        @ApiModelProperty(value = "리뷰 내용(최대1000자)")
+        @ApiModelProperty(value = "리뷰 내용(최대1000자)", required = true)
         private String reviewContent;
 
-        public Review toEntity() {
-            return Review.builder()
-                    .reviewDate(reviewDate)
-                    .reviewContent(reviewContent)
-                    .build();
-        }
     }
 
     @ApiModel(value = "리뷰 저장 반환 객체")
@@ -47,7 +38,7 @@ public class ReviewSaveDto {
         @ApiModelProperty(value = "리뷰 내용(최대1000자)", required = true)
         private String reviewContent;
 
-        public static ReviewSaveDto.Response of(Review review) {
+        public static ReviewUpdateDto.Response of(Review review) {
             return Response.builder()
                     .reviewId(review.getReviewId())
                     .reviewDate(review.getReviewDate())
